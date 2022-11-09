@@ -16,7 +16,7 @@ global $bb_cfg, $userdata, $template, $DBS, $lang;
 if (!empty($template)) {
   $template->assign_vars([
     'SIMPLE_FOOTER' => !empty($gen_simple_header),
-    'POWERED' => $bb_cfg['show_copyright_on_pages'] ? ('<b>TorrentPier</b> &copy; 2005-' . date('Y')) : '',
+    'POWERED' => $bb_cfg['show_copyright_on_pages'] ? ("Powered on <b>{$bb_cfg['tp_name']}</b> &copy; 2005-" . date('Y')) : '',
     'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
     'ADMIN_LINK_HREF' => "admin/index.php",
   ]);

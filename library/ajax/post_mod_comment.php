@@ -28,7 +28,7 @@ $post = DB()->fetch_row("
 	WHERE p.post_id = $post_id
 ");
 if (!$post) {
-  $this->ajax_die('Not post');
+  $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
 }
 
 $data = [
