@@ -551,7 +551,7 @@ VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config`
 VALUES ('bt_allow_spmode_change', '1');
 INSERT INTO `bb_config`
-VALUES ('bt_announce_url', 'https://example.com/bt/announce.php');
+VALUES ('bt_announce_url', 'http://example.com/bt/announce.php');
 INSERT INTO `bb_config`
 VALUES ('bt_disable_dht', '0');
 INSERT INTO `bb_config`

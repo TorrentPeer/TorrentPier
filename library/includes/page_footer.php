@@ -2,9 +2,9 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
- * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
- * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ * @copyright Copyright (c) 2005-2022 TorrentPier (https://torrentpier.site)
+ * @link      https://github.com/TorrentPeer/TorrentPier for the canonical source repository
+ * @license   https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -16,7 +16,7 @@ global $bb_cfg, $userdata, $template, $DBS, $lang;
 if (!empty($template)) {
   $template->assign_vars([
     'SIMPLE_FOOTER' => !empty($gen_simple_header),
-    'POWERED' => $bb_cfg['show_copyright_on_pages'] ? ("Powered on <b>{$bb_cfg['tp_name']}</b> &copy; 2005-" . date('Y')) : '',
+    'POWERED' => $bb_cfg['show_copyright_on_pages'] ? ("Powered on <a href='https://github.com/TorrentPeer'>{$bb_cfg['tp_name']}</a> &copy; 2005-" . date('Y')) : '',
     'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
     'ADMIN_LINK_HREF' => "admin/index.php",
   ]);

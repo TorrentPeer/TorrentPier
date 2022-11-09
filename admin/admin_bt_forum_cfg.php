@@ -2,9 +2,9 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
- * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
- * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ * @copyright Copyright (c) 2005-2022 TorrentPier (https://torrentpier.site)
+ * @link      https://github.com/TorrentPeer/TorrentPier for the canonical source repository
+ * @license   https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -25,7 +25,7 @@ $cfg = [];
  * All config names with default values
  */
 $default_cfg_str = [
-  'bt_announce_url' => 'http://demo.torrentpier.com/bt/',
+  'bt_announce_url' => 'http://example.com/bt/',
 ];
 
 $default_cfg_bool = [
