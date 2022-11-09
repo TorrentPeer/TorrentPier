@@ -1,0 +1,164 @@
+/*
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+.sf {
+  padding-left: 20px !important;
+}
+
+.jumpbox {
+  margin: 6px 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.attachrow {
+  font-size: 11px;
+  border: 1px #A5AFB4 solid;
+}
+
+.attachheader {
+  font-size: 11px;
+  border: 1px #A5AFB4 solid;
+  background: #D1D7DC;
+}
+
+.attachtable {
+  font-size: 12px;
+  border: 1px #A5AFB4 solid;
+  border-collapse: collapse;
+}
+
+pre, .pre {
+  font-family: Courier, monospace;
+  font-size: 12px;
+  border: 1px solid #B7C0C5;
+  background: #F5F5F5;
+  padding: 4px;
+  margin: 10px;
+  text-align: left;
+}
+
+.pre {
+  width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.ann {
+  font-size: 13px;
+  text-align: center;
+  color: #993300;
+  font-weight: bold;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.folded, .folded2 {
+  display: block;
+  background: transparent url(../images/icon_plus_1.gif) no-repeat left center;
+  padding-left: 14px;
+}
+
+.unfolded, .unfolded2 {
+  display: block;
+  background: transparent url(../images/icon_minus_1.gif) no-repeat left center;
+  padding-left: 14px;
+}
+
+.folded2 {
+  background-image: url(../images/icon_plus_2.gif);
+}
+
+.unfolded2 {
+  background-image: url(../images/icon_minus_2.gif);
+}
+
+.warnColor1 {
+  color: #993300;
+}
+
+.warnColor2 {
+  color: #FF0000;
+}
+
+.warnBorder1 {
+  border: 1px solid #A52A2A;
+}
+
+.warningBox1 {
+  border: 1px solid #A52A2A;
+  color: #993300;
+  padding: 12px;
+}
+
+.warningBox2 {
+  color: #993300 !important;
+  background: #FFD9B2;
+  border: 2px solid #CC6600;
+  padding: 8px;
+}
+
+span#autocomplete {
+  cursor: pointer;
+  color: #006699;
+  font: 12px Arial, sans-serif;
+}
+
+div#autocomplete_popup {
+  position: fixed;
+  z-index: 999;
+  width: 300px;
+  height: 100px;
+  background: #FFFFFF;
+  text-align: center;
+  display: none;
+  border: 1px solid #B7C0C5;
+}
+
+div#autocomplete_popup div.relative {
+  position: relative;
+  width: 300px;
+  height: 100px;
+}
+
+div#autocomplete_popup div.title {
+  background: #1C508C;
+  color: #D5E4EC;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 6px 8px 7px;
+}
+
+div#autocomplete_popup div.close {
+  position: absolute;
+  right: 7px;
+  cursor: pointer;
+  top: 7px;
+  color: red;
+  font-weight: bold;
+  width: 12px;
+  height: 12px;
+  background: url("../../../images/bad.gif") transparent no-repeat;
+}
+
+div#autocomplete_popup input {
+  font-size: 16px;
+  margin: 20px 0 0;
+  width: 83px;
+}
+
+div#autocomplete_popup span.regenerate {
+  width: 16px;
+  height: 16px;
+  margin: 24px 0 0 8px;
+  background: url("../../../images/pic_reloading.gif") transparent no-repeat;
+  cursor: pointer;
+  display: inline-block;
+}

@@ -1,0 +1,57 @@
+/*
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+var.ajax-params {
+  display: none;
+}
+
+#ajax-loading, #ajax-error {
+  position: fixed;
+  top: 0 !important;
+  z-index: 2000;
+  padding: 4px;
+  font-size: 11px;
+  max-width: 400px;
+  max-height: 200px;
+  white-space: nowrap;
+  display: none;
+}
+
+#ajax-loading {
+  display: none;
+  background: rgba(0, 0, 0, 0.5) url(../images/loading.gif) no-repeat center center;
+  float: right;
+  width: 85px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -khtml-border-bottom-left-radius: 10px;
+}
+
+#ajax-error {
+  background: #d32031 url(../images/loading.gif) no-repeat center center;
+  float: right;
+  min-width: 200px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -khtml-border-bottom-left-radius: 10px;
+}
+
+.editable-container {
+  cursor: pointer;
+}
+
+.editable-container:hover {
+  background: #E8E9F8;
+}
+
+.loading-1 {
+  background: transparent url(../images/loading.gif) no-repeat left center;
+  padding-left: 22px;
+}

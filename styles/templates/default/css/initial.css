@@ -1,0 +1,18 @@
+/*
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+/* Clean out MARGIN and PADDING */
+html, body, form, fieldset, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, li, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add LEFT MARGIN */
+blockquote, ul, ol, li, dd {
+  margin-left: 1em;
+}

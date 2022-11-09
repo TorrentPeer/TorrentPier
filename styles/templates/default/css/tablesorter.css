@@ -1,0 +1,119 @@
+/*
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+.treeview, .treeview ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.treeview ul {
+  margin-top: 4px;
+}
+
+.treeview .hitarea {
+  background: url(../images/treeview/treeview-default.gif) -64px -25px no-repeat;
+  width: 16px;
+  height: 16px;
+  margin-left: -16px;
+  float: left;
+  cursor: pointer;
+}
+
+* html .hitarea {
+  display: inline;
+  float: none;
+}
+
+.treeview li {
+  margin: 0;
+  padding: 1px 0 1px 16px;
+}
+
+.treeview span {
+  padding-left: 3px;
+  display: block;
+}
+
+.treeview a.selected {
+  background-color: #eee;
+}
+
+#treecontrol {
+  margin: 1em 0;
+  display: none;
+}
+
+.treeview .hover {
+  color: red;
+  cursor: pointer;
+}
+
+.treeview li {
+  background: url(../images/treeview/treeview-default-line.gif) 0 0 no-repeat;
+}
+
+.treeview li.collapsable, .treeview li.expandable {
+  background-position: 0 -176px;
+}
+
+.treeview .expandable-hitarea {
+  background-position: -80px -3px;
+}
+
+.treeview li.last {
+  background-position: 0 -1766px
+}
+
+.treeview li.lastCollapsable, .treeview li.lastExpandable {
+  background-image: url(../images/treeview/treeview-default.gif);
+}
+
+.treeview li.lastCollapsable {
+  background-position: 0 -111px
+}
+
+.treeview li.lastExpandable {
+  background-position: -32px -67px
+}
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea {
+  background-position: 0;
+}
+
+.tablesorter u {
+  display: none;
+}
+
+.tablesorter .header {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tablesorter .tbs-text {
+  padding-bottom: 1px;
+}
+
+.headerSortUp .tbs-text, .headerSortDown .tbs-text {
+  border-bottom: 2px solid;
+}
+
+.tbs-icon {
+  padding-left: 8px;
+  background: url(../images/tbl_sort_bg.gif) no-repeat 0 50%;
+}
+
+.headerSortUp .tbs-icon {
+  background-image: url(../images/tbl_sort_asc.gif);
+}
+
+.headerSortDown .tbs-icon {
+  background-image: url(../images/tbl_sort_desc.gif);
+}

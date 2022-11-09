@@ -1,0 +1,82 @@
+<?php
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+if (!defined('BB_ROOT')) {
+  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+}
+
+if (defined('ATTACH_INSTALL')) {
+  return;
+}
+
+/**
+ * wrapper function for determining the correct language directory
+ *
+ * @param $language_file
+ * @return mixed
+ * @throws \Exception
+ */
+function attach_mod_get_lang($language_file)
+{
+  global $attach_config, $bb_cfg;
+
+  $file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/' . $language_file . '.php';
+  if (file_exists($file)) {
+    return $bb_cfg['default_lang'];
+  }
+
+  $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
+  if (file_exists($file)) {
+    return $attach_config['board_lang'];
+  }
+
+  bb_die('Attachment mod language file does not exist: language/' . $attach_config['board_lang'] . '/' . $language_file . '.php');
+  return false;
+}
+
+/**
+ * Get attachment mod configuration
+ *
+ * @return array
+ * @throws \Exception
+ */
+function get_config(): array
+{
+  global $bb_cfg;
+
+  $attach_config = [];
+
+  $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
+
+  if (!($result = DB()->sql_query($sql))) {
+    bb_die('Could not query attachment information');
+  }
+
+  while ($row = DB()->sql_fetchrow($result)) {
+    $attach_config[$row['config_name']] = trim($row['config_value']);
+  }
+
+  // We assign the original default board language here, because it gets overwritten later with the users default language
+  $attach_config['board_lang'] = trim($bb_cfg['default_lang']);
+
+  return $attach_config;
+}
+
+// Get Attachment Config
+$attach_config = [];
+
+if (!$attach_config = CACHE('bb_cache')->get('attach_config')) {
+  $attach_config = get_config();
+  CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
+}
+
+include ATTACH_DIR . '/displaying.php';
+include ATTACH_DIR . '/posting_attachments.php';
+
+$upload_dir = $attach_config['upload_dir'];

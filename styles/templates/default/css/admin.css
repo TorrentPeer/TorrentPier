@@ -1,0 +1,45 @@
+/*
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+body {
+  background: #E5E5E5;
+  min-width: 10px;
+}
+
+#body_container {
+  background: #E5E5E5;
+  padding: 0 6px 4px;
+}
+
+h1, h2, h3 {
+  margin: 0.8em 0;
+  font-size: 16px;
+}
+
+h4 {
+  margin: 0.1em 0.2em;
+  color: #273F61;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+h5 {
+  margin: 0.1em 0.6em;
+  color: #333399;
+  font-family: "Courier New", serif;
+}
+
+h6 {
+  margin: 0.3em 0.6em;
+  color: #444444;
+  line-height: 100%;
+}
+
+* html table.forumline {
+  width: 97%;
+}
