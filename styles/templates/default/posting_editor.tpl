@@ -100,6 +100,7 @@ ajax.callback.posts = function(data) {
   <input type="button" value="i" name="codeI" title="{L_ITALIC}" style="width: 25px; font-style: italic;" />
   <input type="button" value="u" name="codeU" title="{L_UNDERLINE}" style="width: 25px; text-decoration: underline;" />
   <input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
+  <input type="button" value="@" name="codeMention" title="{L_MENTION}" style="width: 25px;" />
   <input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 57px;" />
   <input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" style="width: 40px;" />
   <input type="button" value="mp3" name="codeMP3" title="{L_MP3_TITLE}" style="width: 40px;" />
@@ -207,6 +208,7 @@ bbcode.addTag("codeI", "i", null, "I", ctrl);
 bbcode.addTag("codeU", "u", null, "U", ctrl);
 bbcode.addTag("codeS", "s", null, "S", ctrl);
 
+bbcode.addTag("codeMention", "@", null, "", ctrl);
 bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
 bbcode.addTag("codeImg", "img", null, "R", ctrl);
 bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);

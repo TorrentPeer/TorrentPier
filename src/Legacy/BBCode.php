@@ -200,6 +200,9 @@ class BBCode
     // Escape tags inside titles in [quote="tilte"]
     $text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', [&$this, 'escape_titles_callback'], $text);
 
+    // [@] (Select user)
+    $text = preg_replace_callback('#\[@\](.*?)\[/@\]#isu', [&$this, 'get_username_callback'], $text);
+
     // Sources
     $sources = [
       // Vimeo
@@ -302,6 +305,24 @@ class BBCode
     // еще раз htmlspecialchars, т.к. при извлечении из title происходит обратное преобразование
     $tilte = htmlspecialchars($tilte, ENT_QUOTES);
     return $m[1] . $tilte . $m[4];
+  }
+
+  /**
+   * Callback to [@] (Select username)
+   *
+   * @param $m
+   * @return string
+   * @throws \Exception
+   */
+  private function get_username_callback($m): string
+  {
+    global $lang;
+
+    if (!$user_array = get_userdata(get_user_id(trim($m[1])))) {
+      return $lang['NO_SUCH_USER'];
+    }
+
+    return profile_url($user_array);
   }
 
   /**

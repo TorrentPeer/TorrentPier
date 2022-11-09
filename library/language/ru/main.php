@@ -1526,6 +1526,7 @@ $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl
 $lang['SUPERSCRIPT'] = 'Верхний индекс: [sup]текст[/sup]';
 $lang['SUBSCRIPT'] = 'Нижний индекс: [sub]текст[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
+$lang['MENTION'] = 'Упомянуть: [@]имя[/@], текст';
 $lang['IMG_TITLE'] = 'Вставить картинку: [img]http://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Ссылка';
 $lang['URL_TITLE'] = 'Ссылка (Ctrl+W)';

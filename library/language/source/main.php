@@ -1526,6 +1526,7 @@ $lang['STRIKEOUT'] = 'Strikeout text: [s]text[/s] (Ctrl+S)';
 $lang['SUPERSCRIPT'] = 'Superscript: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Quote text: [quote]text[/quote] (Ctrl+Q)';
+$lang['MENTION'] = 'Mention: [@]name[/@], text';
 $lang['IMG_TITLE'] = 'Insert image: [img]http://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
 $lang['URL_TITLE'] = 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url] (Ctrl+W)';

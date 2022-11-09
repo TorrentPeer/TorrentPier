@@ -176,6 +176,7 @@ switch ($this->request['type']) {
 						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="width: 25px; font-style: italic;" />
 						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="width: 25px; text-decoration: underline;" />
 						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
+						<input type="button" value="@" name="codeMention" title="' . $lang['MENTION'] . '" style="width: 25px;" />
 						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" style="width: 57px;" />
 						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" style="width: 40px;" />
 						<input type="button" value="mp3" name="codeMP3" title="' . $lang['MP3_TITLE'] . '" style="width: 40px;" />
@@ -203,6 +204,7 @@ switch ($this->request['type']) {
 					bbcode.addTag("codeU", "u", null, "U", ctrl);
 					bbcode.addTag("codeS", "s", null, "S", ctrl);
 
+					bbcode.addTag("codeMention", "@", null, "", ctrl);
 					bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
 					bbcode.addTag("codeImg", "img", null, "R", ctrl);
 					bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);

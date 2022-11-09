@@ -63,7 +63,7 @@ BBCode.prototype = {
       this.quoterText = sel;
       this.insertTag('_quoter');
     } else {
-      this.insertAtCursor("[b]" + name + '[/b], ');
+      this.insertAtCursor("[@]" + name + '[/@], ');
     }
     return false;
   },
