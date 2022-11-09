@@ -13,7 +13,6 @@
   "authors": [
     {
       "name": "Exile",
-      "email": "admin@torrentpier.com",
       "homepage": "https://github.com/Exileum",
       "role": "Developer"
     },
@@ -29,6 +28,7 @@
     },
     {
       "name": "belomaxorka",
+      "email": "roman25052006.kelesh@gmail.com",
       "homepage": "https://github.com/belomaxorka",
       "role": "Developer"
     }
