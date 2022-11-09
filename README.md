@@ -3,13 +3,25 @@
     <img src="https://i.ibb.co/xLRMF24/Torrent-Pier-1.png" width="300px" style="max-width: 100%;">
   </a>
 </p>
+<p align="center">
+  <a href="https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TorrentPeer/TorrentPier" alt="License"></a>
+  <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/stars/torrentpeer/torrentpier" alt="Stars Packagist"></a>
+  <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/dm/torrentpeer/torrentpier" alt="Packagist"></a>
+  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/languages/count/torrentpeer/torrentpier" alt="Languages"></a>
+  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/languages/top/torrentpeer/torrentpier" alt="Top Language"></a>
+  <a href="https://torrentpier.site"><img src="https://img.shields.io/website?url=https%3A%2F%2Ftorrentpier.site" alt="Web Site"></a>
+  <br><br>
+  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/forks/torrentpeer/torrentpier?style=social" alt="Forks"></a>
+  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/watchers/torrentpeer/torrentpier?style=social" alt="Watchers"></a>
+  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/stars/torrentpeer/torrentpier?style=social" alt="Stars"></a>
+</p>
 
 ## About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load
 architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition we have very helpful
-[official support forum](https://torrentpier.site), where among other things it is possible to test the live demo,
-get any support and download modifications for engine.
+[official support forum](https://torrentpier.site), where among other things it is possible to test the live demo, get
+any support and download modifications for engine.
 
 ## Current status
 
@@ -36,10 +48,10 @@ For installation you need to follow a few simple steps:
 1. Edit domain name in the configuration file or a local copy (see below)
 1. Edit domain ssl setting in the configuration file or a local copy (see below)
 1. Edit this files:
-  1. **favicon.png** (change on your own)
-  1. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
-  1. **opensearch_desc.xml** (change the description and address on your own)
-  1. **opensearch_desc_bt.xml** (change the description and address on your own)
+1. **favicon.png** (change on your own)
+1. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
+1. **opensearch_desc.xml** (change the description and address on your own)
+1. **opensearch_desc_bt.xml** (change the description and address on your own)
 1. Log in to the forum with admin/admin login/password and finish setting up via admin panel
 
 ## Access rights on folders and files
@@ -79,4 +91,5 @@ the [tags on this repository](https://github.com/torrentpeer/torrentpier/tags).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE) file for details
+This project is licensed under the MIT License - see
+the [LICENSE](https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE) file for details
