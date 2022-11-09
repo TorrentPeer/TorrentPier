@@ -2,7 +2,7 @@
   <a href="https://torrentpier.site/" rel="nofollow">
     <img src="https://i.ibb.co/xLRMF24/Torrent-Pier-1.png" width="300px" style="max-width: 100%;">
   </a>
-  <center><h1>TorrentPier Kouprey - Released! 🌟</h1></center>
+  <h1>TorrentPier Kouprey - Released! 🌟</h1>
 </p>
 
 ## About TorrentPier
