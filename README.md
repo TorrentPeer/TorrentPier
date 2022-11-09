@@ -79,4 +79,4 @@ the [tags on this repository](https://github.com/torrentpeer/torrentpier/tags).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE) file for details
