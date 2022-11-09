@@ -27,8 +27,39 @@ if ($logged_in) {
   if ($userdata['user_new_privmsg']) {
     $have_new_pm = $userdata['user_new_privmsg'];
     $pm_info = declension($userdata['user_new_privmsg'], $lang['NEW_PMS_DECLENSION'], $lang['NEW_PMS_FORMAT']);
+
+    if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {
+      $userdata['user_last_privmsg'] = $userdata['user_lastvisit'];
+
+      \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, [
+        'user_last_privmsg' => $userdata['user_lastvisit'],
+      ]);
+
+      $have_new_pm = ($userdata['user_new_privmsg'] > 1);
+    }
   }
   if (!$have_new_pm && $userdata['user_unread_privmsg']) {
+    // sync unread pm count
+    if (defined('IN_PM')) {
+      $row = DB()->fetch_row("
+				SELECT COUNT(*) AS pm_count
+				FROM " . BB_PRIVMSGS . "
+				WHERE privmsgs_to_userid = " . $userdata['user_id'] . "
+					AND privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
+				GROUP BY privmsgs_to_userid
+			");
+
+      $real_unread_pm_count = (int)$row['pm_count'];
+
+      if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
+        $userdata['user_unread_privmsg'] = $real_unread_pm_count;
+
+        \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, [
+          'user_unread_privmsg' => $real_unread_pm_count,
+        ]);
+      }
+    }
+
     $pm_info = declension($userdata['user_unread_privmsg'], $lang['UNREAD_PMS_DECLENSION'], $lang['UNREAD_PMS_FORMAT']);
     $have_unread_pm = true;
   }
