@@ -8,13 +8,13 @@
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load
 architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition we have very helpful
-[official support forum](https://torrentpier.com/forum), where among other things it is possible to test the live demo,
+[official support forum](https://torrentpier.site), where among other things it is possible to test the live demo,
 get any support and download modifications for engine.
 
 ## Current status
 
 TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite existing to modern
-standards. If you want to go deep on the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
+standards. If you want to go deep on the code, check our [issues](https://github.com/torrentpeer/torrentpier/issues)
 and go from there. The documentation will be translated into english in the near future, currently russian is the main
 language of it.
 
@@ -60,25 +60,12 @@ chmod 0644 for files in them. If you are not sure, leave it as is.
 
 ## The recommended way to run cron.php
 
-For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more
-information about that you can read [this thread](https://torrentpier.com/forum/threads/52/) on our support forum.
-
-## Local configuration copy
-
-You can override the settings using one of these methods: configuration file **library/config.local.php** and the
-environment file **.env**. Both files are created by copying the appropriate .example templates without extension. Local
-configuration files should not be available for reading to anyone by setting up access rights for your web server.
+For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
 
 ## Ocelot installation
 
 We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **
 library/config.php**, the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot).
-You can read assembly instructions on his repository or in [this thread](https://torrentpier.com/forum/threads/26078/)
-on our support forum.
-
-## Official documentation
-
-Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.com).
 
 ## Contributing
 
@@ -88,7 +75,7 @@ requests to us. But we are always ready to renew your pull-request for complianc
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see
-the [tags on this repository](https://github.com/torrentpier/torrentpier/tags).
+the [tags on this repository](https://github.com/torrentpeer/torrentpier/tags).
 
 ## License
 
