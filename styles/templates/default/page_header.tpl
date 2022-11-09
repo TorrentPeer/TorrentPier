@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="{$bb_cfg['default_lang']}">
 <head>
-<title><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
-<meta name="title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
+<title><!-- IF HAVE_NEW_PM -->({HAVE_NEW_PM})<!-- ENDIF --> <!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
 <!-- IF PAGE_KEYWORDS_ON -->
 <meta name="keywords" content="<!-- IF $bb_cfg['append_keywords_first'] -->{PAGE_KEYWORDS}{RND_KEYWORDS}<!-- ELSE -->{RND_KEYWORDS}{PAGE_KEYWORDS}<!-- ENDIF -->" />
 <!-- ENDIF -->
@@ -284,8 +283,11 @@ Detector.detect();
       action: 'new_pm',
     }, true);
     ajax.callback.new_pm = function (data) {
+      if (data.msg_count > 0) {
+        $('#main-nav').addClass('new-pm');
+        $(document).attr("title", ('(' + data.msg_count + ') ' + '<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->'));
+      }
       $('#pm-link').html(data.text);
-      $('#main-nav').addClass(data.main_nav);
     };
   }
   setInterval("ajax.new_pm()", {$bb_cfg['pm_dynamic']['check_interval']});
