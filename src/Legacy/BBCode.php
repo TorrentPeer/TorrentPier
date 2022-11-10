@@ -106,48 +106,29 @@ class BBCode
     ];
 
     $this->str = [
-      '[quote]' => $tpl['quote_open'],
-      '[/quote]' => $tpl['quote_close'],
-      '[spoiler]' => $tpl['spoiler_open'],
-      '[/spoiler]' => $tpl['spoiler_close'],
-      '[acronym]' => $tpl['acronym_open'],
-      '[/acronym]' => $tpl['acronym_close'],
-      '[list]' => '<ul>',
-      '[*]' => '<li>',
-      '[/list]' => '</ul>',
-      '[/color]' => '</span>',
-      '[/size]' => '</span>',
-      '[/align]' => '</span>',
-      '[/font]' => '</span>',
-      '[tab]' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-      '[br]' => "\n\n",
-      '[hr]' => $tpl['hr'],
-      '[b]' => '<span class="post-b">',
-      '[/b]' => '</span>',
-      '[u]' => '<span class="post-u">',
-      '[/u]' => '</span>',
-      '[i]' => '<span class="post-i">',
-      '[/i]' => '</span>',
-      '[s]' => '<span class="post-s">',
-      '[/s]' => '</span>',
-      '[del]' => '<span class="post-s">',
-      '[/del]' => '</span>',
-      '[clear]' => '<div class="clear">&nbsp;</div>',
       // Tables
-      '[table]' => '<table class="forumline">',
-      '[/table]' => '</table>',
-      '[tr]' => '<tr>',
-      '[/tr]' => '</tr>',
-      '[th]' => '<th>',
-      '[/th]' => '</th>',
-      '[td]' => '<td>',
-      '[/td]' => '</td>',
-      // Sup
-      '[sup]' => '<sup>',
-      '[/sup]' => '</sup>',
-      // Sub
-      '[sub]' => '<sub>',
-      '[/sub]' => '</sub>',
+      '[table]' => '<table class="forumline">', '[/table]' => '</table>', '[tr]' => '<tr>', '[/tr]' => '</tr>', '[th]' => '<th>', '[/th]' => '</th>', '[td]' => '<td>', '[/td]' => '</td>',
+      // Lists
+      '[list]' => '<ul>', '[*]' => '<li>', '[/list]' => '</ul>',
+      // Font
+      '[/color]' => '</span>', '[/size]' => '</span>', '[/align]' => '</span>', '[/font]' => '</span>',
+      // Formatting
+      '[clear]' => '<div class="clear">&nbsp;</div>', '[tab]' => '&nbsp;&nbsp;&nbsp;&nbsp;', '[br]' => "\n\n", '[hr]' => $tpl['hr'],
+      // Text
+      '[b]' => '<span class="post-b">', '[/b]' => '</span>', '[strong]' => '<strong>', '[/strong]' => '</strong>',
+      '[u]' => '<span class="post-u">', '[/u]' => '</span>', '[ins]' => '<ins>', '[/ins]' => '</ins>',
+      '[i]' => '<span class="post-i">', '[/i]' => '</span>', '[em]' => '<em>', '[/em]' => '</em>',
+      '[s]' => '<span class="post-s">', '[/s]' => '</span>', '[del]' => '<del>', '[/del]' => '</del>',
+      '[sup]' => '<sup>', '[/sup]' => '</sup>', '[sub]' => '<sub>', '[/sub]' => '</sub>',
+      '[span]' => '<span>', '[/span]' => '</span>',
+      '[p]' => '<p>', '[/p]' => '</p>',
+      '[h1]' => '<h1>', '[/h1]' => '</h1>', '[h2]' => '<h2>', '[/h2]' => '</h2>', '[h3]' => '<h3>', '[/h3]' => '</h3>', '[h4]' => '<h4>', '[/h4]' => '</h4>', '[h5]' => '<h5>', '[/h5]' => '</h5>', '[h6]' => '<h6>', '[/h6]' => '</h6>',
+      '[mark]' => '<mark>', '[/mark]' => '</mark>',
+      '[small]' => '<small>', '[/small]' => '</small>',
+      // Misc
+      '[quote]' => $tpl['quote_open'], '[/quote]' => $tpl['quote_close'],
+      '[spoiler]' => $tpl['spoiler_open'], '[/spoiler]' => $tpl['spoiler_close'],
+      '[acronym]' => $tpl['acronym_open'], '[/acronym]' => $tpl['acronym_close'],
     ];
 
     $this->preg_search = array_keys($this->preg);
