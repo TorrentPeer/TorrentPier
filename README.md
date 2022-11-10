@@ -6,14 +6,10 @@
 <p align="center">
   <a href="https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TorrentPeer/TorrentPier" alt="License"></a>
   <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/stars/torrentpeer/torrentpier" alt="Stars Packagist"></a>
-  <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/dm/torrentpeer/torrentpier" alt="Packagist"></a>
-  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/languages/count/torrentpeer/torrentpier" alt="Languages"></a>
-  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/languages/top/torrentpeer/torrentpier" alt="Top Language"></a>
-  <a href="https://torrentpier.site"><img src="https://img.shields.io/website?url=https%3A%2F%2Ftorrentpier.site" alt="Web Site"></a>
-  <br><br>
-  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/forks/torrentpeer/torrentpier?style=social" alt="Forks"></a>
-  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/watchers/torrentpeer/torrentpier?style=social" alt="Watchers"></a>
-  <a href="https://github.com/TorrentPeer/TorrentPier"><img src="https://img.shields.io/github/stars/torrentpeer/torrentpier?style=social" alt="Stars"></a>
+  <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/dt/torrentpeer/torrentpier" alt="Downloads"></a>
+  <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpeer/torrentpier" alt="Version"></a>
+  <a href="https://github.com/TorrentPeer/TorrentPier/releases"><img src="https://img.shields.io/github/release-date/torrentpeer/torrentpier" alt="Last release"></a>
+  <img src="https://img.shields.io/github/repo-size/torrentpeer/torrentpier" alt="Size">
 </p>
 
 ## About TorrentPier
