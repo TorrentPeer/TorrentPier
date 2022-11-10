@@ -23,6 +23,7 @@ class Sqlite extends Common
   public $db;
   public $prefix;
   public $cfg = [
+    // Example config
     'db_file_path' => '/path/to/datastore.db.sqlite',
     'table_name' => 'datastore',
     'table_schema' => 'CREATE TABLE datastore (

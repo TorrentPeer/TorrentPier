@@ -19,6 +19,7 @@ use TorrentPier\Legacy\Dev;
 class SqliteCommon extends Common
 {
   public $cfg = [
+    // Example config
     'db_file_path' => 'sqlite.db',
     'table_name' => 'table_name',
     'table_schema' => 'CREATE TABLE table_name (...)',

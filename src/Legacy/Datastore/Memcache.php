@@ -81,7 +81,7 @@ class Memcache extends Common
     }
     $this->data[$title] = $var;
 
-    $this->cur_query = "cache->set('$title')";
+    $this->cur_query = "cache->store('$title')";
     $this->debug('start');
     $this->debug('stop');
     $this->cur_query = null;
@@ -99,7 +99,7 @@ class Memcache extends Common
       $this->connect();
     }
     foreach ($this->known_items as $title => $script_name) {
-      $this->cur_query = "cache->rm('$title')";
+      $this->cur_query = "cache->clean('$title')";
       $this->debug('start');
       $this->debug('stop');
       $this->cur_query = null;
@@ -117,15 +117,17 @@ class Memcache extends Common
   public function _fetch_from_store()
   {
     if (!$items = $this->queued_items) {
-      $src = $this->_debug_find_caller('enqueue');
-      Dev::error_message("Datastore: item '$item' already enqueued [$src]");
+      /** TODO
+       * $src = $this->_debug_find_caller('enqueue');
+       * Dev::error_message("Datastore: item '$item' already enqueued [$src]");
+       */
     }
 
     if (!$this->connected) {
       $this->connect();
     }
     foreach ($items as $item) {
-      $this->cur_query = "cache->get('$item')";
+      $this->cur_query = "cache->_fetch_from_store('$item')";
       $this->debug('start');
       $this->debug('stop');
       $this->cur_query = null;

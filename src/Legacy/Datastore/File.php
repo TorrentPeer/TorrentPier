@@ -44,7 +44,7 @@ class File extends Common
    */
   public function store($title, $var)
   {
-    $this->cur_query = "cache->set('$title')";
+    $this->cur_query = "cache->store('$title')";
     $this->debug('start');
 
     $this->data[$title] = $var;
@@ -70,6 +70,9 @@ class File extends Common
   {
     $dir = $this->dir;
 
+    $this->cur_query = "cache->clean()";
+    $this->debug('start');
+
     if (is_dir($dir)) {
       if ($dh = opendir($dir)) {
         while (($file = readdir($dh)) !== false) {
@@ -82,6 +85,10 @@ class File extends Common
         closedir($dh);
       }
     }
+
+    $this->debug('stop');
+    $this->cur_query = null;
+    $this->num_queries++;
   }
 
   /**
@@ -92,14 +99,16 @@ class File extends Common
   public function _fetch_from_store()
   {
     if (!$items = $this->queued_items) {
-      $src = $this->_debug_find_caller('enqueue');
-      Dev::error_message("Datastore: item '$item' already enqueued [$src]");
+      /** TODO
+       * $src = $this->_debug_find_caller('enqueue');
+       * Dev::error_message("Datastore: item '$item' already enqueued [$src]");
+       */
     }
 
     foreach ($items as $item) {
       $filename = $this->dir . $this->prefix . $item . '.php';
 
-      $this->cur_query = "cache->get('$item')";
+      $this->cur_query = "cache->_fetch_from_store('$item')";
       $this->debug('start');
       $this->debug('stop');
       $this->cur_query = null;
