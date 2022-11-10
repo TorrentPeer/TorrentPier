@@ -12,7 +12,7 @@
 
 ## v2.4.0 (2022-11-09)
 
-- Релиз 2.4.0 🔥
+- Релиз 2.4.0 💤
 - Функции AttachMod теперь в виде классов
 - Добавлен мод "Invites"
 - Добавлен вывод аватаров на странице с пользователями
@@ -659,6 +659,3 @@
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.0.0...v2.0.261)
 
 ## [v2.0.0](https://github.com/torrentpier/torrentpier/tree/v2.0.0) (2011-08-08)
-
-\* *This Change Log was automatically generated
-by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
