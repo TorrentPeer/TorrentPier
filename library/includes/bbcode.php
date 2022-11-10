@@ -18,9 +18,11 @@ $datastore->enqueue([
 
 $page_cfg['include_bbcode_js'] = true;
 
-//
-// BBCode templates
-//
+/**
+ * BBCode templates
+ *
+ * @return array
+ */
 function get_bbcode_tpl()
 {
   $bbcode_tpl = [];
@@ -115,6 +117,12 @@ HTML;
   return $bbcode_tpl;
 }
 
+/**
+ * BBCode template compact
+ *
+ * @param $text
+ * @return array|string|string[]
+ */
 function bbcode_tpl_compact($text)
 {
   $text = \TorrentPier\Helpers\BaseHelper::str_compact($text);
@@ -122,7 +130,12 @@ function bbcode_tpl_compact($text)
   return $text;
 }
 
-// prepare a posted message for entry into the database
+/**
+ * Prepare a posted message for entry into the database
+ *
+ * @param $message
+ * @return string
+ */
 function prepare_message($message)
 {
   $message = \TorrentPier\Legacy\BBCode::clean_up($message);
@@ -130,8 +143,13 @@ function prepare_message($message)
   return $message;
 }
 
-// Fill smiley templates (or just the variables) with smileys
-// Either in a window or inline
+/**
+ * Fill smiley templates (or just the variables) with smileys
+ * Either in a window or inline
+ *
+ * @param $mode
+ * @throws \Exception
+ */
 function generate_smilies($mode)
 {
   global $bb_cfg, $template, $lang, $user, $datastore;
@@ -208,8 +226,6 @@ function generate_smilies($mode)
   }
 }
 
-// some functions from vB
-// #############################################################################
 /**
  * Strips away [quote] tags and their contents from the specified string
  *
@@ -294,7 +310,6 @@ function strip_quotes($text)
   return $newtext;
 }
 
-// #############################################################################
 /**
  * Strips away bbcode from a given string, leaving plain text
  *
@@ -350,6 +365,12 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
   return $message;
 }
 
+/**
+ * Extract search words
+ *
+ * @param $text
+ * @return array
+ */
 function extract_search_words($text)
 {
   global $bb_cfg;
@@ -391,6 +412,16 @@ function extract_search_words($text)
   return $text;
 }
 
+/**
+ * Add search words
+ *
+ * @param $post_id
+ * @param $post_message
+ * @param string $topic_title
+ * @param false $only_return_words
+ * @return string
+ * @throws \Exception
+ */
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
   global $bb_cfg;
@@ -414,6 +445,13 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
  * To add new bbcodes see at src/Legacy/BBCode.php
  */
 
+/**
+ * BBCode to HTML
+ *
+ * @param $text
+ * @return string
+ * @throws \Exception
+ */
 function bbcode2html($text)
 {
   global $bbcode;
@@ -430,6 +468,12 @@ function bbcode2html($text)
   return $bbcode->bbcode2html($text);
 }
 
+/**
+ * Return word rate
+ *
+ * @param $text
+ * @return int
+ */
 function get_words_rate($text)
 {
   static $wr = null;
@@ -439,12 +483,27 @@ function get_words_rate($text)
   return $wr->get_words_rate($text);
 }
 
+/**
+ * Hide a passkey
+ *
+ * @param $str
+ * @return array|string|string[]|null
+ */
 function hide_passkey($str)
 {
   global $bb_cfg;
   return preg_replace("#\?{$bb_cfg['passkey_key']}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{$bb_cfg['passkey_key']}=passkey", $str);
 }
 
+/**
+ * Return parsed post
+ *
+ * @param $postrow
+ * @param string $mode
+ * @param int $return_chars
+ * @return mixed|string
+ * @throws \Exception
+ */
 function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 {
   global $bb_cfg;
@@ -466,6 +525,12 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
   return $message;
 }
 
+/**
+ * Update post HTML (BB_POSTS_HTML)
+ *
+ * @param $postrow
+ * @throws \Exception
+ */
 function update_post_html($postrow)
 {
   DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id']);

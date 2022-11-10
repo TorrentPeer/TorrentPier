@@ -334,7 +334,7 @@ ajax.callback.gen_passkey = function(data){
 
 		<table class="user_details borderless w100">
       <tr>
-        <th>{L_USERNAME}</th>
+        <th>{L_USERNAME}:</th>
         <td id="username">
           <span class="editable bold">{USERNAME}</span>
         </td>
