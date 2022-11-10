@@ -1,5 +1,15 @@
 # Change Log
 
+## [v2.4.0.1](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.1) (2022-11-10)
+
+[Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0...v2.4.0.1)
+
+- Misc fixes and improvements [79bd025](https://github.com/TorrentPeer/TorrentPier/commit/3ecbe69072085f551592bd63ec1f40c6eebaf3ae), [fd4af0a](https://github.com/TorrentPeer/TorrentPier/commit/09aba1b3bb45a8c7663e32564229a26a8ab3bdaa) ([belomaxorka](https://github.com/belomaxorka))
+- Updated copyrights [7aa6e16](https://github.com/TorrentPeer/TorrentPier/commit/d00ebd8581ee1b5190a2965571354626fd69d140) ([belomaxorka](https://github.com/belomaxorka))
+- Improved mention system [d00ebd8](https://github.com/TorrentPeer/TorrentPier/commit/6a3d9e16f16cbd9d194c9301425eec84108b6de4) ([belomaxorka](https://github.com/belomaxorka))
+- Added support of some HTML tags in BBCode [bc83982](https://github.com/TorrentPeer/TorrentPier/commit/79bd02533c3f05d886b62fa646018f043d4f3978) ([belomaxorka](https://github.com/belomaxorka))
+- Showing count of PM in page title [6a3d9e1](https://github.com/TorrentPeer/TorrentPier/commit/d465de7715f49d26a18b7f1766e4eac125f8ec64), [d465de7](https://github.com/TorrentPeer/TorrentPier/commit/57e474f41f101c246524d12429b62dcf95d3e80f) ([belomaxorka](https://github.com/belomaxorka))
+
 ## v2.4.0 (2022-11-09)
 
 - Релиз 2.4.0 🔥
