@@ -299,11 +299,11 @@ class BBCode
   {
     global $lang;
 
-    if (!$user_array = get_userdata(get_user_id(trim($m[1])))) {
+    if (!$user_data = get_userdata(get_user_id(trim($m[1])))) {
       return $lang['NO_SUCH_USER'];
     }
 
-    return profile_url($user_array);
+    return profile_url($user_data);
   }
 
   /**

@@ -22,9 +22,11 @@
 <div id="infobox-wrap" class="bCenter row1">
   <fieldset class="pad_6">
     <legend class="med bold mrg_2 warnColor1">{PAGE_TITLE}</legend>
+    <!-- IF REQUIRE -->
     <div class="bCenter">{REQUIRE}</div>
+    <!-- ENDIF -->
   </fieldset>
   <p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ {L_LOCK} ]</a>
   </p>
 </div><!--/infobox-wrap-->
-<br />
+<br/>

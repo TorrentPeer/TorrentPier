@@ -16,7 +16,7 @@ $user->session_start();
 global $lang;
 
 $info = [];
-$html_dir = LANG_DIR . 'html/';
+$html_dir = (LANG_DIR . 'html/');
 $req_mode = (string)$_REQUEST['show'];
 
 switch ($req_mode) {
@@ -42,11 +42,11 @@ switch ($req_mode) {
     break;
 }
 
-$require = file_exists($html_dir . $info['src']) ? $html_dir . $info['src'] : $html_dir . 'not_found.html';
+$require = file_exists($html_dir . $info['src']) ? ($html_dir . $info['src']) : false;
 
 $template->assign_vars([
   'PAGE_TITLE' => mb_strtoupper($info['title'], 'UTF-8'),
-  'REQUIRE' => file_get_contents($require),
+  'REQUIRE' => $require ? file_get_contents($require) : '',
 ]);
 
 print_page('info.tpl', 'simple');
