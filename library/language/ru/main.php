@@ -50,6 +50,7 @@ $lang['1_YEAR'] = 'за последний год';
 $lang['GO'] = 'Перейти';
 $lang['SUBMIT'] = 'Отправить';
 $lang['RESET'] = 'Сбросить';
+$lang['CLEAR'] = 'Очистить';
 $lang['CANCEL'] = 'Отмена';
 $lang['PREVIEW'] = 'Предв. просмотр';
 $lang['AJAX_PREVIEW'] = 'Быстрый просмотр';

@@ -50,6 +50,7 @@ $lang['1_YEAR'] = '1 Year';
 $lang['GO'] = 'Go to';
 $lang['SUBMIT'] = 'Submit';
 $lang['RESET'] = 'Reset';
+$lang['CLEAR'] = 'Clear';
 $lang['CANCEL'] = 'Cancel';
 $lang['PREVIEW'] = 'Preview';
 $lang['AJAX_PREVIEW'] = 'Quick View';

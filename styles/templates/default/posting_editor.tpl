@@ -114,9 +114,9 @@ ajax.callback.posts = function(data) {
   <input type="button" value="nfo" name="codeInfo" title="{L_INFO_TITLE}" style="width: 40px;" />
 </div>
 <div class="mrg_4 buttons floatR">
-  <input type="reset" value="{L_RESET}" />&nbsp;&nbsp;
-  <input type="button" value="+" onclick="$('#message').css({height: parseInt($('#message').css('height')) + 100}); return false;">
-  <input type="button" value="-" onclick="$('#message').css({height: parseInt($('#message').css('height')) - 100}); return false;">
+  <input type="button" value="{L_CLEAR}" onclick="$('textarea#message').val(''); return false;" />&nbsp;&nbsp;
+  <input type="button" value="+" onclick="$('textarea#message').css({height: parseInt($('#message').css('height')) + 100}); return false;">
+  <input type="button" value="-" onclick="$('textarea#message').css({height: parseInt($('#message').css('height')) - 100}); return false;">
 </div>
 
 <textarea
