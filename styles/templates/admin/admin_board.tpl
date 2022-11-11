@@ -119,7 +119,7 @@
 </tr>
 <tr>
   <td><h4>{L_LOGO}</h4></td>
-  <td><select name="logo_image" onchange="update_logo(this.options[selectedIndex].value);">{LOGO_LIST}</select><!-- IF LOGO_IMAGE --><br><br><img name="logo_image" src="{LOGO_IMAGE}" border="0" width="{LOGO_WIDTH}" height="{LOGO_HEIGHT}"/><!-- ENDIF --></td>
+  <td><select name="logo_image" onchange="update_logo(this.options[selectedIndex].value);">{LOGO_LIST}</select><!-- IF LOGO_IMAGE --><br><br><img name="logo_image" src="{LOGO_IMAGE}" border="0" width="400" height="auto"/><!-- ENDIF --></td>
 </tr>
 <tr>
 	<th colspan="2">{L_ABILITIES_SETTINGS}</th>

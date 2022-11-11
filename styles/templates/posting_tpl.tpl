@@ -4482,7 +4482,7 @@ ajax.callback.topic_tpl = function(data) {
 
 		case 'assign':
 			alert(data.msg);
-			window.location.reload();
+			reload();
 			break;
 
 		case 'save':

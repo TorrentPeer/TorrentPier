@@ -27,6 +27,10 @@
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
 <script type="text/javascript" src="{SITE_URL}styles/libs/torrentpier/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/functions.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/event.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/ajax.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/cookie.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript" src="{SITE_URL}styles/libs/old-browser-detector/oldbrowserdetector.min.js"></script>
 <script type="text/javascript" src="{SCRIPTS}"></script>
@@ -87,13 +91,13 @@ var IWP_SM       = 'HEIGHT=420,WIDTH=470,resizable=yes,scrollbars=yes';
 var user = {
 	opt_js: {USER_OPTIONS_JS},
 
-	set: function (opt, val, days, reload) {
-		this.opt_js[opt] = val;
-		setCookie('opt_js', $.toJSON(this.opt_js), days);
-		if (reload) {
-			window.location.reload();
-		}
-	}
+  set: function (opt, val, days, go_reload) {
+    this.opt_js[opt] = val;
+    setCookie('opt_js', $.toJSON(this.opt_js), days);
+    if (go_reload) {
+      reload();
+    }
+  }
 };
 
 <!-- IF SHOW_JUMPBOX -->

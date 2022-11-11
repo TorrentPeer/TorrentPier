@@ -22,8 +22,8 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0';
-$bb_cfg['tp_release_date'] = '09-11-22';
+$bb_cfg['tp_version'] = '2.4.0.2';
+$bb_cfg['tp_release_date'] = '11-11-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
 // Database
