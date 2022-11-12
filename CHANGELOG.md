@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.4.0.2](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.2) (2022-11-12)
+
+[Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.1...v2.4.0.2)
+
+- Misc fixes and improvements [c3a06e6](https://github.com/TorrentPeer/TorrentPier/commit/5a2abe4f5e526c52952509319199e264ce7ca903), [bbd00da](https://github.com/TorrentPeer/TorrentPier/commit/c3a06e67e41b0754f5991869cf7431c257c2f137), [9e77e87](https://github.com/TorrentPeer/TorrentPier/commit/bbd00da2bbdfca2834911e2ee83d069b15849aee), [c4e64c5](https://github.com/TorrentPeer/TorrentPier/commit/b2a66a29e64c68b448dd5378c063a32e3208ea06), [79bd025](https://github.com/TorrentPeer/TorrentPier/commit/3ecbe69072085f551592bd63ec1f40c6eebaf3ae) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed textarea reset in BBCode [5a2abe4](https://github.com/TorrentPeer/TorrentPier/commit/b1acf3b0d93b2f15588e76f7c8189f1f1ed713d9) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0.1](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.1) (2022-11-10)
 
 [Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0...v2.4.0.1)
