@@ -91,7 +91,7 @@ class Caches
           case 'filecache':
           default:
             if (!isset($this->obj[$cache_name])) {
-              $this->obj[$cache_name] = new Cache\File($this->cfg['cache_dir'] . "filecache/$cache_name/", $this->cfg['prefix']);
+              $this->obj[$cache_name] = new Cache\File($this->cfg['cache_dir'] . "filecache/$cache_name/", $this->cfg['filecache'], $this->cfg['prefix']);
             }
             $this->ref[$cache_name] =& $this->obj[$cache_name];
             break;

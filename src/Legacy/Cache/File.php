@@ -9,8 +9,9 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use belomaxorka\DOFileCache\DOFileCache;
+
 use TorrentPier\Legacy\Dev;
-use TorrentPier\Legacy\Filesystem;
 
 /**
  * Class File
@@ -18,22 +19,39 @@ use TorrentPier\Legacy\Filesystem;
  */
 class File extends Common
 {
-  public $used = true;
+  private $prefix;
+  private $filecache;
+
   public $engine = 'Filecache';
-  public $dir;
-  public $prefix;
+  public $used = false;
 
   /**
    * File constructor.
    *
    * @param $dir
+   * @param $cfg
    * @param null $prefix
+   * @throws \Exception
    */
-  public function __construct($dir, $prefix = null)
+  public function __construct($dir, $cfg, $prefix = null)
   {
-    $this->dir = $dir;
-    $this->prefix = $prefix;
+    if (!$this->is_installed()) {
+      Dev::error_message("Error: {$this->engine} class not loaded");
+    }
+
+    $this->filecache = new DOFileCache();
+
+    $this->filecache->changeConfig([
+      'cacheDirectory' => $dir,
+      'gzipCompression' => $cfg['gzipCompression'],
+      'fileExtension' => $cfg['fileExtension'],
+      'unixLoadUpperThreshold' => '-1',
+      'newStyledFilesOrganization' => false,
+    ]);
+
+    $this->used = true;
     $this->dbg_enabled = Dev::sql_dbg_enabled();
+    $this->prefix = $prefix;
   }
 
   /**
@@ -43,22 +61,22 @@ class File extends Common
    * @param string $get_miss_key_callback
    * @param int $ttl
    * @return array|false|mixed
+   * @throws \Exception
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {
-    $filename = $this->dir . Filesystem::clean_filename($this->prefix . $name) . '.php';
-
-    $this->cur_query = "cache->get('$name')";
+    $this->cur_query = "Get cache: $name";
     $this->debug('start');
 
-    if (file_exists($filename)) {
-      require($filename);
+    if ($get = $this->filecache->get($this->prefix . $name)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $get;
     }
 
-    $this->debug('stop');
-    $this->cur_query = null;
-
-    return (!empty($filecache['value'])) ? $filecache['value'] : false;
+    return false;
   }
 
   /**
@@ -69,32 +87,20 @@ class File extends Common
    * @param int $ttl
    * @return bool
    */
-  public function set($name, $value, $ttl = 86400)
+  public function set($name, $value, $ttl = 0)
   {
-    if (!\function_exists('var_export')) {
-      return false;
-    }
-
-    $this->cur_query = "cache->set('$name')";
+    $this->cur_query = "Set cache: $name";
     $this->debug('start');
 
-    $filename = $this->dir . Filesystem::clean_filename($this->prefix . $name) . '.php';
-    $expire = TIMENOW + $ttl;
-    $cache_data = [
-      'expire' => $expire,
-      'value' => $value,
-    ];
+    if ($set = $this->filecache->set($this->prefix . $name, $value, $ttl)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
 
-    $filecache = "<?php\n";
-    $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
-    $filecache .= '$filecache = ' . var_export($cache_data, true) . ";\n";
-    $filecache .= '?>';
+      return $set;
+    }
 
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
-
-    return (bool)Filesystem::file_write($filecache, $filename, false, true, true);
+    return false;
   }
 
   /**
@@ -105,63 +111,31 @@ class File extends Common
    */
   public function rm($name = '')
   {
-    $clear = false;
+    $name ? $this->cur_query = "Remove cache: $name" : $this->cur_query = "Remove all items from cache";
+
+    $this->debug('start');
+
     if ($name) {
-      $this->cur_query = "cache->rm('$name')";
-      $this->debug('start');
-
-      $filename = $this->dir . Filesystem::clean_filename($this->prefix . $name) . '.php';
-      if (file_exists($filename)) {
-        $clear = (bool)unlink($filename);
-      }
-
-      $this->debug('stop');
-      $this->cur_query = null;
-      $this->num_queries++;
+      $remove = $this->filecache->delete($this->prefix . $name);
     } else {
-      if (is_dir($this->dir)) {
-        if ($dh = opendir($this->dir)) {
-          while (($file = readdir($dh)) !== false) {
-            if ($file != "." && $file != "..") {
-              $filename = $this->dir . $file;
-
-              unlink($filename);
-              $clear = true;
-            }
-          }
-          closedir($dh);
-        }
-      }
+      $remove = $this->filecache->flush();
     }
-    return $clear;
+
+    $this->debug('stop');
+
+    $this->cur_query = null;
+    $this->num_queries++;
+
+    return $remove;
   }
 
   /**
-   * @param int $expire_time
+   * Check if extension is installed
+   *
    * @return bool
    */
-  public function gc($expire_time = TIMENOW)
+  private function is_installed(): bool
   {
-    $clear = false;
-
-    if (is_dir($this->dir)) {
-      if ($dh = opendir($this->dir)) {
-        while (($file = readdir($dh)) !== false) {
-          if ($file != "." && $file != "..") {
-            $filename = $this->dir . $file;
-
-            require($filename);
-
-            if (!empty($filecache['expire']) && ($filecache['expire'] < $expire_time)) {
-              unlink($filename);
-              $clear = true;
-            }
-          }
-        }
-        closedir($dh);
-      }
-    }
-
-    return $clear;
+    return class_exists('belomaxorka\DOFileCache\DOFileCache');
   }
 }
