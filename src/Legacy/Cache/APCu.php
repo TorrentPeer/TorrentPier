@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use MatthiasMullie\Scrapbook\Adapters\Apc;
+
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -17,9 +19,11 @@ use TorrentPier\Legacy\Dev;
  */
 class APCu extends Common
 {
-  public $used = true;
+  private $prefix;
+  private $apcu;
+
   public $engine = 'APCu';
-  public $prefix;
+  public $used = true;
 
   /**
    * APCu constructor.
@@ -30,11 +34,13 @@ class APCu extends Common
   public function __construct($prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message('Error: APCu extension not installed');
+      Dev::error_message("Error: {$this->engine} class not loaded");
     }
 
-    $this->prefix = $prefix;
+    $this->apcu = new Apc();
+
     $this->dbg_enabled = Dev::sql_dbg_enabled();
+    $this->prefix = $prefix;
   }
 
   /**
@@ -47,13 +53,18 @@ class APCu extends Common
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {
-    $this->cur_query = "cache->get('$name')";
+    $this->cur_query = "Set cache: $name";
     $this->debug('start');
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
 
-    return apcu_fetch($this->prefix . $name);
+    if ($get = $this->apcu->get($this->prefix . $name)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $get;
+    }
+
+    return false;
   }
 
   /**
@@ -62,38 +73,48 @@ class APCu extends Common
    * @param $name
    * @param $value
    * @param int $ttl
-   * @return array|bool
+   * @return bool|bool[]
    */
   public function set($name, $value, $ttl = 0)
   {
-    $this->cur_query = "cache->set('$name')";
+    $this->cur_query = "Set cache: $name";
     $this->debug('start');
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
 
-    return apcu_store($this->prefix . $name, $value, $ttl);
+    if ($set = $this->apcu->set($this->prefix . $name, $value, $ttl)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $set;
+    }
+
+    return false;
   }
 
   /**
    * Remove key & value by name
    *
    * @param string $name
-   * @return array|bool|string[]
+   * @return bool|string[]
    */
   public function rm($name = '')
   {
-    if ($name) {
-      $this->cur_query = "cache->rm('$name')";
-      $this->debug('start');
-      $this->debug('stop');
-      $this->cur_query = null;
-      $this->num_queries++;
+    $name ? $this->cur_query = "Remove cache: $name" : $this->cur_query = "Remove all items from cache";
 
-      return apcu_delete($this->prefix . $name);
+    $this->debug('start');
+
+    if ($name) {
+      $remove = $this->apcu->delete($this->prefix . $name);
+    } else {
+      $remove = $this->apcu->flush();
     }
 
-    return apcu_clear_cache();
+    $this->debug('stop');
+
+    $this->cur_query = null;
+    $this->num_queries++;
+
+    return $remove;
   }
 
   /**
@@ -103,6 +124,6 @@ class APCu extends Common
    */
   private function is_installed(): bool
   {
-    return function_exists('apcu_enabled');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\Apc');
   }
 }

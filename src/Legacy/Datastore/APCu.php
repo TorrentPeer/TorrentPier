@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use MatthiasMullie\Scrapbook\Adapters\Apc;
+
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -17,7 +19,9 @@ use TorrentPier\Legacy\Dev;
  */
 class APCu extends Common
 {
-  public $prefix;
+  private $apcu;
+  private $prefix;
+
   public $engine = 'APCu';
 
   /**
@@ -29,8 +33,10 @@ class APCu extends Common
   public function __construct($prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message('Error: APCu extension not installed');
+      Dev::error_message("Error: {$this->engine} class not loaded");
     }
+
+    $this->apcu = new Apc();
 
     $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
@@ -41,19 +47,24 @@ class APCu extends Common
    *
    * @param $title
    * @param $var
-   * @return bool
+   * @return bool|bool[]|void
    */
   public function store($title, $var)
   {
     $this->data[$title] = $var;
 
-    $this->cur_query = "cache->store('$title')";
+    $this->cur_query = "Set datastore: $title";
     $this->debug('start');
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
 
-    return (bool)apcu_store($this->prefix . $title, $var);
+    if ($store = $this->apcu->set($this->prefix . $title, $var)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $store;
+    }
+
+    return false;
   }
 
   /**
@@ -62,20 +73,19 @@ class APCu extends Common
   public function clean()
   {
     foreach ($this->known_items as $title => $script_name) {
-      $this->cur_query = "cache->clean('$title')";
+      $this->cur_query = "Clean datastore";
       $this->debug('start');
+
+      $this->apcu->delete($this->prefix . $title);
+
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
-
-      apcu_delete($this->prefix . $title);
     }
   }
 
   /**
    * Get values
-   *
-   * @throws \Exception
    */
   public function _fetch_from_store()
   {
@@ -87,13 +97,14 @@ class APCu extends Common
     }
 
     foreach ($items as $item) {
-      $this->cur_query = "cache->_fetch_from_store('$item')";
+      $this->cur_query = "Get datastore: $item";
       $this->debug('start');
+
+      $this->data[$item] = $this->apcu->get($this->prefix . $item);
+
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
-
-      $this->data[$item] = apcu_fetch($this->prefix . $item);
     }
   }
 
@@ -104,6 +115,6 @@ class APCu extends Common
    */
   private function is_installed(): bool
   {
-    return function_exists('apcu_enabled');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\Apc');
   }
 }
