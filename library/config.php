@@ -76,13 +76,13 @@ $bb_cfg['cache'] = [
   ],
   // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
   'engines' => [
-    'bb_cache' => 'filecache',
-    'bb_config' => 'filecache',
-    'tr_cache' => 'filecache',
-    'session_cache' => 'filecache',
-    'bb_cap_sid' => 'filecache',
-    'bb_login_err' => 'filecache',
-    'bb_poll_data' => 'filecache',
+    'bb_cache' => 'redis',
+    'bb_config' => 'redis',
+    'tr_cache' => 'redis',
+    'session_cache' => 'redis',
+    'bb_cap_sid' => 'redis',
+    'bb_login_err' => 'redis',
+    'bb_poll_data' => 'redis',
   ],
 ];
 

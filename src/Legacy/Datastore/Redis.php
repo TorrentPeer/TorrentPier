@@ -29,6 +29,7 @@ class Redis extends Common
   /**
    * Redis constructor.
    *
+   * @param $cfg
    * @param null $prefix
    * @throws \Exception
    */

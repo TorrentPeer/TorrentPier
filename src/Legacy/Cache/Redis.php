@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use MatthiasMullie\Scrapbook\Adapters\Redis as Red;
+
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -17,11 +19,12 @@ use TorrentPier\Legacy\Dev;
  */
 class Redis extends Common
 {
-  public $used = true;
+  private $prefix;
+  private $redis;
+  private $cfg;
+
   public $engine = 'Redis';
-  public $cfg;
-  public $redis;
-  public $prefix;
+  public $used = false;
   public $connected = false;
 
   /**
@@ -34,35 +37,38 @@ class Redis extends Common
   public function __construct($cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message('Error: Redis extension not installed');
+      Dev::error_message("Error: {$this->engine} class not loaded");
     }
 
     $this->cfg = $cfg;
-    $this->prefix = $prefix;
-    $this->redis = new \Redis();
+
+    $this->used = true;
     $this->dbg_enabled = Dev::sql_dbg_enabled();
+    $this->prefix = $prefix;
   }
 
   /**
-   * Connect to redis host
-   *
-   * @throws \Exception
+   * Connect to host
    */
-  public function connect()
+  private function connect()
   {
-    $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
-    $this->debug('start');
+    $client = new \Redis();
+    $client->connect($this->cfg['host'], $this->cfg['port']);
 
-    if (@$this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
+    if (!$this->connected) {
+      $this->cur_query = "Connect to: {$this->cfg['host']}:{$this->cfg['port']}";
+      $this->debug('start');
+
+      $this->redis = new Red($client);
+
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+    }
+
+    if ($client->isConnected()) {
       $this->connected = true;
     }
-
-    if (!$this->connected && $this->cfg['con_required']) {
-      Dev::error_message('Could not connect to redis server');
-    }
-
-    $this->debug('stop');
-    $this->cur_query = null;
   }
 
   /**
@@ -72,21 +78,23 @@ class Redis extends Common
    * @param string $get_miss_key_callback
    * @param int $ttl
    * @return array|false|mixed
-   * @throws \Exception
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {
-    if (!$this->connected) {
-      $this->connect();
+    $this->connect();
+
+    $this->cur_query = "Get cache: $name";
+    $this->debug('start');
+
+    if ($get = $this->redis->get($this->prefix . $name)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $get;
     }
 
-    $this->cur_query = "cache->get('$name')";
-    $this->debug('start');
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
-
-    return ($this->connected) ? unserialize($this->redis->get($this->prefix . $name)) : false;
+    return false;
   }
 
   /**
@@ -95,28 +103,21 @@ class Redis extends Common
    * @param $name
    * @param $value
    * @param int $ttl
-   * @return bool
-   * @throws \Exception
+   * @return false
    */
   public function set($name, $value, $ttl = 0)
   {
-    if (!$this->connected) {
-      $this->connect();
-    }
+    $this->connect();
 
-    $this->cur_query = "cache->set('$name')";
+    $this->cur_query = "Set cache: $name";
     $this->debug('start');
 
-    if ($this->redis->set($this->prefix . $name, serialize($value))) {
-      if ($ttl > 0) {
-        $this->redis->expire($this->prefix . $name, $ttl);
-      }
-
+    if ($set = $this->redis->set($this->prefix . $name, $value, $ttl)) {
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
 
-      return true;
+      return $set;
     }
 
     return false;
@@ -126,26 +127,28 @@ class Redis extends Common
    * Remove key & value by name
    *
    * @param string $name
-   * @return bool|int
-   * @throws \Exception
+   * @return false
    */
   public function rm($name = '')
   {
-    if (!$this->connected) {
-      $this->connect();
-    }
+    $this->connect();
+
+    $name ? $this->cur_query = "Remove cache: $name" : $this->cur_query = "Remove all items from cache";
+
+    $this->debug('start');
 
     if ($name) {
-      $this->cur_query = "cache->rm('$name')";
-      $this->debug('start');
-      $this->debug('stop');
-      $this->cur_query = null;
-      $this->num_queries++;
-
-      return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
+      $remove = $this->redis->delete($this->prefix . $name);
+    } else {
+      $remove = $this->redis->flush();
     }
 
-    return ($this->connected) ? $this->redis->flushDB() : false;
+    $this->debug('stop');
+
+    $this->cur_query = null;
+    $this->num_queries++;
+
+    return $remove;
   }
 
   /**
@@ -155,6 +158,6 @@ class Redis extends Common
    */
   private function is_installed(): bool
   {
-    return class_exists('Redis');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\Redis');
   }
 }
