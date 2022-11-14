@@ -48,7 +48,7 @@ $bb_cfg['db_alias'] = [
 // Cache
 $bb_cfg['cache'] = [
   'pconnect' => true,
-  'cache_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
+  'cache_dir' => realpath(BB_ROOT) . '/internal_data/cache/',
   'prefix' => 'tp_',
   'memcache' => [
     'host' => '127.0.0.1',
@@ -82,7 +82,7 @@ $bb_cfg['cache'] = [
 
 // Datastore
 // Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql (filecache by default)
-$bb_cfg['datastore_type'] = 'postgresql';
+$bb_cfg['datastore_type'] = 'sqlite';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name);

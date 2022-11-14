@@ -9,8 +9,9 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use SQLite3;
-use TorrentPier\Helpers\BaseHelper;
+use MatthiasMullie\Scrapbook\Adapters\SQLite as Lite;
+use PDO;
+
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -19,59 +20,53 @@ use TorrentPier\Legacy\Dev;
  */
 class Sqlite extends Common
 {
+  private $sqlite;
+  private $prefix;
+
   public $engine = 'SQLite';
-  public $db;
-  public $prefix;
-  public $cfg = [
-    // Example config
-    'db_file_path' => '/path/to/datastore.db.sqlite',
-    'table_name' => 'datastore',
-    'table_schema' => 'CREATE TABLE datastore (
-	            ds_title       VARCHAR(255),
-	            ds_data        TEXT,
-	            PRIMARY KEY (ds_title)
-	        )',
-    'pconnect' => true,
-    'con_required' => true,
-    'log_name' => 'DATASTORE',
-  ];
 
   /**
    * Sqlite constructor.
    *
-   * @param $cfg
    * @param null $prefix
    * @throws \Exception
    */
-  public function __construct($cfg, $prefix = null)
+  public function __construct($file, $prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message('Error: SQLite3 extension not installed');
+      Dev::error_message("Error: {$this->engine} class not loaded");
     }
 
-    $this->cfg = array_merge($this->cfg, $cfg);
-    $this->db = new SqliteCommon($this->cfg);
+    $client = new PDO("sqlite:{$file}");
+    $this->sqlite = new Lite($client);
+
+    $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
   }
 
   /**
    * Store a value by name
    *
-   * @param $item_name
-   * @param $item_data
-   * @return bool
-   * @throws \Exception
+   * @param $title
+   * @param $var
+   * @return bool|void
    */
-  public function store($item_name, $item_data)
+  public function store($title, $var)
   {
-    $this->data[$item_name] = $item_data;
+    $this->data[$title] = $var;
 
-    $ds_title = SQLite3::escapeString($this->prefix . $item_name);
-    $ds_data = SQLite3::escapeString(serialize($item_data));
+    $this->cur_query = "Set datastore: $title";
+    $this->debug('start');
 
-    $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
+    if ($store = $this->sqlite->set($this->prefix . $title, $var)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
 
-    return (bool)$result;
+      return $store;
+    }
+
+    return false;
   }
 
   /**
@@ -79,7 +74,16 @@ class Sqlite extends Common
    */
   public function clean()
   {
-    $this->db->query("DELETE FROM " . $this->cfg['table_name']);
+    foreach ($this->known_items as $title => $script_name) {
+      $this->cur_query = "Clean datastore";
+      $this->debug('start');
+
+      $this->sqlite->delete($this->prefix . $title);
+
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+    }
   }
 
   /**
@@ -88,22 +92,22 @@ class Sqlite extends Common
   public function _fetch_from_store()
   {
     if (!$items = $this->queued_items) {
-      return;
+      /** TODO
+       * $src = $this->_debug_find_caller('enqueue');
+       * Dev::error_message("Datastore: item '$item' already enqueued [$src]");
+       */
     }
 
-    $prefix_len = \strlen($this->prefix);
-    $prefix_sql = SQLite3::escapeString($this->prefix);
+    foreach ($items as $item) {
+      $this->cur_query = "Get datastore: $item";
+      $this->debug('start');
 
-    BaseHelper::array_deep($items, 'SQLite3::escapeString');
-    $items_list = $prefix_sql . implode("','$prefix_sql", $items);
+      $this->data[$item] = $this->sqlite->get($this->prefix . $item);
 
-    $rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM " . $this->cfg['table_name'] . " WHERE ds_title IN ('$items_list')");
-
-    $this->db->debug('start', "unserialize()");
-    foreach ($rowset as $row) {
-      $this->data[substr($row['ds_title'], $prefix_len)] = unserialize($row['ds_data']);
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
     }
-    $this->db->debug('stop');
   }
 
   /**
@@ -113,6 +117,6 @@ class Sqlite extends Common
    */
   private function is_installed(): bool
   {
-    return extension_loaded('sqlite3');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\SQLite') && class_exists('PDO');
   }
 }
