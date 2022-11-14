@@ -62,14 +62,13 @@ $bb_cfg['cache'] = [
   'redis' => [
     'host' => '127.0.0.1',
     'port' => 6379,
-    'con_required' => true,
   ],
   'postgresql' => [
     'host' => '127.0.0.1',
     'port' => 5432,
     'user' => 'postgres',
     'password' => 'postgres',
-    'db_name' => 'cache'
+    'db_name' => 'cache',
   ],
   'filecache' => [
     'fileExtension' => 'cache',
@@ -89,7 +88,7 @@ $bb_cfg['cache'] = [
 
 // Datastore
 // Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
-$bb_cfg['datastore_type'] = 'filecache';
+$bb_cfg['datastore_type'] = 'redis';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name);
