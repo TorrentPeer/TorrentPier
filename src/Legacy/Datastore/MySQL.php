@@ -9,26 +9,26 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use MatthiasMullie\Scrapbook\Adapters\PostgreSQL as greSQL;
+use MatthiasMullie\Scrapbook\Adapters\MySQL as My;
 use PDO;
 
 use TorrentPier\Legacy\Dev;
 
 /**
- * Class PostgreSQL
+ * Class MySQL
  * @package TorrentPier\Legacy\Datastore
  */
-class PostgreSQL extends Common
+class MySQL extends Common
 {
-  private $postgresql;
+  private $mysql;
   private $prefix;
   private $cfg;
 
-  public $engine = 'PostgreSQL';
+  public $engine = 'MySQL';
   public $connected = false;
 
   /**
-   * PostgreSQL constructor.
+   * MySQL constructor.
    *
    * @param $cfg
    * @param null $prefix
@@ -51,15 +51,15 @@ class PostgreSQL extends Common
    */
   private function connect()
   {
-    $client = new PDO("pgsql:dbname={$this->cfg['db_name']};host={$this->cfg['host']};port={$this->cfg['port']}", $this->cfg['user'], $this->cfg['password']);
+    $client = new PDO("mysql:dbname={$this->cfg['dbname']};host={$this->cfg['dbhost']};port={$this->cfg['dbport']}", $this->cfg['dbuser'], $this->cfg['dbpasswd']);
 
     if ($client && !$this->connected) {
       $this->connected = true;
 
-      $this->cur_query = "Connect to: {$this->cfg['host']}:{$this->cfg['port']}";
+      $this->cur_query = "Connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}";
       $this->debug('start');
 
-      $this->postgresql = new greSQL($client, BB_CACHE);
+      $this->mysql = new My($client, BB_CACHE);
 
       $this->debug('stop');
       $this->cur_query = null;
@@ -83,7 +83,7 @@ class PostgreSQL extends Common
     $this->cur_query = "Set datastore: $title";
     $this->debug('start');
 
-    if ($store = $this->postgresql->set($this->prefix . $title, $var)) {
+    if ($store = $this->mysql->set($this->prefix . $title, $var)) {
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
@@ -105,7 +105,7 @@ class PostgreSQL extends Common
       $this->cur_query = "Clean datastore";
       $this->debug('start');
 
-      $this->postgresql->delete($this->prefix . $title);
+      $this->mysql->delete($this->prefix . $title);
 
       $this->debug('stop');
       $this->cur_query = null;
@@ -131,7 +131,7 @@ class PostgreSQL extends Common
       $this->cur_query = "Get datastore: $item";
       $this->debug('start');
 
-      $this->data[$item] = $this->postgresql->get($this->prefix . $item);
+      $this->data[$item] = $this->mysql->get($this->prefix . $item);
 
       $this->debug('stop');
       $this->cur_query = null;
@@ -146,6 +146,6 @@ class PostgreSQL extends Common
    */
   private function is_installed(): bool
   {
-    return class_exists('MatthiasMullie\Scrapbook\Adapters\PostgreSQL') && class_exists('PDO');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\MySQL') && class_exists('PDO');
   }
 }

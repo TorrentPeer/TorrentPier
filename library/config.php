@@ -68,21 +68,21 @@ $bb_cfg['cache'] = [
     'password' => 'postgres',
     'db_name' => 'cache'
   ],
-  // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql (filecache by default)
+  // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
   'engines' => [
-    'bb_cache' => 'sqlite',
-    'bb_config' => 'sqlite',
-    'tr_cache' => 'sqlite',
-    'session_cache' => 'sqlite',
-    'bb_cap_sid' => 'sqlite',
-    'bb_login_err' => 'sqlite',
-    'bb_poll_data' => 'sqlite',
+    'bb_cache' => 'filecache',
+    'bb_config' => 'filecache',
+    'tr_cache' => 'filecache',
+    'session_cache' => 'filecache',
+    'bb_cap_sid' => 'filecache',
+    'bb_login_err' => 'filecache',
+    'bb_poll_data' => 'filecache',
   ],
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql (filecache by default)
-$bb_cfg['datastore_type'] = 'sqlite';
+// Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
+$bb_cfg['datastore_type'] = 'mysql';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name);

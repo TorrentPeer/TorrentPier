@@ -61,7 +61,7 @@ class PostgreSQL extends Common
       $this->cur_query = "Connect to: {$this->cfg['host']}:{$this->cfg['port']}";
       $this->debug('start');
 
-      $this->postgresql = new greSQL($client);
+      $this->postgresql = new greSQL($client, BB_CACHE);
 
       $this->debug('stop');
       $this->cur_query = null;
