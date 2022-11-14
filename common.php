@@ -155,6 +155,10 @@ switch ($bb_cfg['datastore_type']) {
     $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
     break;
 
+  case 'postgresql':
+    $datastore = new TorrentPier\Legacy\Datastore\PostgreSQL($bb_cfg['cache']['postgresql'], $bb_cfg['cache']['prefix']);
+    break;
+
   case 'filecache':
   default:
     $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['cache_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);

@@ -61,7 +61,14 @@ $bb_cfg['cache'] = [
     'port' => 6379,
     'con_required' => true,
   ],
-  // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+  'postgresql' => [
+    'host' => '127.0.0.1',
+    'port' => 5432,
+    'user' => 'postgres',
+    'password' => 'postgres',
+    'db_name' => 'cache'
+  ],
+  // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql (filecache by default)
   'engines' => [
     'bb_cache' => ['filecache', []],
     'bb_config' => ['filecache', []],
@@ -74,8 +81,8 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
-$bb_cfg['datastore_type'] = 'filecache';
+// Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql (filecache by default)
+$bb_cfg['datastore_type'] = 'postgresql';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name);
