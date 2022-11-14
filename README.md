@@ -3,6 +3,14 @@
     <img src="https://i.ibb.co/52MC943/117716624.png" width="200px" style="max-width: 100%;">
   </a>
 </p>
+
+<h3 align="center">TorrentPier</h3>
+
+<p align="center">
+  Bull-powered BitTorrent tracker engine.
+  <br>
+</p>
+
 <p align="center">
   <a href="https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TorrentPeer/TorrentPier" alt="License"></a>
   <a href="https://packagist.org/packages/torrentpeer/torrentpier"><img src="https://img.shields.io/packagist/stars/torrentpeer/torrentpier" alt="Stars Packagist"></a>
@@ -11,11 +19,12 @@
   <a href="https://github.com/TorrentPeer/TorrentPier/releases"><img src="https://img.shields.io/github/release-date/torrentpeer/torrentpier" alt="Last release"></a>
   <img src="https://img.shields.io/github/repo-size/torrentpeer/torrentpier" alt="Size">
 </p>
+<p align="center"><i>Forked from <a href="https://github.com/torrentpier/torrentpier">TorrentPier</a> repository</i></p>
 
 ## About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load
-architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition we have very helpful
+architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition, we have very helpful
 [official support forum](https://torrentpier.site), where among other things it is possible to test the live demo, get
 any support and download modifications for engine.
 
@@ -35,14 +44,14 @@ language of it.
 
 ## Installation
 
-For installation you need to follow a few simple steps:
+For installation, you need to follow a few simple steps:
 
 1. Unpack to the server the contents of the downloaded folder or run `composer create-project torrentpeer/torrentpier`
 1. Install [Composer](https://getcomposer.org/) and run `composer install` on the downloaded directory
-1. Create database and import dump located at **install/sql/mysql.sql**
-1. Edit database configuration settings in the configuration file or a local copy (see below)
-1. Edit domain name in the configuration file or a local copy (see below)
-1. Edit domain ssl setting in the configuration file or a local copy (see below)
+1. Create database and import dump located at **_project/sql/mysql.sql**
+1. Edit database configuration settings in the configuration file, or a local copy (see below)
+1. Edit domain name in the configuration file, or a local copy (see below)
+1. Edit domain ssl setting in the configuration file, or a local copy (see below)
 1. Edit this files:
 1. **favicon.png** (change on your own)
 1. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
@@ -63,8 +72,8 @@ You must provide write permissions to the specified folders:
 * `internal_data/triggers`
 * `sitemap`
 
-The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, and
-chmod 0644 for files in them. If you are not sure, leave it as is.
+The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and
+chmod **0644** for files in them. If you are not sure, leave it as is.
 
 ## The recommended way to run cron.php
 
@@ -72,8 +81,7 @@ For significant tracker speed increase may be required to replace built-in cron.
 
 ## Ocelot installation
 
-We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **
-library/config.php**, the announcer is in the repository [torrentpeer/ocelot](https://github.com/torrentpeer/ocelot).
+We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**, the announcer is in the repository [torrentpeer/ocelot](https://github.com/torrentpeer/ocelot).
 
 ## Contributing
 
