@@ -31,6 +31,7 @@ class PostgreSQL extends Common
   /**
    * PostgreSQL constructor.
    *
+   * @param $cfg
    * @param null $prefix
    * @throws \Exception
    */
