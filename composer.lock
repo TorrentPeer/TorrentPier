@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c70f9c323528ba117c88da2197a41d23",
+    "content-hash": "aeb10ad35ec6255ce7072669054f82a3",
     "packages": [
         {
             "name": "arokettu/is-resource",
@@ -65,6 +65,58 @@
                 "source": "https://gitlab.com/sandfox/is-resource"
             },
             "time": "2022-09-01T22:54:06+00:00"
+        },
+        {
+            "name": "belomaxorka/do-file-cache",
+            "version": "v2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/belomaxorka/DO-File-Cache.git",
+                "reference": "2a4f74524e3dc666444d6e687588878c458344d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/belomaxorka/DO-File-Cache/zipball/2a4f74524e3dc666444d6e687588878c458344d7",
+                "reference": "2a4f74524e3dc666444d6e687588878c458344d7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zlib": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.0 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "belomaxorka\\DOFileCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "description": "DO File Cache is a PHP File-based Caching Library. Its syntax is designed to closely resemble the PHP memcache extension.",
+            "keywords": [
+                "cache",
+                "caching",
+                "caching library",
+                "file cache",
+                "library",
+                "php"
+            ],
+            "support": {
+                "source": "https://github.com/belomaxorka/DO-File-Cache/tree/v2.0.8"
+            },
+            "time": "2022-11-13T07:42:52+00:00"
         },
         {
             "name": "bugsnag/bugsnag",

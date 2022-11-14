@@ -160,7 +160,7 @@ switch ($bb_cfg['datastore_type']) {
 
   case 'filecache':
   default:
-    $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['cache_dir'] . 'filecache/datastore/', $bb_cfg['cache']['prefix']);
+    $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['cache_dir'] . 'filecache/datastore/', $bb_cfg['cache']['filecache'], $bb_cfg['cache']['prefix']);
 }
 
 /**

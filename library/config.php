@@ -26,6 +26,9 @@ $bb_cfg['tp_version'] = '2.4.0.3';
 $bb_cfg['tp_release_date'] = '14-11-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
+// GZip
+$bb_cfg['gzip_compress'] = false; // compress output
+
 // Database
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, порт, название базы, пользователь, пароль, charset, pconnect);
@@ -68,6 +71,10 @@ $bb_cfg['cache'] = [
     'password' => 'postgres',
     'db_name' => 'cache'
   ],
+  'filecache' => [
+    'fileExtension' => 'cache',
+    'gzipCompression' => $bb_cfg['gzip_compress'],
+  ],
   // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
   'engines' => [
     'bb_cache' => 'mysql',
@@ -82,7 +89,7 @@ $bb_cfg['cache'] = [
 
 // Datastore
 // Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
-$bb_cfg['datastore_type'] = 'mysql';
+$bb_cfg['datastore_type'] = 'filecache';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name);
@@ -90,9 +97,6 @@ $bb_cfg['server_secure'] = \TorrentPier\Helpers\IsHelper::is_https() ? true : $d
 $bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $server_port;
 
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
-
-// GZip
-$bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
 $bb_cfg['tracker_torstatus'] = true; // Search by torrent status

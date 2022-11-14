@@ -9,8 +9,9 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use belomaxorka\DOFileCache\DOFileCache;
+
 use TorrentPier\Legacy\Dev;
-use TorrentPier\Legacy\Filesystem;
 
 /**
  * Class File
@@ -18,21 +19,37 @@ use TorrentPier\Legacy\Filesystem;
  */
 class File extends Common
 {
-  public $dir;
-  public $prefix;
+  private $filecache;
+  private $prefix;
+
   public $engine = 'Filecache';
 
   /**
    * File constructor.
    *
    * @param $dir
+   * @param $cfg
    * @param null $prefix
+   * @throws \Exception
    */
-  public function __construct($dir, $prefix = null)
+  public function __construct($dir, $cfg, $prefix = null)
   {
-    $this->prefix = $prefix;
-    $this->dir = $dir;
+    if (!$this->is_installed()) {
+      Dev::error_message("Error: {$this->engine} class not loaded");
+    }
+
+    $this->filecache = new DOFileCache();
+
+    $this->filecache->changeConfig([
+      'cacheDirectory' => $dir,
+      'gzipCompression' => $cfg['gzipCompression'],
+      'fileExtension' => $cfg['fileExtension'],
+      'unixLoadUpperThreshold' => '-1',
+      'newStyledFilesOrganization' => false,
+    ]);
+
     $this->dbg_enabled = Dev::sql_dbg_enabled();
+    $this->prefix = $prefix;
   }
 
   /**
@@ -40,27 +57,24 @@ class File extends Common
    *
    * @param $title
    * @param $var
-   * @return bool
+   * @return bool|void
    */
   public function store($title, $var)
   {
-    $this->cur_query = "cache->store('$title')";
-    $this->debug('start');
-
     $this->data[$title] = $var;
 
-    $filename = $this->dir . Filesystem::clean_filename($this->prefix . $title) . '.php';
+    $this->cur_query = "Set datastore: $title";
+    $this->debug('start');
 
-    $filecache = "<?php\n";
-    $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
-    $filecache .= '$filecache = ' . var_export($var, true) . ";\n";
-    $filecache .= '?>';
+    if ($store = $this->filecache->set($this->prefix . $title, $var)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
 
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
+      return $store;
+    }
 
-    return (bool)Filesystem::file_write($filecache, $filename, false, true, true);
+    return false;
   }
 
   /**
@@ -68,33 +82,20 @@ class File extends Common
    */
   public function clean()
   {
-    $dir = $this->dir;
+    foreach ($this->known_items as $title => $script_name) {
+      $this->cur_query = "Clean datastore";
+      $this->debug('start');
 
-    $this->cur_query = "cache->clean()";
-    $this->debug('start');
+      $this->filecache->delete($this->prefix . $title);
 
-    if (is_dir($dir)) {
-      if ($dh = opendir($dir)) {
-        while (($file = readdir($dh)) !== false) {
-          if ($file != "." && $file != "..") {
-            $filename = $dir . $file;
-
-            unlink($filename);
-          }
-        }
-        closedir($dh);
-      }
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
     }
-
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
   }
 
   /**
    * Get values
-   *
-   * @throws \Exception
    */
   public function _fetch_from_store()
   {
@@ -106,19 +107,24 @@ class File extends Common
     }
 
     foreach ($items as $item) {
-      $filename = $this->dir . $this->prefix . $item . '.php';
-
-      $this->cur_query = "cache->_fetch_from_store('$item')";
+      $this->cur_query = "Get datastore: $item";
       $this->debug('start');
+
+      $this->data[$item] = $this->filecache->get($this->prefix . $item);
+
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
-
-      if (file_exists($filename)) {
-        require($filename);
-
-        $this->data[$item] = $filecache;
-      }
     }
+  }
+
+  /**
+   * Check if extension is installed
+   *
+   * @return bool
+   */
+  private function is_installed(): bool
+  {
+    return class_exists('belomaxorka\DOFileCache\DOFileCache');
   }
 }
