@@ -34,7 +34,7 @@ class Caches
    * Get a cache object by cache name
    *
    * @param $cache_name
-   * @return mixed|\TorrentPier\Legacy\Cache\APCu|\TorrentPier\Legacy\Cache\File|\TorrentPier\Legacy\Cache\Memcache|\TorrentPier\Legacy\Cache\PostgreSQL|\TorrentPier\Legacy\Cache\Redis|\TorrentPier\Legacy\Cache\Sqlite
+   * @return mixed|\TorrentPier\Legacy\Cache\APCu|\TorrentPier\Legacy\Cache\File|\TorrentPier\Legacy\Cache\Memcached|\TorrentPier\Legacy\Cache\MySQL|\TorrentPier\Legacy\Cache\PostgreSQL|\TorrentPier\Legacy\Cache\Redis|\TorrentPier\Legacy\Cache\Sqlite
    * @throws \Exception
    */
   public function get_cache_obj($cache_name)
@@ -46,9 +46,9 @@ class Caches
         $cache_type =& $engine_cfg;
 
         switch ($cache_type) {
-          case 'memcache':
+          case 'memcached':
             if (!isset($this->obj[$cache_name])) {
-              $this->obj[$cache_name] = new Cache\Memcache($this->cfg['memcache'], $this->cfg['prefix']);
+              $this->obj[$cache_name] = new Cache\Memcached($this->cfg['memcached'], $this->cfg['prefix']);
             }
             $this->ref[$cache_name] =& $this->obj[$cache_name];
             break;

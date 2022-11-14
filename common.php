@@ -121,7 +121,7 @@ function DB($db_alias = 'db')
  * Cache
  *
  * @param $cache_name
- * @return mixed|\TorrentPier\Legacy\Cache\APCu|\TorrentPier\Legacy\Cache\File|\TorrentPier\Legacy\Cache\Memcache|\TorrentPier\Legacy\Cache\Redis|\TorrentPier\Legacy\Cache\Sqlite|\TorrentPier\Legacy\Cache\SqliteCommon
+ * @return mixed|\TorrentPier\Legacy\Cache\APCu|\TorrentPier\Legacy\Cache\File|\TorrentPier\Legacy\Cache\Memcached|\TorrentPier\Legacy\Cache\MySQL|\TorrentPier\Legacy\Cache\PostgreSQL|\TorrentPier\Legacy\Cache\Redis|\TorrentPier\Legacy\Cache\Sqlite
  * @throws \Exception
  */
 function CACHE($cache_name)
@@ -134,8 +134,8 @@ function CACHE($cache_name)
  * Datastore
  */
 switch ($bb_cfg['datastore_type']) {
-  case 'memcache':
-    $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+  case 'memcached':
+    $datastore = new TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
     break;
 
   case 'sqlite':

@@ -53,11 +53,9 @@ $bb_cfg['cache'] = [
   'pconnect' => true,
   'cache_dir' => realpath(BB_ROOT) . '/internal_data/cache/',
   'prefix' => 'tp_',
-  'memcache' => [
+  'memcached' => [
     'host' => '127.0.0.1',
     'port' => 11211,
-    'pconnect' => true,
-    'con_required' => true,
   ],
   'redis' => [
     'host' => '127.0.0.1',
@@ -74,21 +72,21 @@ $bb_cfg['cache'] = [
     'fileExtension' => 'cache',
     'gzipCompression' => $bb_cfg['gzip_compress'],
   ],
-  // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
+  // Available cache types: filecache, memcached, sqlite, redis, apcu, postgresql, mysql (filecache by default)
   'engines' => [
-    'bb_cache' => 'redis',
-    'bb_config' => 'redis',
-    'tr_cache' => 'redis',
-    'session_cache' => 'redis',
-    'bb_cap_sid' => 'redis',
-    'bb_login_err' => 'redis',
-    'bb_poll_data' => 'redis',
+    'bb_cache' => 'memcached',
+    'bb_config' => 'memcached',
+    'tr_cache' => 'memcached',
+    'session_cache' => 'memcached',
+    'bb_cap_sid' => 'memcached',
+    'bb_login_err' => 'memcached',
+    'bb_poll_data' => 'memcached',
   ],
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu, postgresql, mysql (filecache by default)
-$bb_cfg['datastore_type'] = 'redis';
+// Available datastore types: filecache, memcached, sqlite, redis, apcu, postgresql, mysql (filecache by default)
+$bb_cfg['datastore_type'] = 'memcached';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name);

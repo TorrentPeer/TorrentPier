@@ -9,22 +9,25 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use MatthiasMullie\Scrapbook\Adapters\Memcached as Mem;
+
 use TorrentPier\Legacy\Dev;
 
 /**
- * Class Memcache
+ * Class Memcached
  * @package TorrentPier\Legacy\Datastore
  */
-class Memcache extends Common
+class Memcached extends Common
 {
-  public $cfg;
-  public $memcache;
+  private $memcached;
+  private $prefix;
+  private $cfg;
+
+  public $engine = 'Memcached';
   public $connected = false;
-  public $engine = 'Memcache';
-  public $prefix;
 
   /**
-   * Memcache constructor.
+   * Memcached constructor.
    *
    * @param $cfg
    * @param null $prefix
@@ -33,37 +36,37 @@ class Memcache extends Common
   public function __construct($cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message('Error: Memcached extension not installed');
+      Dev::error_message("Error: {$this->engine} class not loaded");
     }
 
     $this->cfg = $cfg;
-    $this->prefix = $prefix;
-    $this->memcache = new \Memcache();
+
     $this->dbg_enabled = Dev::sql_dbg_enabled();
+    $this->prefix = $prefix;
   }
 
   /**
-   * Connect to memcache host
-   *
-   * @throws \Exception
+   * Connect to host
    */
-  public function connect()
+  private function connect()
   {
-    $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+    $client = new \Memcached();
+    $client->addServer($this->cfg['host'], $this->cfg['port']);
 
-    $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
-    $this->debug('start');
+    if (!$this->connected) {
+      $this->cur_query = "Connect to: {$this->cfg['host']}:{$this->cfg['port']}";
+      $this->debug('start');
 
-    if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+      $this->memcached = new Mem($client);
+
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+    }
+
+    if ($client->getStats()) {
       $this->connected = true;
     }
-
-    if (!$this->connected && $this->cfg['con_required']) {
-      Dev::error_message('Could not connect to memcached server');
-    }
-
-    $this->debug('stop');
-    $this->cur_query = null;
   }
 
   /**
@@ -71,23 +74,26 @@ class Memcache extends Common
    *
    * @param $title
    * @param $var
-   * @return bool
-   * @throws \Exception
+   * @return bool|void
    */
   public function store($title, $var)
   {
-    if (!$this->connected) {
-      $this->connect();
-    }
+    $this->connect();
+
     $this->data[$title] = $var;
 
-    $this->cur_query = "cache->store('$title')";
+    $this->cur_query = "Set datastore: $title";
     $this->debug('start');
-    $this->debug('stop');
-    $this->cur_query = null;
-    $this->num_queries++;
 
-    return (bool)$this->memcache->set($this->prefix . $title, $var);
+    if ($store = $this->memcached->set($this->prefix . $title, $var)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $store;
+    }
+
+    return false;
   }
 
   /**
@@ -95,27 +101,27 @@ class Memcache extends Common
    */
   public function clean()
   {
-    if (!$this->connected) {
-      $this->connect();
-    }
+    $this->connect();
+
     foreach ($this->known_items as $title => $script_name) {
-      $this->cur_query = "cache->clean('$title')";
+      $this->cur_query = "Clean datastore";
       $this->debug('start');
+
+      $this->memcached->delete($this->prefix . $title);
+
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
-
-      $this->memcache->delete($this->prefix . $title, 0);
     }
   }
 
   /**
    * Get values
-   *
-   * @throws \Exception
    */
   public function _fetch_from_store()
   {
+    $this->connect();
+
     if (!$items = $this->queued_items) {
       /** TODO
        * $src = $this->_debug_find_caller('enqueue');
@@ -123,17 +129,15 @@ class Memcache extends Common
        */
     }
 
-    if (!$this->connected) {
-      $this->connect();
-    }
     foreach ($items as $item) {
-      $this->cur_query = "cache->_fetch_from_store('$item')";
+      $this->cur_query = "Get datastore: $item";
       $this->debug('start');
+
+      $this->data[$item] = $this->memcached->get($this->prefix . $item);
+
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
-
-      $this->data[$item] = $this->memcache->get($this->prefix . $item);
     }
   }
 
@@ -144,6 +148,6 @@ class Memcache extends Common
    */
   private function is_installed(): bool
   {
-    return class_exists('Memcache');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\Memcached');
   }
 }
