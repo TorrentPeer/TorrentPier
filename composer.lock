@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aeb10ad35ec6255ce7072669054f82a3",
+    "content-hash": "f3e72431a90c718709ca9d49391a0d06",
     "packages": [
         {
             "name": "arokettu/is-resource",

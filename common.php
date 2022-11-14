@@ -139,7 +139,7 @@ switch ($bb_cfg['datastore_type']) {
     break;
 
   case 'sqlite':
-    $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['cache_dir'] . 'sqlite/datastore.cache.db', $bb_cfg['cache']['prefix']);
+    $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['cache_dir'] . 'filecache/datastore.cache.db', $bb_cfg['cache']['prefix']);
     break;
 
   case 'redis':
