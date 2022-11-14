@@ -46,6 +46,9 @@ class PostgreSQL extends Common
     $this->prefix = $prefix;
   }
 
+  /**
+   * Connect to host
+   */
   private function connect()
   {
     $client = new PDO("pgsql:dbname={$this->cfg['db_name']};host={$this->cfg['host']};port={$this->cfg['port']}", $this->cfg['user'], $this->cfg['password']);
@@ -69,7 +72,7 @@ class PostgreSQL extends Common
    *
    * @param $title
    * @param $var
-   * @return bool|bool[]|void
+   * @return false|void
    */
   public function store($title, $var)
   {

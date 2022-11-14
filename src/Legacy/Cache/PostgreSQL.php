@@ -48,6 +48,9 @@ class PostgreSQL extends Common
     $this->prefix = $prefix;
   }
 
+  /**
+   * Connect to host
+   */
   private function connect()
   {
     $client = new PDO("pgsql:dbname={$this->cfg['db_name']};host={$this->cfg['host']};port={$this->cfg['port']}", $this->cfg['user'], $this->cfg['password']);
@@ -98,7 +101,7 @@ class PostgreSQL extends Common
    * @param $name
    * @param $value
    * @param int $ttl
-   * @return bool|bool[]
+   * @return false
    */
   public function set($name, $value, $ttl = 0)
   {
@@ -122,7 +125,7 @@ class PostgreSQL extends Common
    * Remove key & value by name
    *
    * @param string $name
-   * @return bool|string[]
+   * @return false
    */
   public function rm($name = '')
   {
