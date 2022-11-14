@@ -48,7 +48,7 @@ $bb_cfg['db_alias'] = [
 // Cache
 $bb_cfg['cache'] = [
   'pconnect' => true,
-  'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
+  'cache_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
   'prefix' => 'tp_',
   'memcache' => [
     'host' => '127.0.0.1',

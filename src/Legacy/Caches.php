@@ -93,7 +93,7 @@ class Caches
           case 'filecache':
           default:
             if (!isset($this->obj[$cache_name])) {
-              $this->obj[$cache_name] = new Cache\File($this->cfg['db_dir'] . $cache_name . '/', $this->cfg['prefix']);
+              $this->obj[$cache_name] = new Cache\File($this->cfg['cache_dir'] . $cache_name . '/', $this->cfg['prefix']);
             }
             $this->ref[$cache_name] =& $this->obj[$cache_name];
             break;
@@ -115,10 +115,10 @@ class Caches
   public function get_db_path($name, $cfg, $ext): string
   {
     if (!empty($cfg['shard_type']) && $cfg['shard_type'] != 'none') {
-      return $this->cfg['db_dir'] . $name . '_*' . $ext;
+      return $this->cfg['cache_dir'] . $name . '_*' . $ext;
     }
 
-    return $this->cfg['db_dir'] . $name . $ext;
+    return $this->cfg['cache_dir'] . $name . $ext;
   }
 
   /**

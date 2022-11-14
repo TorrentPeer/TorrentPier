@@ -140,7 +140,7 @@ switch ($bb_cfg['datastore_type']) {
 
   case 'sqlite':
     $default_cfg = [
-      'db_file_path' => $bb_cfg['cache']['db_dir'] . 'datastore.sqlite.db',
+      'db_file_path' => $bb_cfg['cache']['cache_dir'] . 'datastore.sqlite.db',
       'pconnect' => true,
       'con_required' => true,
     ];
@@ -157,7 +157,7 @@ switch ($bb_cfg['datastore_type']) {
 
   case 'filecache':
   default:
-    $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+    $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['cache_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
 /**
