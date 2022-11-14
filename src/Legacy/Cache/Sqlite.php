@@ -9,8 +9,9 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use SQLite3;
-use TorrentPier\Helpers\BaseHelper;
+use MatthiasMullie\Scrapbook\Adapters\Sqlite as Lite;
+use PDO;
+
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -19,39 +20,31 @@ use TorrentPier\Legacy\Dev;
  */
 class Sqlite extends Common
 {
-  public $used = true;
-  public $db;
-  public $prefix;
-  public $cfg = [
-    // Example config
-    'db_file_path' => '/path/to/cache.db.sqlite',
-    'table_name' => 'cache',
-    'table_schema' => 'CREATE TABLE cache (
-	                cache_name        VARCHAR(255),
-	                cache_expire_time INT,
-	                cache_value       TEXT,
-	                PRIMARY KEY (cache_name)
-	        )',
-    'pconnect' => true,
-    'con_required' => true,
-    'log_name' => 'CACHE',
-  ];
+  private $sqlite;
+  private $prefix;
+
+  public $engine = 'SQLite';
+  public $used = false;
 
   /**
    * Sqlite constructor.
    *
-   * @param $cfg
+   * @param $file
    * @param null $prefix
    * @throws \Exception
    */
-  public function __construct($cfg, $prefix = null)
+  public function __construct($file, $prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message('Error: SQLite3 extension not installed');
+      Dev::error_message("Error: {$this->engine} class not loaded");
     }
 
-    $this->cfg = array_merge($this->cfg, $cfg);
-    $this->db = new SqliteCommon($this->cfg);
+    $this->used = true;
+
+    $client = new PDO("sqlite:{$file}");
+    $this->sqlite = new Lite($client);
+
+    $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
   }
 
@@ -61,49 +54,22 @@ class Sqlite extends Common
    * @param $name
    * @param string $get_miss_key_callback
    * @param int $ttl
-   * @return array|false|mixed
-   * @throws \Exception
+   * @return array|bool|float|int|mixed|string
    */
-  public function get($name, $get_miss_key_callback = '', $ttl = 604800)
+  public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {
-    if (empty($name)) {
-      return \is_array($name) ? [] : false;
-    }
-    $this->db->shard($name);
-    $cached_items = [];
-    $this->prefix_len = \strlen($this->prefix);
-    $this->prefix_sql = SQLite3::escapeString($this->prefix);
+    $this->cur_query = "Get cache: $name";
+    $this->debug('start');
 
-    $name_ary = $name_sql = (array)$name;
-    BaseHelper::array_deep($name_sql, 'SQLite3::escapeString');
+    if ($get = $this->sqlite->get($this->prefix . $name)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
 
-    // get available items
-    $rowset = $this->db->fetch_rowset("
-			SELECT cache_name, cache_value
-			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
-			LIMIT " . \count($name_ary) . "
-		");
-
-    $this->db->debug('start', 'unserialize()');
-    foreach ($rowset as $row) {
-      $cached_items[substr($row['cache_name'], $this->prefix_len)] = unserialize($row['cache_value']);
-    }
-    $this->db->debug('stop');
-
-    // get miss items
-    if ($get_miss_key_callback and $miss_key = array_diff($name_ary, array_keys($cached_items))) {
-      foreach ($get_miss_key_callback($miss_key) as $k => $v) {
-        $this->set($this->prefix . $k, $v, $ttl);
-        $cached_items[$k] = $v;
-      }
-    }
-    // return
-    if (\is_array($this->prefix . $name)) {
-      return $cached_items;
+      return $get;
     }
 
-    return $cached_items[$name] ?? false;
+    return false;
   }
 
   /**
@@ -113,17 +79,21 @@ class Sqlite extends Common
    * @param $value
    * @param int $ttl
    * @return bool
-   * @throws \Exception
    */
-  public function set($name, $value, $ttl = 604800)
+  public function set($name, $value, $ttl = 0)
   {
-    $this->db->shard($this->prefix . $name);
-    $name_sql = SQLite3::escapeString($this->prefix . $name);
-    $expire = TIMENOW + $ttl;
-    $value_sql = SQLite3::escapeString(serialize($value));
+    $this->cur_query = "Set cache: $name";
+    $this->debug('start');
 
-    $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (cache_name, cache_expire_time, cache_value) VALUES ('$name_sql', $expire, '$value_sql')");
-    return (bool)$result;
+    if ($set = $this->sqlite->set($this->prefix . $name, $value, $ttl)) {
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+
+      return $set;
+    }
+
+    return false;
   }
 
   /**
@@ -131,28 +101,25 @@ class Sqlite extends Common
    *
    * @param string $name
    * @return bool
-   * @throws \Exception
    */
   public function rm($name = '')
   {
-    if ($name) {
-      $this->db->shard($this->prefix . $name);
-      $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
-    } else {
-      $result = $this->db->query("DELETE FROM " . $this->cfg['table_name']);
-    }
-    return (bool)$result;
-  }
+    $name ? $this->cur_query = "Remove cache: $name" : $this->cur_query = "Remove all items from cache";
 
-  /**
-   * @param int $expire_time
-   * @return int
-   * @throws \Exception
-   */
-  public function gc($expire_time = TIMENOW)
-  {
-    $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-    return $result ? $this->db->changes() : 0;
+    $this->debug('start');
+
+    if ($name) {
+      $remove = $this->sqlite->delete($this->prefix . $name);
+    } else {
+      $remove = $this->sqlite->flush();
+    }
+
+    $this->debug('stop');
+
+    $this->cur_query = null;
+    $this->num_queries++;
+
+    return $remove;
   }
 
   /**
@@ -162,6 +129,6 @@ class Sqlite extends Common
    */
   private function is_installed(): bool
   {
-    return extension_loaded('sqlite3');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\SQLite') && class_exists('PDO');
   }
 }

@@ -70,13 +70,13 @@ $bb_cfg['cache'] = [
   ],
   // Available cache types: filecache, memcache, sqlite, redis, apcu, postgresql (filecache by default)
   'engines' => [
-    'bb_cache' => ['postgresql', []],
-    'bb_config' => ['postgresql', []],
-    'tr_cache' => ['postgresql', []],
-    'session_cache' => ['postgresql', []],
-    'bb_cap_sid' => ['postgresql', []],
-    'bb_login_err' => ['postgresql', []],
-    'bb_poll_data' => ['postgresql', []],
+    'bb_cache' => 'sqlite',
+    'bb_config' => 'sqlite',
+    'tr_cache' => 'sqlite',
+    'session_cache' => 'sqlite',
+    'bb_cap_sid' => 'sqlite',
+    'bb_login_err' => 'sqlite',
+    'bb_poll_data' => 'sqlite',
   ],
 ];
 
