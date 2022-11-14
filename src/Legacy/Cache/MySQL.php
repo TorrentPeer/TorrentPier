@@ -9,27 +9,27 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use MatthiasMullie\Scrapbook\Adapters\PostgreSQL as greSQL;
+use MatthiasMullie\Scrapbook\Adapters\MySQL as My;
 use PDO;
 
 use TorrentPier\Legacy\Dev;
 
 /**
- * Class PostgreSQL
+ * Class MySQL
  * @package TorrentPier\Legacy\Cache
  */
-class PostgreSQL extends Common
+class MySQL extends Common
 {
-  private $postgresql;
+  private $mysql;
   private $prefix;
   private $cfg;
 
-  public $engine = 'PostgreSQL';
+  public $engine = 'MySQL';
   public $connected = false;
   public $used = false;
 
   /**
-   * PostgreSQL constructor.
+   * MySQL constructor.
    *
    * @param $cfg
    * @param null $prefix
@@ -53,15 +53,15 @@ class PostgreSQL extends Common
    */
   private function connect()
   {
-    $client = new PDO("pgsql:dbname={$this->cfg['db_name']};host={$this->cfg['host']};port={$this->cfg['port']}", $this->cfg['user'], $this->cfg['password']);
+    $client = new PDO("mysql:dbname={$this->cfg['dbname']};host={$this->cfg['dbhost']};port={$this->cfg['dbport']}", $this->cfg['dbuser'], $this->cfg['dbpasswd']);
 
     if ($client && !$this->connected) {
       $this->connected = true;
 
-      $this->cur_query = "Connect to: {$this->cfg['host']}:{$this->cfg['port']}";
+      $this->cur_query = "Connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}";
       $this->debug('start');
 
-      $this->postgresql = new greSQL($client, 'bb_cache');
+      $this->mysql = new My($client, 'bb_cache');
 
       $this->debug('stop');
       $this->cur_query = null;
@@ -84,7 +84,7 @@ class PostgreSQL extends Common
     $this->cur_query = "Get cache: $name";
     $this->debug('start');
 
-    if ($get = $this->postgresql->get($this->prefix . $name)) {
+    if ($get = $this->mysql->get($this->prefix . $name)) {
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
@@ -110,7 +110,7 @@ class PostgreSQL extends Common
     $this->cur_query = "Set cache: $name";
     $this->debug('start');
 
-    if ($set = $this->postgresql->set($this->prefix . $name, $value, $ttl)) {
+    if ($set = $this->mysql->set($this->prefix . $name, $value, $ttl)) {
       $this->debug('stop');
       $this->cur_query = null;
       $this->num_queries++;
@@ -136,9 +136,9 @@ class PostgreSQL extends Common
     $this->debug('start');
 
     if ($name) {
-      $remove = $this->postgresql->delete($this->prefix . $name);
+      $remove = $this->mysql->delete($this->prefix . $name);
     } else {
-      $remove = $this->postgresql->flush();
+      $remove = $this->mysql->flush();
     }
 
     $this->debug('stop');
@@ -156,6 +156,6 @@ class PostgreSQL extends Common
    */
   private function is_installed(): bool
   {
-    return class_exists('MatthiasMullie\Scrapbook\Adapters\PostgreSQL') && class_exists('PDO');
+    return class_exists('MatthiasMullie\Scrapbook\Adapters\MySQL') && class_exists('PDO');
   }
 }

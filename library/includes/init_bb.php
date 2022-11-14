@@ -262,7 +262,6 @@ define('BB_WORDS', 'bb_words');
 define('BB_REPUTATION', 'bb_reputation');
 define('BB_INVITES', 'bb_invites');
 define('BB_INVITE_RULES', 'bb_invite_rules');
-define('BB_CACHE', 'bb_cache');
 
 define('TORRENT_EXT', 'torrent');
 

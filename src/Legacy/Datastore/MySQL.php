@@ -59,7 +59,7 @@ class MySQL extends Common
       $this->cur_query = "Connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}";
       $this->debug('start');
 
-      $this->mysql = new My($client, BB_CACHE);
+      $this->mysql = new My($client, 'bb_cache');
 
       $this->debug('stop');
       $this->cur_query = null;

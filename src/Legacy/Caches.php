@@ -81,6 +81,13 @@ class Caches
             $this->ref[$cache_name] =& $this->obj[$cache_name];
             break;
 
+          case 'mysql':
+            if (!isset($this->obj[$cache_name])) {
+              $this->obj[$cache_name] = new Cache\MySQL(DB()->cfg, $this->cfg['prefix']);
+            }
+            $this->ref[$cache_name] =& $this->obj[$cache_name];
+            break;
+
           case 'filecache':
           default:
             if (!isset($this->obj[$cache_name])) {
