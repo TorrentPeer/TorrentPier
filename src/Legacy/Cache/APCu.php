@@ -23,7 +23,7 @@ class APCu extends Common
   private $apcu;
 
   public $engine = 'APCu';
-  public $used = true;
+  public $used = false;
 
   /**
    * APCu constructor.
@@ -39,6 +39,7 @@ class APCu extends Common
 
     $this->apcu = new Apc();
 
+    $this->used = true;
     $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
   }
@@ -53,7 +54,7 @@ class APCu extends Common
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {
-    $this->cur_query = "Set cache: $name";
+    $this->cur_query = "Get cache: $name";
     $this->debug('start');
 
     if ($get = $this->apcu->get($this->prefix . $name)) {
