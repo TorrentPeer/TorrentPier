@@ -75,6 +75,8 @@ define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
 
+define('BB_CACHE', 'bb_cache');
+
 define('BT_AUTH_KEY_LENGTH', 10);
 
 define('PEER_HASH_PREFIX', 'peer_');
