@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.4.0.3](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.3) (2022-11-16)
+
+[Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.2...v2.4.0.3)
+
+- Refactored all Cache & Datastore classes [f0f9e45](https://github.com/TorrentPeer/TorrentPier/commit/b553c0c059661ea7ba5fd2e1bdcdbb190c39e4f2), [9ef9b02](https://github.com/TorrentPeer/TorrentPier/commit/3e5bd3dc4ddc604135a41394d4468f241fd1f4e9), [3e5bd3d](https://github.com/TorrentPeer/TorrentPier/commit/aa6c14185be65b86cc12d3eceb0caa0336ee242f), [aa6c141](https://github.com/TorrentPeer/TorrentPier/commit/391514b5e2357f85fa3a85e8853c6813ee0cd14a), [ae7d12e](https://github.com/TorrentPeer/TorrentPier/commit/72b253760291f057168bebd83a5e3b8fa1e67b49), [031c4d3](https://github.com/TorrentPeer/TorrentPier/commit/ae7d12e54ab478b1787834fa8adf3efcd8d86064), [72b2537](https://github.com/TorrentPeer/TorrentPier/commit/cd733118091a2e4da45e5176878e6a1a5fb6bc50), [cd73311](https://github.com/TorrentPeer/TorrentPier/commit/31f38ad1729defb596821a283b0f859f19c62260), [b222637](https://github.com/TorrentPeer/TorrentPier/commit/7c8f00630e4273dc06a948cbac8c30be39f1315c), [7c8f006](https://github.com/TorrentPeer/TorrentPier/commit/f67d64b4c8084bce1f974d76d42e52d4bb84be3f), [f67d64b](https://github.com/TorrentPeer/TorrentPier/commit/74ba57e96a46358cd3066f49a7446cce09915d7e), [74ba57e](https://github.com/TorrentPeer/TorrentPier/commit/1fc5e27ae40bddddeab99c23f294645bfc7f4f45), [1fc5e27](https://github.com/TorrentPeer/TorrentPier/commit/4f656eb9b79fd387f704e2e59befab823245d03b), [4f656eb](https://github.com/TorrentPeer/TorrentPier/commit/c81212fca869777b1fa2a2d720655cf8093330b1), [c81212f](https://github.com/TorrentPeer/TorrentPier/commit/9bb66defe8467f704055dbb4f8c4b9c4325d490c) ([belomaxorka](https://github.com/belomaxorka))
+- Added MySQL & PostgreSQL adapters for Cache & Datastore [391514b](https://github.com/TorrentPeer/TorrentPier/commit/6db950974eeffe243e97a138f054a22c4c5e3e0e), [6db9509](https://github.com/TorrentPeer/TorrentPier/commit/031c4d3dfd064249599626dae475be8d1131fd7f), [31f38ad](https://github.com/TorrentPeer/TorrentPier/commit/3d4d1f9958dff5c18465b8455ced805ceffe0fb8), [3d4d1f9](https://github.com/TorrentPeer/TorrentPier/commit/b222637f6857302f49b38386f314165b487f82e3)  ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0.2](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.2) (2022-11-12)
 
 [Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.1...v2.4.0.2)
