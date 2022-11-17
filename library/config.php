@@ -494,7 +494,11 @@ $bb_cfg['page'] = [
   'show_sidebar2' => [
     #BB_SCRIPT => true
     'index' => true,
-  ]
+  ],
+  'show_notices' => [
+    #BB_SCRIPT => true
+    'index' => true,
+  ],
 ];
 
 // Tracker settings

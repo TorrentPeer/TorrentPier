@@ -515,6 +515,9 @@ $(document).ready(function() {
 
 <!--main_content-->
 <td id="main_content">
+  <!-- IF SHOW_NOTICES && NOTICES -->
+  {NOTICES}
+  <!-- ENDIF -->
 	<div id="main_content_wrap">
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">

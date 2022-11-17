@@ -55,6 +55,15 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
   ]);
 }
 
+// Notices
+$notices = '';
+$sql = "SELECT notice_text, notice_id, notice_active FROM " . BB_NOTICES . " WHERE notice_active = 1 ORDER BY notice_id";
+if ($result = DB()->fetch_rowset($sql)) {
+  foreach ($result as $i => $row) {
+    $notices .= '<div class="alert alert-info"><h4 class="alert-heading">' . $lang['POST_ANNOUNCEMENT'] . '</h4><hr><div>' . $row['notice_text'] . '</div></div>';
+  }
+}
+
 // Advanced Meta Tags
 $viewtopic_page = (preg_match('/viewtopic\.php/', $_SERVER['SCRIPT_NAME'])) ? true : false;
 if ($bb_cfg['append_global_description'] || $bb_cfg['use_dynamic_description']) {
@@ -194,6 +203,9 @@ $template->assign_vars([
 
   'SHOW_SIDEBAR1' => !empty($bb_cfg['page']['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page'],
   'SHOW_SIDEBAR2' => !empty($bb_cfg['page']['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page'],
+
+  'SHOW_NOTICES' => !empty($bb_cfg['page']['show_notices'][BB_SCRIPT]),
+  'NOTICES' => $notices,
 
   'LOGO' => (file_exists($bb_cfg['logo_image_path'] . '/' . $bb_cfg['logo_image'])) ? ($bb_cfg['logo_image_path'] . '/' . $bb_cfg['logo_image']) : '',
   'LOGO_WIDTH' => $bb_cfg['logo_image_w'],
