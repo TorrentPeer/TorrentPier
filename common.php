@@ -61,7 +61,7 @@ if (file_exists(__DIR__ . '/library/config.local.php')) {
 
 // Server
 $server_protocol = $bb_cfg['server_secure'] ? 'https://' : 'http://';
-$server_port = in_array($bb_cfg['server_port'], [80, 443], true) ? '' : (':' . $bb_cfg['server_port']);
+$server_port = in_array($bb_cfg['server_port'], [80, 443]) ? '' : (':' . $bb_cfg['server_port']);
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
