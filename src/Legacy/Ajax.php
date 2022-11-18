@@ -41,6 +41,7 @@ class Ajax
     'manage_group' => ['user'],
     'new_pm' => ['user'],
     'reputation' => ['user'],
+    'callseed' => ['user'],
 
     'view_post' => ['guest'],
     'view_torrent' => ['guest'],
@@ -443,5 +444,13 @@ class Ajax
   public function reputation()
   {
     require AJAX_DIR . '/reputation.php';
+  }
+
+  /**
+   * Call seeder
+   */
+  public function callseed()
+  {
+    require AJAX_DIR . '/callseed.php';
   }
 }

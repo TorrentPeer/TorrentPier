@@ -9,6 +9,17 @@ $(document).ready(function(){
 		sortList: [[4,1]]
 	});
 });
+
+// callseed
+ajax.callseed = function (topic_id) {
+  ajax.exec({
+    action: 'callseed',
+    topic_id: topic_id,
+  });
+};
+ajax.callback.callseed = function (data) {
+  $('input#callseed_response').attr('value', data.response);
+};
 </script>
 
 <tr>
@@ -228,19 +239,19 @@ $(document).ready(function(){
 <!-- ENDIF / SHOW_TOR_ACT -->
 
 <tr>
-	<td colspan="2" class="row3 pad_4">
-	&nbsp;
-	<!-- IF DL_BUTTONS -->
-	<form method="POST" action="{S_DL_ACTION}">{DL_HIDDEN_FIELDS}
-		<!-- IF DL_BUT_WILL --><input type="submit" name="dl_set_will" value="{L_DLWILL}" class="liteoption" />&nbsp;<!-- ENDIF -->
-		<!-- IF DL_BUT_DOWN --><input type="submit" name="dl_set_down" value="{L_DLDOWN}" class="liteoption" />&nbsp;<!-- ENDIF -->
-		<!-- IF DL_BUT_COMPL --><input type="submit" name="dl_set_complete" value="{L_DLCOMPLETE}" class="liteoption" />&nbsp;<!-- ENDIF -->
-		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption" /><!-- ENDIF -->
-	</form>
-	<!-- ENDIF -->
-	<!-- IF CALL_SEED --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
-	&nbsp;
-	</td>
+  <td colspan="2" class="row3 pad_4">
+    &nbsp;
+    <!-- IF DL_BUTTONS -->
+    <form method="POST" action="{S_DL_ACTION}">{DL_HIDDEN_FIELDS}
+      <!-- IF DL_BUT_WILL --><input type="submit" name="dl_set_will" value="{L_DLWILL}" class="liteoption"/>&nbsp;<!-- ENDIF -->
+      <!-- IF DL_BUT_DOWN --><input type="submit" name="dl_set_down" value="{L_DLDOWN}" class="liteoption"/>&nbsp;<!-- ENDIF -->
+      <!-- IF DL_BUT_COMPL --><input type="submit" name="dl_set_complete" value="{L_DLCOMPLETE}" class="liteoption"/>&nbsp;<!-- ENDIF -->
+      <!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption"/><!-- ENDIF -->
+    </form>
+    <!-- ENDIF -->
+    <!-- IF CALL_SEED --><input id="callseed_response" onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
+    &nbsp;
+  </td>
 </tr>
 
 </table>
