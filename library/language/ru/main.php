@@ -61,6 +61,7 @@ $lang['ENABLED'] = 'Включено';
 $lang['DISABLED'] = 'Выключено';
 $lang['ERROR'] = 'Ошибка';
 $lang['SELECT_ACTION'] = 'Выберите действие';
+$lang['POWERED_BY'] = 'Работает на %s';
 
 $lang['NEXT_PAGE'] = 'След.';
 $lang['PREVIOUS_PAGE'] = 'Пред.';
@@ -1607,7 +1608,6 @@ $lang['USERS'] = 'Пользователи';
 $lang['GROUPS'] = 'Группы';
 $lang['FORUMS'] = 'Форумы';
 $lang['MODS'] = 'Модификации';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Конфигурация';
 $lang['MANAGE'] = 'Управление';
@@ -1645,7 +1645,7 @@ $lang['FORUM_STATS'] = 'Статистика форумов';
 $lang['ADMIN_INDEX'] = 'Главная страница';
 $lang['CREATE_PROFILE'] = 'Создать аккаунт';
 
-$lang['TP_VERSION'] = 'Версия TorrentPier';
+$lang['TP_VERSION'] = "Версия {$bb_cfg['tp_name']}";
 $lang['TP_RELEASE_DATE'] = 'Дата выпуска';
 $lang['PHP_INFO'] = 'Информация о PHP';
 

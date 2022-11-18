@@ -61,6 +61,7 @@ $lang['ENABLED'] = 'Enabled';
 $lang['DISABLED'] = 'Disabled';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Select action';
+$lang['POWERED_BY'] = 'Powered by %s';
 
 $lang['NEXT_PAGE'] = 'Next';
 $lang['PREVIOUS_PAGE'] = 'Previous';
@@ -1607,7 +1608,6 @@ $lang['USERS'] = 'User Admin';
 $lang['GROUPS'] = 'Group Admin';
 $lang['FORUMS'] = 'Forum Admin';
 $lang['MODS'] = 'Modifications';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Configuration';
 $lang['MANAGE'] = 'Management';
@@ -1645,7 +1645,7 @@ $lang['FORUM_STATS'] = 'Forum Statistics';
 $lang['ADMIN_INDEX'] = 'Admin Index';
 $lang['CREATE_PROFILE'] = 'Create profile';
 
-$lang['TP_VERSION'] = 'TorrentPier version';
+$lang['TP_VERSION'] = "{$bb_cfg['tp_name']} version";
 $lang['TP_RELEASE_DATE'] = 'Release date';
 $lang['PHP_INFO'] = 'Information about PHP';
 

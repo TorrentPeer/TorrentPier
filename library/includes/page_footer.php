@@ -16,7 +16,7 @@ global $bb_cfg, $userdata, $template, $DBS, $lang;
 if (!empty($template)) {
   $template->assign_vars([
     'SIMPLE_FOOTER' => !empty($gen_simple_header),
-    'POWERED' => $bb_cfg['show_copyright_on_pages'] ? ("Powered on <a href='https://github.com/TorrentPeer'>{$bb_cfg['tp_name']}</a> &copy; 2005-" . date('Y')) : '',
+    'POWERED' => $bb_cfg['show_copyright_on_pages'] ? sprintf($lang['POWERED_BY'], ("<a href='https://github.com/TorrentPeer'>{$bb_cfg['tp_name']}</a> &copy; 2005-" . date('Y'))) : '',
     'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
     'ADMIN_LINK_HREF' => "admin/index.php",
   ]);

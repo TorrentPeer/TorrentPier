@@ -22,17 +22,18 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.3';
-$bb_cfg['tp_release_date'] = '16-11-22';
+$bb_cfg['tp_version'] = '2.4.0.4-beta';
+$bb_cfg['tp_release_date'] = '18-11-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
 // GZip
 $bb_cfg['gzip_compress'] = false; // compress output
 
 // Database
-// Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
-// порядок параметров srv_cfg (хост, порт, название базы, пользователь, пароль, charset, pconnect);
 $bb_cfg['db'] = [
+  'driver' => 'mysql', // Available drivers - mysql, postgresql (mysql by default)
+  // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
+  // порядок параметров srv_cfg (хост, порт, название базы, пользователь, пароль, charset, pconnect);
   'db' => ['localhost', 3306, 'torrentpier', 'root', 'root', 'utf8', false],
 ];
 

@@ -8,7 +8,7 @@
  */
 
 if (!empty($setmodules)) {
-  $module['TP']['FORUM_CONFIG'] = basename(__FILE__);
+  $module[$bb_cfg['tp_name']]['FORUM_CONFIG'] = basename(__FILE__);
   return;
 }
 require __DIR__ . '/pagestart.php';

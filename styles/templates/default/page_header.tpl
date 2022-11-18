@@ -13,7 +13,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="version" content="{$bb_cfg['tp_version']}">
 <meta name="generator" content="{$bb_cfg['tp_name']}">
-<meta name="application-name" content="{$bb_cfg['tp_name']}"/>
+<meta name="application-name" content="{SITENAME}"/>
 <!-- IF $bb_cfg['board_disable'] -->
 <meta name="robots" content="noindex, nofollow, noarchive">
 <!-- ELSE -->
