@@ -25,22 +25,22 @@ if (!$user_id) {
   $this->ajax_die("Invalid user_id: $user_id");
 }
 
-if (!IS_ADMIN) {
-  if ($userdata['user_id'] == $user_id) {
-    $this->ajax_die($lang['REPUTATION_SELF']);
-  }
+if ($userdata['user_id'] == $user_id) {
+  $this->ajax_die($lang['REPUTATION_SELF']);
+}
 
+$row = DB()->fetch_row("SELECT user_id FROM " . BB_REPUTATION . " WHERE user_id = $user_id AND poster_id = " . $userdata['user_id'] . " AND time > " . (TIMENOW - 86400));
+if ($row) {
+  $this->ajax_die($lang['REPUTATION_AGAIN']);
+}
+
+if (!IS_ADMIN) {
   if ($repa < $bb_cfg['reputation']['min_repa_out']) {
     $this->ajax_die($lang['REPUTATION_CANT']);
   }
 
   if ($userdata['user_posts'] < $bb_cfg['reputation']['min_posts']) {
     $this->ajax_die(sprintf($lang['REPUTATION_LOW_POSTS'], $bb_cfg['reputation']['min_posts']));
-  }
-
-  $row = DB()->fetch_row("SELECT user_id FROM " . BB_REPUTATION . " WHERE user_id = $user_id AND poster_id = " . $userdata['user_id'] . " AND time > " . (TIMENOW - 86400));
-  if ($row) {
-    $this->ajax_die($lang['REPUTATION_AGAIN']);
   }
 
   $row = DB()->fetch_row("SELECT COUNT(user_id) AS count FROM " . BB_REPUTATION . " WHERE poster_id = " . $userdata['user_id'] . " AND time > " . (TIMENOW - 86400));
