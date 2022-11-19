@@ -18,7 +18,7 @@ ajax.callseed = function (topic_id) {
   });
 };
 ajax.callback.callseed = function (data) {
-  $('input#callseed_response').attr('value', data.response);
+  alert(data.response);
 };
 </script>
 
@@ -249,7 +249,7 @@ ajax.callback.callseed = function (data) {
       <!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption"/><!-- ENDIF -->
     </form>
     <!-- ENDIF -->
-    <!-- IF CALL_SEED --><input id="callseed_response" onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
+    <!-- IF CALL_SEED --><input onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
     &nbsp;
   </td>
 </tr>

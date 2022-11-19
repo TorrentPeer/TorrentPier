@@ -11,7 +11,11 @@ if (!defined('IN_AJAX')) {
   \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
 }
 
-global $lang, $userdata;
+global $bb_cfg, $lang, $userdata;
+
+if (!$bb_cfg['callseed']) {
+  $this->ajax_die($lang['MODULE_OFF']);
+}
 
 $topic_id = (int)$this->request['topic_id'];
 if (!$t_data = topic_info($topic_id)) {
