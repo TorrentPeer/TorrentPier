@@ -137,32 +137,32 @@ function CACHE($cache_name)
  */
 switch ($bb_cfg['datastore_type']) {
   case 'memcached':
-    $datastore = new TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
     break;
 
   case 'sqlite':
-    $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['cache_dir'] . 'filecache/datastore.cache.db', $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['cache_dir'] . 'filecache/datastore.cache.db', $bb_cfg['cache']['prefix']);
     break;
 
   case 'redis':
-    $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
     break;
 
   case 'apcu':
-    $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
     break;
 
   case 'postgresql':
-    $datastore = new TorrentPier\Legacy\Datastore\PostgreSQL($bb_cfg['cache']['postgresql'], $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\PostgreSQL($bb_cfg['cache']['postgresql'], $bb_cfg['cache']['prefix']);
     break;
 
   case 'mysql':
-    $datastore = new TorrentPier\Legacy\Datastore\MySQL(DB()->cfg, $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\MySQL(DB()->cfg, $bb_cfg['cache']['prefix']);
     break;
 
   case 'filecache':
   default:
-    $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['cache_dir'] . 'filecache/datastore/', $bb_cfg['cache']['filecache'], $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['cache_dir'] . 'filecache/datastore/', $bb_cfg['cache']['filecache'], $bb_cfg['cache']['prefix']);
 }
 
 /**

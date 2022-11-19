@@ -390,7 +390,7 @@ $bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url'] = 'info.php?show=advert';
 
 $bb_cfg['zodiac_sign'] = [
-#   'знак зодиака' => [месяц начала, день начала, месяц конца, день конца]
+# 'знак зодиака' => [месяц начала, день начала, месяц конца, день конца]
   'aries' => [3, 21, 4, 20],
   'taurus' => [4, 21, 5, 21],
   'gemini' => [5, 22, 6, 21],
@@ -429,7 +429,7 @@ $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // для обычных р�
 
 // Sitemap (Ping list)
 $bb_cfg['sitemap_sending'] = [
-#   'Source name' => 'http://ping_url'
+# 'Source name' => 'http://ping_url'
   'Google' => 'http://google.com/webmasters/sitemaps/ping?sitemap=',
 ];
 

@@ -21,6 +21,8 @@ function send_no_cache_headers()
 }
 
 /**
+ * Exit with output
+ *
  * @param string $output
  */
 function bb_exit($output = '')
@@ -196,6 +198,8 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 }
 
 /**
+ * Check is unread
+ *
  * @param $ref
  * @param int $topic_id
  * @param int $forum_id
@@ -256,8 +260,8 @@ $bf['forum_perm'] = [
 ];
 
 $bf['user_opt'] = [
-#   'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
-#   'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
+# 'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
+# 'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
   'user_viewemail' => 0,  // Показывать e-mail
   'dis_sig' => 1,  // Запрет на подпись
   'dis_avatar' => 2,  // Запрет на аватар
@@ -518,6 +522,8 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
 }
 
 /**
+ * Auth check
+ *
  * @param $bf_ary
  * @param $bf_key
  * @param $perm_ary
@@ -550,6 +556,8 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 }
 
 /**
+ * Get a select
+ *
  * @param $select
  * @param null $selected
  * @param string $return_as
@@ -622,6 +630,8 @@ function groupname($select_name, $selected_group, $groupid)
 }
 
 /**
+ * Build a select
+ *
  * @param $name
  * @param $params
  * @param null $selected
@@ -637,6 +647,8 @@ function build_select($name, $params, $selected = null, $max_length = HTML_SELEC
 }
 
 /**
+ * Build a checkbox
+ *
  * @param $name
  * @param $title
  * @param false $checked
@@ -653,6 +665,8 @@ function build_checkbox($name, $title, $checked = false, $disabled = false, $cla
 }
 
 /**
+ * Replace unicode quote symbol with HTML symbol
+ *
  * @param $str
  * @param bool $double
  * @param bool $single
@@ -845,6 +859,8 @@ function bt_show_port($port)
 }
 
 /**
+ * Get value of checkbox
+ *
  * @param $key
  * @param $val
  * @param int $default
@@ -867,6 +883,8 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
 }
 
 /**
+ * Get value of select
+ *
  * @param $key
  * @param $val
  * @param $options_ary
@@ -1024,6 +1042,8 @@ function get_user_id($username)
 }
 
 /**
+ * String cute
+ *
  * @param $text
  * @param $max_length
  * @param string $space
@@ -1079,6 +1099,8 @@ function get_bt_userdata($user_id)
 }
 
 /**
+ * Get user ratio (Tracker)
+ *
  * @param $btu
  * @return float|null
  */
@@ -1091,6 +1113,8 @@ function get_bt_ratio($btu)
 }
 
 /**
+ * Display bt userdata
+ *
  * @param $user_id
  * @throws \Exception
  */
@@ -1150,6 +1174,8 @@ function get_attachments_dir($cfg = null)
 }
 
 /**
+ * Return all data from config
+ *
  * @param $table
  * @param false $from_db
  * @param bool $update_cache
@@ -1171,6 +1197,8 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 }
 
 /**
+ * Update config param by [key => value]
+ *
  * @param $params
  * @param string $table
  * @throws \Exception
@@ -1254,6 +1282,8 @@ function clean_username($username)
 }
 
 /**
+ * Strip whitespace (or other characters) from the beginning of a string
+ *
  * @param $str
  * @param false $charlist
  * @return string
@@ -1270,6 +1300,8 @@ function bb_ltrim($str, $charlist = false): string
 }
 
 /**
+ * Strip whitespace (or other characters) from the end of a string.
+ *
  * @param $str
  * @param false $charlist
  * @return string
@@ -1335,6 +1367,8 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
 }
 
 /**
+ * Create a jumpbox
+ *
  * @param int $selected
  * @throws \Exception
  */
@@ -1908,6 +1942,8 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 }
 
 /**
+ * Return attach status image
+ *
  * @param $switch_attachment
  * @return string
  */
@@ -1922,6 +1958,8 @@ function topic_attachment_image($switch_attachment): string
 }
 
 /**
+ * Clear a DL-List
+ *
  * @param $topics_csv
  * @throws \Exception
  */
@@ -2037,6 +2075,8 @@ function get_topic_icon($topic, $is_unread = null)
 }
 
 /**
+ * Build pagination in topic
+ *
  * @param $url
  * @param $replies
  * @param $per_page
@@ -2067,6 +2107,8 @@ function build_topic_pagination($url, $replies, $per_page)
 }
 
 /**
+ * Print confirm page
+ *
  * @param $tpl_vars
  */
 function print_confirmation($tpl_vars)
@@ -2143,6 +2185,8 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
 }
 
 /**
+ * Clean a title
+ *
  * @param $str
  * @param false $replace_underscore
  * @return string
