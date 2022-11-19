@@ -104,9 +104,12 @@ class Dev
    */
   public static function error_message($message)
   {
+    global $bb_cfg;
+
     if (DBG_USER) {
       throw new \Exception($message);
     } else {
+      header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
       Http::setCode(500);
       return die($message);
     }

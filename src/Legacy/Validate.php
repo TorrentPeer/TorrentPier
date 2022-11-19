@@ -188,10 +188,12 @@ class Validate
 
     $invite_code = BaseHelper::str_compact($invite_code);
     $invite_code = clean_username($invite_code);
+
     if ($invite_code != '') {
       if ($check_activ_and_taken) {
         $invite_code_sql = DB()->escape($invite_code);
         $sql = "SELECT `invite_id` FROM " . BB_INVITES . " WHERE `invite_code` = '$invite_code_sql' AND `active` = '1'";
+
         if (!($result = DB()->sql_query($sql))) {
           return bb_die('Error checking code, invite' . __LINE__ . ',' . __FILE__ . $sql);
         } else {
@@ -205,6 +207,7 @@ class Validate
     } else {
       return $lang['INVITE_EMPTY'];
     }
+
     return false;
   }
 }

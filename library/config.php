@@ -31,7 +31,8 @@ $bb_cfg['gzip_compress'] = false; // compress output
 
 // Database
 $bb_cfg['db'] = [
-  'driver' => 'mysql', // Available drivers - mysql, postgresql (mysql by default)
+  // Available drivers - mysql, postgresql (mysql by default)
+  'driver' => 'mysql',
   // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
   // порядок параметров srv_cfg (хост, порт, название базы, пользователь, пароль, charset, pconnect);
   'db' => ['localhost', 3306, 'torrentpier', 'root', 'root', 'utf8', false],

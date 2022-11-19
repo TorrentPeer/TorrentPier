@@ -1702,6 +1702,8 @@ function obtain_word_list(&$orig_word, &$replacement_word)
 }
 
 /**
+ * Display error message
+ *
  * @param $msg_text
  * @throws \Exception
  */
@@ -1761,22 +1763,20 @@ function bb_die($msg_text)
 }
 
 /**
+ * Simple die
+ *
  * @param $txt
- * @throws \Exception
+ * @return void
+ * @throws Exception
  */
 function bb_simple_die($txt)
 {
-  global $bb_cfg;
-
-  if (!empty($_COOKIE['explain'])) {
-    bb_die("bb_simple_die:<br /><br />$txt");
-  }
-
-  header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
   \TorrentPier\Legacy\Dev::error_message($txt);
 }
 
 /**
+ * Return realpath
+ *
  * @param $path
  * @return false|string
  */
