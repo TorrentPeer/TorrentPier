@@ -9,9 +9,7 @@
 
 namespace TorrentPier\Helpers;
 
-use Closure;
 use TorrentPier\Legacy\Crypt;
-use TorrentPier\Legacy\Dev;
 
 /**
  * Class BaseHelper
@@ -39,17 +37,6 @@ class BaseHelper
   public static function str_compact($str)
   {
     return preg_replace('#\s+#u', ' ', trim($str));
-  }
-
-  /**
-   * Return the default value of the given value.
-   *
-   * @param mixed $value
-   * @return mixed
-   */
-  public static function value($value)
-  {
-    return $value instanceof Closure ? $value() : $value;
   }
 
   /**
@@ -130,7 +117,6 @@ class BaseHelper
     return substr($str, 0, $len);
   }
 
-
   /**
    * Шифрует сгенерированный токен
    *
@@ -149,37 +135,5 @@ class BaseHelper
   public static function get_hash_number()
   {
     return TIMENOW * rand(1, 99999);
-  }
-
-  /**
-   * Checks the system requirements
-   *
-   * @return bool
-   * @throws \Exception
-   */
-  public static function system_requirements()
-  {
-    if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
-      // [1] Check PHP Version
-      if (!IsHelper::is_php(CHECK_REQIREMENTS['php_min_version'])) {
-        bb_simple_die("TorrentPier requires PHP version " . CHECK_REQIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
-      }
-
-      // [2] Check installed PHP Extensions on server
-      $data = [];
-      foreach (CHECK_REQIREMENTS['ext_list'] as $ext) {
-        if (!extension_loaded($ext)) {
-          $data[] = $ext;
-        }
-      }
-
-      if (!empty($data)) {
-        bb_simple_die(sprintf("TorrentPier requires %s extension(s) installed on server", implode(', ', $data)));
-      }
-
-      return CACHE('bb_cache')->set('system_req', true);
-    }
-
-    return true;
   }
 }

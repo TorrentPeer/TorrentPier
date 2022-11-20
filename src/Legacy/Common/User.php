@@ -12,7 +12,6 @@ namespace TorrentPier\Legacy\Common;
 use TorrentPier\Helpers\BaseHelper;
 use TorrentPier\Legacy\Crypt;
 use TorrentPier\Legacy\DateDelta;
-use TorrentPier\Legacy\Dev;
 use TorrentPier\Legacy\Sessions;
 
 /**

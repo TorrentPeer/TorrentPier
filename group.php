@@ -16,6 +16,23 @@ $page_cfg['use_tablesorter'] = true;
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
 $select_sort_mode = $select_sort_order = '';
 
+/**
+ * Generate user info
+ *
+ * @param $row
+ * @param $date_format
+ * @param $group_mod
+ * @param $from
+ * @param $posts
+ * @param $joined
+ * @param $pm
+ * @param $email
+ * @param $www
+ * @param $user_time
+ * @param $avatar
+ * @return void
+ * @throws Exception
+ */
 function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time, &$avatar)
 {
   global $lang, $images, $bb_cfg;
@@ -25,7 +42,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
   $user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE'];
   $posts = $row['user_posts'] ?: 0;
   $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-  $avatar = \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
+  $avatar = \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 60, 60);
 
   if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
     $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
@@ -470,7 +487,7 @@ if (!$group_id) {
           'ROW_NUMBER' => $i + ($start + 1),
           'ROW_CLASS' => $row_class,
           'RELEASER' => profile_url(['user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank']]),
-          'AVATAR_IMG' => \TorrentPier\Legacy\Avatar::getAvatar(false, $release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50),
+          'AVATAR_IMG' => \TorrentPier\Legacy\Avatar::getAvatar(false, $release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), 60, 60),
           'RELEASE_NAME' => sprintf('<a href="%s">%s</a>', TOPIC_URL . $release['topic_id'], htmlCHR($release['topic_title'])),
           'RELEASE_TIME' => bb_date($release['topic_time']),
           'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', FORUM_URL . $release['forum_id'], htmlCHR($release['forum_name'])),

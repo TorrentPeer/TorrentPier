@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy\Common;
 
 use TorrentPier\Legacy\Avatar;
-use TorrentPier\Legacy\Dev;
 use TorrentPier\Legacy\Filesystem;
 
 /**

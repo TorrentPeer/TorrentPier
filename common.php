@@ -49,10 +49,10 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
 }
 
 // Composer
-if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
   die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
-require_once BB_PATH . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Simple die
@@ -192,7 +192,25 @@ switch ($bb_cfg['datastore_type']) {
 /**
  * Board or tracker init
  */
-\TorrentPier\Helpers\BaseHelper::system_requirements();
+if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
+  // [1] Check PHP Version
+  if (!\TorrentPier\Helpers\IsHelper::is_php(CHECK_REQIREMENTS['php_min_version'])) {
+    bb_simple_die("TorrentPier requires PHP version " . CHECK_REQIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
+  }
+
+  // [2] Check installed PHP Extensions on server
+  $data = [];
+  foreach (CHECK_REQIREMENTS['ext_list'] as $ext) {
+    if (!extension_loaded($ext)) {
+      $data[] = $ext;
+    }
+  }
+  if (!empty($data)) {
+    bb_simple_die(sprintf("TorrentPier requires %s extension(s) installed on server", implode(', ', $data)));
+  }
+
+  CACHE('bb_cache')->set('system_req', true);
+}
 
 if (!defined('IN_TRACKER')) {
   require INC_DIR . '/init_bb.php';
