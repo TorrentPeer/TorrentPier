@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 \TorrentPier\Legacy\Logging::bb_log(date('H:i:s - ') . getmypid() . ' --x- SELECT jobs' . LOG_LF, CRON_LOG_DIR . '/cron_check');

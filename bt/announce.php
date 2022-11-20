@@ -164,7 +164,7 @@ function msg_die($msg)
     'warning message' => (string)$msg,
   ]);
 
-  \TorrentPier\Legacy\Dev::error_message($output);
+  bb_simple_die($output);
 }
 
 // Start announcer

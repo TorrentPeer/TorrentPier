@@ -87,7 +87,7 @@ switch ($mode) {
     break;
 
   default:
-    bb_simple_die($lang['NO_POST_MODE']);
+    bb_die($lang['NO_POST_MODE']);
     break;
 }
 
@@ -98,7 +98,7 @@ switch ($mode) {
   case 'newtopic':
   case 'new_rel':
     if (!$forum_id) {
-      bb_simple_die($lang['FORUM_NOT_EXIST']);
+      bb_die($lang['FORUM_NOT_EXIST']);
     }
     $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
     break;
@@ -118,7 +118,7 @@ switch ($mode) {
   case 'editpost':
   case 'delete':
     if (!$post_id) {
-      bb_simple_die($lang['NO_POST_ID']);
+      bb_die($lang['NO_POST_ID']);
     }
 
     $select_sql = 'SELECT f.*, t.*, p.*';
@@ -141,7 +141,7 @@ switch ($mode) {
     break;
 
   default:
-    bb_simple_die($lang['NO_VALID_MODE']);
+    bb_die($lang['NO_VALID_MODE']);
 }
 
 if ($post_info = DB()->fetch_row($sql)) {

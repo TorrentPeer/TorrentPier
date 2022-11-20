@@ -36,7 +36,7 @@ class Memcached extends Common
   public function __construct($cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message("Error: {$this->engine} class not loaded");
+      bb_simple_die("Error: {$this->engine} class not loaded");
     }
 
     $this->cfg = $cfg;
@@ -125,7 +125,7 @@ class Memcached extends Common
     if (!$items = $this->queued_items) {
       /** TODO
        * $src = $this->_debug_find_caller('enqueue');
-       * Dev::error_message("Datastore: item '$item' already enqueued [$src]");
+       * bb_simple_die("Datastore: item '$item' already enqueued [$src]");
        */
     }
 

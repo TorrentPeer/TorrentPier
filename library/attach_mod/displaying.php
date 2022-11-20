@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 $allowed_extensions = [];
@@ -58,14 +58,14 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
   if (!isset($template->uncompiled_code[$template_var]) && empty($template->uncompiled_code[$template_var])) {
     // If we don't have a file assigned to this handle, die.
     if (!isset($template->files[$template_var])) {
-      \Torrentpier\Legacy\Dev::error_message("Template->loadfile(): No file specified for handle $template_var");
+      bb_simple_die("Template->loadfile(): No file specified for handle $template_var");
     }
 
     $filename_2 = $template->files[$template_var];
 
     $str = file_get_contents($filename_2);
     if (empty($str)) {
-      \Torrentpier\Legacy\Dev::error_message("Template->loadfile(): File $filename_2 for handle $template_var is empty");
+      bb_simple_die("Template->loadfile(): File $filename_2 for handle $template_var is empty");
     }
 
     $template->uncompiled_code[$template_var] = $str;
@@ -77,12 +77,12 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
   }
 
   if (!file_exists($complete_filename)) {
-    \Torrentpier\Legacy\Dev::error_message("Template->make_filename(): Error - file $complete_filename does not exist");
+    bb_simple_die("Template->make_filename(): Error - file $complete_filename does not exist");
   }
 
   $content = file_get_contents($complete_filename);
   if (empty($content)) {
-    \Torrentpier\Legacy\Dev::error_message('Template->loadfile(): File ' . $complete_filename . ' is empty');
+    bb_simple_die('Template->loadfile(): File ' . $complete_filename . ' is empty');
   }
 
   // replace $replacement with uncompiled code in $filename

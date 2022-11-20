@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 $log_days_keep = (int)$bb_cfg['log_days_keep'];

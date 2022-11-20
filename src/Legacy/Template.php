@@ -189,7 +189,7 @@ class Template
         return false;
       }
 
-      Dev::error_message("Template->make_filename(): Error - invalid template $filename");
+      bb_simple_die("Template->make_filename(): Error - invalid template $filename");
     }
     // creating cache filename
     if ($can_cache) {
@@ -203,7 +203,7 @@ class Template
       if ($quiet) {
         return false;
       }
-      Dev::error_message('Template->make_filename(): Error - template file not found: <br /><br />' . BaseHelper::hide_bb_path($this->files[$handle]));
+      bb_simple_die('Template->make_filename(): Error - template file not found: <br /><br />' . BaseHelper::hide_bb_path($this->files[$handle]));
     }
     // checking if we should recompile cache
     if (!empty($this->files_cache[$handle])) {
@@ -268,7 +268,7 @@ class Template
     }
     // checking if handle exists
     if (empty($this->files[$handle]) && empty($this->files_cache[$handle])) {
-      Dev::error_message("Template->loadfile(): No files found for handle $handle");
+      bb_simple_die("Template->loadfile(): No files found for handle $handle");
     }
     $this->xs_startup();
     $force_recompile = empty($this->uncompiled_code[$handle]) ? false : true;
@@ -279,7 +279,7 @@ class Template
       return true;
     }
     if (!$this->loadfile($handle)) {
-      Dev::error_message("Template->pparse(): Could not load template file for handle $handle");
+      bb_simple_die("Template->pparse(): Could not load template file for handle $handle");
     }
     // actually compile the template now.
     if (empty($this->compiled_code[$handle])) {
@@ -382,13 +382,13 @@ class Template
 
     // If we don't have a file assigned to this handle, die.
     if (empty($this->files[$handle])) {
-      Dev::error_message("Template->loadfile(): No file specified for handle $handle");
+      bb_simple_die("Template->loadfile(): No file specified for handle $handle");
     }
 
     $filename = $this->files[$handle];
 
     if (($str = @file_get_contents($filename)) === false) {
-      Dev::error_message("Template->loadfile(): File $filename for handle $handle is empty");
+      bb_simple_die("Template->loadfile(): File $filename for handle $handle is empty");
     }
 
     $this->uncompiled_code[$handle] = $str;

@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 $user_session_expire_time = TIMENOW - (int)$bb_cfg['user_session_duration'];

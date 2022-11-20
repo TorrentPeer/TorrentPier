@@ -245,7 +245,7 @@ class User
       $where_sql .= $login ? " OR ban_userid = $user_id" : '';
 
       if (DB()->fetch_row("SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
-        bb_simple_die($lang['YOU_BEEN_BANNED']);
+        bb_die($lang['YOU_BEEN_BANNED']);
       }
     }
 
@@ -269,7 +269,7 @@ class User
         break;
       }
       if ($i == $max_try) {
-        Dev::error_message('Error creating new session');
+        bb_simple_die('Error creating new session');
       }
     }
     // Update last visit for logged in users
@@ -399,7 +399,7 @@ class User
 
       if ($userdata = DB()->fetch_row($sql)) {
         if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == GUEST_UID || !$userdata['user_active']) {
-          Dev::error_message('Invalid userdata');
+          bb_simple_die('Invalid userdata');
         }
 
         // Password verify
@@ -429,7 +429,7 @@ class User
             return $new_session_userdata;
           }
 
-          Dev::error_message("Could not start session : login");
+          bb_simple_die("Could not start session : login");
         }
       }
     }

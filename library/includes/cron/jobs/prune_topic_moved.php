@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 if ($bb_cfg['topic_moved_days_keep']) {

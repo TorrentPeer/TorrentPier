@@ -110,7 +110,7 @@ class BaseHelper
         return memory_get_peak_usage();
         break;
       default:
-        Dev::error_message("Invalid param: $param");
+        bb_simple_die("Invalid param: $param");
     }
     return;
   }
@@ -162,7 +162,7 @@ class BaseHelper
     if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
       // [1] Check PHP Version
       if (!IsHelper::is_php(CHECK_REQIREMENTS['php_min_version'])) {
-        Dev::error_message("TorrentPier requires PHP version " . CHECK_REQIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
+        bb_simple_die("TorrentPier requires PHP version " . CHECK_REQIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
       }
 
       // [2] Check installed PHP Extensions on server
@@ -174,7 +174,7 @@ class BaseHelper
       }
 
       if (!empty($data)) {
-        Dev::error_message(sprintf("TorrentPier requires %s extension(s) installed on server", implode(', ', $data)));
+        bb_simple_die(sprintf("TorrentPier requires %s extension(s) installed on server", implode(', ', $data)));
       }
 
       return CACHE('bb_cache')->set('system_req', true);

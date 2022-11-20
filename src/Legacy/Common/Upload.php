@@ -144,7 +144,7 @@ class Upload
       return $this->_move($file_path);
     }
 
-    Dev::error_message("Invalid upload mode: $mode");
+    bb_simple_die("Invalid upload mode: $mode");
   }
 
   /**

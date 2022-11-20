@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 if (empty($bb_cfg['seeder_last_seen_days_keep']) || empty($bb_cfg['seeder_never_seen_days_keep'])) {

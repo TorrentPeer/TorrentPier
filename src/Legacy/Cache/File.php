@@ -36,7 +36,7 @@ class File extends Common
   public function __construct($dir, $cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
-      Dev::error_message("Error: {$this->engine} class not loaded");
+      bb_simple_die("Error: {$this->engine} class not loaded");
     }
 
     $this->filecache = new DOFileCache();

@@ -84,7 +84,7 @@ class SqlDb
     $this->selected_db = $this->cfg['dbname'];
 
     if (mysqli_connect_error()) {
-      Dev::error_message("Could not connect to mysql server");
+      bb_simple_die("Could not connect to mysql server");
     }
 
     register_shutdown_function([&$this, 'close']);
@@ -104,7 +104,7 @@ class SqlDb
     // Set charset
     if ($this->cfg['charset'] && !mysqli_set_charset($this->link, $this->cfg['charset'])) {
       if (!$this->sql_query("SET NAMES {$this->cfg['charset']}")) {
-        Dev::error_message("Could not set DB charset: {$this->cfg['charset']}");
+        bb_simple_die("Could not set DB charset: {$this->cfg['charset']}");
       }
     }
 
@@ -853,7 +853,7 @@ class SqlDb
   public function trigger_error($msg = 'DB Error')
   {
     $msg .= ' [' . $this->debug_find_source() . ']';
-    Dev::error_message($msg);
+    bb_simple_die($msg);
   }
 
   /**

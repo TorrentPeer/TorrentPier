@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 $domain_name = 'yourdomain.com'; // The domain name from which this board runs
@@ -22,8 +22,8 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.4-beta';
-$bb_cfg['tp_release_date'] = '18-11-22';
+$bb_cfg['tp_version'] = '2.4.0.4-rc1';
+$bb_cfg['tp_release_date'] = '20-11-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
 // GZip

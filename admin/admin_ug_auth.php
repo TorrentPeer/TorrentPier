@@ -65,7 +65,7 @@ if ($submit && $mode == 'user') {
   }
 
   if (!$group_id || !$user_id || null === $this_user_level) {
-    \TorrentPier\Legacy\Dev::error_message('data missing');
+    bb_simple_die('data missing');
   }
 
   // Make user an admin (if already user)

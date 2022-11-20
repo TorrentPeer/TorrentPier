@@ -8,7 +8,7 @@
  */
 
 if (!defined('IN_TRACKER')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 global $bb_cfg;

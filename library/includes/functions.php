@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 function send_no_cache_headers()
@@ -130,7 +130,7 @@ function get_tracks($type)
       $c_name = COOKIE_PM;
       break;
     default:
-      \TorrentPier\Legacy\Dev::error_message(__FUNCTION__ . ": invalid type '$type'");
+      bb_simple_die(__FUNCTION__ . ": invalid type '$type'");
   }
   $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
   return $tracks ?: [];
@@ -308,7 +308,7 @@ function bf_bit2dec($bf_array_name, $key)
 {
   global $bf;
   if (!isset($bf[$bf_array_name][$key])) {
-    \TorrentPier\Legacy\Dev::error_message(__FUNCTION__ . ": bitfield '$key' not found");
+    bb_simple_die(__FUNCTION__ . ": bitfield '$key' not found");
   }
   return (1 << $bf[$bf_array_name][$key]);
 }
@@ -383,7 +383,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
   }
 
   if (empty($auth_fields)) {
-    \TorrentPier\Legacy\Dev::error_message(__FUNCTION__ . '(): empty $auth_fields');
+    bb_simple_die(__FUNCTION__ . '(): empty $auth_fields');
   }
 
   //
@@ -408,7 +408,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
   }
 
   if (empty($f_access)) {
-    \TorrentPier\Legacy\Dev::error_message(__FUNCTION__ . '(): empty $f_access');
+    bb_simple_die(__FUNCTION__ . '(): empty $f_access');
   }
 
   //
@@ -1440,7 +1440,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         break;
 
       default:
-        \TorrentPier\Legacy\Dev::error_message(__FUNCTION__ . ": invalid mode '$mode'");
+        bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
     }
     $cat_title = $forums['c'][$f['cat_id']]['cat_title'];
     $f_name = ($f['forum_parent']) ? ' |- ' : '';
@@ -1752,7 +1752,7 @@ function bb_die($msg_text)
 
   // Check
   if (defined('HAS_DIED')) {
-    \TorrentPier\Legacy\Dev::error_message(__FUNCTION__ . ' was called multiple times');
+    bb_simple_die(__FUNCTION__ . ' was called multiple times');
   }
   define('HAS_DIED', 1);
   define('DISABLE_CACHING_OUTPUT', true);
@@ -1794,18 +1794,6 @@ function bb_die($msg_text)
   require(PAGE_FOOTER);
 
   exit;
-}
-
-/**
- * Simple die
- *
- * @param $txt
- * @return void
- * @throws Exception
- */
-function bb_simple_die($txt)
-{
-  \TorrentPier\Legacy\Dev::error_message($txt);
 }
 
 /**
@@ -1858,7 +1846,7 @@ function redirect($url, $short = false)
 
   if ($short == false) {
     if (headers_sent($filename, $linenum)) {
-      \TorrentPier\Legacy\Dev::error_message("Headers already sent in $filename($linenum)");
+      bb_simple_die("Headers already sent in $filename($linenum)");
     }
 
     if (false !== strpos(urldecode($url), "\n") || false !== strpos(urldecode($url), "\r") || false !== strpos(urldecode($url), ';url')) {
@@ -2626,7 +2614,7 @@ function bb_captcha($mode, $callback = '')
       break;
 
     default:
-      bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
+      bb_die("Invalid mode: $mode");
   }
   return false;
 }

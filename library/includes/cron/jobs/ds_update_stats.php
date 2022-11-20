@@ -7,7 +7,7 @@
  * @license   https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE MIT License
  */
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 $datastore->update('stats');

@@ -121,7 +121,7 @@ class Ajax
         break;
 
       default:
-        Dev::error_message("Invalid auth type for $action");
+        bb_simple_die("Invalid auth type for $action");
     }
 
     // Run action

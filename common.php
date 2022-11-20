@@ -17,6 +17,10 @@ if (isset($_REQUEST['GLOBALS'])) {
 define('TIMESTART', utime());
 define('TIMENOW', time());
 
+$rootPath = __DIR__;
+if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
+define('BB_PATH', $rootPath);
+
 if (empty($_SERVER['REMOTE_ADDR'])) {
   $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 }
@@ -44,14 +48,34 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
   $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
 }
 
-// Get all constants
-require_once __DIR__ . '/library/defines.php';
-
 // Composer
 if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
   die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
 require_once BB_PATH . '/vendor/autoload.php';
+
+/**
+ * Simple die
+ *
+ * @param $txt
+ * @return void
+ * @throws Exception
+ */
+function bb_simple_die($txt)
+{
+  \TorrentPier\Legacy\Dev::error_message($txt);
+}
+
+/**
+ * @return float|int
+ */
+function utime()
+{
+  return array_sum(explode(' ', microtime()));
+}
+
+// Get all constants
+require_once __DIR__ . '/library/defines.php';
 
 // Get config
 require_once __DIR__ . '/library/config.php'; // General config
@@ -170,20 +194,14 @@ switch ($bb_cfg['datastore_type']) {
  */
 \TorrentPier\Helpers\BaseHelper::system_requirements();
 
-/**
- * @return float|int
- */
-function utime()
-{
-  return array_sum(explode(' ', microtime()));
-}
-
 if (!defined('IN_TRACKER')) {
   require INC_DIR . '/init_bb.php';
 } else {
   define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::encode_ip($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
   /**
+   * Dummy exit
+   *
    * @param int $interval
    * @throws \Exception
    */
@@ -195,7 +213,7 @@ if (!defined('IN_TRACKER')) {
       'peers' => (string)DUMMY_PEER,
     ]);
 
-    \TorrentPier\Legacy\Dev::error_message($output);
+    bb_simple_die($output);
   }
 
   header('Content-Type: text/plain');

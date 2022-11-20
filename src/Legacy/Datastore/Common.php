@@ -137,7 +137,7 @@ class Common
     if (isset($this->known_items[$title]) && file_exists($file)) {
       require $file;
     } else {
-      Dev::error_message("Unknown datastore item: $title");
+      bb_simple_die("Unknown datastore item: $title");
     }
   }
 

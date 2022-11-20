@@ -34,7 +34,6 @@ define('TR_RATING_LIMITS', true); // ON/OFF
 define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('BB_PATH', dirname(__DIR__));
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');

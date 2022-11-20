@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('IN_AJAX')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 global $bb_cfg, $lang, $userdata, $datastore;

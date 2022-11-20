@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-  \TorrentPier\Legacy\Dev::error_message(basename(__FILE__));
+  die(basename(__FILE__));
 }
 
 \TorrentPier\Helpers\BaseHelper::array_deep($_POST, 'trim');
@@ -150,7 +150,7 @@ switch ($mode) {
     break;
 
   default:
-    \TorrentPier\Legacy\Dev::error_message("Invalid mode: $mode");
+    bb_simple_die("Invalid mode: $mode");
 }
 
 // Captcha
@@ -593,7 +593,7 @@ foreach ($profile_fields as $field => $can_edit) {
      *  default
      */
     default:
-      \TorrentPier\Legacy\Dev::error_message("Invalid profile field: $field");
+      bb_simple_die("Invalid profile field: $field");
   }
 }
 
