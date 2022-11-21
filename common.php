@@ -67,6 +67,107 @@ function bb_simple_die($txt)
 }
 
 /**
+ * Deep array
+ *
+ * @param $var
+ * @param $fn
+ * @param false $one_dimensional
+ * @param false $array_only
+ */
+function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
+{
+  if (is_array($var)) {
+    foreach ($var as $k => $v) {
+      if (is_array($v)) {
+        if ($one_dimensional) {
+          unset($var[$k]);
+        } elseif ($array_only) {
+          $var[$k] = $fn($v);
+        } else {
+          array_deep($var[$k], $fn);
+        }
+      } elseif (!$array_only) {
+        $var[$k] = $fn($v);
+      }
+    }
+  } elseif (!$array_only) {
+    $var = $fn($var);
+  }
+}
+
+/**
+ * @param string $str
+ * @return string
+ */
+function str_compact($str)
+{
+  return preg_replace('#\s+#u', ' ', trim($str));
+}
+
+/**
+ * System utilities (Sys info)
+ *
+ * @param $param
+ * @return int|string|void
+ * @throws \Exception
+ */
+function sys($param)
+{
+  switch ($param) {
+    case 'la':
+      return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
+      break;
+    case 'mem':
+      return memory_get_usage();
+      break;
+    case 'mem_peak':
+      return memory_get_peak_usage();
+      break;
+    default:
+      bb_simple_die("Invalid param: $param");
+  }
+  return;
+}
+
+/**
+ * Verify ID
+ *
+ * @param $id
+ * @param $length
+ * @return bool
+ */
+function verify_id($id, $length)
+{
+  return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
+}
+
+/**
+ * Скрывает путь BB_PATH
+ *
+ * @param $path
+ * @return string
+ */
+function hide_bb_path($path): string
+{
+  return ltrim(str_replace(BB_PATH, '', $path), '/\\');
+}
+
+/**
+ * Creates a string of random letters and numbers of the given length
+ *
+ * @param int $len
+ * @return false|string
+ */
+function make_rand_str($len = 10)
+{
+  $str = '';
+  while (strlen($str) < $len) {
+    $str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', \TorrentPier\Legacy\Crypt::password_hash(uniqid(mt_rand(), true))));
+  }
+  return substr($str, 0, $len);
+}
+
+/**
  * @return float|int
  */
 function utime()

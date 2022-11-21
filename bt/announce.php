@@ -93,7 +93,7 @@ if (!isset($downloaded) || $downloaded < 0 || $downloaded > $max_up_down_val || 
 if (!isset($left) || $left < 0 || $left > $max_left_val) {
   msg_die('Invalid left value');
 }
-if (!\TorrentPier\Helpers\BaseHelper::verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
+if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
   msg_die('Invalid passkey');
 }
 

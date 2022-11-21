@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
-
 /**
  * Class Poll
  * @package TorrentPier\Legacy
@@ -42,14 +40,14 @@ class Poll
     $poll_votes = (string)@$posted_data['poll_votes'];
     $this->poll_votes = [];
 
-    if (!$poll_caption = BaseHelper::str_compact($poll_caption)) {
+    if (!$poll_caption = str_compact($poll_caption)) {
       global $lang;
       return $this->err_msg = $lang['EMPTY_POLL_TITLE'];
     }
     $this->poll_votes[] = $poll_caption; // заголовок имеет vote_id = 0
 
     foreach (explode("\n", $poll_votes) as $vote) {
-      if (!$vote = BaseHelper::str_compact($vote)) {
+      if (!$vote = str_compact($vote)) {
         continue;
       }
       $this->poll_votes[] = $vote;

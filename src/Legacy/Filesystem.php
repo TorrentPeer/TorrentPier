@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
-
 /**
  * Class Filesystem
  * @package TorrentPier\Legacy
@@ -97,6 +95,6 @@ class Filesystem
   public static function clean_filename($fname)
   {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
-    return str_replace($s, '_', BaseHelper::str_compact($fname));
+    return str_replace($s, '_', str_compact($fname));
   }
 }

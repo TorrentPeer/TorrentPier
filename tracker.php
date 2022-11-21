@@ -42,7 +42,7 @@ $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $set_default = isset($_GET['def']);
 $user_id = $userdata['user_id'];
 $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
-$search_id = (isset($_GET['search_id']) && \TorrentPier\Helpers\BaseHelper::verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
+$search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
@@ -626,7 +626,7 @@ if ($allowed_forums) {
   } else {
     // Save result in DB
     if ($tor_count > $per_page && !$search_id) {
-      $search_id = \TorrentPier\Helpers\BaseHelper::make_rand_str(SEARCH_ID_LENGTH);
+      $search_id = make_rand_str(SEARCH_ID_LENGTH);
       $search_type = SEARCH_TYPE_TRACKER;
 
       $columns = 'session_id,   search_type,   search_id,   search_time,   search_settings,  search_array';

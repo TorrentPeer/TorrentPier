@@ -17,7 +17,7 @@ if (!IS_SUPER_ADMIN) {
   $this->ajax_die('Not auth');
 }
 
-\TorrentPier\Helpers\BaseHelper::array_deep($this->request, 'trim');
+array_deep($this->request, 'trim');
 
 $mode = (string)$this->request['mode'];
 $sql_error = false;
@@ -37,7 +37,7 @@ switch ($mode) {
 switch ($mode) {
   case 'save':
   case 'new':
-    if (!$tpl_name = htmlCHR(\TorrentPier\Helpers\BaseHelper::str_compact($this->request['tpl_name']))) {
+    if (!$tpl_name = htmlCHR(str_compact($this->request['tpl_name']))) {
       $this->ajax_die('не заполнено название шаблона');
     }
     $tpl_name = substr($tpl_name, 0, 60);
@@ -48,7 +48,7 @@ switch ($mode) {
     if (!$tpl_src_title = htmlCHR($this->request['tpl_src_title'])) {
       $this->ajax_die('не заполнен формат названия темы');
     }
-    $tpl_src_title = \TorrentPier\Helpers\BaseHelper::str_compact($tpl_src_title);
+    $tpl_src_title = str_compact($tpl_src_title);
 
     if (!$tpl_src_msg = htmlCHR($this->request['tpl_src_msg'])) {
       $this->ajax_die('не заполнен формат создания сообщения');
@@ -81,7 +81,7 @@ switch ($mode) {
     $this->response['val']['tpl-src-msg'] = $tpl_data['tpl_src_msg'];
     $this->response['val']['tpl-comment-save'] = $tpl_data['tpl_comment'];
     $this->response['val']['tpl-rules-save'] = $tpl_data['tpl_rules_post_id'];
-    \TorrentPier\Helpers\BaseHelper::array_deep($this->response['val'], 'html_ent_decode');
+    array_deep($this->response['val'], 'html_ent_decode');
 
     $this->response['val']['tpl-id-save'] = $tpl_id;
     $this->response['val']['tpl-last-edit-tst'] = $tpl_data['tpl_last_edit_tm'];

@@ -9,7 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
 use TorrentPier\Legacy\AttachMod\Delete;
 
 /**
@@ -602,7 +601,7 @@ class Torrent
     }
 
     for ($i = 0; $i < 20; $i++) {
-      $passkey_val = BaseHelper::make_rand_str(BT_AUTH_KEY_LENGTH);
+      $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
       $old_passkey = null;
 
       if ($row = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = $user_id LIMIT 1")) {

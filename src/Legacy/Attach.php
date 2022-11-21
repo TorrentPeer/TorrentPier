@@ -13,7 +13,6 @@ use TorrentPier\Legacy\AttachMod\Attach as AttachMod;
 use TorrentPier\Legacy\AttachMod\Delete;
 use TorrentPier\Legacy\AttachMod\Filetypes;
 use TorrentPier\Legacy\AttachMod\Thumbs;
-use TorrentPier\Helpers\BaseHelper;
 
 /**
  * Class Attach
@@ -848,7 +847,7 @@ class Attach
 
         //bt
         if (FILENAME_CRYPTIC) {
-          $this->attach_filename = BaseHelper::make_rand_str(FILENAME_CRYPTIC_LENGTH);
+          $this->attach_filename = make_rand_str(FILENAME_CRYPTIC_LENGTH);
         } else { // original
           $this->attach_filename = html_entity_decode(trim(stripslashes($this->attach_filename)));
           $this->attach_filename = AttachMod::delete_extension($this->attach_filename);
@@ -867,7 +866,7 @@ class Attach
         $this->attach_filename = substr(trim($this->attach_filename), 0, FILENAME_MAX_LENGTH);
 
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
-          $fn_prefix = BaseHelper::make_rand_str(FILENAME_PREFIX_LENGTH) . '_';
+          $fn_prefix = make_rand_str(FILENAME_PREFIX_LENGTH) . '_';
           $new_physical_filename = Filesystem::clean_filename($fn_prefix . $this->attach_filename);
 
           if (!AttachMod::physical_filename_already_stored($new_physical_filename)) {

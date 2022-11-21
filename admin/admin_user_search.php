@@ -13,7 +13,7 @@ if (!empty($setmodules)) {
 }
 require __DIR__ . '/pagestart.php';
 
-\TorrentPier\Helpers\BaseHelper::array_deep($_POST, 'trim');
+array_deep($_POST, 'trim');
 
 $total_sql = '';
 

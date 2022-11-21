@@ -103,4 +103,24 @@ class Crypt
   {
     return password_verify($password, $hash);
   }
+
+  /**
+   * Шифрует сгенерированный токен
+   *
+   * @return string
+   */
+  public static function get_hash_token(): string
+  {
+    return Crypt::md5(self::get_hash_number(), true);
+  }
+
+  /**
+   * Генерирует токен на основе TIMENOW + случайное число
+   *
+   * @return float|int
+   */
+  public static function get_hash_number()
+  {
+    return TIMENOW * rand(1, 99999);
+  }
 }

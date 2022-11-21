@@ -9,7 +9,6 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use TorrentPier\Helpers\BaseHelper;
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -197,7 +196,7 @@ class Common
           case 'line':
             return $trace['line'];
           default:
-            return BaseHelper::hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+            return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
         }
       }
     }

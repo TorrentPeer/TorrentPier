@@ -113,7 +113,7 @@ HTML;
 	<span class="post-hr">-</span>
 HTML;
 
-  \TorrentPier\Helpers\BaseHelper::array_deep($bbcode_tpl, 'bbcode_tpl_compact');
+  array_deep($bbcode_tpl, 'bbcode_tpl_compact');
   return $bbcode_tpl;
 }
 
@@ -125,7 +125,7 @@ HTML;
  */
 function bbcode_tpl_compact($text)
 {
-  $text = \TorrentPier\Helpers\BaseHelper::str_compact($text);
+  $text = str_compact($text);
   $text = str_replace('> <', '><', $text);
   return $text;
 }
@@ -379,7 +379,7 @@ function extract_search_words($text)
   $min_word_len = max(2, $bb_cfg['search_min_word_len'] - 1);
   $max_word_len = $bb_cfg['search_max_word_len'];
 
-  $text = ' ' . \TorrentPier\Helpers\BaseHelper::str_compact(strip_tags(mb_strtolower($text))) . ' ';
+  $text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
   $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);
 
   // HTML entities like &nbsp;
@@ -394,7 +394,7 @@ function extract_search_words($text)
   $text = preg_replace('#[.,:;]#u', ' ', $text);
 
   // Trim 1+ spaces to one space and split this string into unique words
-  $text = array_unique(explode(' ', \TorrentPier\Helpers\BaseHelper::str_compact($text)));
+  $text = array_unique(explode(' ', str_compact($text)));
 
   // short & long words 2
   $text_out = [];

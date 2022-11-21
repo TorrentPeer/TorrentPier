@@ -12,7 +12,6 @@ namespace TorrentPier\Legacy;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Logger;
-use TorrentPier\Helpers\BaseHelper;
 use TorrentPier\Legacy\Common\Http;
 use Whoops\Handler\PlainTextHandler;
 use Monolog\Handler\StreamHandler;
@@ -202,7 +201,7 @@ class Dev
   public static function short_query($sql, $esc_html = false)
   {
     $max_len = 100;
-    $sql = BaseHelper::str_compact($sql);
+    $sql = str_compact($sql);
 
     if (!empty($_COOKIE['sql_log_full'])) {
       if (mb_strlen($sql, 'UTF-8') > $max_len) {

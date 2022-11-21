@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy;
 
 use mysqli_result;
-use TorrentPier\Helpers\BaseHelper;
 
 /**
  * Class SqlDb
@@ -515,7 +514,7 @@ class SqlDb
   public function build_sql($sql_ary)
   {
     $sql = '';
-    BaseHelper::array_deep($sql_ary, 'array_unique', false, true);
+    array_deep($sql_ary, 'array_unique', false, true);
 
     foreach ($sql_ary as $clause => $ary) {
       switch ($clause) {
@@ -749,7 +748,7 @@ class SqlDb
       $info[] = "$aff rows";
     }
 
-    return BaseHelper::str_compact(implode(', ', $info));
+    return str_compact(implode(', ', $info));
   }
 
   /**
@@ -812,7 +811,7 @@ class SqlDb
         $dbg['line'] = $this->debug_find_source('line');
         $dbg['time'] = '';
         $dbg['info'] = '';
-        $dbg['mem_before'] = BaseHelper::sys('mem');
+        $dbg['mem_before'] = sys('mem');
       }
       if ($this->do_explain) {
         $this->explain('start');
@@ -830,7 +829,7 @@ class SqlDb
       if ($this->dbg_enabled) {
         $dbg['time'] = utime() - $this->sql_starttime;
         $dbg['info'] = $this->query_info();
-        $dbg['mem_after'] = BaseHelper::sys('mem');
+        $dbg['mem_after'] = sys('mem');
         $id++;
       }
       if ($this->do_explain) {
@@ -873,7 +872,7 @@ class SqlDb
           case 'line':
             return $trace['line'];
           default:
-            return BaseHelper::hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+            return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
         }
       }
     }
@@ -904,7 +903,7 @@ class SqlDb
     $msg[] = round($this->sql_starttime);
     $msg[] = date('m-d H:i:s', $this->sql_starttime);
     $msg[] = sprintf('%-6s', $q_time);
-    $msg[] = sprintf('%-4s', round(BaseHelper::sys('la'), 1));
+    $msg[] = sprintf('%-4s', round(sys('la'), 1));
     $msg[] = sprintf('%05d', getmypid());
     $msg[] = $this->db_server;
     $msg[] = Dev::short_query($this->cur_query);
@@ -940,9 +939,9 @@ class SqlDb
 
     $msg = [];
     $err = $this->sql_error();
-    $msg[] = BaseHelper::str_compact(sprintf('#%06d %s', $err['code'], $err['message']));
+    $msg[] = str_compact(sprintf('#%06d %s', $err['code'], $err['message']));
     $msg[] = '';
-    $msg[] = BaseHelper::str_compact($this->cur_query);
+    $msg[] = str_compact($this->cur_query);
     $msg[] = '';
     $msg[] = 'Source  : ' . $this->debug_find_source() . " :: $this->db_server.$this->selected_db";
     $msg[] = 'IP      : ' . @$_SERVER['REMOTE_ADDR'];
@@ -968,7 +967,7 @@ class SqlDb
    */
   public function explain($mode, $html_table = '', $row = '')
   {
-    $query = BaseHelper::str_compact($this->cur_query);
+    $query = str_compact($this->cur_query);
     // remove comments
     $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
 

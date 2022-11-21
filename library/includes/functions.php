@@ -1966,7 +1966,7 @@ function clear_dl_list($topics_csv)
 function get_id_csv($ids)
 {
   $ids = array_values((array)$ids);
-  \TorrentPier\Helpers\BaseHelper::array_deep($ids, 'intval', 'one-dimensional');
+  array_deep($ids, 'intval', 'one-dimensional');
   return (string)implode(',', $ids);
 }
 
@@ -1979,7 +1979,7 @@ function get_id_csv($ids)
 function get_id_ary($ids)
 {
   $ids = is_string($ids) ? explode(',', $ids) : array_values((array)$ids);
-  \TorrentPier\Helpers\BaseHelper::array_deep($ids, 'intval', 'one-dimensional');
+  array_deep($ids, 'intval', 'one-dimensional');
   return (array)$ids;
 }
 
@@ -2182,7 +2182,7 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
 function clean_title($str, $replace_underscore = false): string
 {
   $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
-  $str = htmlCHR(\TorrentPier\Helpers\BaseHelper::str_compact($str));
+  $str = htmlCHR(str_compact($str));
   return $str;
 }
 
@@ -2197,11 +2197,11 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 {
   global $bb_cfg, $lang;
 
-  $text = \TorrentPier\Helpers\BaseHelper::str_compact($text);
+  $text = str_compact($text);
   $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
   $wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
-  $text = ' ' . \TorrentPier\Helpers\BaseHelper::str_compact(ltrim($text, $ltrim_chars)) . ' ';
+  $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
 
   if ($bb_cfg['search_engine_type'] == 'sphinx') {
     $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
@@ -2211,7 +2211,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
     $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // одиночные " - ", " * "
     $text = trim($text, ' -|');
-    $text = \TorrentPier\Helpers\BaseHelper::str_compact($text);
+    $text = str_compact($text);
     $text_match_sql = ($wrap_with_quotes && $text != '') ? '"' . $text . '"' : $text;
   } else {
     $text_match_sql = DB()->escape(trim($text));

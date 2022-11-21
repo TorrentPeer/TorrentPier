@@ -33,6 +33,6 @@ function silent_exit()
 function error_exit($msg = '')
 {
   silent_exit();
-  echo \SandFox\Bencode\Bencode::encode(['failure reason' => \TorrentPier\Helpers\BaseHelper::str_compact($msg)]);
+  echo \SandFox\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
   exit;
 }

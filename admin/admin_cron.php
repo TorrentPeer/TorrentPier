@@ -154,7 +154,7 @@ switch ($mode) {
     }
 
     $template->assign_vars([
-      'CRON_SCRIPT_PATH' => \TorrentPier\Helpers\BaseHelper::hide_bb_path(sprintf($lang['CRON_SCRIPT_EXPL'], CRON_JOB_DIR)),
+      'CRON_SCRIPT_PATH' => hide_bb_path(sprintf($lang['CRON_SCRIPT_EXPL'], CRON_JOB_DIR)),
 
       'TPL_CRON_EDIT' => true,
       'S_CRON_ACTION' => 'admin_cron.php',

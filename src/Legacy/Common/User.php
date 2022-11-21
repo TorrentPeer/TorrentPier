@@ -9,7 +9,6 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use TorrentPier\Helpers\BaseHelper;
 use TorrentPier\Legacy\Crypt;
 use TorrentPier\Legacy\DateDelta;
 use TorrentPier\Legacy\Sessions;
@@ -185,7 +184,7 @@ class User
 
       if ($userdata = get_userdata((int)$user_id, false, true)) {
         if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
-          if (BaseHelper::verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
+          if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
             $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
           }
         }
@@ -250,7 +249,7 @@ class User
 
     // Create new session
     for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
-      $session_id = BaseHelper::make_rand_str(SID_LENGTH);
+      $session_id = make_rand_str(SID_LENGTH);
 
       $args = DB()->build_array('INSERT', [
         'session_id' => (string)$session_id,
@@ -444,7 +443,7 @@ class User
     $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : [];
 
     // autologin_id
-    if (!empty($sd_resv['uk']) && BaseHelper::verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH)) {
+    if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH)) {
       $this->sessiondata['uk'] = $sd_resv['uk'];
     }
     // user_id
@@ -452,7 +451,7 @@ class User
       $this->sessiondata['uid'] = (int)$sd_resv['uid'];
     }
     // sid
-    if (!empty($sd_resv['sid']) && BaseHelper::verify_id($sd_resv['sid'], SID_LENGTH)) {
+    if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
       $this->sessiondata['sid'] = $sd_resv['sid'];
     }
   }
@@ -523,7 +522,7 @@ class User
       }
     }
 
-    return BaseHelper::verify_id($autologin_id, LOGIN_KEY_LENGTH);
+    return verify_id($autologin_id, LOGIN_KEY_LENGTH);
   }
 
   /**
@@ -537,7 +536,7 @@ class User
    */
   public function create_autologin_id($userdata, $create_new = true)
   {
-    $autologin_id = ($create_new) ? BaseHelper::make_rand_str(LOGIN_KEY_LENGTH) : '';
+    $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
     DB()->query("
 			UPDATE " . BB_USERS . " SET

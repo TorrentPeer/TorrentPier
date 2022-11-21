@@ -89,7 +89,7 @@ $url = basename(__FILE__);
 $anon_id = GUEST_UID;
 $user_id = $userdata['user_id'];
 $lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
-$search_id = (isset($_GET['id']) && \TorrentPier\Helpers\BaseHelper::verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
+$search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
 $session_id = $userdata['session_id'];
 
 $items_found = $items_display = $previous_settings = null;
@@ -853,7 +853,7 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
   }
 
   // Save results in DB
-  $search_id = \TorrentPier\Helpers\BaseHelper::make_rand_str(SEARCH_ID_LENGTH);
+  $search_id = make_rand_str(SEARCH_ID_LENGTH);
 
   if ($items_count > $per_page) {
     $search_array = implode(',', $items_found);
@@ -903,7 +903,7 @@ function prevent_huge_searches($SQL)
 
     if (DB()->query($SQL) and $row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count")) {
       if ($row['rows_count'] > $bb_cfg['limit_max_search_results']) {
-        #				\TorrentPier\Legacy\Logging::bb_log(\TorrentPier\Helpers\BaseHelper::str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
+        #				\TorrentPier\Legacy\Logging::bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
         bb_die('Too_many_search_results');
       }
     }

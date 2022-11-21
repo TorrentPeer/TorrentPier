@@ -50,10 +50,10 @@ if ($show_dbg_info) {
 
   $stat .= ' &nbsp;|&nbsp; ' . $lang['MEMORY'];
   $stat .= humn_size($bb_cfg['mem_on_start'], 2) . ' / ';
-  $stat .= humn_size(\TorrentPier\Helpers\BaseHelper::sys('mem_peak'), 2) . ' / ';
-  $stat .= humn_size(\TorrentPier\Helpers\BaseHelper::sys('mem'), 2);
+  $stat .= humn_size(sys('mem_peak'), 2) . ' / ';
+  $stat .= humn_size(sys('mem'), 2);
 
-  if ($l = \TorrentPier\Helpers\BaseHelper::sys('la')) {
+  if ($l = sys('la')) {
     $l = explode(' ', $l);
     for ($i = 0; $i < 3; $i++) {
       $l[$i] = round($l[$i], 1);

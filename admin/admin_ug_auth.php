@@ -110,7 +110,7 @@ if ($submit && $mode == 'user') {
   $auth = [];
 
   if (!empty($_POST['auth']) && is_array($_POST['auth'])) {
-    \TorrentPier\Helpers\BaseHelper::array_deep($_POST['auth'], 'intval');
+    array_deep($_POST['auth'], 'intval');
 
     foreach ($_POST['auth'] as $f_id => $bf_ary) {
       if (array_sum($bf_ary)) {
@@ -139,7 +139,7 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
   }
 
   $auth = [];
-  \TorrentPier\Helpers\BaseHelper::array_deep($_POST['auth'], 'intval');
+  array_deep($_POST['auth'], 'intval');
 
   foreach ($_POST['auth'] as $f_id => $bf_ary) {
     if (array_sum($bf_ary)) {

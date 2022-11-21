@@ -37,8 +37,8 @@ if (isset($_POST['submit'])) {
       $username = $row['username'];
       $user_id = $row['user_id'];
 
-      $user_actkey = \TorrentPier\Helpers\BaseHelper::make_rand_str(ACTKEY_LENGHT);
-      $user_password = \TorrentPier\Helpers\BaseHelper::make_rand_str(NEWPASSWD_LENGTH);
+      $user_actkey = make_rand_str(ACTKEY_LENGHT);
+      $user_password = make_rand_str(NEWPASSWD_LENGTH);
 
       $sql = "UPDATE " . BB_USERS . "
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'

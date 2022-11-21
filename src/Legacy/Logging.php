@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
-
 /**
  * Class Logging
  * @package TorrentPier\Legacy
@@ -94,7 +92,7 @@ class Logging
     }
 
     if (!empty($_POST) && $add_post) {
-      $str[] = "post: " . BaseHelper::str_compact(urldecode(http_build_query($_POST)));
+      $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
     }
     $str = implode("\t", $str) . "\n";
     self::bb_log($str, $file);

@@ -63,8 +63,8 @@ if (!$mod = $datastore->get('moderators')) {
   $datastore->update('moderators');
   $mod = $datastore->get('moderators');
 }
-\TorrentPier\Helpers\BaseHelper::array_deep($mod['moderators'], 'html_entity_decode');
-\TorrentPier\Helpers\BaseHelper::array_deep($mod['admins'], 'html_entity_decode');
+array_deep($mod['moderators'], 'html_entity_decode');
+array_deep($mod['admins'], 'html_entity_decode');
 
 $users = [$lang['ACTS_LOG_ALL_ACTIONS'] => $all_users] + array_flip($mod['moderators']) + array_flip($mod['admins']);
 

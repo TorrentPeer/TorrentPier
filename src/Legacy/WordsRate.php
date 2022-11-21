@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
-
 /**
  * Class WordsRate
  * @package TorrentPier\Legacy
@@ -31,7 +29,7 @@ class WordsRate
   {
     // слова начинающиеся на..
     $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
-    $del_list = BaseHelper::str_compact($del_list);
+    $del_list = str_compact($del_list);
     $del_list = str_replace(' ', '|', preg_quote($del_list, '/'));
     $del_exp = '/\b(' . $del_list . ')[\w\-]*/i';
 

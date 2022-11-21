@@ -37,7 +37,7 @@ foreach ($sql as $i => $query) {
 echo '</table>';
 echo '<div align="center"><pre>';
 
-if ($l = \TorrentPier\Helpers\BaseHelper::sys('la')) {
+if ($l = sys('la')) {
   $l = explode(' ', $l);
   for ($i = 0; $i < 3; $i++) {
     $l[$i] = round($l[$i], 1);

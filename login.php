@@ -11,7 +11,7 @@ define('BB_SCRIPT', 'login');
 define('IN_LOGIN', true);
 require __DIR__ . '/common.php';
 
-\TorrentPier\Helpers\BaseHelper::array_deep($_POST, 'trim');
+array_deep($_POST, 'trim');
 
 $user->session_start();
 

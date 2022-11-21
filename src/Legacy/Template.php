@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
-
 /**
  * Class Template
  * @package TorrentPier\Legacy
@@ -203,7 +201,7 @@ class Template
       if ($quiet) {
         return false;
       }
-      bb_simple_die('Template->make_filename(): Error - template file not found: <br /><br />' . BaseHelper::hide_bb_path($this->files[$handle]));
+      bb_simple_die('Template->make_filename(): Error - template file not found: <br /><br />' . hide_bb_path($this->files[$handle]));
     }
     // checking if we should recompile cache
     if (!empty($this->files_cache[$handle])) {

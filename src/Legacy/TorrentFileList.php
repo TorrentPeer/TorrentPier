@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use TorrentPier\Helpers\BaseHelper;
-
 /**
  * Class TorrentFileList
  * @package TorrentPier\Legacy
@@ -80,7 +78,7 @@ class TorrentFileList
         if (!isset($f['path']) || !\is_array($f['path'])) {
           continue;
         }
-        BaseHelper::array_deep($f['path'], 'clean_tor_dirname');
+        array_deep($f['path'], 'clean_tor_dirname');
 
         $length = isset($f['length']) ? (float)$f['length'] : 0;
         $subdir_count = \count($f['path']) - 1;

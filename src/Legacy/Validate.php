@@ -13,7 +13,6 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
-use TorrentPier\Helpers\BaseHelper;
 
 /**
  * Class Validate
@@ -36,7 +35,7 @@ class Validate
 
     static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
-    $username = BaseHelper::str_compact($username);
+    $username = str_compact($username);
     $username = clean_username($username);
 
     // Length
@@ -186,7 +185,7 @@ class Validate
   {
     global $lang;
 
-    $invite_code = BaseHelper::str_compact($invite_code);
+    $invite_code = str_compact($invite_code);
     $invite_code = clean_username($invite_code);
 
     if ($invite_code != '') {
