@@ -43,7 +43,7 @@ function msg_die($msg)
   bb_simple_die($output);
 }
 
-require __DIR__ . '/includes/init_tr.php';
+require BB_PATH . '/includes/init_tr.php';
 
 $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 

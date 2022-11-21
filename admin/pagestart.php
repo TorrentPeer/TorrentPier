@@ -9,7 +9,6 @@
 
 define('BB_ROOT', './../');
 define('IN_ADMIN', true);
-
 require dirname(__DIR__) . '/common.php';
 require ATTACH_DIR . '/attachment_mod.php';
 

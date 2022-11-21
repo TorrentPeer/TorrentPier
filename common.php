@@ -49,10 +49,10 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
 }
 
 // Composer
-if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
   die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
-require_once __DIR__ . '/vendor/autoload.php';
+require_once BB_PATH . '/vendor/autoload.php';
 
 /**
  * Simple die
@@ -75,12 +75,12 @@ function utime()
 }
 
 // Get all constants
-require_once __DIR__ . '/library/defines.php';
+require_once BB_PATH . '/library/defines.php';
 
 // Get config
-require_once __DIR__ . '/library/config.php'; // General config
-if (file_exists(__DIR__ . '/library/config.local.php')) {
-  require_once __DIR__ . '/library/config.local.php'; // Local config
+require_once BB_PATH . '/library/config.php'; // General config
+if (file_exists(BB_PATH . '/library/config.local.php')) {
+  require_once BB_PATH . '/library/config.local.php'; // Local config
 }
 
 // Server

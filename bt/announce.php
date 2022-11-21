@@ -168,7 +168,7 @@ function msg_die($msg)
 }
 
 // Start announcer
-require __DIR__ . '/includes/init_tr.php';
+require BB_PATH . '/includes/init_tr.php';
 
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');

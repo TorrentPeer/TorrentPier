@@ -36,6 +36,8 @@ function send_page($contents)
 }
 
 /**
+ * GZip compress output
+ *
  * @param $contents
  * @return string
  */
@@ -75,6 +77,8 @@ define('COOKIE_PERSIST', TIMENOW + 31536000);
 define('COOKIE_MAX_TRACKS', 90);
 
 /**
+ * Cookie set
+ *
  * @param $name
  * @param $val
  * @param int $lifetime
