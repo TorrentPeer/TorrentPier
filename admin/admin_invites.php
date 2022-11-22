@@ -83,13 +83,20 @@ switch ($mode) {
         'S_ADD_GROUP_SELECT' => groupname('add_rule_user_group', '0', $groupid = false),
         'S_RULES_ACTION' => "admin_invites.php?mode=rules"]
     );
+
     $sql = 'SELECT * FROM ' . BB_INVITE_RULES . ' ORDER BY `invites_count`';
-    if (!($result = DB()->sql_query($sql))) bb_die('Could not get a list of rules for the Invite' . __LINE__ . ',' . __FILE__ . $sql);
+
+    if (!($result = DB()->sql_query($sql))) {
+      bb_die('Could not get a list of rules for the Invite' . __LINE__ . ',' . __FILE__ . $sql);
+    }
+
     $rule_row = DB()->sql_fetchrowset($result);
     $num_rule_row = DB()->num_rows($result);
     DB()->sql_freeresult($result);
+
     if ($num_rule_row > 0) {
-      $rule_row = \TorrentPier\Legacy\AttachMod\Admin::sort_multi_array($rule_row, 'invites_count', 'ASC');
+      $rule_row = \TorrentPier\Legacy\AttachMod\Admin::sort_multi_array($rule_row, 'invites_count');
+
       for ($i = 0; $i < $num_rule_row; $i++) {
         $template->assign_block_vars('rule_row', [
             'RULE_ID' => $rule_row[$i]['rule_id'],
