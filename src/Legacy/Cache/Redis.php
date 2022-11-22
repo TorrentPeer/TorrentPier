@@ -23,7 +23,7 @@ class Redis extends Common
   private $redis;
   private $cfg;
 
-  public $engine = 'Redis';
+  public $engine = 'redis';
   public $used = false;
   public $connected = false;
 

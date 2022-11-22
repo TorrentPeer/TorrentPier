@@ -25,7 +25,7 @@ class PostgreSQL extends Common
   private $cfg;
   private $obj;
 
-  public $engine = 'PostgreSQL';
+  public $engine = 'postgresql';
   public $connected = false;
 
   /**

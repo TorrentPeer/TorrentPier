@@ -23,7 +23,7 @@ class Sqlite extends Common
   private $sqlite;
   private $prefix;
 
-  public $engine = 'SQLite';
+  public $engine = 'sqlite';
   public $used = false;
 
   /**

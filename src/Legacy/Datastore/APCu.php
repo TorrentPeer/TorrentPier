@@ -22,7 +22,7 @@ class APCu extends Common
   private $apcu;
   private $prefix;
 
-  public $engine = 'APCu';
+  public $engine = 'apcu';
 
   /**
    * APCu constructor.

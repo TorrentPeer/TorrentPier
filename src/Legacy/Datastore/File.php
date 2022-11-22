@@ -22,7 +22,7 @@ class File extends Common
   private $filecache;
   private $prefix;
 
-  public $engine = 'Filecache';
+  public $engine = 'files';
 
   /**
    * File constructor.

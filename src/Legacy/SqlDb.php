@@ -19,11 +19,12 @@ class SqlDb
 {
   public $driver;
   public $cfg = [];
+  public $pdo;
 
+  private $drivers_allowed = ['mysql', 'postgresql'];
   private $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
   private $link;
 
-  public $pdo;
   public $result;
   public $db_server = '';
   public $selected_db;
@@ -58,6 +59,7 @@ class SqlDb
    *
    * @param $driver
    * @param $cfg_values
+   * @throws \Exception
    */
   public function __construct($driver, $cfg_values)
   {
@@ -65,15 +67,11 @@ class SqlDb
 
     $this->driver = $driver;
 
-    switch ($this->driver) {
-      default:
-      case 'mysql':
-        $this->engine = 'MySQL';
-        break;
-      case 'postgresql':
-        $this->engine = 'PostgreSQL';
-        break;
+    if (!in_array($this->driver, $this->drivers_allowed)) {
+      bb_simple_die("SQL driver ({$this->driver}) not supported");
     }
+
+    $this->engine = $this->driver;
 
     $this->cfg = array_combine($this->cfg_keys, $cfg_values);
     $this->dbg_enabled = (Dev::sql_dbg_enabled() || !empty($_COOKIE['explain']));

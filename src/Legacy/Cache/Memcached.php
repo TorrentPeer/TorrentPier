@@ -23,7 +23,7 @@ class Memcached extends Common
   private $memcached;
   private $cfg;
 
-  public $engine = 'Memcached';
+  public $engine = 'memcached';
   public $used = false;
   public $connected = false;
 

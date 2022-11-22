@@ -25,7 +25,7 @@ class MySQL extends Common
   private $cfg;
   private $obj;
 
-  public $engine = 'MySQL';
+  public $engine = 'mysql';
   public $connected = false;
 
   /**
