@@ -126,7 +126,7 @@ class Dev
     $log = '';
 
     foreach ($DBS->srv as $srv_name => $db_obj) {
-      $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "$srv_name [MySQL]:") : '';
+      $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "$srv_name [{$db_obj->engine}]:") : '';
     }
 
     foreach ($CACHES->obj as $cache_name => $cache_obj) {
@@ -168,7 +168,7 @@ class Dev
       $log .= ''
         . '<div class="sqlLogRow" title="' . $info . '">'
         . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
-        . '<span title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#' . $id . '\').text() );" style="color: gray; letter-spacing: -1px;">' . $perc . '</span>'
+        . '<span class="copyElement" title="Copy to clipboard" data-clipboard-target="#' . $id . '" style="color: gray; letter-spacing: -1px;">' . $perc . '</span>'
         . ' '
         . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'
         . '<span style="color: gray"> # ' . $info . ' </span>'

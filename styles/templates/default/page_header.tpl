@@ -33,6 +33,7 @@
 <script type="text/javascript" src="{SITE_URL}styles/js/cookie.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript" src="{SITE_URL}styles/libs/old-browser-detector/oldbrowserdetector.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/libs/clipboardjs/clipboard.min.js"></script>
 <script type="text/javascript" src="{SCRIPTS}"></script>
 
 <!-- IF $bb_cfg['scrolling_title']['enabled'] -->

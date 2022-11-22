@@ -51,6 +51,7 @@ class SqlDb
   public $shutdown = [];
 
   public $DBS = [];
+  public $engine;
 
   /**
    * sql_db constructor.
@@ -63,6 +64,17 @@ class SqlDb
     global $DBS;
 
     $this->driver = $driver;
+
+    switch ($this->driver) {
+      default:
+      case 'mysql':
+        $this->engine = 'MySQL';
+        break;
+      case 'postgresql':
+        $this->engine = 'PostgreSQL';
+        break;
+    }
+
     $this->cfg = array_combine($this->cfg_keys, $cfg_values);
     $this->dbg_enabled = (Dev::sql_dbg_enabled() || !empty($_COOKIE['explain']));
     $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
@@ -1014,7 +1026,7 @@ class SqlDb
 				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
 					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
-					<th style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#' . $htid . '\').text() );">' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
+					<th class="copyElement" style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" data-clipboard-target="#' . $htid . '">' . '[' . "$this->engine" . ']&nbsp;' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
