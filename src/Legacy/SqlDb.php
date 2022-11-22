@@ -17,9 +17,13 @@ use mysqli_result;
  */
 class SqlDb
 {
+  public $driver;
   public $cfg = [];
-  public $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
+
+  private $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
   private $link;
+
+  public $pdo;
   public $result;
   public $db_server = '';
   public $selected_db;
@@ -51,12 +55,14 @@ class SqlDb
   /**
    * sql_db constructor.
    *
+   * @param $driver
    * @param $cfg_values
    */
-  public function __construct($cfg_values)
+  public function __construct($driver, $cfg_values)
   {
     global $DBS;
 
+    $this->driver = $driver;
     $this->cfg = array_combine($this->cfg_keys, $cfg_values);
     $this->dbg_enabled = (Dev::sql_dbg_enabled() || !empty($_COOKIE['explain']));
     $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));

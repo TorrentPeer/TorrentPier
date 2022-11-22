@@ -23,6 +23,7 @@ class MySQL extends Common
   private $mysql;
   private $prefix;
   private $cfg;
+  private $obj;
 
   public $engine = 'MySQL';
   public $connected = false;
@@ -30,16 +31,18 @@ class MySQL extends Common
   /**
    * MySQL constructor.
    *
+   * @param $obj
    * @param $cfg
    * @param null $prefix
    * @throws \Exception
    */
-  public function __construct($cfg, $prefix = null)
+  public function __construct($obj, $cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
       bb_simple_die("Error: {$this->engine} class not loaded");
     }
 
+    $this->obj = $obj;
     $this->cfg = $cfg;
 
     $this->dbg_enabled = Dev::sql_dbg_enabled();
@@ -51,7 +54,7 @@ class MySQL extends Common
    */
   private function connect()
   {
-    $client = new PDO("mysql:dbname={$this->cfg['dbname']};host={$this->cfg['dbhost']};port={$this->cfg['dbport']}", $this->cfg['dbuser'], $this->cfg['dbpasswd']);
+    $client = $this->obj;
 
     if ($client && !$this->connected) {
       $this->connected = true;

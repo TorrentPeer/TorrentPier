@@ -23,6 +23,7 @@ class PostgreSQL extends Common
   private $postgresql;
   private $prefix;
   private $cfg;
+  private $obj;
 
   public $engine = 'PostgreSQL';
   public $connected = false;
@@ -30,16 +31,18 @@ class PostgreSQL extends Common
   /**
    * PostgreSQL constructor.
    *
+   * @param $obj
    * @param $cfg
    * @param null $prefix
    * @throws \Exception
    */
-  public function __construct($cfg, $prefix = null)
+  public function __construct($obj, $cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
       bb_simple_die("Error: {$this->engine} class not loaded");
     }
 
+    $this->obj = $obj;
     $this->cfg = $cfg;
 
     $this->dbg_enabled = Dev::sql_dbg_enabled();
@@ -51,12 +54,12 @@ class PostgreSQL extends Common
    */
   private function connect()
   {
-    $client = new PDO("pgsql:dbname={$this->cfg['db_name']};host={$this->cfg['host']};port={$this->cfg['port']}", $this->cfg['user'], $this->cfg['password']);
+    $client = $this->obj;
 
     if ($client && !$this->connected) {
       $this->connected = true;
 
-      $this->cur_query = "Connect to: {$this->cfg['host']}:{$this->cfg['port']}";
+      $this->cur_query = "Connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}";
       $this->debug('start');
 
       $this->postgresql = new greSQL($client, BB_CACHE);

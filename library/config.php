@@ -22,7 +22,7 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.4-rc4';
+$bb_cfg['tp_version'] = '2.4.0.4-rc5';
 $bb_cfg['tp_release_date'] = '22-11-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
@@ -62,13 +62,6 @@ $bb_cfg['cache'] = [
   'redis' => [
     'host' => '127.0.0.1',
     'port' => 6379,
-  ],
-  'postgresql' => [
-    'host' => '127.0.0.1',
-    'port' => 5432,
-    'user' => 'postgres',
-    'password' => 'postgres',
-    'db_name' => 'cache',
   ],
   'filecache' => [
     'fileExtension' => 'cache',

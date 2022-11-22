@@ -278,11 +278,11 @@ switch ($bb_cfg['datastore_type']) {
     break;
 
   case 'postgresql':
-    $datastore = new \TorrentPier\Legacy\Datastore\PostgreSQL($bb_cfg['cache']['postgresql'], $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\PostgreSQL(DB()->pdo, DB()->cfg, $bb_cfg['cache']['prefix']);
     break;
 
   case 'mysql':
-    $datastore = new \TorrentPier\Legacy\Datastore\MySQL(DB()->cfg, $bb_cfg['cache']['prefix']);
+    $datastore = new \TorrentPier\Legacy\Datastore\MySQL(DB()->pdo, DB()->cfg, $bb_cfg['cache']['prefix']);
     break;
 
   case 'filecache':
