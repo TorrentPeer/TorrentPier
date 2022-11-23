@@ -153,18 +153,18 @@ function hide_bb_path($path): string
 }
 
 /**
- * Creates a string of random letters and numbers of the given length
+ * Generate a "random" alpha-numeric string.
  *
- * @param int $len
- * @return false|string
+ * Should not be considered sufficient for cryptography, etc.
+ *
+ * @param int $length
+ * @return string
  */
-function make_rand_str($len = 10)
+function make_rand_str($length = 10)
 {
-  $str = '';
-  while (strlen($str) < $len) {
-    $str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', \TorrentPier\Legacy\Crypt::password_hash(uniqid(mt_rand(), true))));
-  }
-  return substr($str, 0, $len);
+  $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
 }
 
 /**

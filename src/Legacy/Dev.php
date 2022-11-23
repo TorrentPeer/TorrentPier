@@ -156,10 +156,10 @@ class Dev
    */
   private static function get_sql_log_html($db_obj, $log_name): string
   {
-    $log = '';
+    $db_obj->dbg ? $log = '<div class="sqlLogTitle">' . $log_name . '</div>' : $log = '';
 
     foreach ($db_obj->dbg as $i => $dbg) {
-      $id = "sql_{$i}_" . mt_rand();
+      $id = "sql_{$i}_" . \TorrentPier\Legacy\Crypt::get_hash_number();
       $sql = Dev::short_query($dbg['sql'], true);
       $time = sprintf('%.4f', $dbg['time']);
       $perc = @sprintf('[%2d]', $dbg['time'] * 100 / $db_obj->sql_timetotal);
@@ -175,10 +175,8 @@ class Dev
         . '</div>'
         . "\n";
     }
-    return '
-		<div class="sqlLogTitle">' . $log_name . '</div>
-		' . $log . '
-	';
+
+    return $log;
   }
 
   /**
