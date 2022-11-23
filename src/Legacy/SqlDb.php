@@ -21,7 +21,7 @@ class SqlDb
   public $cfg = [];
   public $pdo;
 
-  private $drivers_allowed = ['mysql', 'postgresql'];
+  private $drivers_allowed = ['mysql', 'postgresql', 'sqlite'];
   private $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
   private $link;
 

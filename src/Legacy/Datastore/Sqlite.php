@@ -38,7 +38,7 @@ class Sqlite extends Common
     }
 
     $client = new PDO("sqlite:{$file}");
-    $this->sqlite = new Lite($client);
+    $this->sqlite = new Lite($client, BB_CACHE);
 
     $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
