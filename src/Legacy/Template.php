@@ -46,7 +46,7 @@ class Template
   public $root = '';
 
   /** @var string cache directory */
-  public $cachedir = CACHE_DIR . '/';
+  public $cachedir = CACHE_DIR . '/template_compiled/';
 
   /** @var string template root directory */
   public $tpldir = '';
@@ -78,7 +78,7 @@ class Template
   public $include_count = 0;
 
   /** @var string extension tpl-cache files */
-  public $cached_tpl_ext = 'php';
+  public $cached_tpl_ext = 'tplc';
 
   /** @var string these handles will be parsed if pparse() is executed */
   public $preparse = '';
