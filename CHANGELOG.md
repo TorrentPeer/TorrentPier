@@ -1,5 +1,17 @@
 # Change Log
 
+## [v2.4.0.4](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.4) (2022-11-23)
+
+[Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.3...v2.4.0.4)
+
+- Misc fixes and improvements [039ce82](https://github.com/TorrentPeer/TorrentPier/commit/bb4f2d1ac8203c88259b90ff55b126c08c74950b), [3122413](https://github.com/TorrentPeer/TorrentPier/commit/4408db9869a3aec97c385067c601cac9997d680b), [4408db9](https://github.com/TorrentPeer/TorrentPier/commit/6e16e8eb968b87f6ca6fb9dd21ae478d00061068), [0f1e35a](https://github.com/TorrentPeer/TorrentPier/commit/fa7d02fb166a657402e83581a8d8cde61a4363b2), [fa7d02f](https://github.com/TorrentPeer/TorrentPier/commit/f8b9bf2a9ec958e32d048754004a0e5a598c6987), [f8b9bf2](https://github.com/TorrentPeer/TorrentPier/commit/af4a8e516e35750235ff0115c244f315ff9451a2), [af4a8e5](https://github.com/TorrentPeer/TorrentPier/commit/17fac9d8931325bfd64fd748b184d964312474e0), [0a5a655](https://github.com/TorrentPeer/TorrentPier/commit/f83bc5fa2a03be0118082790d6ad4fb2534ee9ff), [f15d22c](https://github.com/TorrentPeer/TorrentPier/commit/5c96cc9420f2af33c4a38430334d0cdd1728102e) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed in_array comparing for $server_port [c2a19f8](https://github.com/TorrentPeer/TorrentPier/commit/039ce823a4492be332f9335af93bf8e450a6913f) ([belomaxorka](https://github.com/belomaxorka))
+- New callseed realization [AJAX] [88958e1](https://github.com/TorrentPeer/TorrentPier/commit/31224139ba130753367b989c0f3e70d455611e24) ([belomaxorka](https://github.com/belomaxorka))
+- Fixes for reputation mod [AJAX] [6e16e8e](https://github.com/TorrentPeer/TorrentPier/commit/ef6c6598b335d77728ee292ca9cd748ecd363f32) ([belomaxorka](https://github.com/belomaxorka))
+- Updated PHPDocs for some functions [ef6c659](https://github.com/TorrentPeer/TorrentPier/commit/0f1e35a91e103d9e7fc9bc2464f36bdb6f8cb72b) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed SQL log copy from debug panel [0ddcb41](https://github.com/TorrentPeer/TorrentPier/commit/0a5a655692c2519e10edb7d5224839d45ed40744) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed array multi sorting [f83bc5f](https://github.com/TorrentPeer/TorrentPier/commit/f15d22cc84836c480ff09bbd1a06b02d2cc0acf1) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0.3](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.3) (2022-11-16)
 
 [Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.2...v2.4.0.3)
