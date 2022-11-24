@@ -31,20 +31,14 @@ Ajax.prototype = {
   state: {},  // current action state
   request: {},  // request data
   params: {},  // action params, format: ajax.params[ElementID] = { param: "val" ... }
-  form_token: '',
-  hide_loading: null,
+  form_token: '', hide_loading: null,
 
   exec: function (request, hide_loading = false) {
     this.request[request.action] = request;
     request['form_token'] = this.form_token;
     this.hide_loading = hide_loading;
     $.ajax({
-      url: this.url,
-      type: this.type,
-      dataType: this.dataType,
-      data: request,
-      success: ajax.success,
-      error: ajax.error
+      url: this.url, type: this.type, dataType: this.dataType, data: request, success: ajax.success, error: ajax.error
     });
   },
 
@@ -183,9 +177,7 @@ $(document).ready(function () {
       status = '';
       text = 'неверный формат данных';
     }
-    $(this).html(
-      "Ошибка в: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>"
-    ).show();
+    $(this).html("Ошибка в: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
     ajax.setStatusBoxPosition($(this));
   });
 

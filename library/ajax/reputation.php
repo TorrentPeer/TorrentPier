@@ -22,7 +22,7 @@ $mode = (string)$this->request['mode'];
 $repa = $userdata['user_reputation'];
 
 if (!$user_id) {
-  $this->ajax_die("Invalid user_id: $user_id");
+  $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
 if ($userdata['user_id'] == $user_id) {

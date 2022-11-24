@@ -225,7 +225,7 @@ switch ($this->request['type']) {
 
   case 'add':
     if (!isset($this->request['topic_id'])) {
-      $this->ajax_die('Empty topic_id');
+      $this->ajax_die($lang['INVALID_TOPIC_ID']);
     }
 
     if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
