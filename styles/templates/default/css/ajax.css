@@ -12,35 +12,27 @@ var.ajax-params {
 
 #ajax-loading, #ajax-error {
   position: fixed;
+  display: none;
+  float: right;
   top: 0 !important;
+  height: 30px;
   z-index: 2000;
   padding: 4px;
   font-size: 11px;
-  max-width: 400px;
-  max-height: 200px;
   white-space: nowrap;
-  display: none;
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -khtml-border-bottom-left-radius: 10px;
 }
 
 #ajax-loading {
-  display: none;
   background: rgba(0, 0, 0, 0.5) url(../images/loading.gif) no-repeat center center;
-  float: right;
   width: 85px;
-  height: 30px;
-  border-bottom-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -khtml-border-bottom-left-radius: 10px;
 }
 
 #ajax-error {
-  background: #d32031 url(../images/loading.gif) no-repeat center center;
-  float: right;
+  background: #d32031;
   min-width: 200px;
-  height: 30px;
-  border-bottom-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -khtml-border-bottom-left-radius: 10px;
 }
 
 .editable-container {
