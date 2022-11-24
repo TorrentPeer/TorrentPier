@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy\Datastore;
 
 use MatthiasMullie\Scrapbook\Adapters\SQLite as Lite;
-use PDO;
 
 use TorrentPier\Legacy\Dev;
 
@@ -22,26 +21,56 @@ class Sqlite extends Common
 {
   private $sqlite;
   private $prefix;
+  private $cfg;
+  private $obj;
 
   public $engine = 'sqlite';
+  public $connected = false;
 
   /**
    * Sqlite constructor.
    *
-   * @param null $prefix
+   * @param $obj
+   * @param $cfg
+   * @param $prefix
    * @throws \Exception
    */
-  public function __construct($file, $prefix = null)
+  public function __construct($obj, $cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
       bb_simple_die("Error: {$this->engine} class not loaded");
     }
 
-    $client = new PDO("sqlite:{$file}");
-    $this->sqlite = new Lite($client, BB_CACHE);
+    if (DB()->driver != $this->engine) {
+      bb_simple_die("Error: You need to use the same driver for caching and database (Current cache driver: {$this->engine} | Current database driver: " . DB()->driver . ")");
+    }
+
+    $this->obj = $obj;
+    $this->cfg = $cfg;
 
     $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
+  }
+
+  /**
+   * Connect to host
+   */
+  private function connect()
+  {
+    $client = $this->obj;
+
+    if ($client && !$this->connected) {
+      $this->connected = true;
+
+      $this->cur_query = "Connect to: {$this->cfg['dbname']}";
+      $this->debug('start');
+
+      $this->sqlite = new Lite($client, BB_CACHE);
+
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+    }
   }
 
   /**
@@ -53,6 +82,8 @@ class Sqlite extends Common
    */
   public function store($title, $var)
   {
+    $this->connect();
+
     $this->data[$title] = $var;
 
     $this->cur_query = "Set datastore: $title";
@@ -74,6 +105,8 @@ class Sqlite extends Common
    */
   public function clean()
   {
+    $this->connect();
+
     foreach ($this->known_items as $title => $script_name) {
       $this->cur_query = "Clean datastore";
       $this->debug('start');
@@ -91,6 +124,8 @@ class Sqlite extends Common
    */
   public function _fetch_from_store()
   {
+    $this->connect();
+
     if (!$items = $this->queued_items) {
       /** TODO
        * $src = $this->_debug_find_caller('enqueue');

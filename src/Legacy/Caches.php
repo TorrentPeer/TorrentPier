@@ -55,7 +55,7 @@ class Caches
 
           case 'sqlite':
             if (!isset($this->obj[$cache_name])) {
-              $this->obj[$cache_name] = new Cache\Sqlite($this->cfg['cache_dir'] . "filecache/$cache_name.cache.db", $this->cfg['prefix']);
+              $this->obj[$cache_name] = new Cache\Sqlite(DB()->pdo, DB()->cfg, $this->cfg['prefix']);
             }
             $this->ref[$cache_name] =& $this->obj[$cache_name];
             break;

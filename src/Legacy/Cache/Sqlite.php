@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy\Cache;
 
 use MatthiasMullie\Scrapbook\Adapters\Sqlite as Lite;
-use PDO;
 
 use TorrentPier\Legacy\Dev;
 
@@ -22,30 +21,58 @@ class Sqlite extends Common
 {
   private $sqlite;
   private $prefix;
+  private $cfg;
+  private $obj;
 
   public $engine = 'sqlite';
+  public $connected = false;
   public $used = false;
 
   /**
    * Sqlite constructor.
    *
-   * @param $file
-   * @param null $prefix
+   * @param $obj
+   * @param $cfg
+   * @param $prefix
    * @throws \Exception
    */
-  public function __construct($file, $prefix = null)
+  public function __construct($obj, $cfg, $prefix = null)
   {
     if (!$this->is_installed()) {
       bb_simple_die("Error: {$this->engine} class not loaded");
     }
 
-    $this->used = true;
+    if (DB()->driver != $this->engine) {
+      bb_simple_die("Error: You need to use the same driver for caching and database (Current cache driver: {$this->engine} | Current database driver: " . DB()->driver . ")");
+    }
 
-    $client = new PDO("sqlite:{$file}");
-    $this->sqlite = new Lite($client, BB_CACHE);
+    $this->obj = $obj;
+    $this->cfg = $cfg;
+    $this->used = true;
 
     $this->dbg_enabled = Dev::sql_dbg_enabled();
     $this->prefix = $prefix;
+  }
+
+  /**
+   * Connect to host
+   */
+  private function connect()
+  {
+    $client = $this->obj;
+
+    if ($client && !$this->connected) {
+      $this->connected = true;
+
+      $this->cur_query = "Connect to: {$this->cfg['dbname']}";
+      $this->debug('start');
+
+      $this->sqlite = new Lite($client, BB_CACHE);
+
+      $this->debug('stop');
+      $this->cur_query = null;
+      $this->num_queries++;
+    }
   }
 
   /**
@@ -58,6 +85,8 @@ class Sqlite extends Common
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {
+    $this->connect();
+
     $this->cur_query = "Get cache: $name";
     $this->debug('start');
 
@@ -82,6 +111,8 @@ class Sqlite extends Common
    */
   public function set($name, $value, $ttl = 0)
   {
+    $this->connect();
+
     $this->cur_query = "Set cache: $name";
     $this->debug('start');
 
@@ -104,6 +135,8 @@ class Sqlite extends Common
    */
   public function rm($name = '')
   {
+    $this->connect();
+
     $name ? $this->cur_query = "Remove cache: $name" : $this->cur_query = "Remove all items from cache";
 
     $this->debug('start');

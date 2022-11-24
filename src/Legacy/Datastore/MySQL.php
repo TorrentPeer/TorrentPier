@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy\Datastore;
 
 use MatthiasMullie\Scrapbook\Adapters\MySQL as My;
-use PDO;
 
 use TorrentPier\Legacy\Dev;
 
@@ -40,6 +39,10 @@ class MySQL extends Common
   {
     if (!$this->is_installed()) {
       bb_simple_die("Error: {$this->engine} class not loaded");
+    }
+
+    if (DB()->driver != $this->engine) {
+      bb_simple_die("Error: You need to use the same driver for caching and database (Current cache driver: {$this->engine} | Current database driver: " . DB()->driver . ")");
     }
 
     $this->obj = $obj;
