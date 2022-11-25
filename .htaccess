@@ -10,6 +10,6 @@ RewriteRule ^sitemap.xml$ sitemap/sitemap.xml [L]
 RewriteRule ^/internal_data/atom/(.*) /atom$1 [L]
 
 ## deny access to system files
-<FilesMatch "\.(.*sql|tpl|db|inc|log|md)|(defines|config|common).php$">
+<FilesMatch "\.(.*tpl|log|md)|(defines|config|common).php$">
 Require all denied
 </FilesMatch>

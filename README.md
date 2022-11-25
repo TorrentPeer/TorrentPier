@@ -48,7 +48,7 @@ For installation, you need to follow a few simple steps:
 
 1. Unpack to the server the contents of the downloaded folder or run `composer create-project torrentpeer/torrentpier`
 1. Install [Composer](https://getcomposer.org/) and run `composer install` on the downloaded directory
-1. Create database and import dump located at **_project/sql/mysql.sql**
+1. Create database and import dump located at **install/sql/mysql.sql**
 1. Edit database configuration settings in the configuration file, or a local copy (see below)
 1. Edit domain name in the configuration file, or a local copy (see below)
 1. Edit domain ssl setting in the configuration file, or a local copy (see below)

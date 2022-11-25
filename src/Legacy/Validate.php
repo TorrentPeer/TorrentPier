@@ -194,7 +194,7 @@ class Validate
         $sql = "SELECT `invite_id` FROM " . BB_INVITES . " WHERE `invite_code` = '$invite_code_sql' AND `active` = '1'";
 
         if (!($result = DB()->sql_query($sql))) {
-          return bb_die('Error checking code, invite' . __LINE__ . ',' . __FILE__ . $sql);
+          bb_die('Error checking code, invite' . __LINE__ . ',' . __FILE__ . $sql);
         } else {
           $num_row = DB()->num_rows($result);
           DB()->sql_freeresult($result);
