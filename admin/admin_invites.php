@@ -67,7 +67,9 @@ if (isset($_POST['change_rule'])) {
 
   if ($rule_id_sql != '') {
     $sql = 'DELETE FROM ' . BB_INVITE_RULES . ' WHERE rule_id IN (' . $rule_id_sql . ')';
-    if (!$result = DB()->sql_query($sql)) bb_die('Could not delete rule' . __LINE__ . ',' . __FILE__ . $sql);
+    if (!$result = DB()->sql_query($sql)) {
+      bb_die('Could not delete rule' . __LINE__ . ',' . __FILE__ . $sql);
+    }
   }
 }
 
@@ -96,7 +98,8 @@ switch ($mode) {
         'TPL_INVITES_RULES' => true,
         'TPL_INVITES_HISTORY' => false,
         'S_ADD_GROUP_SELECT' => groupname('add_rule_user_group', '0', $groupid = false),
-        'S_RULES_ACTION' => "admin_invites.php?mode=rules"]
+        'S_RULES_ACTION' => "admin_invites.php?mode=rules"
+      ]
     );
 
     $sql = 'SELECT * FROM ' . BB_INVITE_RULES . ' ORDER BY `invites_count`';
@@ -119,7 +122,8 @@ switch ($mode) {
             'USER_AGE' => $rule_row[$i]['user_age'],
             'USER_GROUP' => $rule_row[$i]['user_group'],
             'S_GROUP_SELECT' => groupname('rule_user_group_list[]', $rule_row[$i]['user_group'], $groupid = false),
-            'INVITES_COUNT' => $rule_row[$i]['invites_count']]
+            'INVITES_COUNT' => $rule_row[$i]['invites_count']
+          ]
         );
       }
     }
@@ -132,7 +136,6 @@ switch ($mode) {
     );
 
     $sql = 'SELECT * FROM ' . BB_INVITES . ' ORDER BY `generation_date` DESC';
-
     if (!($result = DB()->sql_query($sql))) {
       bb_die('Could not get a list of invites' . __LINE__ . ',' . __FILE__ . $sql);
     }

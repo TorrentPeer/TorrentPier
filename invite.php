@@ -84,6 +84,7 @@ if (count($groups) > 0) {
       $u_group_name = 'groupcp.php?g=' . $groups[$i]['group_id'];
       $l_group_name = $groups[$i]['group_name'];
       $user_group_name = $l_group_name;
+
       $template->assign_block_vars('groups', [
           'U_GROUP_NAME' => $u_group_name,
           'L_GROUP_NAME' => $l_group_name,

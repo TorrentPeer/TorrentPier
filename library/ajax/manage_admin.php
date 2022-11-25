@@ -18,9 +18,7 @@ $mode = (string)$this->request['mode'];
 switch ($mode) {
   case 'clear_cache':
 
-    foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
-      CACHE($cache_name)->rm();
-    }
+    clean_cache();
 
     $this->response['cache_html'] = '<span class="seed bold">' . $lang['ALL_CACHE_CLEARED'] . '</span>';
 
@@ -28,9 +26,7 @@ switch ($mode) {
 
   case 'clear_datastore':
 
-    global $datastore;
-
-    $datastore->clean();
+    clean_datastore();
 
     $this->response['datastore_html'] = '<span class="seed bold">' . $lang['DATASTORE_CLEARED'] . '</span>';
 
@@ -41,7 +37,6 @@ switch ($mode) {
     global $template;
 
     $match = 'tpl_';
-    $match_len = strlen($match);
     $dir = $template->cachedir;
     $res = @opendir($dir);
     while (($file = readdir($res)) !== false) {

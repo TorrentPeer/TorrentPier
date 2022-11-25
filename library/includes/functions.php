@@ -61,6 +61,33 @@ function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $chars
 }
 
 /**
+ * Clean all cache
+ *
+ * @return void
+ * @throws Exception
+ */
+function clean_cache()
+{
+  global $bb_cfg;
+
+  foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
+    CACHE($cache_name)->rm();
+  }
+}
+
+/**
+ * Clean all datastore
+ *
+ * @return void
+ */
+function clean_datastore()
+{
+  global $datastore;
+
+  $datastore->clean();
+}
+
+/**
  * @param $txt
  * @param int $quote_style
  * @param string $charset
