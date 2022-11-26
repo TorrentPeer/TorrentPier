@@ -1578,6 +1578,7 @@ $lang['POST_EDIT_ID'] = 'Изменить ID топика';
 $lang['POST_EDIT_AUTHOR'] = 'Изменить автора топика';
 $lang['POST_EDIT_ID_TEXT'] = 'Введите новый ID топика';
 $lang['POST_EDIT_AUTHOR_TEXT'] = 'Укажите нового автора топика';
+$lang['POST_TAKEN'] = 'Извините, пост с таким ID уже существует';
 
 // Management of my messages
 $lang['GOTO_MY_MESSAGE'] = 'Закрыть и вернуться к списку "Мои сообщения"';

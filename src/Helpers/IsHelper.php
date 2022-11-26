@@ -56,4 +56,48 @@ class IsHelper
     }
     return $is_secure;
   }
+
+  /**
+   * Return true if $value is int
+   *
+   * @param $value
+   * @return bool
+   */
+  public static function is_integer($value): bool
+  {
+    return filter_var($value, \FILTER_VALIDATE_INT);
+  }
+
+  /**
+   * Return true if $value is boolean
+   *
+   * @param $value
+   * @return bool
+   */
+  public static function is_boolean($value): bool
+  {
+    return is_bool(filter_var($value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE));
+  }
+
+  /**
+   * Return true if $value is floating
+   *
+   * @param $value
+   * @return bool
+   */
+  public static function is_float($value): bool
+  {
+    return filter_var($value, \FILTER_VALIDATE_FLOAT);
+  }
+
+  /**
+   * Return true if $value is number string (Regex)
+   *
+   * @param $value
+   * @return bool
+   */
+  public static function is_num($value): bool
+  {
+    return preg_match('/^([0-9])+$/i', $value);
+  }
 }

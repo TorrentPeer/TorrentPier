@@ -1578,6 +1578,7 @@ $lang['POST_EDIT_ID'] = 'Change topic ID';
 $lang['POST_EDIT_AUTHOR'] = 'Change topic author';
 $lang['POST_EDIT_ID_TEXT'] = 'Enter a new topic ID';
 $lang['POST_EDIT_AUTHOR_TEXT'] = 'Enter a new topic author';
+$lang['POST_TAKEN'] = 'Извините, пост с таким ID уже существует';
 
 // Management of my messages
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';

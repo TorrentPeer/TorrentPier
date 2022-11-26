@@ -199,6 +199,7 @@ define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
+define('BB_BT_TOR_DL_STAT', 'bb_bt_tor_dl_stat');
 
 define('BB_CACHE', 'bb_cache');
 

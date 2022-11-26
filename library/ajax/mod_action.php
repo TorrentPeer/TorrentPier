@@ -142,10 +142,29 @@ switch ($mode) {
       $this->ajax_die($lang['INVALID_TOPIC_ID']);
     }
 
+    if (!\TorrentPier\Helpers\IsHelper::is_num($new_data)) {
+      $this->ajax_die($lang['WRONG_INPUT']);
+    }
+
     if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
       $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
     }
     $this->verify_mod_rights($t_data['forum_id']);
+
+    if (DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id = $new_data", 'topic_id')) {
+      $this->ajax_die($lang['POST_TAKEN']);
+    }
+
+    DB()->query("UPDATE " . BB_TOPICS . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_POSTS . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TORRENTS . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TRACKER . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TRACKER_SNAP . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TOR_DL_STAT . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TORSTAT . " SET topic_id = $new_data WHERE topic_id = $topic_id");
+
+    \TorrentPier\Legacy\Admin\Common::sync('topic', [$topic_id, $new_data]);
 
     $this->response['edit_topic_id'] = $new_data;
     break;
@@ -158,7 +177,7 @@ switch ($mode) {
       $this->ajax_die($lang['INVALID_TOPIC_ID']);
     }
 
-    if (!$new_data or !get_userdata($new_data)) {
+    if (!$new_data = get_userdata($new_data)) {
       $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
     }
 
@@ -166,6 +185,18 @@ switch ($mode) {
       $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
     }
     $this->verify_mod_rights($t_data['forum_id']);
+
+    $old_user = DB()->fetch_rowset("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_poster');
+
+    DB()->query("UPDATE " . BB_TOPICS . " SET topic_poster = {$new_data['user_id']} WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_POSTS . " SET poster_id = {$new_data['user_id']}  WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TORRENTS . " SET poster_id = {$new_data['user_id']}  WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TRACKER . " SET user_id = {$new_data['user_id']}  WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TOR_DL_STAT . " SET user_id = {$new_data['user_id']} WHERE topic_id = $topic_id");
+    DB()->query("UPDATE " . BB_BT_TORSTAT . " SET user_id = {$new_data['user_id']}  WHERE topic_id = $topic_id");
+
+    \TorrentPier\Legacy\Admin\Common::sync('user_posts', $old_user);
+    \TorrentPier\Legacy\Admin\Common::sync('user_posts', $new_data['user_id']);
 
     $this->response['edit_topic_author'] = true;
     break;

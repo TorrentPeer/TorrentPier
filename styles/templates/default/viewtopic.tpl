@@ -177,7 +177,7 @@ ajax.topic_actions = function (mode) {
       data: data
     });
   } else {
-    alert('{L_WRONG_INPUT}');
+    alert('{L_FIELDS_EMPTY}')
   }
 };
 ajax.callback.mod_action = function (data) {
