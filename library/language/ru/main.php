@@ -1573,6 +1573,12 @@ $lang['POST_UNPIN'] = 'Открепить первый пост';
 $lang['POST_PINNED'] = 'Первый пост закреплен';
 $lang['POST_UNPINNED'] = 'Первый пост откреплен';
 
+// Topic actions
+$lang['POST_EDIT_ID'] = 'Изменить ID топика';
+$lang['POST_EDIT_AUTHOR'] = 'Изменить автора топика';
+$lang['POST_EDIT_ID_TEXT'] = 'Введите новый ID топика';
+$lang['POST_EDIT_AUTHOR_TEXT'] = 'Укажите нового автора топика';
+
 // Management of my messages
 $lang['GOTO_MY_MESSAGE'] = 'Закрыть и вернуться к списку "Мои сообщения"';
 $lang['DEL_MY_MESSAGE'] = 'Выбранные темы удалены из списка "Мои сообщения"';

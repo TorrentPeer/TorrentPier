@@ -134,6 +134,42 @@ switch ($mode) {
 		';
     break;
 
+  case 'edit_topic_id':
+    $topic_id = (int)$this->request['topic_id'];
+    $new_data = (string)$this->request['data'];
+
+    if (!$topic_id) {
+      $this->ajax_die($lang['INVALID_TOPIC_ID']);
+    }
+
+    if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
+      $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
+    }
+    $this->verify_mod_rights($t_data['forum_id']);
+
+    $this->response['edit_topic_id'] = $new_data;
+    break;
+
+  case 'edit_topic_author':
+    $topic_id = (int)$this->request['topic_id'];
+    $new_data = (string)$this->request['data'];
+
+    if (!$topic_id) {
+      $this->ajax_die($lang['INVALID_TOPIC_ID']);
+    }
+
+    if (!$new_data or !get_userdata($new_data)) {
+      $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    }
+
+    if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
+      $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
+    }
+    $this->verify_mod_rights($t_data['forum_id']);
+
+    $this->response['edit_topic_author'] = true;
+    break;
+
   default:
     $this->ajax_die("Invalid mode: $mode");
 }

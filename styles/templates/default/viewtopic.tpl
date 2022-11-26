@@ -155,6 +155,41 @@ ajax.callback.post_mod_comment = function(data) {
 		$('#pc_'+ data.post_id).show();
 	}
 };
+ajax.topic_actions = function (mode) {
+  let data;
+  let message;
+
+  switch (mode) {
+    case 'edit_topic_id':
+      message = '{L_POST_EDIT_ID_TEXT}';
+      break
+    case 'edit_topic_author':
+      message = '{L_POST_EDIT_AUTHOR_TEXT}';
+      break;
+  }
+
+  data = prompt(message, "");
+  if (data) {
+    ajax.exec({
+      action: 'mod_action',
+      mode: mode,
+      topic_id: {TOPIC_ID},
+      data: data
+    });
+  } else {
+    alert('{L_WRONG_INPUT}');
+  }
+};
+ajax.callback.mod_action = function (data) {
+  // Change topic ID
+  if (data.edit_topic_id) {
+    redirect('{TOPIC_URL}' + data.edit_topic_id);
+  }
+  // Change topic author
+  if (data.edit_topic_author) {
+    reload();
+  }
+};
 </script>
 <a style="cursor: help; color: #800000;" title="{L_EDIT_TOPIC_TITLE}" onclick="edit_topic_title('edit'); return false" href="#">&para;</a>
 
@@ -257,6 +292,10 @@ function build_poll_add_form (src_el)
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
 			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
+      &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+      <a onclick="ajax.topic_actions('edit_topic_id'); return false;" class="small bold" href="#">{L_POST_EDIT_ID}</a>
+      &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+      <a onclick="ajax.topic_actions('edit_topic_author'); return false;" class="small bold" href="#">{L_POST_EDIT_AUTHOR}</a>
 		</td>
 		<!-- IF SELECT_PPP -->
 		<td class="med" style="padding: 0 4px 2px 4px;">|</td>

@@ -1573,6 +1573,12 @@ $lang['POST_UNPIN'] = 'Unpin first post';
 $lang['POST_PINNED'] = 'First post pinned';
 $lang['POST_UNPINNED'] = 'First post unpinned';
 
+// Topic actions
+$lang['POST_EDIT_ID'] = 'Change topic ID';
+$lang['POST_EDIT_AUTHOR'] = 'Change topic author';
+$lang['POST_EDIT_ID_TEXT'] = 'Enter a new topic ID';
+$lang['POST_EDIT_AUTHOR_TEXT'] = 'Enter a new topic author';
+
 // Management of my messages
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';
 $lang['DEL_MY_MESSAGE'] = 'Selected topics have been removed from the "My Messages"';
