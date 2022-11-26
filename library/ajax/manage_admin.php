@@ -34,17 +34,7 @@ switch ($mode) {
 
   case 'clear_template_cache':
 
-    global $template;
-
-    $match = 'tpl_';
-    $dir = $template->cachedir;
-    $res = @opendir($dir);
-    while (($file = readdir($res)) !== false) {
-      if (0 === strpos($file, $match)) {
-        @unlink($dir . $file);
-      }
-    }
-    closedir($res);
+    clean_tpl_cache();
 
     $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
 

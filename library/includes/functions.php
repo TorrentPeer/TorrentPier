@@ -88,6 +88,26 @@ function clean_datastore()
 }
 
 /**
+ * Clean all template cache
+ *
+ * @return void
+ */
+function clean_tpl_cache()
+{
+  global $template;
+
+  $match = 'tpl_';
+  $dir = $template->cachedir;
+  $res = @opendir($dir);
+  while (($file = readdir($res)) !== false) {
+    if (0 === strpos($file, $match)) {
+      @unlink($dir . $file);
+    }
+  }
+  closedir($res);
+}
+
+/**
  * @param $txt
  * @param int $quote_style
  * @param string $charset
