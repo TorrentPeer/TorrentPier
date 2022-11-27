@@ -202,11 +202,11 @@ if ($tor_reged && $tor_info) {
         $i++;
       }
     }
-    if (empty($titles)) $titles = $row_title[1];
+    if (empty($titles)) $titles = $row_title;
 
-    $title_match_sql = clean_text_match(join(' ', $titles), true, false);
+    $title_match_sql = clean_text_match(implode(' ', $titles), true, false);
     $title_match_topics = get_title_match_topics($title_match_sql, []);
-    $search_match_topics_csv = join(',', $title_match_topics);
+    $search_match_topics_csv = implode(',', $title_match_topics);
 
     if ($search_match_topics_csv) {
       $trash_forums = $bb_cfg['trash_forum_id'] ? $bb_cfg['trash_forum_id'] : '0';

@@ -448,7 +448,7 @@ $title_match = (bool)$title_match_sql;
 $tor_type = (bool)$tor_type_val;
 
 $status = (isset($_POST['status']) && IS_AM && $bb_cfg['tracker_torstatus']) ? $_POST['status'] : '';
-$status_list = (!empty($status)) ? join(',', $status) : '';
+$status_list = (!empty($status)) ? implode(',', $status) : '';
 
 $hide_cat = (int)(!$show_cat_val);
 $hide_forum = (int)(!$show_forum_val);

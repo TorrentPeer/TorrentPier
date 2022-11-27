@@ -1369,7 +1369,7 @@ $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[ЛС]';
 
 $lang['DECLENSION']['REPLIES'] = ['ответ', 'ответа', 'ответов'];
-$lang['DECLENSION']['TIMES'] = ['раз', 'раза'];
+$lang['DECLENSION']['TIMES'] = ['раз', 'раза', 'раз'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
   'seconds' => ['секунда', 'секунды', 'секунд'],
