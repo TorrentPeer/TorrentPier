@@ -281,7 +281,7 @@ $template->assign_vars([
   'TORRENTS_STAT' => $bb_cfg['tor_stats'] ? sprintf(
     $lang['TORRENTS_STAT'],
     $stats['torrentcount'],
-    humn_size($stats['size'])
+    \TorrentPier\Legacy\Filesystem::humn_size($stats['size'])
   ) : '',
   'PEERS_STAT' => $bb_cfg['tor_stats'] ? sprintf(
     $lang['PEERS_STAT'],
@@ -291,7 +291,7 @@ $template->assign_vars([
   ) : '',
   'SPEED_STAT' => $bb_cfg['tor_stats'] ? sprintf(
     $lang['SPEED_STAT'],
-    humn_size($stats['speed']) . '/s'
+    \TorrentPier\Legacy\Filesystem::humn_size($stats['speed']) . '/s'
   ) : '',
   'SHOW_MOD_INDEX' => $bb_cfg['show_mod_index'],
   'FORUM_IMG' => $images['forum'],

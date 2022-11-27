@@ -54,7 +54,7 @@ if (isset($_POST['bonus_id'])) {
   \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
   meta_refresh(BONUS_URL, 5);
 
-  $message = sprintf($lang['BONUS_SUCCES'], humn_size($upload_row[$id] * 1024 * 1024 * 1024));
+  $message = sprintf($lang['BONUS_SUCCES'], \TorrentPier\Legacy\Filesystem::humn_size($upload_row[$id] * 1024 * 1024 * 1024));
   $message .= '<br /><br /><a href="' . BONUS_URL . '">' . $lang['BONUS_RETURN'] . '</a><br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">' . $lang['RETURN_PROFILE'] . '</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="index.php">', '</a>');
 
   bb_die($message);
@@ -75,7 +75,7 @@ if (isset($_POST['bonus_id'])) {
     $template->assign_block_vars('bonus_upload', [
       'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
       'ID' => $i,
-      'DESC' => sprintf($lang['BONUS_UPLOAD_DESC'], humn_size($upload_row[$i] * 1024 * 1024 * 1024)),
+      'DESC' => sprintf($lang['BONUS_UPLOAD_DESC'], \TorrentPier\Legacy\Filesystem::humn_size($upload_row[$i] * 1024 * 1024 * 1024)),
       'PRICE' => sprintf($lang['BONUS_UPLOAD_PRICE'], $class, sprintf('%.2f', $price)),
     ]);
   }

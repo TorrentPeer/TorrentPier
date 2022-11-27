@@ -84,7 +84,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     }
     closedir($avatar_dir);
 
-    $avatar_dir_size = humn_size($avatar_dir_size);
+    $avatar_dir_size = \TorrentPier\Legacy\Filesystem::humn_size($avatar_dir_size);
   } else {
     $avatar_dir_size = $lang['NOT_AVAILABLE'];
   }

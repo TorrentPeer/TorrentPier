@@ -149,7 +149,7 @@ switch ($field) {
       }
     }
     $value = sprintf('%.0f', $value);
-    $this->response['new_value'] = humn_size($value, null, null, ' ');
+    $this->response['new_value'] = \TorrentPier\Legacy\Filesystem::humn_size($value, null, null, ' ');
 
     if (!$btu = get_bt_userdata($user_id)) {
       \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);

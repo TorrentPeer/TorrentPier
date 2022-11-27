@@ -398,7 +398,7 @@ foreach ($profile_fields as $field => $can_edit) {
           }
         }
       }
-      $tp_data['AVATARS_MAX_SIZE'] = humn_size($bb_cfg['avatars']['max_size']);
+      $tp_data['AVATARS_MAX_SIZE'] = \TorrentPier\Legacy\Filesystem::humn_size($bb_cfg['avatars']['max_size']);
       break;
 
     /**

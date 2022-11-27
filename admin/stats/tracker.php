@@ -93,7 +93,7 @@ echo "\n
 	<td align=center>
 		$stat[tor_all] / <b>$stat[tor_active]</b> / $stat[tor_with_seeder]
 		&nbsp;
-		[ " . humn_size($stat['torrents_size']) . " ]
+		[ " . \TorrentPier\Legacy\Filesystem::humn_size($stat['torrents_size']) . " ]
 	</td></tr>
 \n";
 
@@ -102,8 +102,8 @@ echo "\n
 	<td align=center>
 		$stat[p_all] / <b>$stat[p_within_ann]</b>
 		&nbsp;
-		[ up:   " . humn_size($stat['speed_up']) . '/s,
-		  down: ' . humn_size($stat['speed_down']) . "/s ]
+		[ up:   " . \TorrentPier\Legacy\Filesystem::humn_size($stat['speed_up']) . '/s,
+		  down: ' . \TorrentPier\Legacy\Filesystem::humn_size($stat['speed_down']) . "/s ]
 	</td></tr>
 \n";
 

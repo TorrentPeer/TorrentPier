@@ -934,7 +934,7 @@ class Attach
 
       // check Filesize
       if (!$error && $allowed_filesize && $this->filesize > $allowed_filesize && !(IS_ADMIN || IS_MOD || IS_GROUP_MEMBER)) {
-        $allowed_filesize = humn_size($allowed_filesize);
+        $allowed_filesize = Filesystem::humn_size($allowed_filesize);
 
         $error = true;
         if (!empty($error_msg)) {

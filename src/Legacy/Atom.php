@@ -192,7 +192,7 @@ class Atom
       $topic_id = $topic['topic_id'];
       $tor_size = '';
       if (isset($topic['tor_size'])) {
-        $tor_size = str_replace('&nbsp;', ' ', ' [' . humn_size($topic['tor_size']) . ']');
+        $tor_size = str_replace('&nbsp;', ' ', ' [' . Filesystem::humn_size($topic['tor_size']) . ']');
       }
       $topic_title = $topic['topic_title'];
       $orig_word = [];

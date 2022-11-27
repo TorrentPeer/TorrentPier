@@ -105,9 +105,9 @@ switch ($mode) {
     $btu = get_bt_userdata($user_id);
     $profiledata = get_userdata($user_id);
 
-    $speed_up = ($btu['speed_up']) ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
-    $speed_down = ($btu['speed_down']) ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
-    $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : $lang['IT_WILL_BE_DOWN'] . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
+    $speed_up = ($btu['speed_up']) ? \TorrentPier\Legacy\Filesystem::humn_size($btu['speed_up']) . '/s' : '0 KB/s';
+    $speed_down = ($btu['speed_down']) ? \TorrentPier\Legacy\Filesystem::humn_size($btu['speed_down']) . '/s' : '0 KB/s';
+    $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : $lang['IT_WILL_BE_DOWN'] . ' <b>' . \TorrentPier\Legacy\Filesystem::humn_size(MIN_DL_FOR_RATIO) . '</b>';
 
     $html = '
 			<tr class="row3">
@@ -120,10 +120,10 @@ switch ($mode) {
     $html .= '</tr>
 			<tr class="row1">
 				<td>' . $lang['TOTAL_TRAF'] . '</td>
-				<td id="u_down_total"><span class="editable bold leechmed">' . humn_size($btu['u_down_total']) . '</span></td>
-				<td id="u_up_total"><span class="editable bold seedmed">' . humn_size($btu['u_up_total']) . '</span></td>
-				<td id="u_up_release"><span class="editable bold seedmed">' . humn_size($btu['u_up_release']) . '</span></td>
-				<td id="u_up_bonus"><span class="editable bold seedmed">' . humn_size($btu['u_up_bonus']) . '</span></td>';
+				<td id="u_down_total"><span class="editable bold leechmed">' . \TorrentPier\Legacy\Filesystem::humn_size($btu['u_down_total']) . '</span></td>
+				<td id="u_up_total"><span class="editable bold seedmed">' . \TorrentPier\Legacy\Filesystem::humn_size($btu['u_up_total']) . '</span></td>
+				<td id="u_up_release"><span class="editable bold seedmed">' . \TorrentPier\Legacy\Filesystem::humn_size($btu['u_up_release']) . '</span></td>
+				<td id="u_up_bonus"><span class="editable bold seedmed">' . \TorrentPier\Legacy\Filesystem::humn_size($btu['u_up_bonus']) . '</span></td>';
     $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
     $html .= '</tr>
 			<tr class="row5">

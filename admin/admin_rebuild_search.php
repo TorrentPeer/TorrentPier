@@ -332,10 +332,10 @@ if ($mode == 'submit' || $mode == 'refresh') {
     'SESSION_AVERAGE_CYCLE_TIME' => delta_time((int)$session_average_cycle_time, 0),
     'SESSION_ESTIMATED_TIME' => delta_time((int)$session_estimated_time, 0),
 
-    'SEARCH_TABLES_SIZE' => humn_size($search_tables_size),
-    'FINAL_SEARCH_TABLES_SIZE' => humn_size($final_search_tables_size),
-    'SEARCH_DATA_SIZE' => humn_size($search_data_size),
-    'SEARCH_INDEX_SIZE' => humn_size($search_index_size),
+    'SEARCH_TABLES_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($search_tables_size),
+    'FINAL_SEARCH_TABLES_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($final_search_tables_size),
+    'SEARCH_DATA_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($search_data_size),
+    'SEARCH_INDEX_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($search_index_size),
 
     'START_POST' => $last_session_data['start_post_id'],
     'POST_LIMIT' => $num_rows,

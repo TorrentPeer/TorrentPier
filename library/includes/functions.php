@@ -833,42 +833,6 @@ function commify($number)
 }
 
 /**
- * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
- *
- * @param $size
- * @param null $rounder
- * @param null $min
- * @param string $space
- * @return string
- */
-function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
-{
-  static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
-
-  $size = (float)$size;
-  $ext = $sizes[0];
-  $rnd = $rounders[0];
-
-  if ($min == 'KB' && $size < 1024) {
-    $size /= 1024;
-    $ext = 'KB';
-    $rounder = 1;
-  } else {
-    for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++) {
-      $size /= 1024;
-      $ext = $sizes[$i];
-      $rnd = $rounders[$i];
-    }
-  }
-  if (!$rounder) {
-    $rounder = $rnd;
-  }
-
-  return round($size, $rounder) . $space . $ext;
-}
-
-/**
  * Подготовка IP адреса перед отображением
  *
  * @param $ip
@@ -1173,30 +1137,30 @@ function show_bt_userdata($user_id)
 
   $template->assign_vars([
     'SHOW_BT_USERDATA' => true,
-    'UP_TOTAL' => humn_size($btu['u_up_total']),
-    'UP_BONUS' => humn_size($btu['u_up_bonus']),
-    'RELEASED' => humn_size($btu['u_up_release']),
-    'DOWN_TOTAL' => humn_size($btu['u_down_total']),
+    'UP_TOTAL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['u_up_total']),
+    'UP_BONUS' => \TorrentPier\Legacy\Filesystem::humn_size($btu['u_up_bonus']),
+    'RELEASED' => \TorrentPier\Legacy\Filesystem::humn_size($btu['u_up_release']),
+    'DOWN_TOTAL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['u_down_total']),
     'DOWN_TOTAL_BYTES' => $btu['u_down_total'],
     'USER_RATIO' => get_bt_ratio($btu),
-    'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
+    'MIN_DL_FOR_RATIO' => \TorrentPier\Legacy\Filesystem::humn_size(MIN_DL_FOR_RATIO),
     'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
     'AUTH_KEY' => ($btu['auth_key']) ?: $lang['NONE'],
 
-    'TD_DL' => humn_size($btu['down_today']),
-    'TD_UL' => humn_size($btu['up_today']),
-    'TD_REL' => humn_size($btu['up_release_today']),
-    'TD_BONUS' => humn_size($btu['up_bonus_today']),
+    'TD_DL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['down_today']),
+    'TD_UL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['up_today']),
+    'TD_REL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['up_release_today']),
+    'TD_BONUS' => \TorrentPier\Legacy\Filesystem::humn_size($btu['up_bonus_today']),
     'TD_POINTS' => ($btu['auth_key']) ? $btu['points_today'] : '0.00',
 
-    'YS_DL' => humn_size($btu['down_yesterday']),
-    'YS_UL' => humn_size($btu['up_yesterday']),
-    'YS_REL' => humn_size($btu['up_release_yesterday']),
-    'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
+    'YS_DL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['down_yesterday']),
+    'YS_UL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['up_yesterday']),
+    'YS_REL' => \TorrentPier\Legacy\Filesystem::humn_size($btu['up_release_yesterday']),
+    'YS_BONUS' => \TorrentPier\Legacy\Filesystem::humn_size($btu['up_bonus_yesterday']),
     'YS_POINTS' => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
 
-    'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
-    'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
+    'SPEED_UP' => \TorrentPier\Legacy\Filesystem::humn_size($btu['speed_up'], 0, 'KB') . '/s',
+    'SPEED_DOWN' => \TorrentPier\Legacy\Filesystem::humn_size($btu['speed_down'], 0, 'KB') . '/s',
   ]);
 }
 

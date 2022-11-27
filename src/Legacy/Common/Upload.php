@@ -79,7 +79,7 @@ class Upload
       return false;
     }
     if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
-      $this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], humn_size($this->cfg['max_size']));
+      $this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], Filesystem::humn_size($this->cfg['max_size']));
       return false;
     }
     // is_uploaded_file

@@ -63,7 +63,7 @@ $bt_user_id = $userdata['user_id'];
 $attach_id = $attachments['_' . $post_id][$i]['attach_id'];
 $tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
 $download_count = $attachments['_' . $post_id][$i]['download_count'];
-$tor_file_size = humn_size($attachments['_' . $post_id][$i]['filesize']);
+$tor_file_size = \TorrentPier\Legacy\Filesystem::humn_size($attachments['_' . $post_id][$i]['filesize']);
 $tor_file_time = bb_date($attachments['_' . $post_id][$i]['filetime']);
 
 $tor_reged = (bool)$tracker_status;
@@ -261,7 +261,7 @@ if ($tor_reged && $tor_info) {
 
             'SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
             'LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
-            'TOR_SIZE' => humn_size($row['size']),
+            'TOR_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($row['size']),
             'COMPL_CNT' => $row['complete_count'],
             'ATTACH_ID' => $row['attach_id'],
             'TOR_FROZEN' => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$row['tor_status']]) : '',
@@ -305,7 +305,7 @@ if ($tor_reged && $tor_info) {
       'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
       'REGED_TIME' => bb_date($tor_info['reg_time']),
       'REGED_DELTA' => delta_time($tor_info['reg_time']),
-      'TORRENT_SIZE' => humn_size($tor_size),
+      'TORRENT_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($tor_size),
       'COMPLETED' => declension((int)$tor_info['complete_count'], 'times'),
     ]);
 
@@ -319,7 +319,7 @@ if ($tor_reged && $tor_info) {
       'SHOW_DL_LIST' => true,
       'SHOW_DL_LIST_TOR_INFO' => true,
 
-      'TOR_SIZE' => humn_size($tor_size),
+      'TOR_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($tor_size),
       'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
       'TOR_COMPLETED' => declension($tor_info['complete_count'], 'times'),
     ]);
@@ -447,8 +447,8 @@ if ($tor_reged && $tor_info) {
         $peers = $tmp;
 
         $template->assign_vars([
-          'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, 0, 'KB') . '/s' : '0 KB/s',
-          'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, 0, 'KB') . '/s' : '0 KB/s',
+          'TOR_SPEED_UP' => ($tor_speed_up) ? \TorrentPier\Legacy\Filesystem::humn_size($tor_speed_up, 0, 'KB') . '/s' : '0 KB/s',
+          'TOR_SPEED_DOWN' => ($tor_speed_down) ? \TorrentPier\Legacy\Filesystem::humn_size($tor_speed_down, 0, 'KB') . '/s' : '0 KB/s',
         ]);
       }
 
@@ -477,7 +477,7 @@ if ($tor_reged && $tor_info) {
 
               $template->assign_block_vars((string)$x_full, [
                 'SEED_ORD_ACT' => $seed_order_action,
-                'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
+                'SEEDERS_UP_TOT' => \TorrentPier\Legacy\Filesystem::humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
               ]);
 
               if ($ip) {
@@ -499,8 +499,8 @@ if ($tor_reged && $tor_info) {
 
               $template->assign_block_vars((string)$x_full, [
                 'LEECH_ORD_ACT' => $leech_order_action,
-                'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
-                'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], 0, 'KB') . '/s'
+                'LEECHERS_UP_TOT' => \TorrentPier\Legacy\Filesystem::humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
+                'LEECHERS_DOWN_TOT' => \TorrentPier\Legacy\Filesystem::humn_size($sp_down_tot[$x], 0, 'KB') . '/s'
               ]);
 
               if ($ip) {
@@ -516,11 +516,11 @@ if ($tor_reged && $tor_info) {
 
           $rel_sign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
           $name = profile_url($peer) . $rel_sign;
-          $up_tot = ($p_max_up) ? humn_size($p_max_up) : '-';
-          $down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
+          $up_tot = ($p_max_up) ? \TorrentPier\Legacy\Filesystem::humn_size($p_max_up) : '-';
+          $down_tot = ($p_max_down) ? \TorrentPier\Legacy\Filesystem::humn_size($p_max_down) : '-';
           $up_ratio = ($p_max_down) ? round(($p_max_up / $p_max_down), 2) : '';
-          $sp_up = ($peer['speed_up']) ? humn_size($peer['speed_up'], 0, 'KB') . '/s' : '-';
-          $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], 0, 'KB') . '/s' : '-';
+          $sp_up = ($peer['speed_up']) ? \TorrentPier\Legacy\Filesystem::humn_size($peer['speed_up'], 0, 'KB') . '/s' : '-';
+          $sp_down = ($peer['speed_down']) ? \TorrentPier\Legacy\Filesystem::humn_size($peer['speed_down'], 0, 'KB') . '/s' : '-';
 
           $bgr_class = (!($tr[$x] % 2)) ? $bgr_class_1 : $bgr_class_2;
           $row_bgr = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';

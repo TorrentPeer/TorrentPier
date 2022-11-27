@@ -213,7 +213,7 @@ if ($submit_change && $view === 'attachments') {
 if ($view == 'stats') {
   $upload_dir_size = \TorrentPier\Legacy\AttachMod\Admin::get_formatted_dirsize();
 
-  $attachment_quota = humn_size($attach_config['attachment_quota']);
+  $attachment_quota = \TorrentPier\Legacy\Filesystem::humn_size($attach_config['attachment_quota']);
 
   // number_of_attachments
   $row = DB()->fetch_row('SELECT COUNT(*) AS total FROM ' . BB_ATTACHMENTS_DESC);

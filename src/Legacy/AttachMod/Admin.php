@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\AttachMod;
 
+use TorrentPier\Legacy\Filesystem;
+
 /**
  * Class Admin
  * @package TorrentPier\Legacy\AttachMod
@@ -131,7 +133,7 @@ class Admin
       return $lang['NOT_AVAILABLE'];
     }
 
-    return humn_size($upload_dir_size);
+    return Filesystem::humn_size($upload_dir_size);
   }
 
   /**

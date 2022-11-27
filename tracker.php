@@ -706,8 +706,8 @@ if ($allowed_forums) {
       $size = $tor['size'];
       $tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key']);
       $compl = $tor['complete_count'];
-      $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
-      $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
+      $dl_sp = ($dl) ? \TorrentPier\Legacy\Filesystem::humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
+      $ul_sp = ($ul) ? \TorrentPier\Legacy\Filesystem::humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
 
       $dl_class = isset($tor['dl_status']) ? $dl_link_css[$tor['dl_status']] : 'genmed';
       $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
@@ -744,7 +744,7 @@ if ($allowed_forums) {
         'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
         'TOR_SIZE_RAW' => $size,
-        'TOR_SIZE' => humn_size($size),
+        'TOR_SIZE' => \TorrentPier\Legacy\Filesystem::humn_size($size),
         'UL_SPEED' => $ul_sp,
         'DL_SPEED' => $dl_sp,
         'SEEDS' => $seeds ?: 0,

@@ -203,7 +203,7 @@ function display_attachments($post_id)
       $upload_image = '<img src="' . $upload_icons[$attachments['_' . $post_id][$i]['extension']] . '" alt="" border="0" />';
     }
 
-    $filesize = humn_size($attachments['_' . $post_id][$i]['filesize']);
+    $filesize = \TorrentPier\Legacy\Filesystem::humn_size($attachments['_' . $post_id][$i]['filesize']);
 
     $display_name = htmlspecialchars($attachments['_' . $post_id][$i]['real_filename']);
     $comment = htmlspecialchars($attachments['_' . $post_id][$i]['comment']);
