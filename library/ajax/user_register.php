@@ -58,7 +58,7 @@ switch ($mode) {
       $invite_code = (string)$this->request['invite_code'];
       if (empty($invite_code)) {
         $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['AJAX_INVITE_FIELD_BLANK'] . '</span>';
-      } else if ($err = \TorrentPier\Legacy\Validate::validate_invite_code($invite_code)) {
+      } else if ($err = \TorrentPier\Legacy\Validate::invite_code($invite_code)) {
         $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
       }
     }

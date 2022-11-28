@@ -36,7 +36,7 @@ if (isset($_POST['change_rule'])) {
 
   $sql = 'SELECT * FROM ' . BB_INVITE_RULES . ' ORDER BY rule_id';
   if (!($result = DB()->sql_query($sql))) {
-    bb_die('Could not get a list of rules for the Invite' . __LINE__ . ',' . __FILE__ . $sql);
+    bb_die('Could not get a list of rules for the Invite');
   }
 
   $num_rows = DB()->num_rows($result);
@@ -55,7 +55,7 @@ if (isset($_POST['change_rule'])) {
 
         $sql = 'UPDATE ' . BB_INVITE_RULES . ' SET ' . \TorrentPier\Legacy\AttachMod\Attach::attach_mod_sql_build_array('UPDATE', $sql_ary) . ' WHERE `rule_id` = ' . (int)$rule_row[$i]['rule_id'];
         if (!DB()->sql_query($sql)) {
-          bb_die('Could not save data' . __LINE__ . ',' . __FILE__ . $sql);
+          bb_die('Could not save data');
         }
       }
     }
@@ -68,7 +68,7 @@ if (isset($_POST['change_rule'])) {
   if ($rule_id_sql != '') {
     $sql = 'DELETE FROM ' . BB_INVITE_RULES . ' WHERE rule_id IN (' . $rule_id_sql . ')';
     if (!$result = DB()->sql_query($sql)) {
-      bb_die('Could not delete rule' . __LINE__ . ',' . __FILE__ . $sql);
+      bb_die('Could not delete rule');
     }
   }
 }
@@ -88,7 +88,7 @@ if (isset($_POST['add_rule'])) {
 
   $sql = 'INSERT INTO ' . BB_INVITE_RULES . ' ' . \TorrentPier\Legacy\AttachMod\Attach::attach_mod_sql_build_array('INSERT', $sql_ary);
   if (!DB()->sql_query($sql)) {
-    bb_die('Could not add rule' . __LINE__ . ',' . __FILE__ . $sql);
+    bb_die('Could not add rule');
   }
 }
 
@@ -105,7 +105,7 @@ switch ($mode) {
     $sql = 'SELECT * FROM ' . BB_INVITE_RULES . ' ORDER BY `invites_count`';
 
     if (!($result = DB()->sql_query($sql))) {
-      bb_die('Could not get a list of rules for the Invite' . __LINE__ . ',' . __FILE__ . $sql);
+      bb_die('Could not get a list of rules for the Invite');
     }
 
     $rule_row = DB()->sql_fetchrowset($result);
@@ -137,7 +137,7 @@ switch ($mode) {
 
     $sql = 'SELECT * FROM ' . BB_INVITES . ' ORDER BY `generation_date` DESC';
     if (!($result = DB()->sql_query($sql))) {
-      bb_die('Could not get a list of invites' . __LINE__ . ',' . __FILE__ . $sql);
+      bb_die('Could not get a list of invites');
     }
 
     $invite_row = DB()->sql_fetchrowset($result);

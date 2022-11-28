@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use thomaswelton\GravatarLib\Gravatar;
+
 /**
  * Class Avatar
  * @package TorrentPier\Legacy
@@ -98,7 +100,7 @@ class Avatar
       $sql = "SELECT user_email FROM " . BB_USERS . " WHERE user_id = $user_id";
       if ($row = DB()->fetch_row($sql)) {
         // Gravatar service
-        $gravatar = new \thomaswelton\GravatarLib\Gravatar();
+        $gravatar = new Gravatar();
         $gravatar->setDefaultImage($bb_cfg['avatars']['avatar_provider']['default_avatar']);
         $gravatar->setAvatarSize($bb_cfg['avatars']['max_height']);
         $gravatar->setMaxRating($bb_cfg['avatars']['avatar_provider']['rating']);

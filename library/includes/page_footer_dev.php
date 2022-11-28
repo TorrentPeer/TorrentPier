@@ -111,6 +111,4 @@ if ($sql_log) {
   echo '<div class="sqlLog" id="sqlLog">' . ($sql_log ?: '') . '</div><!-- / sqlLog --><br clear="all" />';
 }
 ?>
-<script type="text/javascript">
-  $(document).ready(fixSqlLog);
-</script>
+<script type="text/javascript">$(document).ready(fixSqlLog);</script>

@@ -181,7 +181,7 @@ class Validate
    * @return false|mixed|void
    * @throws \Exception
    */
-  public static function validate_invite_code($invite_code, $check_activ_and_taken = true)
+  public static function invite_code($invite_code, $check_activ_and_taken = true)
   {
     global $lang;
 
@@ -194,10 +194,11 @@ class Validate
         $sql = "SELECT `invite_id` FROM " . BB_INVITES . " WHERE `invite_code` = '$invite_code_sql' AND `active` = '1'";
 
         if (!($result = DB()->sql_query($sql))) {
-          bb_die('Error checking code, invite' . __LINE__ . ',' . __FILE__ . $sql);
+          bb_die('Error checking invite code');
         } else {
           $num_row = DB()->num_rows($result);
           DB()->sql_freeresult($result);
+
           if ($num_row == 0) {
             return $lang['INVITE_TAKEN'];
           }

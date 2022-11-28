@@ -52,7 +52,7 @@ $sql = '
 		g.group_name,
 		g.group_id';
 if (!($result = DB()->sql_query($sql))) {
-  bb_die('Could not read groups' . __LINE__ . ',' . __FILE__ . $sql);
+  bb_die('Could not read groups');
 }
 
 while ($group = DB()->sql_fetchrow($result)) {
@@ -73,7 +73,7 @@ if (count($groups) > 0) {
 
       $sql = 'SELECT * FROM ' . BB_USER_GROUP . ' WHERE group_id=' . $group_id . ' AND user_id=' . $userdata['user_id'] . ' AND user_pending=0';
       if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not obtain viewer group list' . __LINE__ . ',' . __FILE__ . $sql);
+        bb_die('Could not obtain viewer group list');
       }
 
       $is_ok = ($group = DB()->sql_fetchrow($result));
@@ -99,7 +99,7 @@ if (count($groups) > 0) {
 if (isset($_GET['mode']) && $_GET['mode'] == 'getinvite') {
   $sql = 'SELECT COUNT(`invite_id`) AS `invites_count_week` FROM ' . BB_INVITES . ' WHERE `user_id`=' . $userdata['user_id'] . ' AND `generation_date`>=' . $date_start . ' AND `generation_date`<=' . $date_end;
   if (!($result = DB()->sql_query($sql))) {
-    bb_die('Could not get a list of invites' . __LINE__ . ',' . __FILE__ . $sql);
+    bb_die('Could not get a list of invites');
   }
 
   $row = DB()->sql_fetchrowset($result);
@@ -124,7 +124,7 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'getinvite') {
   $sql = $sql . ') ORDER BY `invites_count` DESC LIMIT 1';
 
   if (!($result = DB()->sql_query($sql))) {
-    bb_die('Could not get a list of rules for the invite' . __LINE__ . ',' . __FILE__ . $sql);
+    bb_die('Could not get a list of rules for the invite');
   }
 
   $row = DB()->sql_fetchrowset($result);
@@ -153,7 +153,7 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'getinvite') {
 $referend_by_sql = 'SELECT * FROM ' . BB_INVITES . ' WHERE `new_user_id` =' . $userdata['user_id'];
 
 if (!($referend_by_result = DB()->sql_query($referend_by_sql))) {
-  bb_die('Could not get a data of invites' . __LINE__ . ',' . __FILE__ . $referend_by_sql);
+  bb_die('Could not get a data of invites');
 }
 
 $referend_by_row = DB()->sql_fetchrow($referend_by_result);
@@ -179,7 +179,7 @@ if ($num_referend_by_row !== 0) {
 
 $sql = 'SELECT * FROM ' . BB_INVITES . ' WHERE `user_id`=' . $userdata['user_id'] . ' ORDER BY `generation_date` DESC';
 if (!($result = DB()->sql_query($sql))) {
-  bb_die('Could not get a list of invites' . __LINE__ . ',' . __FILE__ . $sql);
+  bb_die('Could not get a list of invites');
 }
 
 $invite_row = DB()->sql_fetchrowset($result);
@@ -206,7 +206,7 @@ if ($num_invite_row > 0) {
 
 $sql = 'SELECT COUNT(`invite_id`) AS `invites_count_all` FROM ' . BB_INVITES . ' WHERE `user_id`=' . $userdata['user_id'];
 if (!($result = DB()->sql_query($sql))) {
-  bb_die('Could not get a list of invites' . __LINE__ . ',' . __FILE__ . $sql);
+  bb_die('Could not get a list of invites');
 }
 
 $row = DB()->sql_fetchrowset($result);
@@ -221,7 +221,7 @@ if ($num_row > 0) {
 
 $sql = 'SELECT COUNT(`invite_id`) AS `invites_count_week` FROM ' . BB_INVITES . ' WHERE `user_id`=' . $userdata['user_id'] . ' AND `generation_date`>=' . $date_start . ' AND `generation_date`<=' . $date_end;
 if (!($result = DB()->sql_query($sql))) {
-  bb_die('Could not get a list of invites' . __LINE__ . ',' . __FILE__ . $sql);
+  bb_die('Could not get a list of invites');
 }
 
 $row = DB()->sql_fetchrowset($result);
@@ -246,7 +246,7 @@ for ($i = 0; $i < count($user_group); $i++) {
 $sql = $sql . ') ORDER BY `invites_count` DESC';
 
 if (!($result = DB()->sql_query($sql))) {
-  bb_die('Could not get a list of rules for the invite' . __LINE__ . ',' . __FILE__ . $sql);
+  bb_die('Could not get a list of rules for the invite');
 }
 
 $row = DB()->sql_fetchrowset($result);
@@ -279,7 +279,7 @@ $template->assign_vars([
 
 $sql = 'SELECT * FROM ' . BB_INVITE_RULES . ' ORDER BY `invites_count`';
 if (!($result = DB()->sql_query($sql))) {
-  bb_die('Could not get a list of rules for the invite' . __LINE__ . ',' . __FILE__ . $sql);
+  bb_die('Could not get a list of rules for the invite');
 }
 
 $rule_row = DB()->sql_fetchrowset($result);

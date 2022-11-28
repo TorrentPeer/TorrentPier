@@ -205,7 +205,7 @@ foreach ($profile_fields as $field => $can_edit) {
       if ($bb_cfg['new_user_reg_only_by_invite']) {
         $invite_code = !empty($_POST['invite_code']) ? clean_username($_POST['invite_code']) : $pr_data['invite_code'];
         if ($submit) {
-          $err = \TorrentPier\Legacy\Validate::validate_invite_code($invite_code);
+          $err = \TorrentPier\Legacy\Validate::invite_code($invite_code);
           if (!$errors and $err && $mode == 'register') {
             $errors[] = $err;
           }
@@ -629,7 +629,7 @@ if ($submit && !$errors) {
     if ($bb_cfg['new_user_reg_only_by_invite']) {
       if ($invite_code != '') {
         $sql = "UPDATE " . BB_INVITES . " SET `active`='0', `new_user_id`=" . $new_user_id . ", `activation_date`=" . time() . " WHERE `invite_code`='" . $invite_code . "'";
-        if (!($upd_querry = DB()->sql_query($sql))) bb_die('Could not activate invite' . __LINE__ . ',' . __FILE__ . $sql);
+        if (!($upd_querry = DB()->sql_query($sql))) bb_die('Could not activate invite');
         DB()->sql_freeresult($upd_querry);
       }
     }
