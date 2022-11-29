@@ -436,7 +436,7 @@ class Template
    *
    * @return string
    */
-  public function generate_block_data_ref($blockname, $include_last_iterator)
+  protected function generate_block_data_ref($blockname, $include_last_iterator)
   {
     // Get an array of the blocks involved.
     $blocks = explode('.', $blockname);
@@ -448,7 +448,7 @@ class Template
     return '$' . $blocks[$blockcount - 1] . '_item[\'' . $blocks[$blockcount] . '.\']';
   }
 
-  public function compile_code($filename, $code)
+  protected function compile_code($filename, $code)
   {
     //	$filename - file to load code from. used if $code is empty
     //	$code - tpl code
@@ -776,7 +776,7 @@ class Template
    * @param $elseif
    * @return string
    */
-  public function compile_tag_if($tag_args, $elseif)
+  protected function compile_tag_if($tag_args, $elseif)
   {
     /* Tokenize args for 'if' tag. */
     preg_match_all('/(?:

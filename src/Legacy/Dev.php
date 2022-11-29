@@ -12,11 +12,13 @@ namespace TorrentPier\Legacy;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Logger;
-use TorrentPier\Legacy\Common\Http;
+
 use Whoops\Handler\PlainTextHandler;
 use Monolog\Handler\StreamHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+
+use TorrentPier\Legacy\Common\Http;
 
 /**
  * Class Dev
