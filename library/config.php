@@ -374,6 +374,8 @@ $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['tor_help_block'] = '<p>Put here something :D (Edit: <b>$bb_cfg[\'tor_help_block\']</b> in <b>config.php</b>)</p>';
 
+$bb_cfg['show_board_start_date'] = true;
+
 $bb_cfg['first_logon_redirect_url'] = 'index.php';
 $bb_cfg['terms_and_conditions_url'] = 'terms.php';
 

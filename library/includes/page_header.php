@@ -168,7 +168,7 @@ $template->assign_vars([
   'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)$bb_cfg['board_timezone'])])),
   'BOARD_TIMEZONE' => $bb_cfg['board_timezone'],
 
-  'BOARD_START' => $lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>',
+  'BOARD_START' => $bb_cfg['show_board_start_date'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : '',
 
   'PM_INFO' => $pm_info,
   'PRIVMSG_IMG' => $icon_pm,
