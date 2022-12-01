@@ -46,8 +46,9 @@ class Dbs
    * @param string $srv_name_or_alias
    *
    * @return mixed
+   * @throws \Exception
    */
-  public function get_db_obj($srv_name_or_alias = 'db')
+  public function get_db_obj(string $srv_name_or_alias = 'db')
   {
     $srv_name = $this->get_srv_name($srv_name_or_alias);
 

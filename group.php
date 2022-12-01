@@ -209,7 +209,6 @@ if (!$group_id) {
   \TorrentPier\Legacy\Group::add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
   if ($bb_cfg['group_send_email']) {
-    /** @var TorrentPier\Legacy\Emailer() $emailer */
     $emailer = new TorrentPier\Legacy\Emailer();
 
     $emailer->set_from($bb_cfg['board_email']);
@@ -251,7 +250,6 @@ if (!$group_id) {
       \TorrentPier\Legacy\Group::add_user_into_group($group_id, $row['user_id']);
 
       if ($bb_cfg['group_send_email']) {
-        /** @var TorrentPier\Legacy\Emailer() $emailer */
         $emailer = new TorrentPier\Legacy\Emailer();
 
         $emailer->set_from($bb_cfg['board_email']);
@@ -310,7 +308,6 @@ if (!$group_id) {
           }
 
           foreach (DB()->fetch_rowset($sql_select) as $row) {
-            /** @var TorrentPier\Legacy\Emailer() $emailer */
             $emailer = new TorrentPier\Legacy\Emailer();
 
             $emailer->set_from($bb_cfg['board_email']);

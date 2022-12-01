@@ -332,9 +332,7 @@ if ($tor_reged && $tor_info) {
       $full_mode_order = 'tr.remain';
       $full_mode_sort_dir = 'ASC';
 
-      if (isset($_REQUEST['psortasc'])) {
-        $full_mode_sort_dir = 'ASC';
-      } elseif (isset($_REQUEST['psortdesc'])) {
+      if (isset($_REQUEST['psortdesc'])) {
         $full_mode_sort_dir = 'DESC';
       }
 

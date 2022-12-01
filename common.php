@@ -71,10 +71,10 @@ function bb_simple_die($txt)
  *
  * @param $var
  * @param $fn
- * @param false $one_dimensional
- * @param false $array_only
+ * @param bool $one_dimensional
+ * @param bool $array_only
  */
-function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
+function array_deep(&$var, $fn, bool $one_dimensional = false, bool $array_only = false)
 {
   if (is_array($var)) {
     foreach ($var as $k => $v) {
@@ -99,7 +99,7 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
  * @param string $str
  * @return string
  */
-function str_compact($str)
+function str_compact(string $str)
 {
   return preg_replace('#\s+#u', ' ', trim($str));
 }
@@ -238,6 +238,7 @@ $CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
  *
  * @param string $db_alias
  * @return mixed|\TorrentPier\Legacy\SqlDb
+ * @throws Exception
  */
 function DB($db_alias = 'db')
 {

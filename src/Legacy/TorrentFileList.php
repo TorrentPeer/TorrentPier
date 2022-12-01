@@ -58,6 +58,8 @@ class TorrentFileList
 
   /**
    * Формирование списка файлов
+   *
+   * @return void
    */
   private function build_filelist_array()
   {

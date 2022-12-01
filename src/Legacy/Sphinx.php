@@ -39,7 +39,7 @@ class Sphinx extends SphinxClient
    * @param $err_msg
    * @param string $query
    */
-  public static function log_sphinx_error($err_type, $err_msg, $query = '')
+  public static function log_sphinx_error($err_type, $err_msg, string $query = '')
   {
     if (!SPHINX_LOG_ERRORS) {
       return;

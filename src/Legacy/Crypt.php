@@ -40,7 +40,7 @@ class Crypt
    * @param false $safety
    * @return string
    */
-  public static function md5($string, $safety = false): string
+  public static function md5($string, bool $safety = false): string
   {
     $safety ? $md5 = md5(md5($string)) : $md5 = md5($string);
     return $md5;
@@ -53,7 +53,7 @@ class Crypt
    * @param false $safety
    * @return string
    */
-  public static function sha1($string, $safety = false): string
+  public static function sha1($string, bool $safety = false): string
   {
     $safety ? $sha1 = sha1(sha1($string)) : $sha1 = sha1($string);
     return $sha1;
@@ -109,7 +109,7 @@ class Crypt
    *
    * @return int
    */
-  public static function get_hash_number()
+  public static function get_hash_number(): int
   {
     return intval(TIMENOW * rand(1, 99999));
   }

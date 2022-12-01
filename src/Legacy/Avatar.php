@@ -27,7 +27,7 @@ class Avatar
    * @param int $sec_div
    * @return string
    */
-  public static function getAvatarPath($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100): string
+  public static function getAvatarPath($id, $ext_id, $base_path = null, int $first_div = 10000, $sec_div = 100): string
   {
     global $bb_cfg;
     $base_path = $base_path ?? $bb_cfg['avatars']['upload_path'];
@@ -44,7 +44,7 @@ class Avatar
   public static function deleteAvatar($user_id, $avatar_ext_id): bool
   {
     $avatar_file = $avatar_ext_id ? self::getAvatarPath($user_id, $avatar_ext_id) : '';
-    return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+    return ($avatar_file && file_exists($avatar_file) && @unlink($avatar_file));
   }
 
   /**
@@ -59,7 +59,7 @@ class Avatar
    * @return string
    * @throws \Exception
    */
-  public static function getAvatar($is_group, $user_id, $ext_id, $allow_avatar = true, $height = '', $width = ''): string
+  public static function getAvatar($is_group, $user_id, $ext_id, bool $allow_avatar = true, $height = '', $width = ''): string
   {
     global $bb_cfg;
 
@@ -95,7 +95,7 @@ class Avatar
     $avatar = make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']);
 
     // Avatar provider (User only)
-    if ($bb_cfg['avatars']['avatar_provider']['enabled'] && $is_group == false) {
+    if ($bb_cfg['avatars']['avatar_provider']['enabled'] && !$is_group) {
       // Get user email
       $sql = "SELECT user_email FROM " . BB_USERS . " WHERE user_id = $user_id";
       if ($row = DB()->fetch_row($sql)) {

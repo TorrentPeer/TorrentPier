@@ -50,4 +50,3 @@ $template->assign_vars([
 ]);
 
 print_page('info.tpl', 'simple');
-

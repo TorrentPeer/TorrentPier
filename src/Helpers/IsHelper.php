@@ -18,10 +18,10 @@ class IsHelper
   /**
    * Determines if the current version of PHP is equal to or greater than the supplied value
    *
-   * @param string
+   * @param string $version
    * @return bool    TRUE if the current version is $version or higher
    */
-  public static function is_php($version): bool
+  public static function is_php(string $version): bool
   {
     static $_is_php;
     $version = (string)$version;

@@ -54,7 +54,7 @@ class Upload
    * @param bool $uploaded_only
    * @return bool
    */
-  public function init(array $cfg = [], array $post_params = [], $uploaded_only = true)
+  public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true)
   {
     global $bb_cfg, $lang;
 

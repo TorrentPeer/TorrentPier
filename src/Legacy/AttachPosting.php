@@ -68,6 +68,7 @@ class AttachPosting extends Attach
 
   /**
    * Handle Attachments (Add/Delete/Edit/Show) - This is the first function called from every message handler
+   * @throws \Exception
    */
   public function posting_attachment_mod()
   {

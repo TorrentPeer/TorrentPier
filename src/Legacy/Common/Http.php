@@ -17,7 +17,6 @@ use Sabre\HTTP as TP_HTTP;
  */
 class Http
 {
-
   /**
    * Set a HTTP response code
    *

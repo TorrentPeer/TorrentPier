@@ -128,6 +128,8 @@ function make_url($path = ''): string
 }
 
 /**
+ * Return path by extension ID
+ *
  * @param $id
  * @param $ext_id
  * @param $base_path
@@ -1977,7 +1979,7 @@ function clear_dl_list($topics_csv)
 function get_id_csv($ids)
 {
   $ids = array_values((array)$ids);
-  array_deep($ids, 'intval', 'one-dimensional');
+  array_deep($ids, 'intval', true);
   return (string)implode(',', $ids);
 }
 
@@ -1990,7 +1992,7 @@ function get_id_csv($ids)
 function get_id_ary($ids)
 {
   $ids = is_string($ids) ? explode(',', $ids) : array_values((array)$ids);
-  array_deep($ids, 'intval', 'one-dimensional');
+  array_deep($ids, 'intval', true);
   return (array)$ids;
 }
 

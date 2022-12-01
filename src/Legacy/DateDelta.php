@@ -44,7 +44,7 @@ class DateDelta
    * @param string $from
    * @return bool|string
    */
-  public function spellDelta($first, $last, $from = 'auto')
+  public function spellDelta($first, $last, string $from = 'auto')
   {
     if ($last < $first) {
       $old_first = $first;

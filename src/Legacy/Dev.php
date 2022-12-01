@@ -195,10 +195,10 @@ class Dev
    * Cuts the long query
    *
    * @param $sql
-   * @param false $esc_html
+   * @param bool $esc_html
    * @return string
    */
-  public static function short_query($sql, $esc_html = false)
+  public static function short_query($sql, bool $esc_html = false): string
   {
     $max_len = 100;
     $sql = str_compact($sql);

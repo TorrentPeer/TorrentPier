@@ -24,6 +24,8 @@ if (!IS_ADMIN && $user_id != $user->id) {
   $this->ajax_die($lang['NOT_ADMIN']);
 }
 
+$response = '';
+
 switch ($mode) {
   case 'delete':
     \TorrentPier\Legacy\Avatar::deleteAvatar($user_id, $u_data['avatar_ext_id']);

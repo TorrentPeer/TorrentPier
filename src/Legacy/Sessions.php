@@ -20,7 +20,7 @@ class Sessions
    *
    * @return bool
    */
-  private static function ignore_cached_userdata()
+  private static function ignore_cached_userdata(): bool
   {
     return \defined('IN_PM') ? true : false;
   }

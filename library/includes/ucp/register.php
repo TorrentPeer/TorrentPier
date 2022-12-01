@@ -648,7 +648,6 @@ if ($submit && !$errors) {
         $email_template = 'user_welcome';
       }
 
-      /** @var TorrentPier\Legacy\Emailer() $emailer */
       $emailer = new TorrentPier\Legacy\Emailer();
 
       $emailer->set_from($bb_cfg['board_email']);
@@ -681,7 +680,6 @@ if ($submit && !$errors) {
         $pr_data['user_actkey'] = $user_actkey;
         $db_data['user_actkey'] = $user_actkey;
 
-        /** @var TorrentPier\Legacy\Emailer() $emailer */
         $emailer = new TorrentPier\Legacy\Emailer();
 
         $emailer->set_from($bb_cfg['board_email']);

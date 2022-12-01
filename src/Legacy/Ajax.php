@@ -155,8 +155,10 @@ class Ajax
     if (!IsHelper::is_ajax()) {
       return false;
     }
+
     $this->request = $_POST;
     $this->action =& $this->request['action'];
+
     return true;
   }
 
@@ -237,7 +239,7 @@ class Ajax
    *
    * @param string $confirm_msg
    */
-  public function prompt_for_confirm($confirm_msg)
+  public function prompt_for_confirm(string $confirm_msg)
   {
     if (empty($confirm_msg)) {
       $this->ajax_die('false');

@@ -78,7 +78,7 @@ class Emailer
    *
    * @param string $subject
    */
-  public function set_subject($subject)
+  public function set_subject(string $subject)
   {
     $this->subject = $subject;
   }
@@ -130,7 +130,7 @@ class Emailer
    * @param string $template_lang язык шаблона
    * @throws \Exception
    */
-  public function set_template($template_file, $template_lang = '')
+  public function set_template(string $template_file, string $template_lang = '')
   {
     global $bb_cfg;
 
@@ -168,7 +168,7 @@ class Emailer
    * @return bool
    * @throws \Exception
    */
-  public function send($email_format = self::MIME_TYPES['text'])
+  public function send(string $email_format = self::MIME_TYPES['text'])
   {
     global $bb_cfg, $lang, $userdata;
 

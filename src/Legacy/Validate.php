@@ -29,7 +29,7 @@ class Validate
    * @return bool|string
    * @throws \Exception
    */
-  public static function username($username, $check_ban_and_taken = true)
+  public static function username($username, bool $check_ban_and_taken = true)
   {
     global $user, $lang;
 
@@ -92,7 +92,7 @@ class Validate
    *
    * @return bool|string
    */
-  public static function password($password, $password_confirm)
+  public static function password(string $password, string $password_confirm)
   {
     global $lang;
 
@@ -121,7 +121,7 @@ class Validate
    * @return bool|string
    * @throws \Exception
    */
-  public static function email($email, $check_ban_and_taken = true)
+  public static function email(string $email, bool $check_ban_and_taken = true)
   {
     global $lang, $userdata, $bb_cfg;
 
@@ -181,7 +181,7 @@ class Validate
    * @return false|mixed|void
    * @throws \Exception
    */
-  public static function invite_code($invite_code, $check_activ_and_taken = true)
+  public static function invite_code($invite_code, bool $check_activ_and_taken = true)
   {
     global $lang;
 
