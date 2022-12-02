@@ -30,7 +30,7 @@ function silent_exit()
 /**
  * @param string $msg
  */
-function error_exit($msg = '')
+function error_exit(string $msg = '')
 {
   silent_exit();
   echo \SandFox\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);

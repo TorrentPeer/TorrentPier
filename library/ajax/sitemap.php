@@ -21,7 +21,7 @@ switch ($mode) {
   case 'create':
     $map->createSitemap();
     if (file_exists(SITEMAP_DIR . '/sitemap.xml')) {
-      $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
+      $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url(SITEMAP_DIR . '/sitemap.xml') . '" target="_blank">' . make_url(SITEMAP_DIR . '/sitemap.xml') . '</a>';
     } else {
       $html .= $lang['SITEMAP_NOT_CREATED'];
     }
@@ -32,7 +32,7 @@ switch ($mode) {
       $map->createSitemap();
     }
 
-    $map_link = make_url('sitemap/sitemap.xml');
+    $map_link = make_url(SITEMAP_DIR . '/sitemap.xml');
 
     foreach ($bb_cfg['sitemap_sending'] as $source_name => $source_link) {
       if ($map->sendSitemap($source_link, $map_link)) {

@@ -47,7 +47,7 @@ function init_complete_extensions_data()
  * @param string $filename
  * @throws \Exception
  */
-function init_display_template($template_var, $replacement, $filename = 'viewtopic_attach.tpl')
+function init_display_template($template_var, $replacement, string $filename = 'viewtopic_attach.tpl')
 {
   global $template;
 

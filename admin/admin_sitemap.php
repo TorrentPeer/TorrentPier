@@ -38,7 +38,7 @@ if (!$result = DB()->sql_query($sql)) {
   }
 }
 
-$s_mess = $lang['SITEMAP_CREATED'] . ': <b>' . bb_date($new['sitemap_time'], $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
+$s_mess = $lang['SITEMAP_CREATED'] . ': <b>' . bb_date($new['sitemap_time'], $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url(SITEMAP_DIR . '/sitemap.xml') . '" target="_blank">' . make_url(SITEMAP_DIR . '/sitemap.xml') . '</a>';
 $message = file_exists(SITEMAP_DIR . '/sitemap.xml') ? $s_mess : $lang['SITEMAP_NOT_CREATED'];
 
 $template->assign_vars([

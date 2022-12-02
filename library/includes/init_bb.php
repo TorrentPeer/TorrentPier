@@ -85,7 +85,7 @@ define('COOKIE_MAX_TRACKS', 90);
  * @param bool $httponly
  * @return bool
  */
-function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false): bool
+function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false): bool
 {
   global $bb_cfg;
 
