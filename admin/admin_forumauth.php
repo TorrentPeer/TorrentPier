@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 $forum_auth_fields = [

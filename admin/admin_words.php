@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['GENERAL']['WORD_CENSOR'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 if (!$bb_cfg['use_word_censor']) {

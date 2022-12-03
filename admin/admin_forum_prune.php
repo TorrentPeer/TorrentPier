@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['FORUMS']['PRUNE'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 $all_forums = -1;

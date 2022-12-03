@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['GENERAL']['PHP_INFO'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 /** @noinspection ForgottenDebugOutputInspection */

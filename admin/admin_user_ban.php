@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['USERS']['BAN_CONTROL'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 if (isset($_POST['submit'])) {

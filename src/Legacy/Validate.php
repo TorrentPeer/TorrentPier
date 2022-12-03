@@ -29,7 +29,7 @@ class Validate
    * @return bool|string
    * @throws \Exception
    */
-  public static function username($username, bool $check_ban_and_taken = true)
+  public static function username(string $username, bool $check_ban_and_taken = true)
   {
     global $user, $lang;
 

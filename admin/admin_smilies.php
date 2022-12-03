@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['GENERAL']['SMILIES'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 // Check to see what mode we should operate in

@@ -11,7 +11,6 @@ if (!empty($setmodules)) {
   $module['MODS']['MASS_EMAIL'] = basename(__FILE__);
   return;
 }
-
 require __DIR__ . '/pagestart.php';
 
 set_time_limit(1200);
