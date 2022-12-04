@@ -168,7 +168,7 @@ class Dev
       $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
 
       $log .= ''
-        . '<div class="sqlLogRow" title="' . $info . '">'
+        . '<div onmouseout="$(this).removeClass(\'sqlHover\');" onmouseover="$(this).addClass(\'sqlHover\');" onclick="$(this).toggleClass(\'sqlHighlight\');" class="sqlLogRow" title="' . $info . '">'
         . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
         . '<span class="copyElement" title="Copy to clipboard" data-clipboard-target="#' . $id . '" style="color: gray; letter-spacing: -1px;">' . $perc . '</span>'
         . ' '
