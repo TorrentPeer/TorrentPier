@@ -4,7 +4,7 @@
 
 [Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.4...v2.4.0.5)
 
-- Misc fixes and improvements
+- Misc fixes and improvements ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to toggle a board start date [0716855](https://github.com/TorrentPeer/TorrentPier/commit/9dfd55843a8c640952815582ceb37080a17772c2) ([belomaxorka](https://github.com/belomaxorka))
 - Updated composer dependencies [45549e0](https://github.com/TorrentPeer/TorrentPier/commit/f4d5133d3843e730d49091ad3ad4accb54156366) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed selecting in debug-panel [f4d5133](https://github.com/TorrentPeer/TorrentPier/commit/25bdb1055b6dd6941e8937a2d70ca48193a2ec1f) ([belomaxorka](https://github.com/belomaxorka))
