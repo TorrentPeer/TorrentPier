@@ -96,10 +96,10 @@ function array_deep(&$var, $fn, bool $one_dimensional = false, bool $array_only 
 }
 
 /**
- * @param string $str
- * @return string
+ * @param string|null $str
+ * @return string|null
  */
-function str_compact(string $str)
+function str_compact(?string $str): ?string
 {
   return preg_replace('#\s+#u', ' ', trim($str));
 }

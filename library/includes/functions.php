@@ -23,13 +23,14 @@ function send_no_cache_headers()
 /**
  * Exit with output
  *
- * @param string $output
+ * @param mixed $output
  */
-function bb_exit($output = '')
+function bb_exit($output = null)
 {
-  if ($output) {
+  if (!empty($output)) {
     echo $output;
   }
+
   exit;
 }
 
@@ -39,12 +40,13 @@ function bb_exit($output = '')
  * @param bool $print
  * @return string
  */
-function prn_r($var, $title = '', $print = true)
+function prn_r($var, $title = '', bool $print = true)
 {
   $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
   if ($print) {
     echo $r;
   }
+
   return $r;
 }
 
@@ -55,7 +57,7 @@ function prn_r($var, $title = '', $print = true)
  * @param string $charset
  * @return string
  */
-function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, string $charset = 'UTF-8'): string
 {
   return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
@@ -96,7 +98,7 @@ function clean_tpl_cache()
 {
   global $template;
 
-  $match = 'tpl_';
+  $match = XS_TPL_PREFIX;
   $dir = $template->cachedir;
   $res = @opendir($dir);
   while (($file = readdir($res)) !== false) {
@@ -113,7 +115,7 @@ function clean_tpl_cache()
  * @param string $charset
  * @return string
  */
-function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+function html_ent_decode($txt, int $quote_style = ENT_QUOTES, string $charset = 'UTF-8'): string
 {
   return (string)html_entity_decode($txt, $quote_style, $charset);
 }
@@ -122,7 +124,7 @@ function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
  * @param string $path
  * @return string
  */
-function make_url($path = ''): string
+function make_url(string $path = ''): string
 {
   return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
@@ -141,6 +143,7 @@ function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
   global $bb_cfg;
   $ext = $bb_cfg['file_id_ext'][$ext_id] ?? '';
+
   return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
 }
 
@@ -156,6 +159,7 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 {
   global $bb_cfg;
   $base_path = $base_path ?? $bb_cfg['attach']['upload_path'];
+
   return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
@@ -182,6 +186,7 @@ function get_tracks($type)
       bb_simple_die(__FUNCTION__ . ": invalid type '$type'");
   }
   $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
+
   return $tracks ?: [];
 }
 
@@ -243,6 +248,7 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 
   $t = $tracking_topics[$topic_id] ?? 0;
   $f = $tracking_forums[$forum_id] ?? 0;
+
   return max($t, $f, $user->data['user_lastvisit']);
 }
 
@@ -342,8 +348,10 @@ function bit2dec($bit_num)
     foreach ($bit_num as $bit) {
       $dec |= (1 << $bit);
     }
+
     return $dec;
   }
+
   return (1 << $bit_num);
 }
 
@@ -359,6 +367,7 @@ function bf_bit2dec($bf_array_name, $key)
   if (!isset($bf[$bf_array_name][$key])) {
     bb_simple_die(__FUNCTION__ . ": bitfield '$key' not found");
   }
+
   return (1 << $bf[$bf_array_name][$key]);
 }
 
@@ -599,7 +608,7 @@ function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
  * @param string $granularity
  * @return mixed
  */
-function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
+function delta_time($timestamp_1, $timestamp_2 = TIMENOW, string $granularity = 'auto')
 {
   return $GLOBALS['DeltaTime']->spellDelta($timestamp_1, $timestamp_2, $granularity);
 }
@@ -692,6 +701,7 @@ function groupname($select_name, $selected_group, $groupid)
 function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
   global $html;
+
   return $html->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
 }
 
@@ -710,6 +720,7 @@ function build_select($name, $params, $selected = null, $max_length = HTML_SELEC
 function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 {
   global $html;
+
   return $html->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
 }
 
@@ -729,6 +740,7 @@ function replace_quote($str, $double = true, $single = true)
   if ($single) {
     $str = str_replace("'", '&#039;', $str);
   }
+
   return $str;
 }
 
@@ -1031,10 +1043,12 @@ function get_username($user_id)
     foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
       $usernames[$row['user_id']] = $row['username'];
     }
+
     return $usernames;
   }
 
   $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+
   return $row['username'];
 }
 
@@ -1051,6 +1065,7 @@ function get_user_id($username)
     return false;
   }
   $row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1");
+
   return $row['user_id'];
 }
 
@@ -1108,6 +1123,7 @@ function get_bt_userdata($user_id)
 		");
     CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
   }
+
   return $btu;
 }
 
@@ -1206,6 +1222,7 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
       CACHE('bb_config')->set("config_{$table}", $cfg);
     }
   }
+
   return $cfg;
 }
 
@@ -1586,6 +1603,7 @@ function birthday_age($date)
   }
 
   $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
+
   return delta_time(strtotime($date, $tz));
 }
 
@@ -1826,7 +1844,7 @@ function bb_realpath($path)
  * @param string $url
  * @throws \Exception
  */
-function login_redirect($url = '')
+function login_redirect(string $url = '')
 {
   redirect(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
@@ -1851,13 +1869,13 @@ function meta_refresh($url, $time = 5)
  * @param false $short
  * @throws \Exception
  */
-function redirect($url, $short = false)
+function redirect($url, bool $short = false)
 {
   global $bb_cfg;
 
   $redirect_url = $url;
 
-  if ($short == false) {
+  if (!$short) {
     if (headers_sent($filename, $linenum)) {
       bb_simple_die("Headers already sent in $filename($linenum)");
     }
@@ -1939,6 +1957,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     // field
     $res = $listrow['fields'][$selected_row];
   }
+
   return $res;
 }
 
@@ -1955,6 +1974,7 @@ function topic_attachment_image($switch_attachment): string
   if (!$switch_attachment || !($is_auth['auth_download'] && $is_auth['auth_view'])) {
     return '';
   }
+
   return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
 }
 
@@ -1980,6 +2000,7 @@ function get_id_csv($ids)
 {
   $ids = array_values((array)$ids);
   array_deep($ids, 'intval', true);
+
   return (string)implode(',', $ids);
 }
 
@@ -1993,6 +2014,7 @@ function get_id_ary($ids)
 {
   $ids = is_string($ids) ? explode(',', $ids) : array_values((array)$ids);
   array_deep($ids, 'intval', true);
+
   return (array)$ids;
 }
 
@@ -2008,6 +2030,7 @@ function get_topic_title($topic_id)
   $row = DB()->fetch_row("
 		SELECT topic_title FROM " . BB_TOPICS . " WHERE topic_id = " . (int)$topic_id . "
 	");
+
   return $row['topic_title'];
 }
 
@@ -2174,14 +2197,19 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
     return;
   }
 
-  if ($mode == 'send') {
-    if ($cached_contents = CACHE('bb_cache')->get($cache_var_name)) {
-      bb_exit($cached_contents);
-    }
-  } elseif ($mode == 'store') {
-    if ($output = ob_get_contents()) {
-      CACHE('bb_cache')->set($cache_var_name, $output, $ttl);
-    }
+  switch ($mode) {
+    case 'send':
+      if ($cached_contents = CACHE('bb_cache')->get($cache_var_name)) {
+        bb_exit($cached_contents);
+      }
+      break;
+    case 'store':
+      if ($output = ob_get_contents()) {
+        CACHE('bb_cache')->set($cache_var_name, $output, $ttl);
+      }
+      break;
+    default:
+      bb_simple_die("Invalid mode: $mode");
   }
 }
 
@@ -2196,6 +2224,7 @@ function clean_title($str, $replace_underscore = false): string
 {
   $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
   $str = htmlCHR(str_compact($str));
+
   return $str;
 }
 
@@ -2345,7 +2374,7 @@ function pad_with_space($str)
  * @return string
  * @throws \Exception
  */
-function create_magnet($infohash, $auth_key)
+function create_magnet($infohash, $auth_key): string
 {
   global $bb_cfg, $images, $lang, $userdata;
 
@@ -2436,7 +2465,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
  * @return string
  * @throws \Exception
  */
-function profile_url($data)
+function profile_url($data): string
 {
   global $bb_cfg, $lang, $datastore;
 
@@ -2586,7 +2615,7 @@ function hash_search($hash)
  * @return bool|string
  * @throws \Exception
  */
-function bb_captcha($mode, $callback = '')
+function bb_captcha($mode, string $callback = '')
 {
   global $bb_cfg, $lang;
 
@@ -2629,6 +2658,7 @@ function bb_captcha($mode, $callback = '')
     default:
       bb_die("Invalid mode: $mode");
   }
+
   return false;
 }
 
@@ -2673,9 +2703,11 @@ function get_zodiac($birthday, $mode = 'full')
             $data = "($title) <img src='$image' alt='$title' title='$title' style='vertical-align:middle;' />";
             break;
         }
+
         return $data;
       }
     }
   }
+
   return false;
 }
