@@ -390,11 +390,11 @@ if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN
   if ($bb_cfg['board_disable']) {
     // admin lock
     send_no_cache_headers();
-    bb_die('BOARD_DISABLE');
+    bb_die($lang['BOARD_DISABLE']);
   } elseif (file_exists(BB_DISABLED)) {
     // trigger lock
-    TorrentPier\Helpers\CronHelper::releaseDeadlock();
+    \TorrentPier\Helpers\CronHelper::releaseDeadlock();
     send_no_cache_headers();
-    bb_die('BOARD_DISABLE_CRON');
+    bb_die($lang['BOARD_DISABLE_CRON']);
   }
 }

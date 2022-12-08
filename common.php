@@ -180,8 +180,8 @@ require_once BB_PATH . '/library/defines.php';
 
 // Get config
 require_once BB_PATH . '/library/config.php'; // General config
-if (file_exists(BB_PATH . '/library/config.local.php')) {
-  require_once BB_PATH . '/library/config.local.php'; // Local config
+if (file_exists(BB_PATH . LOCAL_CONFIG)) {
+  require_once BB_PATH . LOCAL_CONFIG; // Local config
 }
 
 // Server
