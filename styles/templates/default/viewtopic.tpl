@@ -176,8 +176,6 @@ ajax.topic_actions = function (mode) {
       topic_id: {TOPIC_ID},
       data: data
     });
-  } else {
-    alert('{L_FIELDS_EMPTY}')
   }
 };
 ajax.callback.mod_action = function (data) {
