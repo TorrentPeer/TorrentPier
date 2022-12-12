@@ -739,8 +739,7 @@ switch ($mode) {
     break;
 
   default:
-    bb_die('invalid action');
-    break;
+    bb_die("Invalid mode: $mode");
 }
 
 $template->assign_vars(['PAGE_TITLE' => $lang['MOD_CP']]);

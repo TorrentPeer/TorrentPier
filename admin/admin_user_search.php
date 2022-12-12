@@ -234,7 +234,7 @@ if (!isset($_REQUEST['dosearch'])) {
       break;
 
     default:
-      bb_die('Invalid mode');
+      bb_die("Invalid mode: $mode");
   }
 
   $base_url = 'admin_user_search.php?dosearch=true';

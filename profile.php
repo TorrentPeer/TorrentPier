@@ -57,5 +57,5 @@ switch ($mode) {
     break;
 
   default:
-    bb_die('Invalid mode');
+    bb_die("Invalid mode: $mode");
 }

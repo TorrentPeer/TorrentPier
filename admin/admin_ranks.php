@@ -29,125 +29,134 @@ if (isset($_GET['mode']) || isset($_POST['mode'])) {
 }
 
 if ($mode != '') {
-  if ($mode == 'edit' || $mode == 'add') {
-    //
-    // They want to add a new rank, show the form.
-    //
-    $rank_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+  switch ($mode) {
 
-    $s_hidden_fields = '';
+    case 'edit':
+    case 'add':
+      //
+      // They want to add a new rank, show the form.
+      //
+      $rank_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-    if ($mode == 'edit') {
-      if (empty($rank_id)) {
+      $s_hidden_fields = '';
+
+      if ($mode == 'edit') {
+        if (empty($rank_id)) {
+          bb_die($lang['MUST_SELECT_RANK']);
+        }
+
+        $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
+        if (!$result = DB()->sql_query($sql)) {
+          bb_die('Could not obtain ranks data #1');
+        }
+
+        $rank_info = DB()->sql_fetchrow($result);
+        $s_hidden_fields .= '<input type="hidden" name="id" value="' . $rank_id . '" />';
+      }
+
+      $s_hidden_fields .= '<input type="hidden" name="mode" value="save" />';
+
+      $template->assign_vars([
+        'TPL_RANKS_EDIT' => true,
+
+        'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
+        'IMAGE' => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : 'styles/images/ranks/rank_image.png',
+        'STYLE' => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
+        'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="' . BB_ROOT . $rank_info['rank_image'] . '" />' : '',
+
+        'S_RANK_ACTION' => 'admin_ranks.php',
+        'S_HIDDEN_FIELDS' => $s_hidden_fields,
+      ]);
+      break;
+
+    case 'save':
+      //
+      // Ok, they sent us our info, let's update it.
+      //
+
+      $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+      $rank_title = isset($_POST['title']) ? trim($_POST['title']) : '';
+      $rank_style = isset($_POST['style']) ? trim($_POST['style']) : '';
+      $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
+
+      if ($rank_title == '') {
         bb_die($lang['MUST_SELECT_RANK']);
       }
 
-      $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
-      if (!$result = DB()->sql_query($sql)) {
-        bb_die('Could not obtain ranks data #1');
+      //
+      // The rank image has to be a jpg, gif or png
+      //
+      if ($rank_image != '') {
+        if (!preg_match('/(\.gif|\.png|\.jpg)$/is', $rank_image)) {
+          $rank_image = '';
+        }
       }
 
-      $rank_info = DB()->sql_fetchrow($result);
-      $s_hidden_fields .= '<input type="hidden" name="id" value="' . $rank_id . '" />';
-    }
+      if ($rank_id) {
 
-    $s_hidden_fields .= '<input type="hidden" name="mode" value="save" />';
+        $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
+        if (!$result = DB()->sql_query($sql)) {
+          bb_die($lang['NO_UPDATE_RANKS']);
+        }
 
-    $template->assign_vars([
-      'TPL_RANKS_EDIT' => true,
-
-      'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
-      'IMAGE' => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : 'styles/images/ranks/rank_image.png',
-      'STYLE' => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
-      'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="' . BB_ROOT . $rank_info['rank_image'] . '" />' : '',
-
-      'S_RANK_ACTION' => 'admin_ranks.php',
-      'S_HIDDEN_FIELDS' => $s_hidden_fields,
-    ]);
-  } elseif ($mode == 'save') {
-    //
-    // Ok, they sent us our info, let's update it.
-    //
-
-    $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-    $rank_title = isset($_POST['title']) ? trim($_POST['title']) : '';
-    $rank_style = isset($_POST['style']) ? trim($_POST['style']) : '';
-    $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
-
-    if ($rank_title == '') {
-      bb_die($lang['MUST_SELECT_RANK']);
-    }
-
-    //
-    // The rank image has to be a jpg, gif or png
-    //
-    if ($rank_image != '') {
-      if (!preg_match('/(\.gif|\.png|\.jpg)$/is', $rank_image)) {
-        $rank_image = '';
-      }
-    }
-
-    if ($rank_id) {
-
-      $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
-      if (!$result = DB()->sql_query($sql)) {
-        bb_die($lang['NO_UPDATE_RANKS']);
-      }
-
-      $sql = 'UPDATE ' . BB_RANKS . "
+        $sql = 'UPDATE ' . BB_RANKS . "
 				SET rank_title = '" . DB()->escape($rank_title) . "',
 					rank_image = '" . DB()->escape($rank_image) . "',
 					rank_style = '" . DB()->escape($rank_style) . "'
 				WHERE rank_id = $rank_id";
 
-      $message = $lang['RANK_UPDATED'];
-    } else {
-      $sql = 'INSERT INTO ' . BB_RANKS . " (rank_title, rank_image, rank_style)
+        $message = $lang['RANK_UPDATED'];
+      } else {
+        $sql = 'INSERT INTO ' . BB_RANKS . " (rank_title, rank_image, rank_style)
 				VALUES ('" . DB()->escape($rank_title) . "', '" . DB()->escape($rank_image) . "', '" . DB()->escape($rank_style) . "')";
 
-      $message = $lang['RANK_ADDED'];
-    }
-
-    if (!$result = DB()->sql_query($sql)) {
-      bb_die('Could not update / insert into ranks table');
-    }
-
-    $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
-    $datastore->update('ranks');
-
-    bb_die($message);
-  } elseif ($mode == 'delete') {
-    //
-    // Ok, they want to delete their rank
-    //
-
-    if (isset($_POST['id']) || isset($_GET['id'])) {
-      $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : (int)$_GET['id'];
-    } else {
-      $rank_id = 0;
-    }
-
-    if ($rank_id) {
-      $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
-
-      if (!$result = DB()->sql_query($sql)) {
-        bb_die('Could not delete rank data');
+        $message = $lang['RANK_ADDED'];
       }
 
-      $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
       if (!$result = DB()->sql_query($sql)) {
-        bb_die($lang['NO_UPDATE_RANKS']);
+        bb_die('Could not update / insert into ranks table');
       }
+
+      $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
       $datastore->update('ranks');
 
-      bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
-    } else {
-      bb_die($lang['MUST_SELECT_RANK']);
-    }
-  } else {
-    bb_die('Invalid mode');
+      bb_die($message);
+      break;
+
+    case 'delete':
+      //
+      // Ok, they want to delete their rank
+      //
+
+      if (isset($_POST['id']) || isset($_GET['id'])) {
+        $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : (int)$_GET['id'];
+      } else {
+        $rank_id = 0;
+      }
+
+      if ($rank_id) {
+        $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
+
+        if (!$result = DB()->sql_query($sql)) {
+          bb_die('Could not delete rank data');
+        }
+
+        $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
+        if (!$result = DB()->sql_query($sql)) {
+          bb_die($lang['NO_UPDATE_RANKS']);
+        }
+
+        $datastore->update('ranks');
+
+        bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+      } else {
+        bb_die($lang['MUST_SELECT_RANK']);
+      }
+      break;
+
+    default:
+      bb_die("Invalid mode: $mode");
   }
 } else {
   //
