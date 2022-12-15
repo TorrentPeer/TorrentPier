@@ -51,6 +51,8 @@ class BBCode
     'pre',
     'quote',
     'spoiler',
+    'nfo',
+    'table'
   ];
 
   public $preg = [];
