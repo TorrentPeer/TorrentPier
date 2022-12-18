@@ -8,31 +8,24 @@ input[name="username"], input[name="user_email"], input[name="cur_pass"], input[
 .prof-tbl h6 { margin: 4px 0 4px 4px; color: #444444; line-height: 100%; display: inline-block; }
 </style>
 <script type="text/javascript">
-function autocomplete_settings() {
-  return autocomplete(false, {PASSWORD_MIN_LENGTH})
-}
+  $(function () {
+    var tab_idx = 100;
+    $('input,select,textarea', '#prof-form').not(':hidden').not(':disabled').each(function () {
+      $(this).attr({tabindex: ++tab_idx});
+    });
+  });
 
-$(function(){
-	var tab_idx = 100;
-	$('input,select,textarea', '#prof-form').not(':hidden').not(':disabled').each(function(){
-		$(this).attr({ tabindex: ++tab_idx });
-	});
-});
+  // check fields ajax
+  ajax.callback.user_register = function (data) {
+    $('#' + data.mode).html(data.html);
+  };
 
-ajax.callback.user_register = function(data){
-	$('#'+ data.mode).html(data.html);
-};
+  // generate password ajax
+  ajax.callback.gen_password = function (data) {
+    $('input#pass').val(data.password);
+    alert('{L_YOUR_NEW_PASSWORD}' + data.password);
+  };
 </script>
-<div id="autocomplete_popup">
-	<div class="relative">
-		<div class="close" onclick="$('div#autocomplete_popup').hide();"></div>
-		<div class="title">{L_YOUR_NEW_PASSWORD}</div>
-		<div>
-			<input size="35" value="" autocomplete="off" type="text"/>
-			<span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete_settings()"></span>
-		</div>
-	</div>
-</div>
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
@@ -84,7 +77,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	<td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <br /><h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
 	<td>
 		<input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value="" />&nbsp;
-		<span id="autocomplete" onclick="autocomplete_settings()" title="{L_AUTOCOMPLETE}">&#9668;</span> &nbsp;<i class="med">{PASSWORD_LONG}</i>
+    <span id="autocomplete" onclick="ajax.exec({ action: 'gen_password' }); return false;" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
 	</td>
 </tr>
 <tr>

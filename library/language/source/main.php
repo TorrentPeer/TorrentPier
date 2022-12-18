@@ -1491,7 +1491,6 @@ $lang['JAVASCRIPT_ON_REGISTER'] = 'To register, heads necessary to enable JavaSc
 $lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (now " . date('H:i') . " MSK)<br /><br />We apologize for this inconvenience";
 $lang['AUTOCOMPLETE'] = 'Password generate';
 $lang['YOUR_NEW_PASSWORD'] = 'Your are new password:';
-$lang['REGENERATE'] = 'Regenerate';
 
 // Debug
 $lang['EXECUTION_TIME'] = 'Execution time:';

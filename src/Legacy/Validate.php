@@ -111,6 +111,7 @@ class Validate
       return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
     }
 
+    // Расширенная проверка пароля
     if ($bb_cfg['password_symbols']) {
       // проверка на наличие цифр
       if ($bb_cfg['password_symbols']['nums']) {
@@ -121,9 +122,11 @@ class Validate
 
       // проверка на наличие букв
       if ($bb_cfg['password_symbols']['letters']) {
+        // lowercase
         if (!IsHelper::is_contains_letters($password)) {
           return $lang['CHOOSE_PASS_ERR_LETTER'];
         }
+        // uppercase
         if (!IsHelper::is_contains_letters($password, true)) {
           return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
         }

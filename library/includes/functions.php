@@ -130,6 +130,18 @@ function make_url(string $path = ''): string
 }
 
 /**
+ * Generates a random password
+ *
+ * @param int $length
+ * @return string
+ */
+function make_rand_password(int $length = PASSWORD_MIN_LENGTH): string
+{
+  /** TODO */
+  return make_rand_str($length);
+}
+
+/**
  * Return path by extension ID
  *
  * @param $id

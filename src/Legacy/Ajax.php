@@ -49,6 +49,7 @@ class Ajax
     'posts' => ['guest'],
     'index_data' => ['guest'],
     'users_today' => ['guest'],
+    'gen_password' => ['guest'],
   ];
 
   public $action;
@@ -454,5 +455,13 @@ class Ajax
   public function callseed()
   {
     require AJAX_DIR . '/callseed.php';
+  }
+
+  /**
+   * Generate password
+   */
+  public function gen_password()
+  {
+    require AJAX_DIR . '/gen_password.php';
   }
 }
