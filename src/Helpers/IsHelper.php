@@ -109,7 +109,7 @@ class IsHelper
    */
   public static function is_contains_numbers($value): bool
   {
-    return preg_match('@[0-9]@', $value);
+    return preg_match('@[[:digit:]]@', $value);
   }
 
   /**
@@ -132,6 +132,6 @@ class IsHelper
    */
   public static function is_contains_spec_symbols($value): bool
   {
-    return preg_match('@[^\w]@', $value);
+    return preg_match('@[[:punct:]]@', $value);
   }
 }

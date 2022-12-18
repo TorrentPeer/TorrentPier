@@ -112,6 +112,7 @@ class Dev
     } else {
       header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
       Http::setCode(500);
+
       return die($message);
     }
   }
