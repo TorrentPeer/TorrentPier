@@ -14,6 +14,8 @@ use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 
+use TorrentPier\Helpers\IsHelper;
+
 /**
  * Class Validate
  * @package TorrentPier\Legacy
@@ -94,7 +96,7 @@ class Validate
    */
   public static function password(string $password, string $password_confirm)
   {
-    global $lang;
+    global $lang, $bb_cfg;
 
     // Check password confirm
     if ($password_confirm != $password) {
@@ -107,6 +109,32 @@ class Validate
     }
     if (mb_strlen($password, 'UTF-8') < PASSWORD_MIN_LENGTH) {
       return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
+    }
+
+    if ($bb_cfg['password_symbols']) {
+      // проверка на наличие цифр
+      if ($bb_cfg['password_symbols']['nums']) {
+        if (!IsHelper::is_contains_numbers($password)) {
+          return $lang['CHOOSE_PASS_ERR_NUMS'];
+        }
+      }
+
+      // проверка на наличие букв
+      if ($bb_cfg['password_symbols']['letters']) {
+        if (!IsHelper::is_contains_letters($password)) {
+          return $lang['CHOOSE_PASS_ERR_LETTER'];
+        }
+        if (!IsHelper::is_contains_letters($password, true)) {
+          return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
+        }
+      }
+
+      // проверка на наличие спец символов
+      if ($bb_cfg['password_symbols']['spec_symbols']) {
+        if (!IsHelper::is_contains_spec_symbols($password)) {
+          return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
+        }
+      }
     }
 
     return false;

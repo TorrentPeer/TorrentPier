@@ -100,4 +100,38 @@ class IsHelper
   {
     return preg_match('/^([0-9])+$/i', $value);
   }
+
+  /**
+   * Return true if $value contains numbers
+   *
+   * @param $value
+   * @return bool
+   */
+  public static function is_contains_numbers($value): bool
+  {
+    return preg_match('@[0-9]@', $value);
+  }
+
+  /**
+   * Return true if $value contains letters (Uppercase included)
+   *
+   * @param $value
+   * @param bool $req_uppercase
+   * @return bool
+   */
+  public static function is_contains_letters($value, bool $req_uppercase = false): bool
+  {
+    return $req_uppercase ? preg_match('@[A-Z]@', $value) : preg_match('@[a-z]@', $value);
+  }
+
+  /**
+   * Return true if $value contains special symbols
+   *
+   * @param $value
+   * @return bool
+   */
+  public static function is_contains_spec_symbols($value): bool
+  {
+    return preg_match('@[^\w]@', $value);
+  }
 }
