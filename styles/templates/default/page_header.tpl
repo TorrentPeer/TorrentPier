@@ -335,10 +335,7 @@ Detector.detect();
   <h2>{SITENAME}</h2>
   <!-- ENDIF -->
   <div class="floatR">
-    <!--
-      EN: don't you dare call yourself human if you delete the line below
-      RU: не смей называть себя человеком, если удалишь строку что ниже
-    -->
+    <!-- DON'T DELETE LINE BELOW -->
     <span style="color: #0057b8;">#STAND</span><span style="color: #ffd700;">WITHUKRAINE</span>
   </div>
 </div>
