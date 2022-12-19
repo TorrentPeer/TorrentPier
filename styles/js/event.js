@@ -41,11 +41,9 @@ function addEvent(obj, type, fn) {
 var EventCache = function () {
   var listEvents = [];
   return {
-    listEvents: listEvents,
-    add: function (node, sEventName, fHandler) {
+    listEvents: listEvents, add: function (node, sEventName, fHandler) {
       listEvents.push(arguments);
-    },
-    flush: function () {
+    }, flush: function () {
       var i, item;
       for (i = listEvents.length - 1; i >= 0; i = i - 1) {
         item = listEvents[i];

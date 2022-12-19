@@ -30,12 +30,7 @@ function setCookie(name, value, days, path, domain, secure) {
     var expires = '';
   }
 
-  document.cookie =
-    name + '=' + encodeURI(value)
-    + ((expires) ? '; expires=' + expires : '')
-    + ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : ''))
-    + ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : ''))
-    + ((secure) ? '; secure' : ((cookieSecure) ? '; secure' : ''));
+  document.cookie = name + '=' + encodeURI(value) + ((expires) ? '; expires=' + expires : '') + ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : '')) + ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : '')) + ((secure) ? '; secure' : ((cookieSecure) ? '; secure' : ''));
 }
 
 /**

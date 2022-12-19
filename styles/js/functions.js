@@ -15,10 +15,8 @@ function $p() {
   var elements = [];
   for (var i = 0; i < arguments.length; i++) {
     var element = arguments[i];
-    if (typeof element === 'string')
-      element = document.getElementById(element);
-    if (arguments.length === 1)
-      return element;
+    if (typeof element === 'string') element = document.getElementById(element);
+    if (arguments.length === 1) return element;
     elements.push(element);
   }
   return elements;
@@ -69,10 +67,7 @@ function redirect(link) {
  * @returns {boolean}
  */
 function isEmpty(x) {
-  if (Array.isArray(x)
-    || typeof x === 'string'
-    || x instanceof String
-  ) {
+  if (Array.isArray(x) || typeof x === 'string' || x instanceof String) {
     return x.length === 0;
   }
 

@@ -30,19 +30,12 @@ BBCode.prototype = {
     this.textarea = textarea;
     this.tags = {};
     // Tag for quoting
-    this.addTag(
-      '_quoter',
-      function () {
-        return '[quote="' + th.quoter + '"][qpost=' + th.qouted_pid + ']'
-      },
-      '[/quote]\n',
-      null,
-      null,
-      function () {
-        th.collapseAfterInsert = true;
-        return th._prepareMultiline(th.quoterText)
-      }
-    );
+    this.addTag('_quoter', function () {
+      return '[quote="' + th.quoter + '"][qpost=' + th.qouted_pid + ']'
+    }, '[/quote]\n', null, null, function () {
+      th.collapseAfterInsert = true;
+      return th._prepareMultiline(th.quoterText)
+    });
 
     // Init events
     var th = this;
@@ -228,12 +221,9 @@ BBCode.prototype = {
     // Hot keys
     var form = this.textarea.form;
     var submitter = null;
-    if (e.keyCode === this.VK_PAGE_UP && e.shiftKey && !e.ctrlKey && e.altKey)
-      submitter = form.add_attachment_box;
-    if (e.keyCode === this.VK_ENTER && !e.shiftKey && !e.ctrlKey && e.altKey)
-      submitter = form.preview;
-    if (e.keyCode === this.VK_ENTER && !e.shiftKey && e.ctrlKey && !e.altKey)
-      submitter = form.post;
+    if (e.keyCode === this.VK_PAGE_UP && e.shiftKey && !e.ctrlKey && e.altKey) submitter = form.add_attachment_box;
+    if (e.keyCode === this.VK_ENTER && !e.shiftKey && !e.ctrlKey && e.altKey) submitter = form.preview;
+    if (e.keyCode === this.VK_ENTER && !e.shiftKey && e.ctrlKey && !e.altKey) submitter = form.post;
     if (submitter) {
       submitter.click();
       return this._cancelEvent(e);
@@ -314,8 +304,7 @@ if (window.HTMLElement && window.HTMLElement.prototype.__defineSetter__) {
 }
 
 function AddSelectedText(BBOpen, BBClose) {
-  if (document.post.message.caretPos) document.post.message.caretPos.text = BBOpen + document.post.message.caretPos.text + BBClose;
-  else document.post.message.value += BBOpen + BBClose;
+  if (document.post.message.caretPos) document.post.message.caretPos.text = BBOpen + document.post.message.caretPos.text + BBClose; else document.post.message.value += BBOpen + BBClose;
   document.post.message.focus()
 }
 
@@ -434,8 +423,7 @@ function fixPostImage($img) {
   var src = $img[0].src;
   if (src.match(banned_image_hosts)) {
     $img.wrap('<a href="' + this.src + '" target="_blank"></a>').attr({
-      src: "" + bb_url + "styles/images/smiles/tr_oops.gif",
-      title: "" + bbl['scr_rules'] + ""
+      src: "" + bb_url + "styles/images/smiles/tr_oops.gif", title: "" + bbl['scr_rules'] + ""
     });
   }
   return $img;

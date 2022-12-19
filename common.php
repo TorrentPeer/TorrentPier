@@ -160,7 +160,7 @@ function hide_bb_path($path): string
  * @param int $length
  * @return string
  */
-function make_rand_str($length = 10)
+function make_rand_str($length = 10): string
 {
   $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -243,6 +243,7 @@ $CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
 function DB($db_alias = 'db')
 {
   global $DBS;
+
   return $DBS->get_db_obj($db_alias);
 }
 
@@ -256,6 +257,7 @@ function DB($db_alias = 'db')
 function CACHE($cache_name)
 {
   global $CACHES;
+
   return $CACHES->get_cache_obj($cache_name);
 }
 

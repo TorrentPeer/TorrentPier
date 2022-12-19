@@ -22,8 +22,8 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.6-rc1';
-$bb_cfg['tp_release_date'] = '19-12-22';
+$bb_cfg['tp_version'] = '2.4.0.6-rc2';
+$bb_cfg['tp_release_date'] = '20-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
 // GZip
@@ -373,7 +373,7 @@ $bb_cfg['poll_max_days'] = 180; // сколько дней с момента с�
 
 $bb_cfg['allow_change'] = [
   'language' => true,
-  'dateformat' => false,
+  'dateformat' => true,
 ];
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
