@@ -299,10 +299,8 @@ class BBCode
    */
   private function get_username_callback($m): string
   {
-    global $lang;
-
     if (!$user_data = get_userdata(get_user_id(trim($m[1])))) {
-      return $lang['NO_SUCH_USER'];
+      return '[b]' . $m[1] . '[/b]';
     }
 
     return profile_url($user_data);
