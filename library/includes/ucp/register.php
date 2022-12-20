@@ -73,22 +73,24 @@ switch ($mode) {
       'username' => true,
       'user_password' => true,
       'user_email' => true,
+      'invite_code' => true,
+      // Automatic
+      'user_opt' => true,
       'user_timezone' => true,
       'user_lang' => true,
-      'user_opt' => true,
-      'invite_code' => true,
     ];
 
     $pr_data = [
-      'user_id' => GUEST_UID,
       'username' => '',
       'user_password' => '',
       'user_email' => '',
+      'invite_code' => '',
+      // Automatic
+      'user_id' => GUEST_UID,
       'user_timezone' => $bb_cfg['board_timezone'],
       'user_lang' => $bb_cfg['default_lang'],
       'user_opt' => 0,
       'avatar_ext_id' => 0,
-      'invite_code' => '',
     ];
     break;
 
@@ -168,7 +170,7 @@ $cur_pass_valid = $adm_edit;
 foreach ($profile_fields as $field => $can_edit) {
   switch ($field) {
     /**
-     *  Активация (edit, reg)
+     *  Активация (reg)
      */
     case 'user_active':
       $active = isset($_POST['user_active']) ? (int)$_POST['user_active'] : $pr_data['user_active'];
@@ -296,7 +298,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  Часовой пояс (edit, reg)
+     *  Часовой пояс (edit)
      */
     case 'user_timezone':
       $user_timezone = isset($_POST['user_timezone']) ? (int)$_POST['user_timezone'] : $pr_data['user_timezone'];
@@ -309,7 +311,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  Пол (edit, reg)
+     *  Пол (edit)
      */
     case 'user_gender':
       $user_gender = isset($_POST['user_gender']) ? (int)$_POST['user_gender'] : $pr_data['user_gender'];
@@ -483,7 +485,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     * Провайдер
+     * Провайдер (edit)
      **/
     case 'user_prov':
       $prov = isset($_POST['user_prov']) ? (string)$_POST['user_prov'] : $pr_data['user_prov'];
@@ -498,7 +500,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  Интересы
+     *  Интересы (edit)
      */
     case 'user_interests':
       $interests = isset($_POST['user_interests']) ? (string)$_POST['user_interests'] : $pr_data['user_interests'];
@@ -511,7 +513,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  Skype
+     *  Skype (edit)
      */
     case 'user_skype':
       $skype = isset($_POST['user_skype']) ? (string)$_POST['user_skype'] : $pr_data['user_skype'];
@@ -526,7 +528,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  Twitter
+     *  Twitter (edit)
      */
     case 'user_twitter':
       $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];
@@ -541,7 +543,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  Telegram
+     *  Telegram (edit)
      */
     case 'user_telegram':
       $telegram = isset($_POST['user_telegram']) ? (string)$_POST['user_telegram'] : $pr_data['user_telegram'];
@@ -556,7 +558,7 @@ foreach ($profile_fields as $field => $can_edit) {
       break;
 
     /**
-     *  VK
+     *  VK (edit)
      */
     case 'user_vk':
       $vk = isset($_POST['user_vk']) ? (string)$_POST['user_vk'] : $pr_data['user_vk'];

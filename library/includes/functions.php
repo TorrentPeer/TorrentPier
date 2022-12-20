@@ -1553,13 +1553,12 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 {
   global $bb_cfg, $lang, $userdata;
 
-  $gmepoch = (int)$gmepoch;
+  if (empty($lang)) {
+    require_once($bb_cfg['default_lang_dir'] . 'main.php');
+  }
 
   if (!$format) {
     $format = $bb_cfg['default_dateformat'];
-  }
-  if (empty($lang)) {
-    require_once($bb_cfg['default_lang_dir'] . 'main.php');
   }
 
   if (empty($userdata['session_logged_in'])) {
@@ -1567,6 +1566,8 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
   } else {
     $tz = $userdata['user_timezone'];
   }
+
+  $gmepoch = (int)$gmepoch;
 
   $date = gmdate($format, $gmepoch + (3600 * $tz));
 
