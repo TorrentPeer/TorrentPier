@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.4.0.6](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.6) (2022-12-20)
+
+[Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.5...v2.4.0.6)
+
+- Misc fixes and improvements ([belomaxorka](https://github.com/belomaxorka))
+- Updated normalize.css [afa0c74](https://github.com/TorrentPeer/TorrentPier/commit/afa0c74cf5fa5cf5f60ebf1f0b36f368f254c9e0) ([belomaxorka](https://github.com/belomaxorka))
+- Dynamic PM disabled by default [dee3f9a](https://github.com/TorrentPeer/TorrentPier/commit/dee3f9afe34c040c4a8413933e8f16e9f833d3cc) ([belomaxorka](https://github.com/belomaxorka))
+- Added some translations for debug panel [c7d6869](https://github.com/TorrentPeer/TorrentPier/commit/c7d6869edf17463231892b1cf0f776bb5a186287) ([belomaxorka](https://github.com/belomaxorka))
+- Added missing tags in $block_tags [9bd6610](https://github.com/TorrentPeer/TorrentPier/commit/9bd66104b0bbb66e7a04271d3da6ceb0ce98a7e9) ([belomaxorka](https://github.com/belomaxorka))
+- Removed useless "Cache GC" cron job [7ceb563](https://github.com/TorrentPeer/TorrentPier/commit/7ceb563e9021008e9bfb286870eddec0225a8ec8) ([belomaxorka](https://github.com/belomaxorka))
+- Added extended password validation [d95f321](https://github.com/TorrentPeer/TorrentPier/commit/d95f321e866b41629ebde1bf2696330b0ff0488a) ([belomaxorka](https://github.com/belomaxorka))
+- Removed "Change date format by user" [20f2556](https://github.com/TorrentPeer/TorrentPier/commit/20f25567484f6249a2af3e401a021bb7975f26a2) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0.5](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.5) (2022-12-04)
 
 [Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.4...v2.4.0.5)
