@@ -256,12 +256,6 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF $bb_cfg['allow_change']['dateformat'] -->
-<tr>
-	<td class="prof-title">{L_DATE_FORMAT}:<br /><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
-	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
-</tr>
-<!-- ENDIF -->
 <tr>
 	<th colspan="2">{L_UCP_DOWNLOADS}</th>
 </tr>
