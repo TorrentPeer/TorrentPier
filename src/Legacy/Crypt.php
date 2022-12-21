@@ -84,24 +84,40 @@ class Crypt
   /**
    * Generate a password hash
    *
-   * @param $password
+   * @param string $password
    * @return false|string|null
    */
-  public static function password_hash($password)
+  public static function password_hash(string $password)
   {
-    return password_hash($password, PASSWORD_DEFAULT);
+    global $bb_cfg;
+
+    switch ($bb_cfg['password_crypt_method']) {
+      default:
+      case 'password_hash':
+        return password_hash($password, PASSWORD_DEFAULT);
+      case 'md5':
+        return self::md5($password, true);
+    }
   }
 
   /**
    * Password verify by password hash
    *
-   * @param $password
-   * @param $hash
+   * @param string $password
+   * @param string $hash
    * @return bool
    */
-  public static function password_verify($password, $hash): bool
+  public static function password_verify(string $password, string $hash): bool
   {
-    return password_verify($password, $hash);
+    global $bb_cfg;
+
+    switch ($bb_cfg['password_crypt_method']) {
+      default:
+      case 'password_hash':
+        return password_verify($password, $hash);
+      case 'md5':
+        return self::md5($password, true) === $hash;
+    }
   }
 
   /**

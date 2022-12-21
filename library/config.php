@@ -22,8 +22,8 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.7-beta1';
-$bb_cfg['tp_release_date'] = '20-12-22';
+$bb_cfg['tp_version'] = '2.4.0.7-beta2';
+$bb_cfg['tp_release_date'] = '21-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
 // GZip
@@ -187,6 +187,7 @@ $bb_cfg['max_last_visit_days'] = 14; // days
 $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 
 // Registration
+$bb_cfg['password_crypt_method'] = 'password_hash'; // Тип шифрования паролей (Доступные значения: password_hash (РЕКОМЕНДУЕТСЯ), md5). Используйте md5 только в том случае, если вам нужно перенести уже существующую базу данных, где используются md5 пароли
 $bb_cfg['invalid_logins'] = 5; // Количество неверных попыток ввода пароля, перед выводом проверки капчей
 $bb_cfg['new_user_reg_disabled'] = false; // Запретить регистрацию новых учетных записей
 $bb_cfg['unique_ip'] = false; // Запретить регистрацию нескольких учетных записей с одного ip
