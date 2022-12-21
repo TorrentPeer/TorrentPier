@@ -336,7 +336,9 @@ Detector.detect();
   <!-- ENDIF -->
   <div class="floatR">
     <!-- DON'T DELETE LINE BELOW -->
-    <span style="color: #0057b8;">#STAND</span><span style="color: #ffd700;">WITHUKRAINE</span>
+    <a target="_blank" title="Do something to stop this war! Russians are killing our children and civilians!"
+       href="https://bank.gov.ua/en/news/all/natsionalniy-bank-vidkriv-spetsrahunok-dlya-zboru-koshtiv-na-potrebi-armiyi"><span
+        style="color: #0057b8;">#STAND</span><span style="color: #ffd700;">WITHUKRAINE</span></a>
   </div>
 </div>
 <!--/logo-->
