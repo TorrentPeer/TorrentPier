@@ -17,8 +17,8 @@
       </div><br/>
       <!-- ENDIF -->
 
-      <!-- IF NEW_POST -->
-      <div class="section">
+      <!-- IF $bb_cfg['show_latest_posts_sidebar'] -->
+      <div>
         <h3>{L_LATEST_POSTS}</h3>
         <div id="new_post">
           <ul class="newtopics_mes">
