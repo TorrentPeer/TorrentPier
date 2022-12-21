@@ -147,6 +147,7 @@ $lang['SEARCH_UNANSWERED'] = 'Сообщения без ответов';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'без ответов';
 $lang['SEARCH_LATEST'] = 'Последние темы';
 $lang['LATEST_RELEASES'] = 'Последние раздачи';
+$lang['LATEST_POSTS'] = 'Последние сообщения';
 
 $lang['REGISTER'] = 'Регистрация';
 $lang['PROFILE'] = 'Профиль';
@@ -316,6 +317,8 @@ $lang['NO_POST_MODE'] = 'Не указан режим сообщения'; // If
 
 $lang['POST_A_NEW_TOPIC'] = 'Начать новую тему';
 $lang['POST_A_REPLY'] = 'Ответить';
+$lang['POST_REPLIED'] = '%s ответил';
+$lang['POST_POSTED'] = '%s разместил новую тему';
 $lang['POST_TOPIC_AS'] = 'Статус создаваемой темы';
 $lang['EDIT_POST'] = 'Редактировать сообщение';
 $lang['EDIT_TOPIC_TITLE'] = 'Изменить название темы';

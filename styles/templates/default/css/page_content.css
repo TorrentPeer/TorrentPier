@@ -116,3 +116,33 @@
 #author-rel a {
   color: #800000;
 }
+
+/* Latest posts */
+#new_post ul.newtopics_mes, li {
+  margin: 0;
+}
+
+#new_post ul.newtopics_mes li {
+  font: 11px/1.231 arial, helvetica, clean, sans-serif;
+  margin: 5px 0;
+  padding: 2px;
+  list-style: none outside none;
+  overflow: hidden;
+}
+
+#new_post ul.newtopics_mes .avatars img {
+  height: 48px;
+  width: 48px;
+}
+
+#new_post ul.newtopics_mes .avatars {
+  margin-right: 5px;
+  float: left;
+  width: auto;
+  height: auto;
+}
+
+#new_post ul.newtopics_mes .title {
+  color: #A52A2A;
+  font-weight: bold;
+}

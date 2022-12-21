@@ -397,6 +397,37 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
   ]);
 }
 
+if ($bb_cfg['show_latest_posts_sidebar']) {
+  $template->assign_vars(['NEW_POST' => true]);
+
+  if (!$new_post = CACHE('bb_cache')->get('new_post')) {
+    $new_post = DB()->fetch_rowset('SELECT
+        p.post_id, p.poster_id, t.topic_title, t.topic_first_post_id, t.topic_id, u.username, u.user_id,
+        u.avatar_ext_id, u.user_rank, p.forum_id, p.post_time
+        FROM ' . BB_POSTS . ' p
+        LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = p.topic_id
+        LEFT JOIN ' . BB_USERS . ' u ON u.user_id = p.poster_id
+        ORDER BY p.post_id DESC LIMIT 10');
+
+    CACHE('bb_cache')->set('new_post', $new_post, 60);
+  }
+
+  foreach ($new_post as $row) {
+    if ((!empty($excluded_forums_csv)) ? !in_array($row['forum_id'], explode(',', $excluded_forums_csv)) : true) {
+      $mes = ($row['post_id'] == $row['topic_first_post_id']) ? true : false;
+      $topic_text = ($mes) ? $lang['POST_POSTED'] . '&nbsp;' : $lang['POST_REPLIED'] . '&nbsp;';
+
+      $template->assign_block_vars('new', [
+        'POSTING' => ($mes) ? TOPIC_URL . $row['topic_id'] : POST_URL . $row['post_id'] . '#' . $row['post_id'],
+        'TOPIC_TITLE' => $row['topic_title'],
+        'POST_TOPIC' => str_short($row['topic_title'], 32),
+        'AVATAR' => \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id']),
+        'TOPIC_TEXT' => sprintf($topic_text, profile_url(['username' => $row['username'], 'user_id' => $row['poster_id'], 'user_rank' => $row['user_rank']])) . bb_date($row['post_time']),
+      ]);
+    }
+  }
+}
+
 // Allow cron
 if (IS_AM) {
   if (file_exists(CRON_RUNNING)) {

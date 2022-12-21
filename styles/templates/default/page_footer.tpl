@@ -17,6 +17,23 @@
       </div><br/>
       <!-- ENDIF -->
 
+      <!-- IF NEW_POST -->
+      <div class="section">
+        <h3>{L_LATEST_POSTS}</h3>
+        <div id="new_post">
+          <ul class="newtopics_mes">
+            <!-- BEGIN new -->
+            <li>
+              <div class="avatars">{new.AVATAR}</div>
+              <a href="{new.POSTING}" title="{new.TOPIC_TITLE}" class="title">{new.POST_TOPIC}</a>
+              <div>{new.TOPIC_TEXT}</div>
+            </li>
+            <!-- END new -->
+          </ul>
+        </div>
+      </div>
+      <!-- ENDIF -->
+
 			<!-- IF HTML_SIDEBAR_2 -->
 				<?php include($V['HTML_SIDEBAR_2']); ?>
 			<!-- ENDIF -->

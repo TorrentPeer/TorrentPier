@@ -147,6 +147,7 @@ $lang['SEARCH_UNANSWERED'] = 'View unanswered posts';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'unanswered';
 $lang['SEARCH_LATEST'] = 'Latest topics';
 $lang['LATEST_RELEASES'] = 'Latest releases';
+$lang['LATEST_POSTS'] = 'Latest posts';
 
 $lang['REGISTER'] = 'Register';
 $lang['PROFILE'] = 'Profile';
@@ -316,6 +317,8 @@ $lang['NO_POST_MODE'] = 'No post mode selected'; // If posting.php is called wit
 
 $lang['POST_A_NEW_TOPIC'] = 'Post new topic';
 $lang['POST_A_REPLY'] = 'Post new reply';
+$lang['POST_REPLIED'] = '%s replied';
+$lang['POST_POSTED'] = '%s posted a new topic';
 $lang['POST_TOPIC_AS'] = 'Post topic as';
 $lang['EDIT_POST'] = 'Edit post';
 $lang['EDIT_TOPIC_TITLE'] = 'Edit topic title';
