@@ -82,7 +82,7 @@ class Crypt
   }
 
   /**
-   * Generate a password hash
+   * Generate a hash of password
    *
    * @param string $password
    * @return false|string|null
@@ -101,7 +101,7 @@ class Crypt
   }
 
   /**
-   * Password verify by password hash
+   * Password hash verify
    *
    * @param string $password
    * @param string $hash

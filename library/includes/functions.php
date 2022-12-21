@@ -133,12 +133,50 @@ function make_url(string $path = ''): string
  * Generates a random password
  *
  * @param int $length
+ * @param bool $add_dashes
+ * @param string $available_sets
  * @return string
+ * @throws Exception
  */
-function make_rand_password(int $length = PASSWORD_MIN_LENGTH): string
+function make_rand_password(int $length = PASSWORD_MIN_LENGTH, bool $add_dashes = false, string $available_sets = 'luds'): string
 {
-  /** TODO */
-  return make_rand_str($length);
+  $sets = [];
+  if (strpos($available_sets, 'l') !== false)
+    $sets[] = 'abcdefghjkmnpqrstuvwxyz';
+  if (strpos($available_sets, 'u') !== false)
+    $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+  if (strpos($available_sets, 'd') !== false)
+    $sets[] = '23456789';
+  if (strpos($available_sets, 's') !== false)
+    $sets[] = "!\"#$%&'()*+,\-./:;<=>?@[]^_`{|}";
+
+  $all = '';
+  $password = '';
+
+  foreach ($sets as $set) {
+    $password .= $set[tweak_array_rand(str_split($set))];
+    $all .= $set;
+  }
+
+  $all = str_split($all);
+  for ($i = 0; $i < $length - count($sets); $i++)
+    $password .= $all[tweak_array_rand($all)];
+
+  $password = str_shuffle($password);
+
+  if (!$add_dashes)
+    return $password;
+
+  $dash_len = floor(sqrt($length));
+  $dash_str = '';
+
+  while (strlen($password) > $dash_len) {
+    $dash_str .= substr($password, 0, $dash_len) . '-';
+    $password = substr($password, $dash_len);
+  }
+  $dash_str .= $password;
+
+  return $dash_str;
 }
 
 /**
@@ -589,6 +627,24 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
   }
 
   return ($forum_id == AUTH_LIST_ALL) ? $auth : $auth[$forum_id];
+}
+
+/**
+ * Improved array rand algo
+ *
+ * @param $array
+ * @return array|int|string
+ * @throws Exception
+ */
+function tweak_array_rand($array)
+{
+  if (function_exists('random_int')) {
+    return random_int(0, count($array) - 1);
+  } elseif (function_exists('mt_rand')) {
+    return mt_rand(0, count($array) - 1);
+  } else {
+    return array_rand($array);
+  }
 }
 
 /**

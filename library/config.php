@@ -22,7 +22,7 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.7-beta3';
+$bb_cfg['tp_version'] = '2.4.0.7-beta4';
 $bb_cfg['tp_release_date'] = '21-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
@@ -198,7 +198,7 @@ $bb_cfg['reg_email_activation'] = false; // Требовать активаци�
 $bb_cfg['password_symbols'] = [
   // Требовать наличие символов в пароле
   'nums' => true, // Цифры
-  'spec_symbols' => false, // Спец символы
+  'spec_symbols' => true, // Спец символы
   'letters' => true // Буквы
 ];
 
