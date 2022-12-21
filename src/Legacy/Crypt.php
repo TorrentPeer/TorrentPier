@@ -89,15 +89,7 @@ class Crypt
    */
   public static function password_hash(string $password)
   {
-    global $bb_cfg;
-
-    switch ($bb_cfg['password_crypt_method']) {
-      default:
-      case 'password_hash':
-        return password_hash($password, PASSWORD_DEFAULT);
-      case 'md5':
-        return self::md5($password, true);
-    }
+    return password_hash($password, PASSWORD_DEFAULT);
   }
 
   /**
@@ -109,15 +101,7 @@ class Crypt
    */
   public static function password_verify(string $password, string $hash): bool
   {
-    global $bb_cfg;
-
-    switch ($bb_cfg['password_crypt_method']) {
-      default:
-      case 'password_hash':
-        return password_verify($password, $hash);
-      case 'md5':
-        return self::md5($password, true) === $hash;
-    }
+    return password_verify($password, $hash) || self::md5($password, true) === $hash;
   }
 
   /**

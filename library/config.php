@@ -188,7 +188,6 @@ $bb_cfg['max_last_visit_days'] = 14; // days
 $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 
 // Registration
-$bb_cfg['password_crypt_method'] = 'password_hash'; // Тип шифрования паролей (Доступные значения: password_hash (РЕКОМЕНДУЕТСЯ), md5). Используйте md5 только в том случае, если вам нужно перенести уже существующую базу данных, где используются md5 пароли
 $bb_cfg['invalid_logins'] = 5; // Количество неверных попыток ввода пароля, перед выводом проверки капчей
 $bb_cfg['new_user_reg_disabled'] = false; // Запретить регистрацию новых учетных записей
 $bb_cfg['unique_ip'] = false; // Запретить регистрацию нескольких учетных записей с одного ip
