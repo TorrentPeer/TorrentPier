@@ -49,4 +49,4 @@ $template->assign_vars([
   'REQUIRE' => $require ? file_get_contents($require) : $lang['NOT_FOUND'],
 ]);
 
-print_page('info.tpl', 'simple');
+print_page('info.tpl', 'simple', 'no_footer');

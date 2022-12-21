@@ -335,9 +335,9 @@ require INC_DIR . '/functions.php';
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
-$log_action = new TorrentPier\Legacy\LogAction();
-$html = new TorrentPier\Legacy\Common\Html();
-$user = new TorrentPier\Legacy\Common\User();
+$log_action = new \TorrentPier\Legacy\LogAction();
+$html = new \TorrentPier\Legacy\Common\Html();
+$user = new \TorrentPier\Legacy\Common\User();
 
 $userdata =& $user->data;
 
@@ -358,19 +358,19 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
       if (TorrentPier\Helpers\CronHelper::hasFileLock()) {
         /** снятие файловой блокировки */
         register_shutdown_function(function () {
-          TorrentPier\Helpers\CronHelper::releaseLockFile();
+          \TorrentPier\Helpers\CronHelper::releaseLockFile();
         });
 
         /** разблокировка форума */
         register_shutdown_function(function () {
-          TorrentPier\Helpers\CronHelper::enableBoard();
+          \TorrentPier\Helpers\CronHelper::enableBoard();
         });
 
-        TorrentPier\Helpers\CronHelper::trackRunning('start');
+        \TorrentPier\Helpers\CronHelper::trackRunning('start');
 
         require(CRON_DIR . 'cron_check.php');
 
-        TorrentPier\Helpers\CronHelper::trackRunning('end');
+        \TorrentPier\Helpers\CronHelper::trackRunning('end');
       }
 
       if (defined('IN_CRON')) {
@@ -390,11 +390,11 @@ if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN
   if ($bb_cfg['board_disable']) {
     // admin lock
     send_no_cache_headers();
-    bb_die($lang['BOARD_DISABLE']);
+    bb_die('BOARD_DISABLE');
   } elseif (file_exists(BB_DISABLED)) {
     // trigger lock
     \TorrentPier\Helpers\CronHelper::releaseDeadlock();
     send_no_cache_headers();
-    bb_die($lang['BOARD_DISABLE_CRON']);
+    bb_die('BOARD_DISABLE_CRON');
   }
 }
