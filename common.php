@@ -54,6 +54,21 @@ if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
 }
 require_once BB_PATH . '/vendor/autoload.php';
 
+// Get all constants
+require_once BB_PATH . '/library/defines.php';
+
+// Get config
+require_once BB_PATH . '/library/config.php'; // General config
+if (file_exists(BB_PATH . LOCAL_CONFIG)) {
+  require_once BB_PATH . LOCAL_CONFIG; // Local config
+}
+
+/**
+ * Debug
+ */
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
+new \TorrentPier\Legacy\Dev();
+
 /**
  * Simple die
  *
@@ -168,20 +183,13 @@ function make_rand_str($length = 10): string
 }
 
 /**
+ * Microtimer
+ *
  * @return float|int
  */
 function utime()
 {
   return array_sum(explode(' ', microtime()));
-}
-
-// Get all constants
-require_once BB_PATH . '/library/defines.php';
-
-// Get config
-require_once BB_PATH . '/library/config.php'; // General config
-if (file_exists(BB_PATH . LOCAL_CONFIG)) {
-  require_once BB_PATH . LOCAL_CONFIG; // Local config
 }
 
 // Server
@@ -190,9 +198,6 @@ $server_port = in_array($bb_cfg['server_port'], [80, 443]) ? '' : (':' . $bb_cfg
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
-
-// Debug options
-define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 
 // Board / tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
@@ -221,11 +226,6 @@ define('TOR_TYPE_SILVER', 2);
 
 define('GUEST_UID', -1);
 define('BOT_UID', -746);
-
-/**
- * Debug
- */
-new \TorrentPier\Legacy\Dev();
 
 /**
  * Init database & cache
