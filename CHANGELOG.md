@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.4.0.7](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.7) (2022-12-22)
+
+[Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.6...v2.4.0.7)
+
+- Misc fixes and improvements ([belomaxorka](https://github.com/belomaxorka))
+- Fixed username selecting in admin_groups.php [5ab126e](https://github.com/TorrentPeer/TorrentPier/commit/5ab126e7a54acd54979312e48370c1b579bc67cc) ([belomaxorka](https://github.com/belomaxorka))
+- Added support for md5 legacy passwords [325860e](https://github.com/TorrentPeer/TorrentPier/commit/325860ef2ec9f8d21f2a640aab7bcf1ed39a621a) ([belomaxorka](https://github.com/belomaxorka))
+- Added show the latest posts in sidebar [36c76c0](https://github.com/TorrentPeer/TorrentPier/commit/36c76c003a80e0b587e5cfb243c00f65cf3fd6cc) ([belomaxorka](https://github.com/belomaxorka))
+- New password generator (Secured) [83d2c8d](https://github.com/TorrentPeer/TorrentPier/commit/83d2c8dcf4d3a881d80b60728b22e9a6d346118e) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to hide videos/audios in post [72be347](https://github.com/TorrentPeer/TorrentPier/commit/72be3471eb754e518cd14eec1ce992617d82eccb) ([belomaxorka](https://github.com/belomaxorka))
+- Disabled error notices for PHP >=7.4 [03b816c](https://github.com/TorrentPeer/TorrentPier/commit/03b816c3ce6384383bf7b3e30cfe795c645018fa) ([belomaxorka](https://github.com/belomaxorka))
+- Added copy url button for selected post [32a3efb](https://github.com/TorrentPeer/TorrentPier/commit/32a3efbbd3a11638f143418831d4cd374c867b7e) ([belomaxorka](https://github.com/belomaxorka))
+- Added current topic url copy button [aad0826](https://github.com/TorrentPeer/TorrentPier/commit/aad0826e6fcfb03d2a5cd6c0be1b4b87b9c35876) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0.6](https://github.com/torrentpeer/torrentpier/tree/v2.4.0.6) (2022-12-20)
 
 [Full Changelog](https://github.com/torrentpeer/torrentpier/compare/v2.4.0.5...v2.4.0.6)
