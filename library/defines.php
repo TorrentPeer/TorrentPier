@@ -87,7 +87,7 @@ define('LOG_LF', "\n");
 define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
-ini_set('error_reporting', E_ALL);
+ini_set('error_reporting', \TorrentPier\Helpers\IsHelper::is_php('7.4') ? (E_ALL ^ E_NOTICE) : E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
 define('WHOOPS_LOG_FILE', 'php_whoops'); // log file enabled only if log_errors == 1 (whoops)
