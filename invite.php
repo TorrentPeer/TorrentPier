@@ -273,7 +273,8 @@ $template->assign_vars([
     'USER_GROUP' => $user_group[0],
     'INVITES_GETTED_ALL' => $invites_count_all,
     'INVITES_GETTED_WEEK' => $invites_count_week,
-    'INVITES_MAY_GET' => $invites_may_get
+    'INVITES_MAY_GET' => $invites_may_get,
+    'S_INVITE_ACTION' => 'invite.php?mode=getinvite',
   ]
 );
 
