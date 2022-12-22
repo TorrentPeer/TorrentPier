@@ -506,6 +506,8 @@ $template->assign_vars([
   'HIDE_AVATAR' => $user->opt_js['h_av'],
   'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && $bb_cfg['show_rank_image']),
   'HIDE_POST_IMG' => $user->opt_js['h_post_i'],
+  'HIDE_POST_VIDEOS' => $user->opt_js['h_post_videos'],
+  'HIDE_POST_AUDIOS' => $user->opt_js['h_post_audios'],
   'HIDE_SMILE' => $user->opt_js['h_smile'],
   'HIDE_SIGNATURE' => $user->opt_js['h_sig'],
   'SPOILER_OPENED' => $user->opt_js['sp_op'],

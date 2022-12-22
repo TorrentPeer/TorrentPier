@@ -189,9 +189,9 @@ class BBCode
     // Sources
     $sources = [
       // Vimeo
-      '#\[vimeo\](.*?)\[/vimeo\]#isu' => '<div style="width: 862px;height: auto;"><div class="js-player" data-plyr-provider="vimeo" data-plyr-embed-id="$1"></div></div>',
+      '#\[vimeo\](.*?)\[/vimeo\]#isu' => '<div class="postVideo"><div class="js-player" data-plyr-provider="vimeo" data-plyr-embed-id="$1"></div></div>',
       // Youtube
-      '#\[youtube\](.*?)\[/youtube\]#isu' => '<div style="width: 862px;height: auto;"><div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="$1"></div></div>',
+      '#\[youtube\](.*?)\[/youtube\]#isu' => '<div class="postVideo"><div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="$1"></div></div>',
     ];
     $text = preg_replace(array_keys($sources), array_values($sources), $text);
 

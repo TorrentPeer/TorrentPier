@@ -2,7 +2,9 @@
 <style type="text/css">
 <!-- IF HIDE_AVATAR -->.avatar { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_RANK_IMG -->.rank_img { display: none; }<!-- ENDIF -->
-<!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap { display: none; }<!-- ENDIF -->
+<!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap, a.highslide { display: none; }<!-- ENDIF -->
+<!-- IF HIDE_POST_VIDEOS -->.postVideo { display: none; }<!-- ENDIF -->
+<!-- IF HIDE_POST_AUDIOS -->.postAudio { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_SMILE -->.smile { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_SIGNATURE -->.signature { display: none; }<!-- ENDIF -->
 </style>
@@ -351,6 +353,16 @@ function build_poll_add_form (src_el)
 						onclick="user.set('h_post_i', this.checked ? 1 : 0);"
 					/>{L_POST_IMAGES}
 				</label>
+        <label>
+          <input type="checkbox" <!-- IF HIDE_POST_VIDEOS -->{CHECKED}<!-- ENDIF -->
+          onclick="user.set('h_post_videos', this.checked ? 1 : 0);"
+          />{L_POST_VIDEOS}
+        </label>
+        <label>
+          <input type="checkbox" <!-- IF HIDE_POST_AUDIOS -->{CHECKED}<!-- ENDIF -->
+          onclick="user.set('h_post_audios', this.checked ? 1 : 0);"
+          />{L_POST_AUDIOS}
+        </label>
 				<label>
 					<input type="checkbox" <!-- IF HIDE_SMILE -->{CHECKED}<!-- ENDIF -->
 						onclick="user.set('h_smile', this.checked ? 1 : 0);"
@@ -599,7 +611,9 @@ function build_poll_add_form (src_el)
 </table><!--/topic_main-->
 <!-- ENDIF -->
 
-<!-- IF HIDE_POST_IMG --><script type="text/javascript">$('img.postImg').remove();</script><!-- ENDIF -->
+<!-- IF HIDE_POST_AUDIOS --><script type="text/javascript">$('.postAudio').remove();</script><!-- ENDIF -->
+<!-- IF HIDE_POST_VIDEOS --><script type="text/javascript">$('.postVideo').remove();</script><!-- ENDIF -->
+<!-- IF HIDE_POST_IMG --><script type="text/javascript">$('img.postImg').remove(); $('a.highslide').remove();</script><!-- ENDIF -->
 <!-- IF HIDE_SMILE --><script type="text/javascript">$('img.smile').remove();</script><!-- ENDIF -->
 
 <!-- IF PAGINATION -->

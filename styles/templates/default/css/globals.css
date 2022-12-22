@@ -536,6 +536,15 @@ a.postLink-name, a.postLink-name:visited {
 }
 
 /* ---------------------------------- *
+     Video, Audio
+ * ---------------------------------- */
+.postVideo,
+.postAudio {
+  width: 862px;
+  height: auto;
+}
+
+/* ---------------------------------- *
      Inputs, buttons, forms
  * ---------------------------------- */
 input, textarea, select {

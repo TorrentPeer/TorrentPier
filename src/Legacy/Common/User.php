@@ -39,6 +39,8 @@ class User
     'h_av' => 0,     // hide avatar
     'h_rnk_i' => 0,     // hide rank images
     'h_post_i' => 0,     // hide post images
+    'h_post_videos' => 0, // hide post videos
+    'h_post_audios' => 0, // hide post audios
     'h_smile' => 0,     // hide smilies
     'h_sig' => 0,     // hide signatures
     'sp_op' => 0,     // show spoiler opened

@@ -100,12 +100,12 @@ HTML;
 
 // MP3
   $bbcode_tpl['mp3'] = <<<HTML
-	<div style="width: 862px;height: auto;"><audio class="js-player" controls preload="auto" src="\\1"><source src="\\1" type="audio/mpeg"></audio></div>
+	<div class="postAudio"><audio class="js-player" controls preload="auto" src="\\1"><source src="\\1" type="audio/mpeg"></audio></div>
 HTML;
 
 // MP4
   $bbcode_tpl['mp4'] = <<<HTML
-	<div style="width: 862px;height: auto;"><video class="js-player" playsinline controls preload="auto" src="\\1"><source src="\\1" type="video/mp4"></video></div>
+	<div class="postVideo"><video class="js-player" playsinline controls preload="auto" src="\\1"><source src="\\1" type="video/mp4"></video></div>
 HTML;
 
 // HR
