@@ -25,16 +25,15 @@ use function is_string;
  */
 class SqlDb
 {
-  public $driver;
   public $cfg = [];
   public $pdo;
 
-  private $drivers_allowed = ['mysql', 'postgresql', 'sqlite'];
+  public $driver = null;
+
   private $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
   private $link;
 
   public $result;
-  public $db_server = '';
   public $selected_db;
   public $inited = false;
 
@@ -60,26 +59,18 @@ class SqlDb
   public $shutdown = [];
 
   public $DBS = [];
-  public $engine;
 
   /**
    * sql_db constructor.
    *
-   * @param $driver
+   * @param string $driver
    * @param $cfg_values
-   * @throws Exception
    */
-  public function __construct($driver, $cfg_values)
+  public function __construct(string $driver, $cfg_values)
   {
     global $DBS;
 
     $this->driver = $driver;
-
-    if (!in_array($this->driver, $this->drivers_allowed)) {
-      bb_simple_die("SQL driver ({$this->driver}) not supported");
-    }
-
-    $this->engine = $this->driver;
 
     $this->cfg = array_combine($this->cfg_keys, $cfg_values);
     $this->dbg_enabled = (Dev::sql_dbg_enabled() || !empty($_COOKIE['explain']));
@@ -929,7 +920,7 @@ class SqlDb
     $msg[] = sprintf('%-6s', $q_time);
     $msg[] = sprintf('%-4s', round(sys('la'), 1));
     $msg[] = sprintf('%05d', getmypid());
-    $msg[] = $this->db_server;
+    $msg[] = "$this->driver.$this->selected_db";
     $msg[] = Dev::short_query($this->cur_query);
     $msg = implode(LOG_SEPR, $msg);
     $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
@@ -967,7 +958,7 @@ class SqlDb
     $msg[] = '';
     $msg[] = str_compact($this->cur_query);
     $msg[] = '';
-    $msg[] = 'Source  : ' . $this->debug_find_source() . " :: $this->db_server.$this->selected_db";
+    $msg[] = 'Source  : ' . $this->debug_find_source() . " :: $this->driver.$this->selected_db";
     $msg[] = 'IP      : ' . @$_SERVER['REMOTE_ADDR'];
     $msg[] = 'Date    : ' . date('Y-m-d H:i:s');
     $msg[] = 'Agent   : ' . @$_SERVER['HTTP_USER_AGENT'];
@@ -1032,7 +1023,7 @@ class SqlDb
 				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
 					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
-					<th class="copyElement" style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" data-clipboard-target="#' . $htid . '">' . '[' . "$this->engine" . ']&nbsp;' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
+					<th class="copyElement" style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" data-clipboard-target="#' . $htid . '">' . '[pdo]&nbsp;' . "$this->driver.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>

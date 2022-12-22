@@ -18,9 +18,11 @@ use function is_object;
  */
 class Dbs
 {
+  private $drivers_allowed = ['mysql', 'postgresql', 'sqlite'];
+  private $driver;
+
   public $cfg = [];
   public $srv = [];
-  public $alias = [];
 
   public $log_file = 'sql_queries';
   public $log_counter = 0;
@@ -32,11 +34,17 @@ class Dbs
    * Dbs constructor
    *
    * @param $cfg
+   * @throws Exception
    */
   public function __construct($cfg)
   {
     $this->cfg = $cfg['db'];
-    $this->alias = $cfg['db_alias'];
+
+    $this->driver = $this->cfg['driver'];
+
+    if (!in_array($this->driver, $this->drivers_allowed)) {
+      bb_simple_die("SQL driver ({$this->driver}) not supported");
+    }
 
     foreach ($this->cfg as $srv_name => $srv_cfg) {
       $this->srv[$srv_name] = null;
@@ -46,39 +54,15 @@ class Dbs
   /**
    * Получение / инициализация класса сервера $srv_name
    *
-   * @param string $srv_name_or_alias
-   *
    * @return mixed
    * @throws Exception
    */
-  public function get_db_obj(string $srv_name_or_alias = 'db')
+  public function get_db_obj()
   {
-    $srv_name = $this->get_srv_name($srv_name_or_alias);
-
-    if (!is_object($this->srv[$srv_name])) {
-      $this->srv[$srv_name] = new SqlDb($this->cfg['driver'], $this->cfg[$srv_name]);
-      $this->srv[$srv_name]->db_server = $srv_name;
-    }
-    return $this->srv[$srv_name];
-  }
-
-  /**
-   * Определение имени сервера
-   *
-   * @param $name
-   *
-   * @return mixed|string
-   */
-  public function get_srv_name($name)
-  {
-    $srv_name = 'db';
-
-    if (isset($this->alias[$name])) {
-      $srv_name = $this->alias[$name];
-    } elseif (isset($this->cfg[$name])) {
-      $srv_name = $name;
+    if (!is_object($this->srv[$this->driver])) {
+      $this->srv[$this->driver] = new SqlDb($this->driver, $this->cfg[$this->driver]);
     }
 
-    return $srv_name;
+    return $this->srv[$this->driver];
   }
 }

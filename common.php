@@ -236,15 +236,14 @@ $CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
 /**
  * Database
  *
- * @param string $db_alias
  * @return mixed|\TorrentPier\Legacy\SqlDb
  * @throws Exception
  */
-function DB($db_alias = 'db')
+function DB()
 {
   global $DBS;
 
-  return $DBS->get_db_obj($db_alias);
+  return $DBS->get_db_obj();
 }
 
 /**

@@ -22,7 +22,7 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.7';
+$bb_cfg['tp_version'] = '2.4.0.8-alpha1';
 $bb_cfg['tp_release_date'] = '21-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
@@ -33,21 +33,9 @@ $bb_cfg['gzip_compress'] = false; // compress output
 $bb_cfg['db'] = [
   // Available drivers - mysql, postgresql, sqlite (mysql by default)
   'driver' => 'mysql',
-  // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
-  // порядок параметров srv_cfg (хост, порт, название базы, пользователь, пароль, charset, pconnect);
-  'db' => ['localhost', 3306, 'torrentpier', 'root', 'root', 'utf8', false],
-];
-
-$bb_cfg['db_alias'] = [
-  'log' => 'db', // BB_LOG
-  'search' => 'db', // BB_TOPIC_SEARCH
-  'sres' => 'db', // BB_BT_USER_SETTINGS, BB_SEARCH_RESULTS
-  'u_ses' => 'db', // BB_USER_SES, BB_USER_LASTVISIT
-  'dls' => 'db', // BB_BT_DLS_*
-  'ip' => 'db', // BB_POSTS_IP
-  'ut' => 'db', // BB_TOPICS_USER_POSTED
-  'pm' => 'db', // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
-  'pt' => 'db', // BB_POSTS_TEXT
+  // порядок параметров (хост, порт, название базы, пользователь, пароль, charset, pconnect);
+  'mysql' => ['localhost', 3306, 'torrentpier', 'root', 'root', 'utf8', false],
+  'postgresql' => ['localhost', 5432, 'torrentpier', 'root', 'root', 'utf8', false],
 ];
 
 // Cache
