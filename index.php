@@ -399,7 +399,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 }
 
 // Latest posts
-if ($bb_cfg['show_latest_posts_sidebar']) {
+if ($bb_cfg['show_latest_posts_sidebar']['status']) {
   if (!$new_post = CACHE('bb_cache')->get('new_post')) {
     $new_post = DB()->fetch_rowset('SELECT
         p.post_id, p.poster_id, t.topic_title, t.topic_first_post_id, t.topic_id, u.username, u.user_id,
@@ -407,7 +407,7 @@ if ($bb_cfg['show_latest_posts_sidebar']) {
         FROM ' . BB_POSTS . ' p
         LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = p.topic_id
         LEFT JOIN ' . BB_USERS . ' u ON u.user_id = p.poster_id
-        ORDER BY p.post_id DESC LIMIT 10');
+        ORDER BY p.post_id DESC LIMIT ' . $bb_cfg['show_latest_posts_sidebar']['limit']);
 
     CACHE('bb_cache')->set('new_post', $new_post, 60);
   }

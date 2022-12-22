@@ -17,7 +17,7 @@
       </div><br/>
       <!-- ENDIF -->
 
-      <!-- IF $bb_cfg['show_latest_posts_sidebar'] -->
+      <!-- IF $bb_cfg['show_latest_posts_sidebar']['status'] -->
       <div>
         <h3>{L_LATEST_POSTS}</h3>
         <div id="new_post">

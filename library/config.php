@@ -22,7 +22,7 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.7-beta4';
+$bb_cfg['tp_version'] = '2.4.0.7-beta5';
 $bb_cfg['tp_release_date'] = '21-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
@@ -171,7 +171,11 @@ $bb_cfg['templating'] = [
 $bb_cfg['show_sidebar1_on_every_page'] = false;
 $bb_cfg['show_sidebar2_on_every_page'] = false;
 $bb_cfg['show_copyright_on_pages'] = true;
-$bb_cfg['show_latest_posts_sidebar'] = true;
+
+$bb_cfg['show_latest_posts_sidebar'] = [
+  'status' => true,
+  'limit' => 10
+];
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
