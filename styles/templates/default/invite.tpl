@@ -87,7 +87,9 @@
     <!-- BEGIN invite_row -->
     <tr>
       <td class="row1" align="center">{invite_row.GENERATION_DATE}</td>
-      <td class="row2" align="center">{invite_row.INVITE_CODE}</td>
+      <td data-clipboard-target="#invite_{invite_row.INVITE_CODE}" title="Copy to clipboard"
+          id="invite_{invite_row.INVITE_CODE}" class="row2 copyElement clickable"
+          align="center">{invite_row.INVITE_CODE}</td>
       <td class="row1" align="center">{invite_row.ACTIVE}</td>
       <td class="row1" align="center">{invite_row.NEW_USER}</td>
       <td class="row1" align="center">{invite_row.ACTIVATION_DATE}</td>

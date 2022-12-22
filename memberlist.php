@@ -178,14 +178,14 @@ if ($result = DB()->fetch_rowset($sql)) {
       'ROW_NUMBER' => $i + ($start + 1),
       'ROW_CLASS' => $row_class,
       'USER' => profile_url($row),
-      'FROM' => $from,
+      'FROM' => !empty($from) ? $from : $lang['NOSELECT'],
       'USER_AVATAR' => \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], true, 60, 60),
       'JOINED_RAW' => $row['user_regdate'],
       'JOINED' => $joined,
       'POSTS' => $posts,
       'PM' => $pm,
       'EMAIL' => $email,
-      'WWW' => $www,
+      'WWW' => !empty($www) ? $www : $lang['NOSELECT'],
       'U_VIEWPROFILE' => PROFILE_URL . $user_id,
     ]);
   }
