@@ -39,7 +39,7 @@ language of it.
 
 * Apache (2.4) / nginx
 * MySQL / MariaDB / Percona
-* PHP: 7.1 / 7.2 / 7.3
+* PHP: 7.1 / 7.2 / 7.3 / 7.4
 * PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
 
 ## Installation
