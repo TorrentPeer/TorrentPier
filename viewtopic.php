@@ -235,6 +235,8 @@ if (!$forums = $datastore->get('cat_forums')) {
 }
 
 $template->assign_vars([
+  'U_POST_URL' => POST_URL,
+
   'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
   'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
   'PARENT_FORUM_HREF' => ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
