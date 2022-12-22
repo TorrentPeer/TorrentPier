@@ -1,0 +1,86 @@
+Схема изменений начиная с версии 2.1.5:
+
+Изменения в базе:
+
+// 2.2.0
+UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
+DELETE FROM `bb_smilies` WHERE `code` = ':ad:';
+INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
+DROP TABLE IF EXISTS `bb_ads`;
+DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
+ALTER TABLE `bb_log` DROP COLUMN `log_username`;
+DELETE FROM `bb_config` WHERE `config_name` = 'new_tpls';
+UPDATE `bb_posts` SET `poster_ip` = '0';
+ALTER TABLE `bb_posts` CHANGE `poster_ip` `poster_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_bt_tracker` SET `ip` = '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `ip` `ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_users` SET `user_last_ip` = '0';
+ALTER TABLE `bb_users` CHANGE `user_last_ip` `user_last_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_users` SET `user_reg_ip` = '0';
+ALTER TABLE `bb_users` CHANGE `user_reg_ip` `user_reg_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_log` SET `log_user_ip` = '0';
+ALTER TABLE `bb_log` CHANGE `log_user_ip` `log_user_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_poll_users` SET `vote_ip` = '0';
+ALTER TABLE `bb_poll_users` CHANGE `vote_ip` `vote_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_privmsgs` SET `privmsgs_ip` = '0';
+ALTER TABLE `bb_privmsgs` CHANGE `privmsgs_ip` `privmsgs_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_sessions` SET `session_ip` = '0';
+ALTER TABLE `bb_sessions` CHANGE `session_ip` `session_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_banlist` SET `ban_ip` = '0';
+ALTER TABLE `bb_banlist` CHANGE `ban_ip` `ban_ip` varchar(42) NOT NULL DEFAULT '0';
+
+// 2.2.2
+ALTER TABLE `bb_ranks` DROP `rank_min`;
+ALTER TABLE `bb_ranks` DROP `rank_special`;
+
+// 2.3.0
+ALTER TABLE `bb_cron` CHANGE `last_run` `last_run` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00';
+ALTER TABLE `bb_cron` CHANGE `next_run` `next_run` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00';
+ALTER TABLE `bb_users` CHANGE `user_birthday` `user_birthday` DATE NOT NULL DEFAULT '1900-01-01';
+ALTER TABLE `bb_posts` CHANGE `mc_comment` `mc_comment` TEXT NOT NULL DEFAULT '';
+
+// 2.4.0
+ALTER TABLE `bb_users` CHANGE `user_sig` `user_sig` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_groups` CHANGE `group_signature` `group_signature` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_sessions` ADD `session_agent` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` ADD `user_telegram` VARCHAR(15) NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` ADD `user_vk` VARCHAR(15) NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `user_password` `user_password` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `user_actkey` `user_actkey` VARCHAR(64) NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(64) NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` ADD `curpage_topic` MEDIUMINT(8) NOT NULL default '0';
+ALTER TABLE `bb_users` ADD `curpage_topic_time` INT(11) NOT NULL default '0';
+ALTER TABLE `bb_users` ADD `user_prov` VARCHAR(100) NOT NULL DEFAULT '';
+DELETE FROM `bb_smilies` WHERE `code` = ':сd:';
+INSERT INTO `bb_smilies` VALUES ('', ':cd:', 'cd.gif', 'cd');
+INSERT INTO bb_config VALUES ('use_dynamic_description', '1');
+INSERT INTO bb_config VALUES ('use_dynamic_keywords', '1');
+INSERT INTO bb_config VALUES ('global_description', 'ваше глобальное мета-описание');
+INSERT INTO bb_config VALUES ('global_keywords', 'подставьте, сюда, свои, ключевые, слова');
+INSERT INTO bb_config VALUES ('append_global_description', '1');
+INSERT INTO bb_config VALUES ('append_global_keywords', '1');
+INSERT INTO bb_config VALUES ('append_keywords_first', '0');
+INSERT INTO bb_config VALUES ('description_word_count', '150');
+INSERT INTO bb_config VALUES ('keyword_word_count', '50');
+INSERT INTO bb_config VALUES ('admin_note', 'Hello, world!');
+INSERT INTO bb_config VALUES ('logo_image', 'logo.png');
+INSERT INTO bb_config VALUES ('logo_image_h', '60');
+INSERT INTO bb_config VALUES ('logo_image_path', 'styles/images/logo');
+INSERT INTO bb_config VALUES ('logo_image_w', '460');
+INSERT INTO bb_config VALUES ('new_user_reg_only_by_invite', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune inactive invites', 'prune_inactive_invites.php', 'daily', '', '05:00:00', '110', '', '', '', '1', '', '0', '1', '0');
+DROP TABLE IF EXISTS `bb_invites`;
+CREATE TABLE IF NOT EXISTS `bb_invites` (`invite_id` INT(8) unsigned NOT NULL AUTO_INCREMENT, `user_id` MEDIUMINT(8) NOT NULL DEFAULT '0', `new_user_id` MEDIUMINT(8) NOT NULL DEFAULT '0', `invite_code` VARCHAR(16) NOT NULL DEFAULT '', `active` ENUM ('1','0') DEFAULT '1', `generation_date` INT(10) NOT NULL DEFAULT '0', `activation_date` INT(10) NOT NULL DEFAULT '0', PRIMARY KEY (`invite_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
+DROP TABLE IF EXISTS `bb_invite_rules`;
+CREATE TABLE IF NOT EXISTS `bb_invite_rules` (`rule_id` INT(4) unsigned NOT NULL AUTO_INCREMENT, `user_rating` INT(4) unsigned NOT NULL DEFAULT '0', `user_age` INT(4) unsigned NOT NULL DEFAULT '0', `invites_count` INT(4) unsigned NOT NULL DEFAULT '0', `user_group` INT(4) unsigned NOT NULL DEFAULT '0', PRIMARY KEY (`rule_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
+ALTER TABLE `bb_users` ADD `user_reputation` INT(5) NOT NULL DEFAULT '0';
+DROP TABLE IF EXISTS `bb_reputation`;
+CREATE TABLE IF NOT EXISTS `bb_reputation` (`user_id` MEDIUMINT(8) NOT NULL DEFAULT '0', `poster_id` MEDIUMINT(8) DEFAULT '0', `mode` VARCHAR(10) DEFAULT NULL, `time` INT(11) DEFAULT '0') ENGINE = MyISAM DEFAULT CHARSET = utf8;
+
+// 2.4.0.3
+DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
+
+// 2.4.0.4
+DROP TABLE IF EXISTS `bb_notices`;
+CREATE TABLE IF NOT EXISTS `bb_notices` (`notice_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT, `notice_active` TINYINT(1) NOT NULL DEFAULT '0', `notice_text` TEXT NOT NULL, PRIMARY KEY (`notice_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
