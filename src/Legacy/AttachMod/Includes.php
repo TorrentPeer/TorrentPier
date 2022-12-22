@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\AttachMod;
 
+use Exception;
+
 /**
  * Class Includes
  * @package TorrentPier\Legacy\AttachMod
@@ -40,7 +42,7 @@ class Includes
    * @param $admin_mode
    * @param $mode
    * @param false $submit
-   * @throws \Exception
+   * @throws Exception
    */
   public static function attachment_quota_settings($admin_mode, $mode, $submit = false)
   {

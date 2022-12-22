@@ -9,8 +9,10 @@
 
 namespace TorrentPier\Legacy\Admin;
 
+use Exception;
 use TorrentPier\Legacy\Avatar;
 use TorrentPier\Legacy\Post;
+use function defined;
 
 /**
  * Class Common
@@ -33,7 +35,7 @@ class Common
    *
    * @param string $type
    * @param array|string $id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function sync($type, $id)
   {
@@ -216,7 +218,7 @@ class Common
    * @param bool $prune_all
    *
    * @return bool|int
-   * @throws \Exception
+   * @throws Exception
    */
   public static function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
   {
@@ -428,7 +430,7 @@ class Common
    * @param bool $insert_bot_msg
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shadow = false, $insert_bot_msg = false)
   {
@@ -528,7 +530,7 @@ class Common
    * @param bool $exclude_first
    *
    * @return bool|int
-   * @throws \Exception
+   * @throws Exception
    */
   public static function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
   {
@@ -666,7 +668,7 @@ class Common
       $log_action->admin('mod_post_delete', [
         'log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count",
       ]);
-    } elseif (!\defined('IN_CRON')) {
+    } elseif (!defined('IN_CRON')) {
       foreach ($log_topics as $row) {
         $log_action->mod('mod_post_delete', [
           'forum_id' => $row['forum_id'],
@@ -701,7 +703,7 @@ class Common
    * @param bool $delete_posts
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function user_delete($user_id, $delete_posts = false)
   {
@@ -798,7 +800,7 @@ class Common
    * @param array|string $user_id
    *
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   private static function get_usernames_for_log($user_id)
   {

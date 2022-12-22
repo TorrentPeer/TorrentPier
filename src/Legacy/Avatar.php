@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
 use thomaswelton\GravatarLib\Gravatar;
 
 /**
@@ -57,7 +58,7 @@ class Avatar
    * @param string $height
    * @param string $width
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function getAvatar($is_group, $user_id, $ext_id, bool $allow_avatar = true, $height = '', $width = ''): string
   {
@@ -85,7 +86,7 @@ class Avatar
    * @param $user_id
    * @param $is_group
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   private static function avatarMethod($user_id, $is_group): string
   {

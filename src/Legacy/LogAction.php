@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+
 /**
  * Class LogAction
  * @package TorrentPier\Legacy
@@ -41,7 +43,7 @@ class LogAction
   /**
    * @param $type_name
    * @param array $args
-   * @throws \Exception
+   * @throws Exception
    */
   public function mod($type_name, array $args = [])
   {
@@ -91,7 +93,7 @@ class LogAction
   /**
    * @param $type_name
    * @param array $args
-   * @throws \Exception
+   * @throws Exception
    */
   public function admin($type_name, array $args = [])
   {

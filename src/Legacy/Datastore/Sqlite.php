@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use Exception;
 use MatthiasMullie\Scrapbook\Adapters\SQLite as Lite;
 
 use TorrentPier\Legacy\Dev;
@@ -33,7 +34,7 @@ class Sqlite extends Common
    * @param $obj
    * @param $cfg
    * @param $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($obj, $cfg, $prefix = null)
   {

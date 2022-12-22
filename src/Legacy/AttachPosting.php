@@ -9,7 +9,9 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
 use TorrentPier\Legacy\AttachMod\Delete;
+use function count;
 
 /**
  * Class AttachPosting
@@ -30,7 +32,7 @@ class AttachPosting extends Attach
    * Insert an Attachment into a Post (this is the second function called from posting.php)
    *
    * @param $post_id
-   * @throws \Exception
+   * @throws Exception
    */
   public function insert_attachment($post_id)
   {
@@ -41,7 +43,7 @@ class AttachPosting extends Attach
       $this->do_insert_attachment('attach_list', 'post', $post_id);
       $this->do_insert_attachment('last_attachment', 'post', $post_id);
 
-      if ((\count($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment'])) {
+      if ((count($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment'])) {
         $sql = 'UPDATE ' . BB_POSTS . ' SET post_attachment = 1 WHERE post_id = ' . (int)$post_id;
 
         if (!DB()->sql_query($sql)) {
@@ -68,7 +70,7 @@ class AttachPosting extends Attach
 
   /**
    * Handle Attachments (Add/Delete/Edit/Show) - This is the first function called from every message handler
-   * @throws \Exception
+   * @throws Exception
    */
   public function posting_attachment_mod()
   {

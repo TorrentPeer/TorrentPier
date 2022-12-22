@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\AttachMod;
 
+use Exception;
+
 /**
  * Class Selects
  * @package TorrentPier\Legacy\AttachMod
@@ -21,7 +23,7 @@ class Selects
    * @param $select_name
    * @param int $default_group
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function group_select($select_name, $default_group = 0)
   {
@@ -65,7 +67,7 @@ class Selects
    * @param $select_name
    * @param int $group_id
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function download_select($select_name, $group_id = 0)
   {
@@ -112,7 +114,7 @@ class Selects
    * @param $select_name
    * @param int $group_id
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function category_select($select_name, $group_id = 0)
   {
@@ -195,7 +197,7 @@ class Selects
    * @param $select_name
    * @param int $default_quota
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function quota_limit_select($select_name, $default_quota = 0)
   {
@@ -231,7 +233,7 @@ class Selects
    * @param $select_name
    * @param int $default_quota
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function default_quota_limit_select($select_name, $default_quota = 0)
   {

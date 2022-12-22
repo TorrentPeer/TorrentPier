@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\AttachMod;
 
+use Exception;
 use TorrentPier\Legacy\Filesystem;
 
 /**
@@ -24,7 +25,7 @@ class Admin
    * @param $id
    * @param $quota_type
    * @param int $quota_limit_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
   {
@@ -142,7 +143,7 @@ class Admin
    * @param $order_by
    * @param $total_rows
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   public static function search_attachments($order_by, &$total_rows)
   {

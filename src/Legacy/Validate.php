@@ -14,7 +14,9 @@ use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 
+use Exception;
 use TorrentPier\Helpers\IsHelper;
+use function strlen;
 
 /**
  * Class Validate
@@ -29,7 +31,7 @@ class Validate
    * @param bool $check_ban_and_taken
    *
    * @return bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function username(string $username, bool $check_ban_and_taken = true)
   {
@@ -150,7 +152,7 @@ class Validate
    * @param bool $check_ban_and_taken
    *
    * @return bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function email(string $email, bool $check_ban_and_taken = true)
   {
@@ -160,7 +162,7 @@ class Validate
     if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
       return $lang['EMAIL_INVALID'];
     }
-    if (\strlen($email) > USEREMAIL_MAX_LENGTH) {
+    if (strlen($email) > USEREMAIL_MAX_LENGTH) {
       return $lang['EMAIL_TOO_LONG'];
     }
 
@@ -210,7 +212,7 @@ class Validate
    * @param $invite_code
    * @param bool $check_activ_and_taken
    * @return false|mixed|void
-   * @throws \Exception
+   * @throws Exception
    */
   public static function invite_code($invite_code, bool $check_activ_and_taken = true)
   {

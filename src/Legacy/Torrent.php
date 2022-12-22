@@ -9,7 +9,14 @@
 
 namespace TorrentPier\Legacy;
 
+use SandFox\Bencode\Bencode;
+
 use TorrentPier\Legacy\AttachMod\Delete;
+
+use Exception;
+use function in_array;
+use function is_array;
+use function strlen;
 
 /**
  * Class Torrent
@@ -23,7 +30,7 @@ class Torrent
    * @param int $attach_id
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   private static function get_torrent_info($attach_id)
   {
@@ -66,7 +73,7 @@ class Torrent
    * @param int $poster_id
    *
    * @return bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   private static function torrent_auth_check($forum_id, $poster_id)
   {
@@ -91,7 +98,7 @@ class Torrent
    *
    * @param int $attach_id
    * @param string $mode
-   * @throws \Exception
+   * @throws Exception
    */
   public static function tracker_unregister($attach_id, $mode = '')
   {
@@ -177,7 +184,7 @@ class Torrent
    *
    * @param int $attach_id
    * @param string $mode
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_torrent($attach_id, $mode = '')
   {
@@ -208,7 +215,7 @@ class Torrent
    *
    * @param int $attach_id
    * @param int $new_tor_status
-   * @throws \Exception
+   * @throws Exception
    */
   public static function change_tor_status($attach_id, $new_tor_status)
   {
@@ -240,7 +247,7 @@ class Torrent
    *
    * @param int $attach_id
    * @param int $tor_status_gold
-   * @throws \Exception
+   * @throws Exception
    */
   public static function change_tor_type($attach_id, $tor_status_gold)
   {
@@ -278,7 +285,7 @@ class Torrent
    * @param int $reg_time
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
   {
@@ -324,14 +331,14 @@ class Torrent
     if (!file_exists($filename)) {
       return self::torrent_error_exit('File not exists');
     }
-    if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
+    if (!$tor = Bencode::decode($file_contents)) {
       return self::torrent_error_exit('This is not a bencoded file');
     }
 
     if ($bb_cfg['bt_disable_dht']) {
       $tor['info']['private'] = (int)1;
       $fp = fopen($filename, 'wb+');
-      fwrite($fp, \SandFox\Bencode\Bencode::encode($tor));
+      fwrite($fp, Bencode::encode($tor));
       fclose($fp);
     }
 
@@ -341,7 +348,7 @@ class Torrent
       $ann = (@$tor['announce']) ? $tor['announce'] : '';
       $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
-      if (!$ann || !\in_array($ann, $announce_urls)) {
+      if (!$ann || !in_array($ann, $announce_urls)) {
         $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
         return self::torrent_error_exit($msg);
       }
@@ -349,11 +356,11 @@ class Torrent
 
     $info = (@$tor['info']) ? $tor['info'] : [];
 
-    if (!isset($info['name'], $info['piece length'], $info['pieces']) || \strlen($info['pieces']) % 20 != 0) {
+    if (!isset($info['name'], $info['piece length'], $info['pieces']) || strlen($info['pieces']) % 20 != 0) {
       return self::torrent_error_exit($lang['TORFILE_INVALID']);
     }
 
-    $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
+    $info_hash = pack('H*', sha1(Bencode::encode($info)));
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     $info_hash_md5 = Crypt::md5($info_hash);
 
@@ -372,7 +379,7 @@ class Torrent
 
     if (isset($info['length'])) {
       $totallen = (float)$info['length'];
-    } elseif (isset($info['files']) && \is_array($info['files'])) {
+    } elseif (isset($info['files']) && is_array($info['files'])) {
       foreach ($info['files'] as $fn => $f) {
         $totallen += (float)$f['length'];
       }
@@ -431,7 +438,7 @@ class Torrent
    * Set passkey and send torrent to the browser
    *
    * @param string $filename
-   * @throws \Exception
+   * @throws Exception
    */
   public static function send_torrent_with_passkey($filename)
   {
@@ -509,7 +516,7 @@ class Torrent
     $ann_url = $bb_cfg['bt_announce_url'];
 
     $file_contents = file_get_contents($filename);
-    if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
+    if (!$tor = Bencode::decode($file_contents)) {
       bb_die('This is not a bencoded file');
     }
 
@@ -555,12 +562,12 @@ class Torrent
     unset($tor['comment.utf-8']);
 
     // Send torrent
-    $output = \SandFox\Bencode\Bencode::encode($tor);
+    $output = Bencode::encode($tor);
     $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent';
 
     if (!empty($_COOKIE['explain'])) {
       $out = "attach path: $filename<br /><br />";
-      $tor['info']['pieces'] = '[...] ' . \strlen($tor['info']['pieces']) . ' bytes';
+      $tor['info']['pieces'] = '[...] ' . strlen($tor['info']['pieces']) . ' bytes';
       $out .= print_r($tor, true);
       bb_die("<pre>$out</pre>");
     }
@@ -578,7 +585,7 @@ class Torrent
    * @param bool $force_generate
    *
    * @return bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function generate_passkey($user_id, $force_generate = false)
   {
@@ -633,7 +640,7 @@ class Torrent
    * @param int $user_id
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function tracker_rm_user($user_id): bool
   {
@@ -647,7 +654,7 @@ class Torrent
    * @param string $mode
    *
    * @return bool|array
-   * @throws \Exception
+   * @throws Exception
    */
   private static function get_registered_torrents($id, $mode)
   {
@@ -672,7 +679,7 @@ class Torrent
    * @param string $message
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   private static function torrent_error_exit($message)
   {

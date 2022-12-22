@@ -11,6 +11,7 @@ namespace TorrentPier\Legacy\Datastore;
 
 use belomaxorka\DOFileCache\DOFileCache;
 
+use Exception;
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -30,7 +31,7 @@ class File extends Common
    * @param $dir
    * @param $cfg
    * @param null $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($dir, $cfg, $prefix = null)
   {

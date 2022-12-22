@@ -9,7 +9,15 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
 use mysqli_result;
+use function define;
+use function defined;
+use function is_array;
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_string;
 
 /**
  * Class SqlDb
@@ -59,7 +67,7 @@ class SqlDb
    *
    * @param $driver
    * @param $cfg_values
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($driver, $cfg_values)
   {
@@ -135,14 +143,14 @@ class SqlDb
    * @param $query
    *
    * @return bool|mysqli_result|null
-   * @throws \Exception
+   * @throws Exception
    */
   public function sql_query($query)
   {
     if (!$this->link) {
       $this->init();
     }
-    if (\is_array($query)) {
+    if (is_array($query)) {
       $query = $this->build_sql($query);
     }
     if (SQL_PREPEND_SRC_COMM) {
@@ -172,7 +180,7 @@ class SqlDb
    * @param $query
    *
    * @return bool|mysqli_result|null
-   * @throws \Exception
+   * @throws Exception
    */
   public function query($query)
   {
@@ -297,7 +305,7 @@ class SqlDb
    * @param string $field_name
    *
    * @return array|bool|null
-   * @throws \Exception
+   * @throws Exception
    */
   public function fetch_row($query, $field_name = '')
   {
@@ -334,7 +342,7 @@ class SqlDb
    * @param string $field_name
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   public function fetch_rowset($query, $field_name = '')
   {
@@ -352,7 +360,7 @@ class SqlDb
    * @param string $field_name
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   public function fetch_all($query, $field_name = '')
   {
@@ -397,7 +405,7 @@ class SqlDb
    * @param bool $dont_escape
    *
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public function escape($v, $check_type = false, $dont_escape = false)
   {
@@ -409,13 +417,13 @@ class SqlDb
     }
 
     switch (true) {
-      case \is_string($v):
+      case is_string($v):
         return "'" . $this->escape_string($v) . "'";
-      case \is_int($v):
+      case is_int($v):
         return (string)$v;
-      case \is_bool($v):
+      case is_bool($v):
         return ($v) ? '1' : '0';
-      case \is_float($v):
+      case is_float($v):
         return "'$v'";
       case null === $v:
         return 'NULL';
@@ -450,7 +458,7 @@ class SqlDb
    * @param bool $check_data_type_in_escape
    *
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public function build_array($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true)
   {
@@ -458,7 +466,7 @@ class SqlDb
     $dont_escape = $data_already_escaped;
     $check_type = $check_data_type_in_escape;
 
-    if (empty($input_ary) || !\is_array($input_ary)) {
+    if (empty($input_ary) || !is_array($input_ary)) {
       $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary');
     }
 
@@ -641,7 +649,7 @@ class SqlDb
    * @param string $lock_type
    *
    * @return bool|mysqli_result|null
-   * @throws \Exception
+   * @throws Exception
    */
   public function lock($tables, $lock_type = 'WRITE')
   {
@@ -661,7 +669,7 @@ class SqlDb
    * Unlock tables
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public function unlock(): bool
   {
@@ -679,7 +687,7 @@ class SqlDb
    * @param int $timeout
    *
    * @return mixed
-   * @throws \Exception
+   * @throws Exception
    */
   public function get_lock($name, $timeout = 0)
   {
@@ -700,7 +708,7 @@ class SqlDb
    * @param $name
    *
    * @return mixed
-   * @throws \Exception
+   * @throws Exception
    */
   public function release_lock($name)
   {
@@ -720,7 +728,7 @@ class SqlDb
    * @param $name
    *
    * @return mixed
-   * @throws \Exception
+   * @throws Exception
    */
   public function is_free_lock($name)
   {
@@ -784,7 +792,7 @@ class SqlDb
    *
    * @param int $ignoring_time
    * @param int $new_priority
-   * @throws \Exception
+   * @throws Exception
    */
   public function expect_slow_query($ignoring_time = 60, $new_priority = 10)
   {
@@ -794,8 +802,8 @@ class SqlDb
       }
     }
 
-    if (!\defined('IN_FIRST_SLOW_QUERY')) {
-      \define('IN_FIRST_SLOW_QUERY', true);
+    if (!defined('IN_FIRST_SLOW_QUERY')) {
+      define('IN_FIRST_SLOW_QUERY', true);
     }
 
     CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
@@ -805,7 +813,7 @@ class SqlDb
    * Store debug info
    *
    * @param $mode
-   * @throws \Exception
+   * @throws Exception
    */
   public function debug($mode)
   {
@@ -863,7 +871,7 @@ class SqlDb
    * Trigger error
    *
    * @param string $msg
-   * @throws \Exception
+   * @throws Exception
    */
   public function trigger_error($msg = 'DB Error')
   {
@@ -910,7 +918,7 @@ class SqlDb
    * Log query
    *
    * @param string $log_file
-   * @throws \Exception
+   * @throws Exception
    */
   public function log_query($log_file = 'sql_queries')
   {
@@ -926,7 +934,7 @@ class SqlDb
     $msg = implode(LOG_SEPR, $msg);
     $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
     $msg .= ' # ' . $this->debug_find_source() . ' ';
-    $msg .= \defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI']);
+    $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI']);
     Logging::bb_log($msg . LOG_LF, $log_file);
   }
 
@@ -934,11 +942,11 @@ class SqlDb
    * Log slow query
    *
    * @param string $log_file
-   * @throws \Exception
+   * @throws Exception
    */
   public function log_slow_query($log_file = 'sql_slow_bb')
   {
-    if (!\defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query')) {
+    if (!defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query')) {
       return;
     }
     $this->log_query($log_file);

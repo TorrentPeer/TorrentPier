@@ -9,6 +9,9 @@
 
 namespace TorrentPier\Legacy\Admin;
 
+use Exception;
+use function define;
+
 /**
  * Class Cron
  * @package TorrentPier\Legacy\Admin
@@ -19,14 +22,14 @@ class Cron
    * Run cron jobs
    *
    * @param array $jobs
-   * @throws \Exception
+   * @throws Exception
    */
   public static function run_jobs($jobs): void
   {
     /** @noinspection PhpUnusedLocalVariableInspection */
     global $bb_cfg, $datastore;
 
-    \define('IN_CRON', true);
+    define('IN_CRON', true);
 
     $jobs = implode(",", $jobs);
     $sql = "SELECT cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
@@ -68,7 +71,7 @@ class Cron
    * Delete cron jobs
    *
    * @param array $jobs
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_jobs($jobs): void
   {
@@ -81,7 +84,7 @@ class Cron
    *
    * @param array $jobs
    * @param string $cron_action
-   * @throws \Exception
+   * @throws Exception
    */
   public static function toggle_active($jobs, $cron_action): void
   {
@@ -121,7 +124,7 @@ class Cron
    * Insert cron job to database
    *
    * @param array $cron_arr
-   * @throws \Exception
+   * @throws Exception
    */
   public static function insert_cron_job($cron_arr): void
   {
@@ -165,7 +168,7 @@ class Cron
    * Update cron job in database
    *
    * @param array $cron_arr
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_cron_job($cron_arr): void
   {

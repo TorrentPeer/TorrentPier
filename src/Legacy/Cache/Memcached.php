@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use Exception;
 use MatthiasMullie\Scrapbook\Adapters\Memcached as Mem;
 
 use TorrentPier\Legacy\Dev;
@@ -32,7 +33,7 @@ class Memcached extends Common
    *
    * @param $cfg
    * @param null $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($cfg, $prefix = null)
   {

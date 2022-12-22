@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use Exception;
 use MatthiasMullie\Scrapbook\Adapters\Sqlite as Lite;
 
 use TorrentPier\Legacy\Dev;
@@ -34,7 +35,7 @@ class Sqlite extends Common
    * @param $obj
    * @param $cfg
    * @param $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($obj, $cfg, $prefix = null)
   {

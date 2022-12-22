@@ -9,6 +9,9 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use function is_array;
+
 /**
  * Class Group
  * @package TorrentPier\Legacy
@@ -19,13 +22,13 @@ class Group
    * Update user access level
    *
    * @param array|int $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_user_level($user_id)
   {
     global $datastore;
 
-    if (\is_array($user_id)) {
+    if (is_array($user_id)) {
       $user_id = implode(',', $user_id);
     }
     $user_groups_in = ($user_id !== 'all') ? "AND ug.user_id IN($user_id)" : '';
@@ -82,7 +85,7 @@ class Group
    * Delete group
    *
    * @param int $group_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_group($group_id)
   {
@@ -108,7 +111,7 @@ class Group
    * @param int $user_id
    * @param int $user_pending
    * @param int $user_time
-   * @throws \Exception
+   * @throws Exception
    */
   public static function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time = TIMENOW)
   {
@@ -130,7 +133,7 @@ class Group
    *
    * @param int $group_id
    * @param int $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_user_group($group_id, $user_id)
   {
@@ -148,7 +151,7 @@ class Group
    *
    * @param int $user_id
    * @return int
-   * @throws \Exception
+   * @throws Exception
    */
   public static function create_user_group($user_id)
   {
@@ -197,7 +200,7 @@ class Group
    * @param array|string $group_id
    * @param array|string $user_id
    * @param array|string $cat_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
   {
@@ -222,11 +225,11 @@ class Group
    *
    * @param int $group_id
    * @param array $auth_ary
-   * @throws \Exception
+   * @throws Exception
    */
   public static function store_permissions($group_id, $auth_ary)
   {
-    if (empty($auth_ary) || !\is_array($auth_ary)) {
+    if (empty($auth_ary) || !is_array($auth_ary)) {
       return;
     }
 
@@ -248,11 +251,11 @@ class Group
    * Update user group permissions
    *
    * @param string|array $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   private static function update_user_permissions($user_id = 'all')
   {
-    if (\is_array($user_id)) {
+    if (is_array($user_id)) {
       $user_id = implode(',', $user_id);
     }
     $delete_in = ($user_id !== 'all') ? " WHERE user_id IN($user_id)" : '';

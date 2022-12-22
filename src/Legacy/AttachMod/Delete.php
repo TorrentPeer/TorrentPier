@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\AttachMod;
 
+use Exception;
+
 /**
  * Class Delete
  * @package TorrentPier\Legacy\AttachMod
@@ -22,7 +24,7 @@ class Delete
    * @param int $attach_id_array
    * @param int $page
    * @param int $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, $user_id = 0)
   {

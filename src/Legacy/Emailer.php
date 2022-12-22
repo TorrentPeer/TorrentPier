@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
@@ -128,7 +129,7 @@ class Emailer
    *
    * @param string $template_file имя шаблона
    * @param string $template_lang язык шаблона
-   * @throws \Exception
+   * @throws Exception
    */
   public function set_template(string $template_file, string $template_lang = '')
   {
@@ -166,7 +167,7 @@ class Emailer
    *
    * @param string $email_format
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public function send(string $email_format = self::MIME_TYPES['text'])
   {
@@ -226,7 +227,7 @@ class Emailer
     try {
       $mailer->send($email);
     } catch (TransportExceptionInterface $e) {
-      throw new \Exception($e->getMessage());
+      throw new Exception($e->getMessage());
     }
 
     return true;

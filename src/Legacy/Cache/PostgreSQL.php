@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use Exception;
 use MatthiasMullie\Scrapbook\Adapters\PostgreSQL as greSQL;
 
 use TorrentPier\Legacy\Dev;
@@ -34,7 +35,7 @@ class PostgreSQL extends Common
    * @param $obj
    * @param $cfg
    * @param null $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($obj, $cfg, $prefix = null)
   {

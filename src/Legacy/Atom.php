@@ -9,6 +9,10 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use function count;
+use function dirname;
+
 /**
  * Class Atom
  * @package TorrentPier\Legacy
@@ -22,7 +26,7 @@ class Atom
    * @param array $forum_data
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_forum_feed($forum_id, $forum_data)
   {
@@ -85,7 +89,7 @@ class Atom
       }
       $topics[] = $topic;
     }
-    if (!\count($topics)) {
+    if (!count($topics)) {
       @unlink($file_path);
       return false;
     }
@@ -103,7 +107,7 @@ class Atom
    * @param string $username
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_user_feed($user_id, $username)
   {
@@ -140,7 +144,7 @@ class Atom
       }
       $topics[] = $topic;
     }
-    if (!\count($topics)) {
+    if (!count($topics)) {
       @unlink($file_path);
       return false;
     }
@@ -161,12 +165,12 @@ class Atom
    * @param array $topics
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   private static function create_atom($file_path, $mode, $id, $title, $topics)
   {
     global $lang;
-    $dir = \dirname($file_path);
+    $dir = dirname($file_path);
     if (!file_exists($dir)) {
       if (!Filesystem::bb_mkdir($dir)) {
         return false;
@@ -198,7 +202,7 @@ class Atom
       $orig_word = [];
       $replacement_word = [];
       obtain_word_list($orig_word, $replacement_word);
-      if (\count($orig_word)) {
+      if (count($orig_word)) {
         $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
       }
       $topic_title = wbr($topic_title);

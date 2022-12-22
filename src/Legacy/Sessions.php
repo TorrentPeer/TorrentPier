@@ -9,6 +9,9 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use function defined;
+
 /**
  * Class Sessions
  * @package TorrentPier\Legacy
@@ -22,7 +25,7 @@ class Sessions
    */
   private static function ignore_cached_userdata(): bool
   {
-    return \defined('IN_PM') ? true : false;
+    return defined('IN_PM') ? true : false;
   }
 
   /**
@@ -31,7 +34,7 @@ class Sessions
    * @param int $id
    *
    * @return bool|array
-   * @throws \Exception
+   * @throws Exception
    */
   public static function cache_get_userdata($id)
   {
@@ -49,7 +52,7 @@ class Sessions
    * @param bool $force
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function cache_set_userdata($userdata, $force = false)
   {
@@ -69,7 +72,7 @@ class Sessions
    * @param array $userdata
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function cache_rm_userdata($userdata)
   {
@@ -85,7 +88,7 @@ class Sessions
    * Delete user sessions from cache
    *
    * @param array|string $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function cache_rm_user_sessions($user_id)
   {
@@ -104,7 +107,7 @@ class Sessions
    * @param array $userdata
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function cache_update_userdata($userdata)
   {
@@ -119,7 +122,7 @@ class Sessions
    * @param bool $data_already_escaped
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function db_update_userdata($userdata, $sql_ary, $data_already_escaped = true)
   {
@@ -141,7 +144,7 @@ class Sessions
    * Delete user sessions from cache and database
    *
    * @param array|string $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_user_sessions($user_id)
   {
@@ -158,7 +161,7 @@ class Sessions
    * @param bool $req_login
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    * @deprecated
    *
    */

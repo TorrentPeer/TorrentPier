@@ -11,6 +11,7 @@ namespace TorrentPier\Legacy\Cache;
 
 use belomaxorka\DOFileCache\DOFileCache;
 
+use Exception;
 use TorrentPier\Legacy\Dev;
 
 /**
@@ -31,7 +32,7 @@ class File extends Common
    * @param $dir
    * @param $cfg
    * @param null $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($dir, $cfg, $prefix = null)
   {
@@ -61,7 +62,7 @@ class File extends Common
    * @param string $get_miss_key_callback
    * @param int $ttl
    * @return array|false|mixed
-   * @throws \Exception
+   * @throws Exception
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 0)
   {

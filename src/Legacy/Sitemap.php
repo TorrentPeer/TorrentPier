@@ -9,8 +9,11 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use InvalidArgumentException;
 use samdark\sitemap\Sitemap as STM;
 use samdark\sitemap\Index as IDX;
+use function function_exists;
 
 /**
  * Class Sitemap
@@ -22,7 +25,7 @@ class Sitemap
    * Получение списка URL разделов
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   private function getForumUrls()
   {
@@ -53,7 +56,7 @@ class Sitemap
    * Получение списка URL тем
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   private function getTopicUrls()
   {
@@ -113,7 +116,7 @@ class Sitemap
    *
    * @return array
    *
-   * @throws \Exception
+   * @throws Exception
    */
   private function buildDynamicSitemap()
   {
@@ -137,7 +140,7 @@ class Sitemap
    *
    * @return array
    *
-   * @throws \InvalidArgumentException
+   * @throws InvalidArgumentException
    */
   private function buildStaticSitemap()
   {
@@ -156,7 +159,7 @@ class Sitemap
    * Генерация карты сайта
    *
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public function createSitemap()
   {
@@ -191,7 +194,7 @@ class Sitemap
   {
     $file = $url . urlencode($map);
 
-    if (\function_exists('curl_init')) {
+    if (function_exists('curl_init')) {
       $ch = curl_init();
 
       curl_setopt($ch, CURLOPT_URL, $file);

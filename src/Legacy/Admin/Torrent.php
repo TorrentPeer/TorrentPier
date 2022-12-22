@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Admin;
 
+use Exception;
+
 /**
  * Class Torrent
  * @package TorrentPier\Legacy\Admin
@@ -22,7 +24,7 @@ class Torrent
    * @param string $key
    * @param string $field_name
    * @param string $field_def_val
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_table_bool($table_name, $key, $field_name, $field_def_val)
   {
@@ -120,7 +122,7 @@ class Torrent
    * @param array $default_cfg
    * @param array $cfg
    * @param string $type
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_config_table($table_name, $default_cfg, $cfg, $type)
   {

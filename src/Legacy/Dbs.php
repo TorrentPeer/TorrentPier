@@ -9,6 +9,9 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use function is_object;
+
 /**
  * Class Dbs
  * @package TorrentPier\Legacy
@@ -46,13 +49,13 @@ class Dbs
    * @param string $srv_name_or_alias
    *
    * @return mixed
-   * @throws \Exception
+   * @throws Exception
    */
   public function get_db_obj(string $srv_name_or_alias = 'db')
   {
     $srv_name = $this->get_srv_name($srv_name_or_alias);
 
-    if (!\is_object($this->srv[$srv_name])) {
+    if (!is_object($this->srv[$srv_name])) {
       $this->srv[$srv_name] = new SqlDb($this->cfg['driver'], $this->cfg[$srv_name]);
       $this->srv[$srv_name]->db_server = $srv_name;
     }

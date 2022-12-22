@@ -9,6 +9,9 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use function count;
+
 /**
  * Class Poll
  * @package TorrentPier\Legacy
@@ -54,7 +57,7 @@ class Poll
     }
 
     // проверять на "< 3" -- 2 варианта ответа + заголовок
-    if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
+    if (count($this->poll_votes) < 3 || count($this->poll_votes) > $this->max_votes + 1) {
       global $lang;
       return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
     }
@@ -65,7 +68,7 @@ class Poll
    * Добавление голосов в базу данных
    *
    * @param int $topic_id
-   * @throws \Exception
+   * @throws Exception
    */
   public function insert_votes_into_db($topic_id)
   {
@@ -91,7 +94,7 @@ class Poll
    * Удаление голосования
    *
    * @param int $topic_id
-   * @throws \Exception
+   * @throws Exception
    */
   public function delete_poll($topic_id)
   {
@@ -103,7 +106,7 @@ class Poll
    * Удаление информации о проголосовавших и голосов
    *
    * @param int $topic_id
-   * @throws \Exception
+   * @throws Exception
    */
   public function delete_votes_data($topic_id)
   {
@@ -115,7 +118,7 @@ class Poll
   /**
    * @param $topic_id
    * @return array|false|mixed|string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function get_poll_data_items_js($topic_id)
   {

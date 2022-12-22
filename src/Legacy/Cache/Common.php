@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy\Cache;
 
 use TorrentPier\Legacy\Dev;
+use function is_array;
 
 /**
  * Class Common
@@ -27,7 +28,7 @@ class Common
     if ($get_miss_key_callback) {
       return $get_miss_key_callback($name);
     }
-    return \is_array($name) ? [] : false;
+    return is_array($name) ? [] : false;
   }
 
   /**

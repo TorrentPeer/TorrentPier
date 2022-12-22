@@ -9,10 +9,14 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
 use TorrentPier\Legacy\AttachMod\Attach as AttachMod;
 use TorrentPier\Legacy\AttachMod\Delete;
 use TorrentPier\Legacy\AttachMod\Filetypes;
 use TorrentPier\Legacy\AttachMod\Thumbs;
+use function count;
+use function define;
+use function defined;
 
 /**
  * Class Attach
@@ -63,7 +67,7 @@ class Attach
    * Get Quota Limits
    * @param array $userdata_quota
    * @param int $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public function get_quota_limits(array $userdata_quota, $user_id = 0)
   {
@@ -253,7 +257,7 @@ class Attach
       }
     }
 
-    $this->num_attachments = \count($this->attachment_list);
+    $this->num_attachments = count($this->attachment_list);
 
     if ($submit) {
       if ($mode === 'newtopic' || $mode === 'reply' || $mode === 'editpost') {
@@ -321,7 +325,7 @@ class Attach
 
         // restore values :)
         if (isset($_POST['attachment_list'])) {
-          for ($i = 0, $iMax = \count($actual_list); $i < $iMax; $i++) {
+          for ($i = 0, $iMax = count($actual_list); $i < $iMax; $i++) {
             $restore = false;
             $del_thumb = false;
 
@@ -389,7 +393,7 @@ class Attach
 
           $this->attachment_comment_list = [];
 
-          for ($i = 0, $iMax = \count($this->attachment_list); $i < $iMax; $i++) {
+          for ($i = 0, $iMax = count($this->attachment_list); $i < $iMax; $i++) {
             $this->attachment_comment_list[$i] = $actual_comment_list[$i];
           }
         }
@@ -411,7 +415,7 @@ class Attach
             $attachment_id = 0;
             $actual_element = 0;
 
-            for ($i = 0, $iMax = \count($actual_id_list); $i < $iMax; $i++) {
+            for ($i = 0, $iMax = count($actual_id_list); $i < $iMax; $i++) {
               if (isset($_POST['update_attachment'][$actual_id_list[$i]])) {
                 $attachment_id = (int)$actual_id_list[$i];
                 $actual_element = $i;
@@ -524,7 +528,7 @@ class Attach
    * @param $message_type
    * @param $message_id
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public function do_insert_attachment($mode, $message_type, $message_id)
   {
@@ -544,11 +548,11 @@ class Attach
     }
 
     if ($mode === 'attach_list') {
-      for ($i = 0, $iMax = \count($this->attachment_list); $i < $iMax; $i++) {
+      for ($i = 0, $iMax = count($this->attachment_list); $i < $iMax; $i++) {
         if ($this->attachment_id_list[$i]) {
           //bt
-          if ($this->attachment_extension_list[$i] === TORRENT_EXT && !\defined('TORRENT_ATTACH_ID')) {
-            \define('TORRENT_ATTACH_ID', $this->attachment_id_list[$i]);
+          if ($this->attachment_extension_list[$i] === TORRENT_EXT && !defined('TORRENT_ATTACH_ID')) {
+            define('TORRENT_ATTACH_ID', $this->attachment_id_list[$i]);
           }
           //bt end
 
@@ -586,8 +590,8 @@ class Attach
           $attach_id = DB()->sql_nextid();
 
           //bt
-          if ($this->attachment_extension_list[$i] === TORRENT_EXT && !\defined('TORRENT_ATTACH_ID')) {
-            \define('TORRENT_ATTACH_ID', $attach_id);
+          if ($this->attachment_extension_list[$i] === TORRENT_EXT && !defined('TORRENT_ATTACH_ID')) {
+            define('TORRENT_ATTACH_ID', $attach_id);
           }
           //bt end
 
@@ -671,7 +675,7 @@ class Attach
 
     if ($this->attachment_list) {
       $hidden = '';
-      for ($i = 0, $iMax = \count($this->attachment_list); $i < $iMax; $i++) {
+      for ($i = 0, $iMax = count($this->attachment_list); $i < $iMax; $i++) {
         $hidden .= '<input type="hidden" name="attachment_list[]" value="' . $this->attachment_list[$i] . '" />';
         $hidden .= '<input type="hidden" name="filename_list[]" value="' . $this->attachment_filename_list[$i] . '" />';
         $hidden .= '<input type="hidden" name="extension_list[]" value="' . $this->attachment_extension_list[$i] . '" />';
@@ -703,7 +707,7 @@ class Attach
         'TPL_POSTED_ATTACHMENTS' => true,
       ]);
 
-      for ($i = 0, $iMax = \count($this->attachment_list); $i < $iMax; $i++) {
+      for ($i = 0, $iMax = count($this->attachment_list); $i < $iMax; $i++) {
         if (@$this->attachment_id_list[$i] == 0) {
           $download_link = $upload_dir . '/' . basename($this->attachment_list[$i]);
         } else {
@@ -1036,7 +1040,7 @@ class Attach
    *
    * @param $upload_mode
    * @param $file
-   * @throws \Exception
+   * @throws Exception
    */
   public function move_uploaded_attachment($upload_mode, $file)
   {

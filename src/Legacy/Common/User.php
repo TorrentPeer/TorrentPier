@@ -9,9 +9,13 @@
 
 namespace TorrentPier\Legacy\Common;
 
+use Exception;
 use TorrentPier\Legacy\Crypt;
 use TorrentPier\Legacy\DateDelta;
 use TorrentPier\Legacy\Sessions;
+use function define;
+use function defined;
+use function is_array;
 
 /**
  * Class User
@@ -102,7 +106,7 @@ class User
    * @param array $cfg
    *
    * @return array|bool
-   * @throws \Exception
+   * @throws Exception
    */
   public function session_start(array $cfg = [])
   {
@@ -159,8 +163,8 @@ class User
       $ip_check_u = substr(USER_IP, 0, 6);
 
       if ($ip_check_s == $ip_check_u) {
-        if ($this->data['user_id'] != GUEST_UID && \defined('IN_ADMIN')) {
-          \define('SID_GET', "sid={$this->data['session_id']}");
+        if ($this->data['user_id'] != GUEST_UID && defined('IN_ADMIN')) {
+          define('SID_GET', "sid={$this->data['session_id']}");
         }
         $session_id = $this->sessiondata['sid'] = $this->data['session_id'];
 
@@ -198,13 +202,13 @@ class User
       $this->session_create($userdata, true);
     }
 
-    \define('IS_GUEST', !$this->data['session_logged_in']);
-    \define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-    \define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-    \define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-    \define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-    \define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
-    \define('IS_AM', IS_ADMIN || IS_MOD);
+    define('IS_GUEST', !$this->data['session_logged_in']);
+    define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
+    define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
+    define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
+    define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+    define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+    define('IS_AM', IS_ADMIN || IS_MOD);
 
     $this->set_shortcuts();
 
@@ -225,7 +229,7 @@ class User
    * @param bool $auto_created
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   public function session_create($userdata, $auto_created = false)
   {
@@ -278,7 +282,7 @@ class User
 
       if (!$session_time = $this->data['user_session_time']) {
         $last_visit = TIMENOW;
-        \define('FIRST_LOGON', true);
+        define('FIRST_LOGON', true);
       } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
         $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
       }
@@ -320,8 +324,8 @@ class User
 
     $this->set_session_cookies($user_id);
 
-    if ($login && (\defined('IN_ADMIN') || $mod_admin_session)) {
-      \define('SID_GET', "sid=$session_id");
+    if ($login && (defined('IN_ADMIN') || $mod_admin_session)) {
+      define('SID_GET', "sid=$session_id");
     }
 
     Sessions::cache_set_userdata($this->data);
@@ -334,7 +338,7 @@ class User
    *
    * @param bool $update_lastvisit
    * @param bool $set_cookie
-   * @throws \Exception
+   * @throws Exception
    */
   public function session_end($update_lastvisit = false, $set_cookie = true)
   {
@@ -378,7 +382,7 @@ class User
    * @param bool $mod_admin_login
    *
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   public function login($args, $mod_admin_login = false)
   {
@@ -504,7 +508,7 @@ class User
    * @param bool $create_new
    *
    * @return bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
   {
@@ -534,7 +538,7 @@ class User
    * @param bool $create_new
    *
    * @return bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   public function create_autologin_id($userdata, $create_new = true)
   {
@@ -572,17 +576,17 @@ class User
   {
     global $bb_cfg, $theme, $source_lang, $DeltaTime;
 
-    if (\defined('LANG_DIR')) {
+    if (defined('LANG_DIR')) {
       return;
     }  // prevent multiple calling
 
-    \define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
-    \define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
+    define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+    define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
     if ($this->data['user_id'] != GUEST_UID) {
       if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
         $bb_cfg['default_lang'] = basename($this->data['user_lang']);
-        \define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+        define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
       }
 
       if (isset($this->data['user_timezone'])) {
@@ -593,8 +597,8 @@ class User
     $this->data['user_lang'] = $bb_cfg['default_lang'];
     $this->data['user_timezone'] = $bb_cfg['board_timezone'];
 
-    if (!\defined('LANG_DIR')) {
-      \define('LANG_DIR', DEFAULT_LANG_DIR);
+    if (!defined('LANG_DIR')) {
+      define('LANG_DIR', DEFAULT_LANG_DIR);
     }
 
     /** Temporary place source language to the global */
@@ -624,7 +628,7 @@ class User
    * Mark read
    *
    * @param $type
-   * @throws \Exception
+   * @throws Exception
    */
   public function mark_read($type)
   {
@@ -664,7 +668,7 @@ class User
     } elseif (!empty($_COOKIE['opt_js'])) {
       $opt_js = json_decode($_COOKIE['opt_js'], true);
 
-      if (\is_array($opt_js)) {
+      if (is_array($opt_js)) {
         $this->opt_js = array_merge($this->opt_js, $opt_js);
       }
     }
@@ -676,7 +680,7 @@ class User
    * @param $auth_type
    *
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public function get_not_auth_forums($auth_type)
   {
@@ -737,7 +741,7 @@ class User
    * @param string $return_as
    *
    * @return array|bool|string
-   * @throws \Exception
+   * @throws Exception
    */
   public function get_excluded_forums($auth_type, $return_as = 'csv')
   {

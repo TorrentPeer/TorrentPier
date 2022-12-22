@@ -9,6 +9,15 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
+use TorrentPier\Legacy\Cache\APCu;
+use TorrentPier\Legacy\Cache\File;
+use TorrentPier\Legacy\Cache\Memcached;
+use TorrentPier\Legacy\Cache\MySQL;
+use TorrentPier\Legacy\Cache\PostgreSQL;
+use TorrentPier\Legacy\Cache\Redis;
+use TorrentPier\Legacy\Cache\Sqlite;
+
 /**
  * Class Caches
  * @package TorrentPier\Legacy
@@ -34,8 +43,8 @@ class Caches
    * Get a cache object by cache name
    *
    * @param $cache_name
-   * @return mixed|\TorrentPier\Legacy\Cache\APCu|\TorrentPier\Legacy\Cache\File|\TorrentPier\Legacy\Cache\Memcached|\TorrentPier\Legacy\Cache\MySQL|\TorrentPier\Legacy\Cache\PostgreSQL|\TorrentPier\Legacy\Cache\Redis|\TorrentPier\Legacy\Cache\Sqlite
-   * @throws \Exception
+   * @return mixed|APCu|File|Memcached|MySQL|PostgreSQL|Redis|Sqlite
+   * @throws Exception
    */
   public function get_cache_obj($cache_name)
   {

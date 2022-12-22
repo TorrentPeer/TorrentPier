@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use Exception;
 use MatthiasMullie\Scrapbook\Adapters\Apc;
 
 use TorrentPier\Legacy\Dev;
@@ -29,7 +30,7 @@ class APCu extends Common
    * APCu constructor.
    *
    * @param null $prefix
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct($prefix = null)
   {

@@ -9,6 +9,11 @@
 
 namespace TorrentPier\Legacy;
 
+use Bugsnag\Client;
+use Bugsnag\Handler;
+
+use Exception;
+
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Logger;
@@ -29,7 +34,7 @@ class Dev
   /**
    * Dev constructor.
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function __construct()
   {
@@ -45,8 +50,8 @@ class Dev
      * Bugsnag initialize
      */
     if ($bb_cfg['bugsnag']['enabled']) {
-      $bugsnag = \Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-      \Bugsnag\Handler::register($bugsnag);
+      $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+      Handler::register($bugsnag);
     }
 
     if (DBG_USER) {
@@ -101,14 +106,14 @@ class Dev
    * Show error message
    *
    * @param $message
-   * @throws \Exception
+   * @throws Exception
    */
   public static function error_message($message)
   {
     global $bb_cfg;
 
     if (DBG_USER) {
-      throw new \Exception($message);
+      throw new Exception($message);
     } else {
       header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
       Http::setCode(500);

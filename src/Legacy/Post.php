@@ -9,7 +9,9 @@
 
 namespace TorrentPier\Legacy;
 
+use Exception;
 use TorrentPier\Legacy\Admin\Common;
+use function count;
 
 /**
  * Class Post
@@ -26,7 +28,7 @@ class Post
    * @param string $username
    * @param string $subject
    * @param string $message
-   * @throws \Exception
+   * @throws Exception
    */
   public static function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
   {
@@ -91,7 +93,7 @@ class Post
    * @param int $attach_rg_sig
    *
    * @return string
-   * @throws \Exception
+   * @throws Exception
    */
   public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
   {
@@ -233,7 +235,7 @@ class Post
    * @param int $topic_id
    * @param int $post_id
    * @param int $user_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id)
   {
@@ -317,7 +319,7 @@ class Post
    * @param int $forum_id
    * @param int $topic_id
    * @param int $post_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id, $post_id)
   {
@@ -338,7 +340,7 @@ class Post
    * @param int $forum_id
    * @param int $topic_id
    * @param bool $notify_user
-   * @throws \Exception
+   * @throws Exception
    */
   public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
   {
@@ -373,7 +375,7 @@ class Post
           $orig_word = $replacement_word = [];
           obtain_word_list($orig_word, $replacement_word);
 
-          if (\count($orig_word)) {
+          if (count($orig_word)) {
             $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
           }
 
@@ -438,7 +440,7 @@ class Post
    * @param int $old_topic_id
    * @param string $message
    * @param int $poster_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function insert_post($mode, $topic_id, $forum_id = null, $old_forum_id = null, $new_topic_id = null, $new_topic_title = '', $old_topic_id = null, $message = '', $poster_id = null)
   {
@@ -516,7 +518,7 @@ class Post
    * Preview topic with posts content
    *
    * @param $topic_id
-   * @throws \Exception
+   * @throws Exception
    */
   public static function topic_review($topic_id)
   {

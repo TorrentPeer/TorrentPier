@@ -10,6 +10,9 @@
 namespace TorrentPier\Legacy;
 
 use TorrentPier\Helpers\IsHelper;
+use function defined;
+use function is_string;
+use function strlen;
 
 /**
  * Class Ajax
@@ -78,7 +81,7 @@ class Ajax
     // Check that requested action is valid
     $action = $this->action;
 
-    if (!$action || !\is_string($action)) {
+    if (!$action || !is_string($action)) {
       $this->ajax_die('no action specified');
     } elseif (!$action_params =& $this->valid_actions[$action]) {
       $this->ajax_die('invalid action: ' . $action);
@@ -194,8 +197,8 @@ class Ajax
 
     $response_js = json_encode($this->response);
 
-    if (GZIP_OUTPUT_ALLOWED && !\defined('NO_GZIP')) {
-      if (UA_GZIP_SUPPORTED && \strlen($response_js) > 2000) {
+    if (GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
+      if (UA_GZIP_SUPPORTED && strlen($response_js) > 2000) {
         header('Content-Encoding: gzip');
         $response_js = gzencode($response_js, 1);
       }

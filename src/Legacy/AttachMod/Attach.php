@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\AttachMod;
 
+use Exception;
+
 /**
  * Class Attach
  * @package TorrentPier\Legacy\AttachMod
@@ -244,7 +246,7 @@ class Attach
    *
    * @param $filename
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function physical_filename_already_stored($filename)
   {
@@ -273,7 +275,7 @@ class Attach
    *
    * @param $post_id_array
    * @return array
-   * @throws \Exception
+   * @throws Exception
    */
   public static function get_attachments_from_post($post_id_array)
   {
@@ -326,7 +328,7 @@ class Attach
    *
    * @param $attach_ids
    * @return int
-   * @throws \Exception
+   * @throws Exception
    */
   public static function get_total_attach_filesize($attach_ids)
   {
@@ -370,7 +372,7 @@ class Attach
    * Sync Topic
    *
    * @param $topics
-   * @throws \Exception
+   * @throws Exception
    */
   public static function attachment_sync_topic($topics)
   {
@@ -462,7 +464,7 @@ class Attach
    * @param $user_id
    * @param $group_id
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public static function user_in_group($user_id, $group_id)
   {

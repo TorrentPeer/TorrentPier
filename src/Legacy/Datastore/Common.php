@@ -9,7 +9,9 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use Exception;
 use TorrentPier\Legacy\Dev;
+use function in_array;
 
 /**
  * Class Common
@@ -58,7 +60,7 @@ class Common
   {
     foreach ((array)$items as $item) {
       // игнор уже поставленного в очередь либо уже извлеченного
-      if (!\in_array($item, $this->queued_items) && !isset($this->data[$item])) {
+      if (!in_array($item, $this->queued_items) && !isset($this->data[$item])) {
         $this->queued_items[] = $item;
       }
     }
@@ -97,7 +99,7 @@ class Common
 
   /**
    * @param $items
-   * @throws \Exception
+   * @throws Exception
    */
   public function update($items)
   {
@@ -128,7 +130,7 @@ class Common
 
   /**
    * @param $title
-   * @throws \Exception
+   * @throws Exception
    */
   public function _build_item($title)
   {

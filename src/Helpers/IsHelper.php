@@ -9,6 +9,11 @@
 
 namespace TorrentPier\Helpers;
 
+use const FILTER_NULL_ON_FAILURE;
+use const FILTER_VALIDATE_BOOLEAN;
+use const FILTER_VALIDATE_FLOAT;
+use const FILTER_VALIDATE_INT;
+
 /**
  * Class IsHelper
  * @package TorrentPier\Helpers
@@ -65,7 +70,7 @@ class IsHelper
    */
   public static function is_integer($value): bool
   {
-    return filter_var($value, \FILTER_VALIDATE_INT);
+    return filter_var($value, FILTER_VALIDATE_INT);
   }
 
   /**
@@ -76,7 +81,7 @@ class IsHelper
    */
   public static function is_boolean($value): bool
   {
-    return is_bool(filter_var($value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE));
+    return is_bool(filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE));
   }
 
   /**
@@ -87,7 +92,7 @@ class IsHelper
    */
   public static function is_float($value): bool
   {
-    return filter_var($value, \FILTER_VALIDATE_FLOAT);
+    return filter_var($value, FILTER_VALIDATE_FLOAT);
   }
 
   /**

@@ -9,8 +9,11 @@
 
 namespace TorrentPier\Legacy\Common;
 
+use Exception;
 use TorrentPier\Legacy\Avatar;
 use TorrentPier\Legacy\Filesystem;
+use function dirname;
+use function in_array;
 
 /**
  * Class Upload
@@ -115,7 +118,7 @@ class Upload
       }
     }
     // check ext
-    if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
+    if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
       $this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
       return false;
     }
@@ -128,7 +131,7 @@ class Upload
    * @param string $mode
    * @param array $params
    * @return bool
-   * @throws \Exception
+   * @throws Exception
    */
   public function store($mode = '', array $params = [])
   {
@@ -152,7 +155,7 @@ class Upload
    */
   public function _move($file_path)
   {
-    $dir = \dirname($file_path);
+    $dir = dirname($file_path);
     if (!file_exists($dir)) {
       if (!Filesystem::bb_mkdir($dir)) {
         $this->errors[] = "Cannot create dir: $dir";
