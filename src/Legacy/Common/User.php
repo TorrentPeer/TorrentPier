@@ -93,6 +93,13 @@ class User
   public $id;
 
   /**
+   * Username
+   *
+   * @var
+   */
+  public $name;
+
+  /**
    * User constructor
    */
   public function __construct()
@@ -211,6 +218,7 @@ class User
     define('IS_AM', IS_ADMIN || IS_MOD);
 
     $this->id =& $this->data['user_id'];
+    $this->name =& $this->data['username'];
 
     // Redirect guests to login page
     if (IS_GUEST && $this->cfg['req_login']) {
@@ -728,7 +736,7 @@ class User
    * @return array|bool|string
    * @throws Exception
    */
-  public function get_excluded_forums($auth_type, $return_as = 'csv')
+  public function get_excluded_forums($auth_type, string $return_as = 'csv')
   {
     $excluded = [];
 
@@ -754,12 +762,15 @@ class User
     }
 
     switch ($return_as) {
+      default:
       case   'csv':
         return implode(',', $excluded);
+      case  'flip_csv':
+        return implode(',', array_flip($excluded));
       case 'array':
         return $excluded;
-      case  'flip':
-        return implode(',', array_flip($excluded));
+      case 'flip':
+        return array_flip($excluded);
     }
   }
 }
