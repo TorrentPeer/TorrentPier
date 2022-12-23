@@ -115,6 +115,8 @@ $images['progress_bar_full'] = $_main . 'progress_bar_full.gif';
 // other
 $images['icon_run'] = $_img . 'icon_run.gif';
 $images['icon_delete'] = $_img . 'icon_delete.gif';
+$images['icon_online'] = $_img . 'user_online.gif';
+$images['icon_offline'] = $_img . 'user_offline.gif';
 
 $template->assign_vars([
   'IMG' => $_main,
