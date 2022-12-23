@@ -86,7 +86,7 @@ class User
   public $data = [];
 
   /**
-   * Shortcuts
+   * User ID
    *
    * @var
    */
@@ -210,7 +210,7 @@ class User
     define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
     define('IS_AM', IS_ADMIN || IS_MOD);
 
-    $this->set_shortcuts();
+    $this->id =& $this->data['user_id'];
 
     // Redirect guests to login page
     if (IS_GUEST && $this->cfg['req_login']) {
@@ -555,21 +555,6 @@ class User
   }
 
   /**
-   * Set shortcuts
-   */
-  public function set_shortcuts()
-  {
-    $this->id =& $this->data['user_id'];
-    $this->active =& $this->data['user_active'];
-    $this->name =& $this->data['username'];
-    $this->lastvisit =& $this->data['user_lastvisit'];
-    $this->regdate =& $this->data['user_regdate'];
-    $this->level =& $this->data['user_level'];
-    $this->opt =& $this->data['user_opt'];
-    $this->ip = CLIENT_IP;
-  }
-
-  /**
    * Initialise user settings
    */
   public function init_userprefs()
@@ -751,7 +736,7 @@ class User
       $excluded[] = $not_auth;
     }
 
-    if (bf($this->opt, 'user_opt', 'user_porn_forums')) {
+    if (bf($this->data['user_opt'], 'user_opt', 'user_porn_forums')) {
       global $datastore;
 
       if (!$forums = $datastore->get('cat_forums')) {
@@ -774,7 +759,7 @@ class User
       case 'array':
         return $excluded;
       case  'flip':
-        return array_flip(explode(',', $excluded));
+        return implode(',', array_flip($excluded));
     }
   }
 }
