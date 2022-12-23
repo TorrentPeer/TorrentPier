@@ -55,12 +55,12 @@ class Avatar
    * @param $user_id
    * @param $ext_id
    * @param bool $allow_avatar
-   * @param string $height
-   * @param string $width
+   * @param int $height
+   * @param int $width
    * @return string
    * @throws Exception
    */
-  public static function getAvatar($is_group, $user_id, $ext_id, bool $allow_avatar = true, $height = '', $width = ''): string
+  public static function getAvatar($is_group, $user_id, $ext_id, bool $allow_avatar = true, int $height = 100, int $width = 100): string
   {
     global $bb_cfg;
 

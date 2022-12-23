@@ -421,7 +421,7 @@ if ($bb_cfg['show_latest_posts_sidebar']['status']) {
         'POSTING' => ($mes) ? TOPIC_URL . $row['topic_id'] : POST_URL . $row['post_id'] . '#' . $row['post_id'],
         'TOPIC_TITLE' => $row['topic_title'],
         'POST_TOPIC' => str_short($row['topic_title'], 32),
-        'AVATAR' => \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], true, 50, 50),
+        'AVATAR' => \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], true, 60, 60),
         'TOPIC_TEXT' => sprintf($topic_text, profile_url(['username' => $row['username'], 'user_id' => $row['poster_id'], 'user_rank' => $row['user_rank']])) . '<br>' . bb_date($row['post_time']),
       ]);
     }
