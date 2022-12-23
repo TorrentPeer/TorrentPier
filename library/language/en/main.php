@@ -1631,6 +1631,7 @@ $lang['MANAGE'] = 'Management';
 $lang['DISALLOW'] = 'Disallow names';
 $lang['PRUNE'] = 'Pruning';
 $lang['MASS_EMAIL'] = 'Mass Email';
+$lang['NOTICES_SYSTEM'] = 'Announcements for users';
 $lang['RANKS'] = 'Ranks';
 $lang['SMILIES'] = 'Smilies';
 $lang['WORD_CENSOR'] = 'Word Censors';
@@ -2959,3 +2960,12 @@ $lang['AJAX_INVITE_FIELD_BLANK'] = 'The field with the invite code cannot be emp
 $lang['INVITE_ENABLED'] = 'Enable registration only by invites';
 $lang['INVITE_ADMIN_HIST'] = 'History of invites';
 $lang['INVITE_ADMIN_RULES'] = 'Invite rules';
+
+// Notices management
+$lang['NOTICES_MANAGEMENT'] = 'Manage announcements';
+$lang['NOTICES_EXPLAIN'] = 'Here you can add, delete, edit announcements that will be visible to all users of the site';
+$lang['ADD_NEW_NOTICE'] = 'New announcement';
+$lang['DELETE_NOTICE'] = 'The announcement has been deleted successfully';
+$lang['NOTICE_ADDED'] = 'The announcement has been added successfully';
+$lang['NOTICE_UPDATED'] = 'The announcement has been updated successfully';
+$lang['CLICK_RETURN_NOTICEADMIN'] = 'Click %sHere%s to return to Announcement Administration';

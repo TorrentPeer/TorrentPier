@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images, $datastore;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -57,10 +57,9 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
 
 // Notices
 $notices = '';
-$sql = "SELECT notice_text, notice_id, notice_active FROM " . BB_NOTICES . " WHERE notice_active = 1 ORDER BY notice_id";
-if ($result = DB()->fetch_rowset($sql)) {
-  foreach ($result as $i => $row) {
-    $notices .= '<div class="alert alert-info"><h4 class="alert-heading">' . $lang['POST_ANNOUNCEMENT'] . '</h4><hr><div>' . $row['notice_text'] . '</div></div>';
+foreach ($datastore->get('notices') as $notice) {
+  if ($notice['notice_active']) {
+    $notices .= '<div class="alert alert-info"><h4 class="alert-heading">' . $lang['POST_ANNOUNCEMENT'] . '</h4><hr><div>' . $notice['notice_text'] . '</div></div>';
   }
 }
 

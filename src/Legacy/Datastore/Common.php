@@ -51,6 +51,7 @@ class Common
     'ranks' => 'build_ranks.php',
     'attach_extensions' => 'build_attach_extensions.php',
     'smile_replacements' => 'build_smilies.php',
+    'notices' => 'build_notices.php',
   ];
 
   /**

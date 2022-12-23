@@ -1798,7 +1798,7 @@ DROP TABLE IF EXISTS `bb_notices`;
 CREATE TABLE IF NOT EXISTS `bb_notices`
 (
   `notice_id`     INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `notice_active` TINYINT(1)      NOT NULL DEFAULT '0',
+  `notice_active` ENUM ('1','0') DEFAULT '0',
   `notice_text`   TEXT            NOT NULL,
   PRIMARY KEY (`notice_id`)
 )

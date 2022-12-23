@@ -1631,6 +1631,7 @@ $lang['MANAGE'] = 'Управление';
 $lang['DISALLOW'] = 'Запрещенные имена';
 $lang['PRUNE'] = 'Чистка';
 $lang['MASS_EMAIL'] = 'Массовая рассылка почты';
+$lang['NOTICES_SYSTEM'] = 'Объявления для пользователей';
 $lang['RANKS'] = 'Звания';
 $lang['SMILIES'] = 'Смайлики';
 $lang['WORD_CENSOR'] = 'Автоцензор';
@@ -2959,3 +2960,12 @@ $lang['AJAX_INVITE_FIELD_BLANK'] = 'Поле c кодом инвайта не м
 $lang['INVITE_ENABLED'] = 'Включить регистрацию только по инвайтам';
 $lang['INVITE_ADMIN_HIST'] = 'История инвайтов';
 $lang['INVITE_ADMIN_RULES'] = 'Правила инвайтов';
+
+// Notices management
+$lang['NOTICES_MANAGEMENT'] = 'Управление объявлениями на сайте';
+$lang['NOTICES_EXPLAIN'] = 'Здесь вы можете добавлять, удалять, редактировать объявления, которые будут видны всем пользователям сайта';
+$lang['ADD_NEW_NOTICE'] = 'Новое объявление';
+$lang['DELETE_NOTICE'] = 'Объявление было успешно удалено';
+$lang['NOTICE_ADDED'] = 'Объявление было успешно добавлено';
+$lang['NOTICE_UPDATED'] = 'Объявление было успешно изменено';
+$lang['CLICK_RETURN_NOTICEADMIN'] = '%sВернуться к управлению объявлениями%s';
