@@ -22,8 +22,8 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.8-alpha3';
-$bb_cfg['tp_release_date'] = '23-12-22';
+$bb_cfg['tp_version'] = '2.4.0.8-alpha4';
+$bb_cfg['tp_release_date'] = '24-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
 // GZip
@@ -162,7 +162,7 @@ $bb_cfg['show_copyright_on_pages'] = true;
 
 $bb_cfg['show_latest_posts_sidebar'] = [
   'status' => true,
-  'limit' => 10
+  'limit' => 8
 ];
 
 // Cookie
@@ -278,7 +278,7 @@ $bb_cfg['user_signature_end'] = '</div>'; // Это позволит испол�
 // Posts
 $bb_cfg['use_posts_cache'] = true;
 $bb_cfg['posts_cache_days_keep'] = 14;
-$bb_cfg['max_post_length'] = 120000;
+$bb_cfg['max_post_length'] = 150000;
 $bb_cfg['use_ajax_posts'] = true;
 
 // Search
@@ -291,7 +291,7 @@ $bb_cfg['sphinx'] = [
   'connect_timeout' => 5, // seconds
   'limits' => [
     'offset' => 0,
-    'limit' => 100, // max results
+    'limit' => 250, // max results
   ],
 ];
 
@@ -305,14 +305,14 @@ $bb_cfg['limit_max_search_results'] = false;
 
 // Posting
 $bb_cfg['prevent_multiposting'] = true; // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
-$bb_cfg['max_smilies'] = 25; // Максимальное число смайлов в посте (0 - без ограничения)
+$bb_cfg['max_smilies'] = 30; // Максимальное число смайлов в посте (0 - без ограничения)
 
 // PM
 $bb_cfg['privmsg_disable'] = false; // отключить систему личных сообщений на форуме
 $bb_cfg['max_outgoing_pm_cnt'] = 10; // ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
-$bb_cfg['max_inbox_privmsgs'] = 500; // максимальное число сообщений в папке входящие
-$bb_cfg['max_savebox_privmsgs'] = 500; // максимальное число сообщений в папке сохраненные
-$bb_cfg['max_sentbox_privmsgs'] = 500; // максимальное число сообщений в папке отправленные
+$bb_cfg['max_inbox_privmsgs'] = 1000; // максимальное число сообщений в папке входящие
+$bb_cfg['max_savebox_privmsgs'] = 1000; // максимальное число сообщений в папке сохраненные
+$bb_cfg['max_sentbox_privmsgs'] = 1000; // максимальное число сообщений в папке отправленные
 $bb_cfg['pm_days_keep'] = 180; // время хранения ЛС
 $bb_cfg['pm_dynamic'] = [
   // Динамическое появление новых ЛС (без перезагрузки страницы)
@@ -342,7 +342,7 @@ $bb_cfg['use_word_censor'] = true; // авто цензура слов
 $bb_cfg['reputation'] = [
   // Reputation
   'disabled' => false,
-  'vote' => '10',
+  'vote' => '5',
   'min_posts' => '2',
   'min_repa_out' => '0',
   'min_repa' => '-1000',
@@ -413,7 +413,7 @@ $bb_cfg['file_id_ext'] = [
 // Attachments
 $bb_cfg['attach'] = [
   'upload_path' => DATA_DIR . '/torrent_files', // путь к директории с torrent файлами
-  'max_size' => 5 * 1024 * 1024, // максимальный размер файла в байтах
+  'max_size' => 8 * 1024 * 1024, // максимальный размер файла в байтах
 ];
 
 $bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // для разделов с раздачами
@@ -429,9 +429,9 @@ $bb_cfg['sitemap_sending'] = [
 $bb_cfg['avatars'] = [
   'allowed_ext' => ['gif', 'jpg', 'jpeg', 'png'], // разрешенные форматы файлов
   'bot_avatar' => '/gallery/bot.gif', // аватара бота
-  'max_size' => 100 * 1024, // размер аватары в байтах
-  'max_height' => 100, // высота аватара в px
-  'max_width' => 100, // ширина аватара в px
+  'max_size' => 500 * 1024, // размер аватары в байтах
+  'max_height' => 400, // высота аватара в px
+  'max_width' => 400, // ширина аватара в px
   'avatar_provider' => [
     // Read more: https://gravatar.com/site/implement/images/
     'enabled' => false,
@@ -447,9 +447,9 @@ $bb_cfg['avatars'] = [
 // Group avatars
 $bb_cfg['group_avatars'] = [
   'allowed_ext' => ['gif', 'jpg', 'jpeg', 'png'], // разрешенные форматы файлов
-  'max_size' => 300 * 1024, // размер аватары в байтах
-  'max_height' => 300, // высота аватара в px
-  'max_width' => 300, // ширина аватара в px
+  'max_size' => 500 * 1024, // размер аватары в байтах
+  'max_height' => 400, // высота аватара в px
+  'max_width' => 400, // ширина аватара в px
   'up_allowed' => true, // разрешить загрузку аватар
 ];
 
