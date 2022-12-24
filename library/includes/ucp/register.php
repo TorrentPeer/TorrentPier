@@ -51,7 +51,7 @@ switch ($mode) {
     }
 
     // Отключение регистрации для ботов
-    if ($userdata['session_bot_name']) {
+    if (!empty($userdata['session_bot_name'])) {
       bb_die($lang['BOTS_REG_DISABLED']);
     }
 
