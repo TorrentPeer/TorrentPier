@@ -84,3 +84,6 @@ DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
 // 2.4.0.4
 DROP TABLE IF EXISTS `bb_notices`;
 CREATE TABLE IF NOT EXISTS `bb_notices` (`notice_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT, `notice_active` ENUM ('1','0') DEFAULT '0', `notice_text` TEXT NOT NULL, PRIMARY KEY (`notice_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
+
+// 2.4.0.8
+ALTER TABLE `bb_sessions` ADD `session_bot_name` VARCHAR(255) NOT NULL DEFAULT '';

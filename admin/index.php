@@ -131,7 +131,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     }
     $onlinerow_reg = DB()->sql_fetchrowset($result);
 
-    $sql = 'SELECT session_logged_in, session_time, session_ip, session_agent, session_start
+    $sql = 'SELECT session_logged_in, session_time, session_ip, session_agent, session_bot_name, session_start
 			FROM ' . BB_SESSIONS . '
 			WHERE session_logged_in = 0
 				AND session_time >= ' . (TIMENOW - 300) . '
@@ -196,6 +196,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
           'IP_ADDRESS' => $guest_ip,
           'USER_AGENT' => $onlinerow_guest[$i]['session_agent'],
           'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
+          'NAME' => !empty($onlinerow_guest[$i]['session_bot_name']) ? $onlinerow_guest[$i]['session_bot_name'] : $lang['GUEST'],
+          'IS_BOT' => !empty($onlinerow_guest[$i]['session_bot_name']) ? $lang['YES'] : $lang['NO'],
         ]);
       }
     }

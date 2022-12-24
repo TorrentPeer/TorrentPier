@@ -224,6 +224,7 @@
     <th>{L_LOGIN} / {L_LAST_UPDATED}</th>
     <th>User-Agent</th>
     <th>{L_IP_ADDRESS}</th>
+    <th>BOT</th>
   </tr>
   <!-- BEGIN reg_user_row -->
   <tr class="{reg_user_row.ROW_CLASS}">
@@ -231,17 +232,19 @@
     <td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
     <td align="center" nowrap="nowrap">{reg_user_row.USER_AGENT}</td>
     <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a></td>
+    <td class="tCenter">{L_NO}</td>
   </tr>
   <!-- END reg_user_row -->
   <tr>
-    <td colspan="4" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+    <td colspan="5" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
   </tr>
   <!-- BEGIN guest_user_row -->
   <tr class="{guest_user_row.ROW_CLASS}">
-    <td nowrap="nowrap">{L_GUEST}</td>
+    <td nowrap="nowrap">{guest_user_row.NAME}</td>
     <td align="center">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</td>
     <td align="center" nowrap="nowrap">{guest_user_row.USER_AGENT}</td>
     <td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></td>
+    <td nowrap="nowrap">{guest_user_row.IS_BOT}</td>
   </tr>
   <!-- END guest_user_row -->
 </table>

@@ -261,6 +261,12 @@ class User
       }
     }
 
+    // Bot check
+    $bot_name = '';
+    foreach ($bb_cfg['bots_list'] as $bot => $name) {
+      if (strstr(USER_AGENT, $bot)) $bot_name = $name;
+    }
+
     // Create new session
     for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
       $session_id = make_rand_str(SID_LENGTH);
@@ -274,6 +280,7 @@ class User
         'session_agent' => (string)USER_AGENT,
         'session_logged_in' => (int)$login,
         'session_admin' => (int)$mod_admin_session,
+        'session_bot_name' => (string)$bot_name,
       ]);
       $sql = "INSERT INTO " . BB_SESSIONS . $args;
 
@@ -329,6 +336,7 @@ class User
     $this->data['session_start'] = TIMENOW;
     $this->data['session_time'] = TIMENOW;
     $this->data['session_admin'] = $mod_admin_session;
+    $this->data['session_bot_name'] = $bot_name;
 
     $this->set_session_cookies($user_id);
 

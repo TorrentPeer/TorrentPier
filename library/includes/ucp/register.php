@@ -50,6 +50,11 @@ switch ($mode) {
       redirect('index.php');
     }
 
+    // Отключение регистрации для ботов
+    if ($userdata['session_bot_name']) {
+      bb_die($lang['BOTS_REG_DISABLED']);
+    }
+
     if (!IS_ADMIN) {
       // Ограничение по ip
       if ($bb_cfg['unique_ip']) {

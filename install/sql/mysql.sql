@@ -1347,6 +1347,7 @@ CREATE TABLE IF NOT EXISTS `bb_sessions`
   `session_agent`     TEXT                 NOT NULL DEFAULT '',
   `session_logged_in` TINYINT(1)           NOT NULL DEFAULT '0',
   `session_admin`     TINYINT(2)           NOT NULL DEFAULT '0',
+  `session_bot_name`  VARCHAR(255)         NOT NULL DEFAULT '',
   PRIMARY KEY (`session_id`)
 )
   ENGINE = MyISAM

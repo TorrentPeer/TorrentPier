@@ -130,7 +130,7 @@ $lang['DISPLAYING_OPTIONS'] = 'Displaying options';
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Registered Users:';
 $lang['BROWSING_FORUM'] = 'Users browsing this forum:';
-$lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d registered and %3$d guests';
+$lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d registered and %3$d guests / search robots';
 $lang['RECORD_ONLINE_USERS'] = 'The most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
 
 $lang['ONLINE_ADMIN'] = 'Administrator';
@@ -1392,6 +1392,7 @@ $lang['AUTH_TYPES'][AUTH_ACL] = $lang['AUTH_USERS_GRANTED_ACCESS'];
 $lang['AUTH_TYPES'][AUTH_MOD] = $lang['AUTH_MODERATORS'];
 $lang['AUTH_TYPES'][AUTH_ADMIN] = $lang['AUTH_ADMINISTRATORS'];
 
+$lang['BOTS_REG_DISABLED'] = 'Sorry, registration is disabled for search robots';
 $lang['NEW_USER_REG_DISABLED'] = 'Sorry, registration is disabled at this time';
 $lang['ONLY_NEW_POSTS'] = 'only new posts';
 $lang['ONLY_NEW_TOPICS'] = 'only new topics';

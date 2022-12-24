@@ -130,7 +130,7 @@ $lang['DISPLAYING_OPTIONS'] = 'Опции показа';
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Зарегистрированные пользователи:';
 $lang['BROWSING_FORUM'] = 'Сейчас этот форум просматривают:';
-$lang['ONLINE_USERS'] = 'Сейчас на форуме <b>%1$d</b> посетителей: %2$d зарегистрированных и %3$d гостей';
+$lang['ONLINE_USERS'] = 'Сейчас на форуме <b>%1$d</b> посетителей: %2$d зарегистрированных и %3$d гостей / поисковых ботов';
 $lang['RECORD_ONLINE_USERS'] = 'Больше всего посетителей (<b>%s</b>) здесь было %s'; // first %s = number of users, second %s is the date.
 
 $lang['ONLINE_ADMIN'] = 'Администратор';
@@ -1392,6 +1392,7 @@ $lang['AUTH_TYPES'][AUTH_ACL] = $lang['AUTH_USERS_GRANTED_ACCESS'];
 $lang['AUTH_TYPES'][AUTH_MOD] = $lang['AUTH_MODERATORS'];
 $lang['AUTH_TYPES'][AUTH_ADMIN] = $lang['AUTH_ADMINISTRATORS'];
 
+$lang['BOTS_REG_DISABLED'] = 'Регистрация для поисковых ботов невозможна';
 $lang['NEW_USER_REG_DISABLED'] = 'Регистрация новых пользователей временно отключена';
 $lang['ONLY_NEW_POSTS'] = 'только новые сообщения';
 $lang['ONLY_NEW_TOPICS'] = 'только новые темы';

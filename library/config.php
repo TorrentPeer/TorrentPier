@@ -22,7 +22,7 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // App info
 $bb_cfg['tp_name'] = 'TorrentPier';
-$bb_cfg['tp_version'] = '2.4.0.8-alpha4';
+$bb_cfg['tp_version'] = '2.4.0.8-beta1';
 $bb_cfg['tp_release_date'] = '24-12-22';
 $bb_cfg['tp_release_codename'] = 'Kouprey';
 
@@ -395,6 +395,65 @@ $bb_cfg['zodiac_sign'] = [
   'capricorn' => [12, 23, 1, 20],
   'aquarius' => [1, 21, 2, 19],
   'pisces' => [2, 20, 3, 20],
+];
+
+// Список поисковых ботов
+$bb_cfg['bots_list'] = [
+# 'USER_AGENT' => имя бота при выводе
+  'AdsBot-Google' => 'AdsBot [Google]',
+  'ia_archiver' => 'Alexa [Bot]',
+  'Scooter/' => 'Alta Vista [Bot]',
+  'Ask Jeeves' => 'Ask Jeeves [Bot]',
+  'Baiduspider+(' => 'Baidu [Spider]',
+  'Exabot/' => 'Exabot [Bot]',
+  'FAST Enterprise Crawler' => 'FAST Enterprise [Crawler]',
+  'FAST-WebCrawler/' => 'FAST WebCrawler [Crawler]',
+  'http://www.neomo.de/' => 'Francis [Bot]',
+  'Gigabot/' => 'Gigabot [Bot]',
+  'Mediapartners-Google' => 'Google Adsense [Bot]',
+  'Google Desktop' => 'Google Desktop',
+  'Feedfetcher-Google' => 'Google Feedfetcher',
+  'Googlebot' => 'Google [Bot]',
+  'heise-IT-Markt-Crawler' => 'Heise IT-Markt [Crawler]',
+  'heritrix/1.' => 'Heritrix [Crawler]',
+  'ibm.com/cs/crawler' => 'IBM Research [Bot]',
+  'ICCrawler - ICjobs' => 'ICCrawler - ICjobs',
+  'ichiro/' => 'ichiro [Crawler]',
+  'MJ12bot/' => 'Majestic-12 [Bot]',
+  'MetagerBot/' => 'Metager [Bot]',
+  'msnbot-NewsBlogs/' => 'MSN NewsBlogs',
+  'msnbot/' => 'MSN [Bot]',
+  'msnbot-media/' => 'MSNbot Media',
+  'NG-Search/' => 'NG-Search [Bot]',
+  'http://lucene.apache.org/nutch/' => 'Nutch [Bot]',
+  'NutchCVS/' => 'Nutch/CVS [Bot]',
+  'OmniExplorer_Bot/' => 'OmniExplorer [Bot]',
+  'online link validator' => 'Online link [Validator]',
+  'psbot/0' => 'psbot [Picsearch]',
+  'Seekbot/' => 'Seekport [Bot]',
+  'Sensis Web Crawler' => 'Sensis [Crawler]',
+  'SEO search Crawler/' => 'SEO Crawler',
+  'Seoma [SEO Crawler]' => 'Seoma [Crawler]',
+  'SEOsearch/' => 'SEOSearch [Crawler]',
+  'Snappy/1.1 ( http://www.urltrends.com/ )' => 'Snappy [Bot]',
+  'http://www.tkl.iis.u-tokyo.ac.jp/~crawler/' => 'Steeler [Crawler]',
+  'SynooBot/' => 'Synoo [Bot]',
+  'crawleradmin.t-info@telekom.de' => 'Telekom [Bot]',
+  'TurnitinBot/' => 'TurnitinBot [Bot]',
+  'voyager/1.0' => 'Voyager [Bot]',
+  'W3 SiteSearch Crawler' => 'W3 [Sitesearch]',
+  'W3C-checklink/' => 'W3C [Linkcheck]',
+  'W3C_*Validator' => 'W3C [Validator]',
+  'http://www.WISEnutbot.com' => 'WiseNut [Bot]',
+  'yacybot' => 'YaCy [Bot]',
+  'Yahoo-MMCrawler/' => 'Yahoo MMCrawler [Bot]',
+  'Yahoo! DE Slurp' => 'Yahoo Slurp [Bot]',
+  'Yahoo! Slurp' => 'Yahoo [Bot]',
+  'YahooSeeker/' => 'YahooSeeker [Bot]',
+  'Yandex/1.01.001 (compatible; Win16; I)' => 'Яндекс БОТ',
+  'Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)' => 'Яндекс [Bot]',
+  'bingbot/' => 'Bing [Bot]',
+  'Rambler/' => 'Rambler [Bot]',
 ];
 
 // Extensions
