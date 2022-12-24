@@ -23,11 +23,13 @@ class Common
    * Директория с builder-скриптами (внутри INC_DIR)
    */
   public $ds_dir = 'datastore';
+
   /**
    * Готовая к употреблению data
    * array('title' => data)
    */
   public $data = [];
+
   /**
    * Список элементов, которые будут извлечены из хранилища при первом же запросе get()
    * до этого момента они ставятся в очередь $queued_items для дальнейшего извлечения _fetch()'ем
@@ -55,7 +57,9 @@ class Common
   ];
 
   /**
-   * @param array (item1_title, item2_title...) or single item's title
+   * Enqueue
+   *
+   * @param $items (item1_title, item2_title...) or single item's title
    */
   public function enqueue($items)
   {
@@ -68,8 +72,11 @@ class Common
   }
 
   /**
+   * Get
+   *
    * @param $title
    * @return mixed
+   * @throws Exception
    */
   public function &get($title)
   {
@@ -81,6 +88,8 @@ class Common
   }
 
   /**
+   * Store
+   *
    * @param $item_name
    * @param $item_data
    */
@@ -89,6 +98,8 @@ class Common
   }
 
   /**
+   * Remove
+   *
    * @param $items
    */
   public function rm($items)
@@ -99,6 +110,8 @@ class Common
   }
 
   /**
+   * Update
+   *
    * @param $items
    * @throws Exception
    */
@@ -112,6 +125,12 @@ class Common
     }
   }
 
+  /**
+   * Fetch
+   *
+   * @return void
+   * @throws Exception
+   */
   public function _fetch()
   {
     $this->_fetch_from_store();
@@ -125,11 +144,18 @@ class Common
     $this->queued_items = [];
   }
 
+  /**
+   * Fetch from store
+   *
+   * @return void
+   */
   public function _fetch_from_store()
   {
   }
 
   /**
+   * Build item
+   *
    * @param $title
    * @throws Exception
    */
@@ -186,10 +212,12 @@ class Common
   }
 
   /**
+   * Debug [Find source]
+   *
    * @param string $mode
    * @return mixed|string
    */
-  public function debug_find_source($mode = '')
+  public function debug_find_source(string $mode = '')
   {
     foreach (debug_backtrace() as $trace) {
       if ($trace['file'] !== __FILE__) {
@@ -203,6 +231,7 @@ class Common
         }
       }
     }
+
     return 'src not found';
   }
 }

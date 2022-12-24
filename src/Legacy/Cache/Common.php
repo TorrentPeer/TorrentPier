@@ -18,10 +18,20 @@ use function is_array;
  */
 class Common
 {
+  /**
+   * Is used?
+   *
+   * @var bool
+   */
   public $used = false;
 
   /**
    * Returns value of variable
+   *
+   * @param $name
+   * @param $get_miss_key_callback
+   * @param $ttl
+   * @return array|false|mixed
    */
   public function get($name, $get_miss_key_callback = '', $ttl = 604800)
   {
@@ -33,6 +43,11 @@ class Common
 
   /**
    * Store value of variable
+   *
+   * @param $name
+   * @param $value
+   * @param $ttl
+   * @return false
    */
   public function set($name, $value, $ttl = 604800)
   {
@@ -41,6 +56,9 @@ class Common
 
   /**
    * Remove variable
+   *
+   * @param $name
+   * @return false
    */
   public function rm($name = '')
   {
@@ -89,7 +107,13 @@ class Common
     }
   }
 
-  public function debug_find_source($mode = '')
+  /**
+   * Debug [Find source]
+   *
+   * @param string $mode
+   * @return mixed|string
+   */
+  public function debug_find_source(string $mode = '')
   {
     foreach (debug_backtrace() as $trace) {
       if ($trace['file'] !== __FILE__) {
@@ -103,6 +127,7 @@ class Common
         }
       }
     }
+
     return 'src not found';
   }
 }
