@@ -22,7 +22,7 @@ ajax.callback.user_register = function(data){
 </tr>
 <tr>
 	<td>{L_EMAIL_ADDRESS}: *</td>
-	<td><input type="text" class="post" name="email" size="50" maxlength="255" /></td>
+	<td><input placeholder="{L_HOLDER_ENTER_EMAIL}" type="text" class="post" name="email" size="50" maxlength="255" /></td>
 </tr>
 <!-- IF CAPTCHA_HTML -->
 <tr>

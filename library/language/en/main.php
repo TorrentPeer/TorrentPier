@@ -2972,3 +2972,4 @@ $lang['CLICK_RETURN_NOTICEADMIN'] = 'Click %sHere%s to return to Announcement Ad
 
 // Placeholders
 $lang['HOLDER_ENTER_USERNAME'] = 'Enter username';
+$lang['HOLDER_ENTER_EMAIL'] = 'Enter email';

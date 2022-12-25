@@ -19,7 +19,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_EMAIL_ADDRESS}:</b>&nbsp;<input class="post" type="text" name="email" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_email" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_EMAIL_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_EMAIL_ADDRESS}:</b>&nbsp;<input placeholder="{L_HOLDER_ENTER_EMAIL}" class="post" type="text" name="email" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_email" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_EMAIL_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
