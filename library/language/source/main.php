@@ -294,7 +294,6 @@ $lang['START_WATCHING_TOPIC'] = 'Follow the topic for replies';
 $lang['NO_LONGER_WATCHING'] = 'You are no longer following this topic';
 $lang['YOU_ARE_WATCHING'] = 'You are following this topic now';
 
-$lang['TOTAL_VOTES'] = 'Total Votes';
 $lang['SEARCH_IN_TOPIC'] = 'search in topic...';
 $lang['HIDE_IN_TOPIC'] = 'Hide';
 
