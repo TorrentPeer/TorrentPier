@@ -456,6 +456,11 @@ abbr.post-acronym {
 /* ---------------------------------- *
      List
  * ---------------------------------- */
+ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
 .post_body ul, .post_body ol {
   margin: 8px auto 8px 8px;
 }
