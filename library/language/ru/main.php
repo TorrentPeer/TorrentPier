@@ -39,6 +39,10 @@ $lang['SEEDER'] = 'Сидер';
 $lang['LEECHER'] = 'Личер';
 $lang['RELEASER'] = 'Релизер';
 
+// User online status
+$lang['U_ONLINE'] = 'Сейчас на сайте';
+$lang['U_OFFLINE'] = 'Не в сети';
+
 $lang['1_DAY'] = 'за последний день';
 $lang['7_DAYS'] = 'за последние 7 дней';
 $lang['2_WEEKS'] = 'за последние 2 недели';

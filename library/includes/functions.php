@@ -2781,3 +2781,34 @@ function get_zodiac($birthday, $mode = 'full')
 
   return false;
 }
+
+/**
+ * Return a user status icon (Offline / Online)
+ *
+ * @param $user_id
+ * @param bool $return_as_bool
+ * @param int $height
+ * @param int $width
+ *
+ * @return string|bool
+ * @throws Exception
+ */
+function get_user_online($user_id, bool $return_as_bool = false, int $height = 15, int $width = 15)
+{
+  global $images, $lang;
+
+  $status_img = $status = 'offline';
+
+  switch ($status) {
+    case 'online':
+      $status_img = $return_as_bool ? true : '<img src="' . $images['icon_online'] . '" width="' . $width . '" height="' . $height . '" alt="' . $lang['U_ONLINE'] . '" title="' . $lang['U_ONLINE'] . '" />&nbsp;';
+      break;
+    case 'offline':
+      $status_img = $return_as_bool ? false : '<img src="' . $images['icon_offline'] . '" width="' . $width . '" height="' . $height . '" alt="' . $lang['U_OFFLINE'] . '" title="' . $lang['U_OFFLINE'] . '" />&nbsp;';
+      break;
+    default:
+      bb_die("Invalid status: $status");
+  }
+
+  return $status_img;
+}

@@ -39,6 +39,10 @@ $lang['SEEDER'] = 'Seeder';
 $lang['LEECHER'] = 'Leecher';
 $lang['RELEASER'] = 'Releaser';
 
+// User online status
+$lang['U_ONLINE'] = 'Online';
+$lang['U_OFFLINE'] = 'Offline';
+
 $lang['1_DAY'] = '1 Day';
 $lang['7_DAYS'] = '7 Days';
 $lang['2_WEEKS'] = '2 Weeks';

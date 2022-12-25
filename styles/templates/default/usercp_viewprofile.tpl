@@ -358,6 +358,10 @@ ajax.callback.gen_passkey = function(data){
 				</td>
 			</tr>
 			<!-- ENDIF -->
+      <tr>
+        <th>{L_STATUS}:</th>
+        <td>{USER_STATUS}</td>
+      </tr>
 			<tr>
 				<th>{L_JOINED}:</th>
 				<td id="user_regdate">
@@ -400,7 +404,6 @@ ajax.callback.gen_passkey = function(data){
 					<span class="editable bold">{LAST_VISIT_TIME}</span>
 				</td>
 			</tr>
-
 			<tr>
 				<th class="nowrap">{L_LAST_ACTIVITY}:</th>
 				<td>

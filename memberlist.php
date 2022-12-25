@@ -181,6 +181,7 @@ if ($result = DB()->fetch_rowset($sql)) {
       'FROM' => !empty($from) ? $from : $lang['NOSELECT'],
       'USER_AVATAR' => \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], true, 60, 60),
       'JOINED_RAW' => $row['user_regdate'],
+      'USER_STATUS' => get_user_online($row['user_id']),
       'JOINED' => $joined,
       'POSTS' => $posts,
       'PM' => $pm,

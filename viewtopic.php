@@ -773,6 +773,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     'RANK_IMAGE' => $rank_image,
     'POSTER_JOINED' => ($bb_cfg['show_poster_joined']) ? $poster_longevity : '',
 
+    'POSTER_STATUS' => get_user_online($poster_id, true) ? $lang['U_ONLINE'] : $lang['U_OFFLINE'],
     'POSTER_JOINED_DATE' => $poster_joined,
     'POSTER_POSTS' => ($bb_cfg['show_poster_posts']) ? $poster_posts : '',
     'POSTER_FROM' => ($bb_cfg['show_poster_from']) ? wbr($poster_from) : '',

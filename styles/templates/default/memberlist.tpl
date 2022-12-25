@@ -24,6 +24,7 @@
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">#</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
+  <th class="{sorter: false}" ><b class="tbs-text">{L_STATUS}</b></th>
 	<!-- IF IS_ADMIN --><th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th><!-- ENDIF -->
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_LOCATION}</b></th>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_JOINED}</b></th>
@@ -41,6 +42,7 @@
 	<td>{memberrow.ROW_NUMBER}</td>
   <td><div>{memberrow.USER_AVATAR}</div><b>{memberrow.USER}</b></td>
 	<td>{memberrow.PM}</td>
+  <td>{memberrow.USER_STATUS}</td>
 	<!-- IF IS_ADMIN --><td>{memberrow.EMAIL}</td><!-- ENDIF -->
 	<td>{memberrow.FROM}</td>
 	<td class="small">
