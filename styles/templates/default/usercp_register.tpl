@@ -59,7 +59,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <tr>
 	<td class="prof-title">{L_USERNAME}: *</td>
-	<td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}" /><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->
+	<td><!-- IF CAN_EDIT_USERNAME --><input placeholder="{L_HOLDER_ENTER_USERNAME}" id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}" /><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->
 	<span id="check_name"></span></td>
 </tr>
 <tr>

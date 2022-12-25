@@ -2969,3 +2969,6 @@ $lang['DELETE_NOTICE'] = 'The announcement has been deleted successfully';
 $lang['NOTICE_ADDED'] = 'The announcement has been added successfully';
 $lang['NOTICE_UPDATED'] = 'The announcement has been updated successfully';
 $lang['CLICK_RETURN_NOTICEADMIN'] = 'Click %sHere%s to return to Announcement Administration';
+
+// Placeholders
+$lang['HOLDER_ENTER_USERNAME'] = 'Enter username';

@@ -13,7 +13,7 @@
 		<th>{L_SEARCH_USERS_ADVANCED}</th>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_USERNAME}:</b>&nbsp;<input class="post" type="text" name="username" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_username" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERNAME_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_USERNAME}:</b>&nbsp;<input placeholder="{L_HOLDER_ENTER_USERNAME}" class="post" type="text" name="username" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_username" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERNAME_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>

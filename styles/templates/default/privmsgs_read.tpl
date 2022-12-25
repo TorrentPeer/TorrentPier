@@ -84,7 +84,7 @@ ajax.callback.posts = function(data){
 <tr>
 	<td class="td2 row2 tCenter pad_6">
 		<b>{L_TO}:</b>
-		<input type="text" name="username" size="18" maxlength="25" style="width:110px" class="post" value="{MESSAGE_FROM}" />&nbsp;
+		<input placeholder="{L_HOLDER_ENTER_USERNAME}" type="text" name="username" size="18" maxlength="25" style="width:110px" class="post" value="{MESSAGE_FROM}" />&nbsp;
 		<b>{L_SUBJECT}:</b>
 		<input type="text" name="subject" size="50" maxlength="60" style="width:300px" class="post" value="{QR_SUBJECT}" />
 	</td>

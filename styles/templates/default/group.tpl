@@ -189,7 +189,7 @@
 <tr>
 	<td colspan="11" class="cat" style="padding: 2px 12px;">
 		<p id="add_group_member" class="floatL">
-			<input type="text" name="username" maxlength="50" size="20" />
+			<input placeholder="{L_HOLDER_ENTER_USERNAME}" type="text" name="username" maxlength="50" size="20" />
 			<input type="submit" name="add" value="{L_ADD_MEMBER}" class="mainoption" />
 			<input type="button" name="usersubmit" value="{L_FIND_USERNAME}" class="liteoption" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US);return false;" />
 		</p>

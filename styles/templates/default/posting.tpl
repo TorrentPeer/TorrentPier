@@ -78,7 +78,7 @@
 <tr>
 	<td><b>{L_USERNAME}</b></td>
 	<td>
-		<input type="text" name="username" size="25" maxlength="25" tabindex="1" value="{USERNAME}" />&nbsp;
+		<input placeholder="{L_HOLDER_ENTER_USERNAME}" type="text" name="username" size="25" maxlength="25" tabindex="1" value="{USERNAME}" />&nbsp;
 		<input type="submit" name="usersubmit" class="lite" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US);return false;" />
 	</td>
 </tr>

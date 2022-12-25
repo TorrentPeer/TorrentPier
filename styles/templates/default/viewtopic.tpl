@@ -644,7 +644,7 @@ function build_poll_add_form (src_el)
 		</div>
 		<div class="quick_reply_box bCenter">
 			<!-- IF not LOGGED_IN -->
-			<p class="mrg_6"><b>{L_QR_USERNAME}: </b><input type="text" name="username" size="20" maxlength="25" /></p>
+			<p class="mrg_6"><b>{L_QR_USERNAME}: </b><input placeholder="{L_HOLDER_ENTER_USERNAME}" type="text" name="username" size="20" maxlength="25" /></p>
 			<!-- ENDIF -->
 			<div class="spacer_2"></div>
 			<!-- INCLUDE posting_editor.tpl -->
