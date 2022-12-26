@@ -21,6 +21,9 @@ $rootPath = __DIR__;
 if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
 define('BB_PATH', $rootPath);
 
+if (empty($_SERVER['SERVER_ADDR'])) {
+  $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
+}
 if (empty($_SERVER['REMOTE_ADDR'])) {
   $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 }
