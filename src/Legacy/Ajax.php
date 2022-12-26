@@ -51,7 +51,6 @@ class Ajax
     'user_register' => ['guest'],
     'posts' => ['guest'],
     'index_data' => ['guest'],
-    'users_today' => ['guest'],
     'gen_password' => ['guest'],
   ];
 
@@ -426,14 +425,6 @@ class Ajax
   public function sitemap()
   {
     require AJAX_DIR . '/sitemap.php';
-  }
-
-  /**
-   * User who visited today
-   */
-  public function users_today()
-  {
-    require AJAX_DIR . '/users_today.php';
   }
 
   /**

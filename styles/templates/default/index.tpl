@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  ajax.callback.index_data = function (data) {
+    $('#' + data.mode).html(data.html);
+  };
+</script>
+
 <!-- IF TORHELP_TOPICS -->
 	<!-- INCLUDE torhelp.tpl -->
 	<div class="spacer_6"></div>
@@ -174,18 +180,7 @@
 				<p>{TOTAL_GENDER}</p>
 				<p>{NEWEST_USER}</p>
 
-        <script type="text/javascript">
-        ajax.users_today = function (mode) {
-          ajax.exec({
-            action: 'users_today',
-            mode: mode
-          });
-        }
-        ajax.callback.users_today = function (data) {
-          $('#users_today').html(data.html);
-        }
-        </script>
-        <p id="users_today"><a class="clickable" href="#" onclick="ajax.users_today('list'); return false;">{L_USERS_TODAY}</a></p>
+        <p id="users_today"><a class="clickable" href="#" onclick="ajax.exec({action: 'index_data', mode: 'users_today'}); return false;">{L_USERS_TODAY}</a></p>
 
         <!-- IF $bb_cfg['show_board_start_date'] -->
         <p style="margin-top: 4px;">{BOARD_START}</p>
@@ -199,11 +194,6 @@
 				<!-- ENDIF -->
 
 				<!-- IF $bb_cfg['birthday_enabled'] -->
-				<script type="text/javascript">
-				ajax.callback.index_data = function(data) {
-					$('#'+ data.mode).html(data.html);
-				};
-				</script>
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
 				<p id="birthday_today" class="birthday">{WHOSBIRTHDAY_TODAY}</p>
 				<p id="birthday_week" class="birthday">{WHOSBIRTHDAY_WEEK}</p>
