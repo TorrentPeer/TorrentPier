@@ -110,6 +110,7 @@ $template->assign_vars([
   'SHOW_ZODIAC' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && bf($profiledata['user_opt'], 'user_opt', 'user_show_zodiac') && $profiledata['user_birthday'] != '1900-01-01') ? get_zodiac($profiledata['user_birthday']) : '',
   'AGE' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
   'USER_STATUS' => get_user_online($profiledata['user_id']),
+  'USER_BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
 
   'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
   'L_MY_PROFILE' => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),

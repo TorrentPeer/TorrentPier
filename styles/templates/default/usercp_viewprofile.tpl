@@ -242,6 +242,7 @@ ajax.callback.gen_passkey = function(data){
 			<div id="rank-msg" class="mrg_6"></div>
 		<!-- ENDIF -->
 		</p>
+    <!-- IF USER_BIRTHDAY_ICON --><div class="mrg_8">{USER_BIRTHDAY_ICON}</div><!-- ENDIF -->
 		<h4 class="cat border bw_TB">{L_CONTACT}&nbsp;{USERNAME}</h4>
 
 		<div class="spacer_4"></div>

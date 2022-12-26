@@ -2812,3 +2812,21 @@ function get_user_online($user_id, bool $return_as_bool = false, int $height = 1
 
   return $status_img;
 }
+
+/**
+ * Get birthday icon
+ *
+ * @param $user_birthday
+ * @param $user_id
+ * @return string
+ */
+function user_birthday_icon($user_birthday, $user_id): string
+{
+  global $bb_cfg, $images, $lang;
+
+  $current_date = bb_date(TIMENOW, 'md', false);
+  $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
+    ? date('md', strtotime($user_birthday)) : false;
+
+  return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
+}
