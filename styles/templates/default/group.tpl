@@ -23,8 +23,8 @@
 	</tr>
 	<tr>
 		<!-- BEGIN groups -->
-		<td class="vTop pad_4">
-			<ul>
+		<td class="vTop">
+			<ul class="corrected">
 				{groups.GROUP_SELECT}
 			</ul>
 		</td>

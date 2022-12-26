@@ -456,7 +456,7 @@ abbr.post-acronym {
 /* ---------------------------------- *
      List
  * ---------------------------------- */
-ul {
+ul.corrected {
   list-style-position: inside;
   padding-left: 0;
 }
