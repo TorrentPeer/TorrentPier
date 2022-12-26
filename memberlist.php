@@ -155,7 +155,7 @@ $sql .= " ORDER BY $order_by";
 if ($result = DB()->fetch_rowset($sql)) {
   foreach ($result as $i => $row) {
     $user_id = $row['user_id'];
-    $from = $row['user_from'];
+    $from = !empty($row['user_from']) ? $row['user_from'] : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], $bb_cfg['date_format']);
     $posts = $row['user_posts'];
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
@@ -164,13 +164,13 @@ if ($result = DB()->fetch_rowset($sql)) {
       $email_uri = $bb_cfg['board_email_form'] ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
       $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
-      $email = '';
+      $email = $lang['HIDDEN_USER'];
     }
 
     if ($row['user_website']) {
       $www = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
     } else {
-      $www = '';
+      $www = $lang['NOSELECT'];
     }
 
     $row_class = !($i % 2) ? 'row1' : 'row2';
@@ -178,7 +178,7 @@ if ($result = DB()->fetch_rowset($sql)) {
       'ROW_NUMBER' => $i + ($start + 1),
       'ROW_CLASS' => $row_class,
       'USER' => profile_url($row),
-      'FROM' => !empty($from) ? $from : $lang['NOSELECT'],
+      'FROM' => $from,
       'USER_AVATAR' => \TorrentPier\Legacy\Avatar::getAvatar(false, $row['user_id'], $row['avatar_ext_id'], true, 60, 60),
       'JOINED_RAW' => $row['user_regdate'],
       'USER_STATUS' => get_user_online($row['user_id']),
@@ -186,7 +186,7 @@ if ($result = DB()->fetch_rowset($sql)) {
       'POSTS' => $posts,
       'PM' => $pm,
       'EMAIL' => $email,
-      'WWW' => !empty($www) ? $www : $lang['NOSELECT'],
+      'WWW' => $www,
       'U_VIEWPROFILE' => PROFILE_URL . $user_id,
     ]);
   }

@@ -52,7 +52,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
   $email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
   $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
-  $email = '';
+  $email = $lang['HIDDEN_USER'];
 }
 
 //
