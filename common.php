@@ -22,19 +22,19 @@ if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/'
 define('BB_PATH', $rootPath);
 
 if (empty($_SERVER['SERVER_ADDR'])) {
-  $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
+  $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR') ?? '';
 }
 if (empty($_SERVER['REMOTE_ADDR'])) {
-  $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+  $_SERVER['REMOTE_ADDR'] = getenv('REMOTE_ADDR') ?? '127.0.0.1';
 }
 if (empty($_SERVER['HTTP_USER_AGENT'])) {
-  $_SERVER['HTTP_USER_AGENT'] = '';
+  $_SERVER['HTTP_USER_AGENT'] = getenv('HTTP_USER_AGENT') ?? '';
 }
 if (empty($_SERVER['HTTP_REFERER'])) {
-  $_SERVER['HTTP_REFERER'] = '';
+  $_SERVER['HTTP_REFERER'] = getenv('HTTP_REFERER') ?? '';
 }
 if (empty($_SERVER['SERVER_NAME'])) {
-  $_SERVER['SERVER_NAME'] = '';
+  $_SERVER['SERVER_NAME'] = getenv('SERVER_NAME') ?? '';
 }
 
 if (!defined('BB_ROOT')) {
