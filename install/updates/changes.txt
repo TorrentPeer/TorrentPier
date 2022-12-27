@@ -70,19 +70,15 @@ INSERT INTO bb_config VALUES ('logo_image_path', 'styles/images/logo');
 INSERT INTO bb_config VALUES ('logo_image_w', '460');
 INSERT INTO bb_config VALUES ('new_user_reg_only_by_invite', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Prune inactive invites', 'prune_inactive_invites.php', 'daily', '', '05:00:00', '110', '', '', '', '1', '', '0', '1', '0');
-DROP TABLE IF EXISTS `bb_invites`;
 CREATE TABLE IF NOT EXISTS `bb_invites` (`invite_id` INT(8) unsigned NOT NULL AUTO_INCREMENT, `user_id` MEDIUMINT(8) NOT NULL DEFAULT '0', `new_user_id` MEDIUMINT(8) NOT NULL DEFAULT '0', `invite_code` VARCHAR(16) NOT NULL DEFAULT '', `active` ENUM ('1','0') DEFAULT '1', `generation_date` INT(10) NOT NULL DEFAULT '0', `activation_date` INT(10) NOT NULL DEFAULT '0', PRIMARY KEY (`invite_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
-DROP TABLE IF EXISTS `bb_invite_rules`;
 CREATE TABLE IF NOT EXISTS `bb_invite_rules` (`rule_id` INT(4) unsigned NOT NULL AUTO_INCREMENT, `user_rating` INT(4) unsigned NOT NULL DEFAULT '0', `user_age` INT(4) unsigned NOT NULL DEFAULT '0', `invites_count` INT(4) unsigned NOT NULL DEFAULT '0', `user_group` INT(4) unsigned NOT NULL DEFAULT '0', PRIMARY KEY (`rule_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
 ALTER TABLE `bb_users` ADD `user_reputation` INT(5) NOT NULL DEFAULT '0';
-DROP TABLE IF EXISTS `bb_reputation`;
 CREATE TABLE IF NOT EXISTS `bb_reputation` (`user_id` MEDIUMINT(8) NOT NULL DEFAULT '0', `poster_id` MEDIUMINT(8) DEFAULT '0', `mode` VARCHAR(10) DEFAULT NULL, `time` INT(11) DEFAULT '0') ENGINE = MyISAM DEFAULT CHARSET = utf8;
 
 // 2.4.0.3
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
 
 // 2.4.0.4
-DROP TABLE IF EXISTS `bb_notices`;
 CREATE TABLE IF NOT EXISTS `bb_notices` (`notice_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT, `notice_active` ENUM ('1','0') DEFAULT '0', `notice_text` TEXT NOT NULL, PRIMARY KEY (`notice_id`)) ENGINE = MyISAM DEFAULT CHARSET = utf8;
 
 // 2.4.0.8
