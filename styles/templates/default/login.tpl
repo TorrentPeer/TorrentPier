@@ -24,7 +24,7 @@
 	<table class="borderless bCenter">
 	<tr>
 		<td width="35%" align="right">{L_USERNAME}:</td>
-		<td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{LOGIN_USERNAME}" tabindex="101"<!-- IF ADMIN_LOGIN --> readonly="readonly" style="color: gray"<!-- ENDIF --> /></td>
+		<td><input placeholder="{L_HOLDER_ENTER_USERNAME}" type="text" class="post" name="login_username" size="25" maxlength="40" value="{LOGIN_USERNAME}" tabindex="101"<!-- IF ADMIN_LOGIN --> readonly="readonly" style="color: gray"<!-- ENDIF --> /></td>
 	</tr>
 	<tr>
 		<td align="right">{L_PASSWORD}:</td>
