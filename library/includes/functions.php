@@ -2770,7 +2770,7 @@ function get_zodiac($birthday, $mode = 'full')
             $data = "<img src='$image' alt='$title' title='$title' style='vertical-align:middle;' />";
             break;
           case 'full':
-            $data = "($title) <img src='$image' alt='$title' title='$title' style='vertical-align:middle;' />";
+            $data = "($title <img src='$image' alt='$title' title='$title' style='vertical-align:middle;' />)";
             break;
         }
 
