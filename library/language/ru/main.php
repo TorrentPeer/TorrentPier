@@ -2976,4 +2976,4 @@ $lang['CLICK_RETURN_NOTICEADMIN'] = '%sВернуться к управлени�
 
 // Placeholders
 $lang['HOLDER_ENTER_USERNAME'] = 'Введите имя пользователя';
-$lang['HOLDER_ENTER_EMAIL'] = 'Введите ваш email';
+$lang['HOLDER_ENTER_EMAIL'] = 'Введите email';

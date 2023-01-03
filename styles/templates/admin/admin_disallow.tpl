@@ -12,7 +12,7 @@
 	<th colspan="2">{L_ADD_DISALLOW_TITLE}</th>
 </tr>
 <tr>
-	<td colspan="2"><input class="post" type="text" name="disallowed_user" size="100" />&nbsp;<input type="submit" name="add_name" value="{L_ADD_DISALLOW}" class="mainoption" /></td>
+	<td colspan="2"><input placeholder="{L_HOLDER_ENTER_USERNAME}" class="post" type="text" name="disallowed_user" size="100" />&nbsp;<input type="submit" name="add_name" value="{L_ADD_DISALLOW}" class="mainoption" /></td>
 </tr>
 <tr>
 	<th colspan="2">{L_DELETE_DISALLOW_TITLE}</th>

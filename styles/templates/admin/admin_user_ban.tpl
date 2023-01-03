@@ -39,7 +39,7 @@
 	</tr>
 	<tr>
 		<td class="row1">{L_EMAIL_ADDRESS}: <br /><span class="small">{L_BAN_EMAIL_EXPLAIN}</span></td>
-		<td class="row2"><input class="post" type="text" name="ban_email" size="35" /></td>
+		<td class="row2"><input placeholder="{L_HOLDER_ENTER_EMAIL}" class="post" type="text" name="ban_email" size="35" /></td>
 	</tr>
 	<tr>
 		<th colspan="2">{L_UNBAN_EMAIL}</th>

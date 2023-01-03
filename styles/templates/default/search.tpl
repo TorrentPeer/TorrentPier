@@ -28,7 +28,7 @@
 		<legend>{L_SEARCH_AUTHOR}</legend>
 		<div>
 			<p class="input">
-				<input style="width: 50%" id="author" type="text" class="post" name="{POSTER_NAME_KEY}" />&nbsp;
+				<input placeholder="{L_HOLDER_ENTER_USERNAME}" style="width: 50%" id="author" type="text" class="post" name="{POSTER_NAME_KEY}" />&nbsp;
 				<input style="width: 40%" type="button" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US); return false;" />
 			</p>
 			<p class="chbox med">
