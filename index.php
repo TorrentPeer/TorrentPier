@@ -266,6 +266,8 @@ $template->assign_vars([
   'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : $lang['HOME'],
   'NO_FORUMS_MSG' => $only_new ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
 
+  'ATOM_FEED_RELEASES_HREF' => file_exists($bb_cfg['atom']['path'] . '/f/0.atom') ? 'href="' . make_url(hide_bb_path($bb_cfg['atom']['path']) . '/f/0.atom') . '"' : '',
+
   'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
   'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
   'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
