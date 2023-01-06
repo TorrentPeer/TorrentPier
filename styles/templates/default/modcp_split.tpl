@@ -39,7 +39,7 @@ function toggle_cbox (cb_id, tr_id)
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen">{L_NEW_TOPIC_TITLE}</span></td>
-		<td class="row2"><input class="post" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
+		<td class="row2"><input class="post" placeholder="{L_SORT_TOPIC_TITLE}" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen">{L_FORUM_FOR_NEW_TOPIC}</span></td>

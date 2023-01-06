@@ -566,7 +566,7 @@ function build_poll_add_form (src_el)
 		<table class="bordered bCenter">
 		<tr>
 			<td class="row1">{L_NEW_TOPIC_TITLE}</td>
-			<td class="row2"><input class="post" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
+			<td class="row2"><input class="post" placeholder="{L_SORT_TOPIC_TITLE}" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
 		</tr>
 		<tr>
 			<td class="row1">{L_FORUM_FOR_NEW_TOPIC}</td>

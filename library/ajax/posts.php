@@ -166,7 +166,7 @@ switch ($this->request['type']) {
 
       $hidden_form = '<input type="hidden" name="mode" value="editpost" />';
       $hidden_form .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $post_id . '" />';
-      $hidden_form .= '<input type="hidden" name="subject" value="' . $post['topic_title'] . '" />';
+      $hidden_form .= '<input type="hidden" placeholder="' . $lang['SORT_TOPIC_TITLE'] . '" name="subject" value="' . $post['topic_title'] . '" />';
 
       $this->response['text'] = '
 				<form action="' . POSTING_URL . '" method="post" name="post">

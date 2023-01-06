@@ -4827,7 +4827,7 @@ $(function(){
 <form id="tpl-post-form" method="post" action="{TPL_FORM_ACTION}" name="post" class="tokenized">
 	<input type="hidden" name="tor_required" value="{TOR_REQUIRED}">
 	<input type="hidden" name="preview" value="1">
-	<input id="tpl-post-subject" type="text" name="subject" size="90" value="" />
+	<input id="tpl-post-subject" type="text" placeholder="{L_SORT_TOPIC_TITLE}" name="subject" size="90" value="" />
 	<textarea id="tpl-post-message" name="message" rows="1" cols="1"></textarea>
 </form>
 </div>

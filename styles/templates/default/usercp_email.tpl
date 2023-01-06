@@ -18,7 +18,7 @@
 </tr>
 <tr>
 	<td><b>{L_SUBJECT}</b></td>
-	<td><input type="text" name="subject" size="80" /></td>
+	<td><input placeholder="{L_SORT_TOPIC_TITLE}" type="text" name="subject" size="80" /></td>
 </tr>
 <tr>
 	<td valign="top"><b>{L_MESSAGE}</b><p class="small pad_6">{L_EMAIL_MESSAGE_DESC}</p></td>

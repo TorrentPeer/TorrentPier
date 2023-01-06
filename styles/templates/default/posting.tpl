@@ -86,7 +86,7 @@
 <!-- IF POSTING_SUBJECT -->
 <tr>
 	<td><b>{L_SUBJECT}</b></td>
-	<td><input type="text" name="subject" size="90" tabindex="2" value="{SUBJECT}" maxlength="250" style="width: 98%;" /></td>
+	<td><input type="text" placeholder="{L_SORT_TOPIC_TITLE}" name="subject" size="90" tabindex="2" value="{SUBJECT}" maxlength="250" style="width: 98%;" /></td>
 </tr>
 <!-- ENDIF -->
 </tbody>
