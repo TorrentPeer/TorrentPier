@@ -751,7 +751,7 @@ $template->assign_vars([
   'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
   'USER_TIMEZONE' => $pr_data['user_timezone'],
 
-  'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MAX_LENGTH),
+  'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
 
   'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
   'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
