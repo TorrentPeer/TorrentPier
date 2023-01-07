@@ -1,6 +1,6 @@
 /**
 * @file: highslide.css 
-* @version: 4.1.9
+* @version: 5.0.0
 */
 .highslide-container div {
 	font-family: Verdana, Helvetica;
@@ -8,6 +8,7 @@
 }
 .highslide-container table {
 	background: none;
+	table-layout: auto;
 }
 .highslide {
 	outline: none;
@@ -145,6 +146,7 @@ a.highslide-credits:hover i {
 	border: 1px solid silver;
 	background: #ededed;
 	margin: 2px;
+	padding: 0;
 	line-height: 0;
 	overflow: hidden;
 }
@@ -286,6 +288,9 @@ html>/**/body .highslide-gallery ul img {
 }
 .highslide-html {
 	background-color: white;
+}
+.mobile .highslide-html {
+	border: 1px solid silver;
 }
 .highslide-html-content {
 	display: none;

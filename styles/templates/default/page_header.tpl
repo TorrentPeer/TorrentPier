@@ -64,7 +64,7 @@ var attachImg_MaxWidth = screen.width - {ATTACH_IMG_WIDTH_DECR_JS};
 var ExternalLinks_InNewWindow = '{EXT_LINK_NEW_WIN}';
 var hidePostImg = false;
 </script>
-<script type="text/javascript" src="{SITE_URL}styles/libs/highslide/highslide.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/libs/highslide/highslide-full.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{SITE_URL}styles/libs/highslide/highslide.css"/>
 <script type="text/javascript">
 hs.graphicsDir = '{SITE_URL}styles/libs/highslide/graphics/';
@@ -73,8 +73,25 @@ hs.transitions = ['expand', 'crossfade'];
 hs.outlineType = 'glossy-dark';
 hs.wrapperClassName = 'dark';
 hs.fadeInOut = true;
-hs.dimmingOpacity = 0.50;
+hs.captionEval = 'this.a.title';
 hs.numberPosition = 'caption';
+hs.dimmingOpacity = 0.8;
+hs.addSlideshow({
+  interval: 5000,
+  repeat: false,
+  useControls: true,
+  fixedControls: 'fit',
+  overlayOptions: {
+    position: 'bottom center',
+    opacity: .75,
+    hideOnMouseOut: true
+  },
+  thumbstrip: {
+    position: 'above',
+    mode: 'horizontal',
+    relativeTo: 'expander'
+  }
+});
 </script>
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
 
