@@ -11,6 +11,12 @@ if (empty($bb_cfg['topic_notify_enabled'])) {
   bb_die($lang['DISABLED']);
 }
 
+//
+// Define censored word matches
+//
+$orig_word = $replacement_word = [];
+obtain_word_list($orig_word, $replacement_word);
+
 $page_cfg['use_tablesorter'] = true;
 $page_cfg['include_bbcode_js'] = true;
 $tracking_topics = get_tracks('topic');
@@ -69,7 +75,7 @@ if ($watch_count > 0) {
         'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
         'POST_ID' => $watch[$i]['topic_first_post_id'],
         'TOPIC_ID' => $watch[$i]['topic_id'],
-        'TOPIC_TITLE' => wbr(str_short($watch[$i]['topic_title'], 70)),
+        'TOPIC_TITLE' => wbr(str_short(is_countable($orig_word) ? preg_replace($orig_word, $replacement_word, $watch[$i]['topic_title']) : $watch[$i]['topic_title'], 70)),
         'FULL_TOPIC_TITLE' => wbr($watch[$i]['topic_title']),
         'U_TOPIC' => TOPIC_URL . $watch[$i]['topic_id'],
         'FORUM_TITLE' => wbr($watch[$i]['forum_name']),
