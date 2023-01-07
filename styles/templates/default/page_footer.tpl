@@ -102,7 +102,7 @@ $p('{ONLOAD_FOCUS_ID}').focus();
 <script type="text/javascript">new ClipboardJS('.copyElement');</script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{SITE_URL}styles/libs/plyr/plyr.polyfilled.js"></script>
-<link rel="stylesheet" type="text/css" href="{SITE_URL}styles/libs/plyr/plyr.css"/>
+<script type="text/javascript" src="{SITE_URL}styles/libs/plyr/plyr.polyfilled.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{SITE_URL}styles/libs/plyr/plyr.min.css"/>
 <script type="text/javascript">Plyr.setup('.js-player');</script>
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
