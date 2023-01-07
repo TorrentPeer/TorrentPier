@@ -170,21 +170,32 @@ class Atom
   private static function create_atom($file_path, $mode, $id, $title, $topics)
   {
     global $lang;
+
+    //
+    // Define censored word matches
+    //
+    $orig_word = $replacement_word = [];
+    obtain_word_list($orig_word, $replacement_word);
+
     $dir = dirname($file_path);
     if (!file_exists($dir)) {
       if (!Filesystem::bb_mkdir($dir)) {
         return false;
       }
     }
+
     foreach ($topics as $topic) {
       $last_time = $topic['topic_last_post_time'];
+
       if ($topic['topic_last_post_edit_time']) {
         $last_time = $topic['topic_last_post_edit_time'];
       }
+
       $date = bb_date($last_time, 'Y-m-d', 0);
       $time = bb_date($last_time, 'H:i:s', 0);
       break;
     }
+
     $atom = "";
     $atom .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
     $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"" . FULL_URL . "\">\n";
@@ -192,32 +203,31 @@ class Atom
     $atom .= "<updated>" . $date . "T$time+00:00</updated>\n";
     $atom .= "<id>tag:rto.feed,2000:/$mode/$id</id>\n";
     $atom .= "<link href=\"" . FULL_URL . "\" />\n";
+
     foreach ($topics as $topic) {
       $topic_id = $topic['topic_id'];
       $tor_size = '';
       if (isset($topic['tor_size'])) {
         $tor_size = str_replace('&nbsp;', ' ', ' [' . Filesystem::humn_size($topic['tor_size']) . ']');
       }
-      $topic_title = $topic['topic_title'];
-      $orig_word = [];
-      $replacement_word = [];
-      obtain_word_list($orig_word, $replacement_word);
-      if (count($orig_word)) {
-        $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-      }
-      $topic_title = wbr($topic_title);
+
+      $topic_title = wbr(is_countable($orig_word) ? preg_replace($orig_word, $replacement_word, $topic['topic_title']) : $topic['topic_title']);
       $author_name = $topic['first_username'] ? wbr($topic['first_username']) : $lang['GUEST'];
       $last_time = $topic['topic_last_post_time'];
+
       if ($topic['topic_last_post_edit_time']) {
         $last_time = $topic['topic_last_post_edit_time'];
       }
+
       $date = bb_date($last_time, 'Y-m-d', 0);
       $time = bb_date($last_time, 'H:i:s', 0);
       $updated = '';
       $checktime = TIMENOW - 604800; // неделя (week)
+
       if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) {
         $updated = '[' . $lang['ATOM_UPDATED'] . '] ';
       }
+
       $atom .= "<entry>\n";
       $atom .= "	<title type=\"html\"><![CDATA[$updated$topic_title$tor_size]]></title>\n";
       $atom .= "	<author>\n";
@@ -228,11 +238,13 @@ class Atom
       $atom .= "	<link href=\"viewtopic.php?t=$topic_id\" />\n";
       $atom .= "</entry>\n";
     }
+
     $atom .= "</feed>";
     @unlink($file_path);
     $fp = fopen($file_path, 'wb');
     fwrite($fp, $atom);
     fclose($fp);
+
     return true;
   }
 }

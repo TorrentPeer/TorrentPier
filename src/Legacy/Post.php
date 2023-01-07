@@ -372,12 +372,13 @@ class Post
 			");
 
         if ($watch_list) {
+          //
+          // Define censored word matches
+          //
           $orig_word = $replacement_word = [];
           obtain_word_list($orig_word, $replacement_word);
 
-          if (count($orig_word)) {
-            $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-          }
+          $topic_title = is_countable($orig_word) ? preg_replace($orig_word, $replacement_word, $topic_title) : $topic_title;
 
           $u_topic = make_url(TOPIC_URL . $topic_id . '&view=newest#newest');
           $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");
