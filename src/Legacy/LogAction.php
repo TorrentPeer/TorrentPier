@@ -28,6 +28,7 @@ class LogAction
     'adm_user_ban' => 8,
     'adm_user_unban' => 9,
   ];
+
   public $log_type_select = [];
   public $log_disabled = false;
 
@@ -85,6 +86,7 @@ class LogAction
       'log_time' => (int)TIMENOW,
       'log_msg' => (string)$log_msg,
     ];
+
     $sql_args = DB()->build_array('INSERT', $sql_ary);
 
     DB()->query("INSERT INTO " . BB_LOG . " $sql_args");

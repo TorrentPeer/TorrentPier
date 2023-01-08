@@ -31,15 +31,19 @@ class Atom
   public static function update_forum_feed($forum_id, $forum_data)
   {
     global $bb_cfg, $lang;
+
     $file_path = $bb_cfg['atom']['path'] . '/f/' . $forum_id . '.atom';
     $select_tor_sql = $join_tor_sql = '';
+
     if ($forum_id == 0) {
       $forum_data['forum_name'] = $lang['ATOM_GLOBAL_FEED'] ?? $bb_cfg['server_name'];
     }
+
     if ($forum_id > 0 && $forum_data['allow_reg_tracker']) {
       $select_tor_sql = ', tor.size AS tor_size, tor.tor_status';
       $join_tor_sql = "LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)";
     }
+
     if ($forum_id == 0) {
       $sql = "
 			SELECT
@@ -74,8 +78,10 @@ class Atom
 			LIMIT 50
 		";
     }
+
     $topics_tmp = DB()->fetch_rowset($sql);
     $topics = [];
+
     foreach ($topics_tmp as $topic) {
       if (isset($topic['topic_status'])) {
         if ($topic['topic_status'] == TOPIC_MOVED) {
@@ -89,10 +95,12 @@ class Atom
       }
       $topics[] = $topic;
     }
+
     if (!count($topics)) {
       @unlink($file_path);
       return false;
     }
+
     if (self::create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['forum_name']), $topics)) {
       return true;
     }
@@ -112,7 +120,9 @@ class Atom
   public static function update_user_feed($user_id, $username)
   {
     global $bb_cfg;
+
     $file_path = $bb_cfg['atom']['path'] . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+
     $sql = "
 		SELECT
 			t.topic_id, t.topic_title, t.topic_status,
@@ -129,8 +139,10 @@ class Atom
 		ORDER BY t.topic_last_post_time DESC
 		LIMIT 50
 	";
+
     $topics_tmp = DB()->fetch_rowset($sql);
     $topics = [];
+
     foreach ($topics_tmp as $topic) {
       if (isset($topic['topic_status'])) {
         if ($topic['topic_status'] == TOPIC_MOVED) {
@@ -144,10 +156,12 @@ class Atom
       }
       $topics[] = $topic;
     }
+
     if (!count($topics)) {
       @unlink($file_path);
       return false;
     }
+
     if (self::create_atom($file_path, 'u', $user_id, wbr($username), $topics)) {
       return true;
     }

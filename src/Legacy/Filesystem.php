@@ -69,6 +69,7 @@ class Filesystem
     $old_um = umask(0);
     $dir = self::mkdir_rec($path, $mode);
     umask($old_um);
+
     return $dir;
   }
 
@@ -95,6 +96,7 @@ class Filesystem
   public static function clean_filename($fname)
   {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
+
     return str_replace($s, '_', str_compact($fname));
   }
 

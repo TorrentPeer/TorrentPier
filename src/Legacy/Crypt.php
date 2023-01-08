@@ -43,6 +43,7 @@ class Crypt
   public static function md5($string, bool $safety = false): string
   {
     $safety ? $md5 = md5(md5($string)) : $md5 = md5($string);
+
     return $md5;
   }
 
@@ -56,6 +57,7 @@ class Crypt
   public static function sha1($string, bool $safety = false): string
   {
     $safety ? $sha1 = sha1(sha1($string)) : $sha1 = sha1($string);
+
     return $sha1;
   }
 

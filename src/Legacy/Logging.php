@@ -34,6 +34,7 @@ class Logging
     if ($return_path) {
       return $path;
     }
+
     return Filesystem::file_write($msg, $path);
   }
 
@@ -73,12 +74,14 @@ class Logging
     $file = $file ?: 'req/' . date('m-d');
     $str = [];
     $str[] = date('m-d H:i:s');
+
     if ($prepend_str !== false) {
       $str[] = $prepend_str;
     }
     if (!empty($user->data)) {
       $str[] = $user->id . "\t" . html_entity_decode($user->name);
     }
+
     $str[] = sprintf('%-15s', $_SERVER['REMOTE_ADDR']);
 
     if (isset($_SERVER['REQUEST_URI'])) {
@@ -94,6 +97,7 @@ class Logging
     if (!empty($_POST) && $add_post) {
       $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
     }
+
     $str = implode("\t", $str) . "\n";
     self::bb_log($str, $file);
   }

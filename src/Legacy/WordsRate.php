@@ -54,14 +54,17 @@ class WordsRate
     if (strlen($text) > 600) {
       return $this->words_rate;
     }
+
     // вырезаем цитаты если содержит +1
     if (preg_match('#\+\d+#', $text)) {
       $text = strip_quotes($text);
     }
+
     // содержит ссылку
     if (strpos($text, '://')) {
       return $this->words_rate;
     }
+
     // вопрос
     if ($questions = preg_match_all('#\w\?+#', $text, $m)) {
       if ($questions >= 1) {
@@ -78,6 +81,7 @@ class WordsRate
 
     // удаление смайлов
     $text = preg_replace('#:\w+:#', '', $text);
+
     // удаление bbcode тегов
     $text = preg_replace('#\[\S+\]#', '', $text);
 

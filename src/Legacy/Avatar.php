@@ -32,6 +32,7 @@ class Avatar
   {
     global $bb_cfg;
     $base_path = $base_path ?? $bb_cfg['avatars']['upload_path'];
+
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
   }
 
@@ -45,6 +46,7 @@ class Avatar
   public static function deleteAvatar($user_id, $avatar_ext_id): bool
   {
     $avatar_file = $avatar_ext_id ? self::getAvatarPath($user_id, $avatar_ext_id) : '';
+
     return ($avatar_file && file_exists($avatar_file) && @unlink($avatar_file));
   }
 

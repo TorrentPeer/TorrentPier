@@ -22,6 +22,7 @@ class DateDelta
     31363200 => 'mday', // 12 months
     311040000 => 'mon', // 10 years
   ];
+
   public $intervals = [];
   public $format = '';
 
@@ -154,6 +155,7 @@ class DateDelta
     while (checkdate($mon, $l + 1, $year)) {
       $l++;
     }
+
     return $l;
   }
 }
